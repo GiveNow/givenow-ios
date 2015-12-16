@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="e3f-Jn-9PU">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--Give Now-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Profile and Navigation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Agp-7i-bT7">
+                                <rect key="frame" x="196" y="84" width="208" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quick &amp; Dirty Implementation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etm-uf-rbx">
+                                <rect key="frame" x="188" y="112" width="224.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrc-g2-vaz">
+                                <rect key="frame" x="256.5" y="172.5" width="87" height="30"/>
+                                <state key="normal" title="Onboarding"/>
+                                <connections>
+                                    <segue destination="ecX-Pv-I9H" kind="show" id="DbI-ST-l1Q"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anl-EG-1gk">
+                                <rect key="frame" x="256.5" y="210.5" width="87" height="30"/>
+                                <state key="normal" title="Donating"/>
+                                <connections>
+                                    <segue destination="t8l-FU-hPT" kind="show" id="kPN-3G-3ZW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwc-j6-v2N">
+                                <rect key="frame" x="256.5" y="248.5" width="87" height="30"/>
+                                <state key="normal" title="Volunteering"/>
+                                <connections>
+                                    <segue destination="NyQ-uJ-cMG" kind="show" id="JbK-nu-7pi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Lrc-g2-vaz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4VM-qH-4Dm"/>
+                            <constraint firstItem="anl-EG-1gk" firstAttribute="centerX" secondItem="Lrc-g2-vaz" secondAttribute="centerX" id="6F4-oI-CnH"/>
+                            <constraint firstItem="Agp-7i-bT7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GT4-8F-ub5"/>
+                            <constraint firstItem="anl-EG-1gk" firstAttribute="top" secondItem="Lrc-g2-vaz" secondAttribute="bottom" constant="8" id="Je3-yV-zI1"/>
+                            <constraint firstItem="bwc-j6-v2N" firstAttribute="top" secondItem="anl-EG-1gk" secondAttribute="bottom" constant="8" id="TAB-n4-YgZ"/>
+                            <constraint firstItem="bwc-j6-v2N" firstAttribute="width" secondItem="Lrc-g2-vaz" secondAttribute="width" id="bOb-qI-8K6"/>
+                            <constraint firstItem="anl-EG-1gk" firstAttribute="width" secondItem="Lrc-g2-vaz" secondAttribute="width" id="eYk-R1-0Bp"/>
+                            <constraint firstItem="etm-uf-rbx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ejN-or-PFU"/>
+                            <constraint firstItem="bwc-j6-v2N" firstAttribute="centerX" secondItem="Lrc-g2-vaz" secondAttribute="centerX" id="i3Y-Qk-xB5"/>
+                            <constraint firstItem="Lrc-g2-vaz" firstAttribute="top" secondItem="etm-uf-rbx" secondAttribute="bottom" constant="40" id="lRl-43-2Sa"/>
+                            <constraint firstItem="etm-uf-rbx" firstAttribute="top" secondItem="Agp-7i-bT7" secondAttribute="bottom" constant="8" id="llf-iC-9bD"/>
+                            <constraint firstItem="Agp-7i-bT7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="qzD-V6-6Ar"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Give Now" id="Bw1-8P-qI6">
+                        <barButtonItem key="backBarButtonItem" title=" " id="KjW-IO-D1B"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1075" y="337"/>
+        </scene>
+        <!--Onboarding-->
+        <scene sceneID="t3K-1I-9VK">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Onboarding" id="ecX-Pv-I9H" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FWJ-fd-FLG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1523.5" y="287"/>
+        </scene>
+        <!--Donating-->
+        <scene sceneID="5fc-KP-c2h">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Donating" id="t8l-FU-hPT" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QEs-2T-yD3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1515.5" y="337"/>
+        </scene>
+        <!--Volunteering-->
+        <scene sceneID="3WX-2e-Hfe">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Volunteering" id="NyQ-uJ-cMG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XPj-Vq-pNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1527" y="388"/>
+        </scene>
+        <!--Base Navigation Controller-->
+        <scene sceneID="xWp-6H-dfU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e3f-Jn-9PU" customClass="BaseNavigationController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AN0-vN-iVd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="aGD-Qy-mvi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MJg-W1-vHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="263" y="997"/>
+        </scene>
+    </scenes>
+</document>
