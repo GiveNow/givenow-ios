@@ -1,4 +1,7 @@
 #!/bin/sh
 
-pod install --no-integrate
-
+if [ -f "Podfile.lock" ]; then
+	pod update --no-integrate
+else
+	pod install --no-integrate
+fi

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Map View Controller-->
@@ -18,10 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uLw-U0-wjZ" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="85" width="600" height="515"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_me" translatesAutoresizingMaskIntoConstraints="NO" id="Zk1-KE-lC0">
                                 <rect key="frame" x="285" y="273" width="30" height="55"/>
                             </imageView>
@@ -32,20 +27,22 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uLw-U0-wjZ" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Yay-9I-ImA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="5h1-DL-vzx"/>
                             <constraint firstAttribute="trailing" secondItem="uLw-U0-wjZ" secondAttribute="trailing" id="EgO-zE-w7w"/>
+                            <constraint firstItem="Yay-9I-ImA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="POX-2t-m2b"/>
                             <constraint firstItem="Yay-9I-ImA" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="RNa-IJ-cmh"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uLw-U0-wjZ" secondAttribute="bottom" id="Sjr-eC-7zo"/>
                             <constraint firstItem="Zk1-KE-lC0" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="WBL-Nf-teA"/>
-                            <constraint firstItem="Yay-9I-ImA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="WMv-dH-Yij"/>
                             <constraint firstItem="uLw-U0-wjZ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="iPI-yv-Rh6"/>
+                            <constraint firstAttribute="trailing" secondItem="Yay-9I-ImA" secondAttribute="trailing" id="kte-db-ear"/>
                             <constraint firstItem="uLw-U0-wjZ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="lHc-PR-je1"/>
                             <constraint firstItem="Zk1-KE-lC0" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="oJ0-es-Mw7"/>
-                            <constraint firstAttribute="trailing" secondItem="Yay-9I-ImA" secondAttribute="trailing" id="t5E-hi-jJY"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Yay-9I-ImA" secondAttribute="trailing" id="zR3-mg-jjJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6Hq-pz-3QM">

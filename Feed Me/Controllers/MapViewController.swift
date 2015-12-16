@@ -25,6 +25,8 @@
 */
 
 import UIKit
+import CoreLocation
+import GoogleMaps
 
 class MapViewController: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
