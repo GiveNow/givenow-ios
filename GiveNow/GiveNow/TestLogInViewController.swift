@@ -20,6 +20,7 @@ class TestLogInViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // log out to reset the test state
         PFUser.logOutInBackground()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("loginStatusDidChange:"), name: LoginStatusDidChangeNotification, object: nil)
@@ -54,7 +55,6 @@ class TestLogInViewController: BaseViewController {
         
         if let phoneNumber = phoneNumberTextField?.text,
             let entryCode = entryCodeTextField?.text {
-            
             Backend.sharedInstance().logInWithPhoneNumber(phoneNumber, codeEntry: entryCode, completionHandler: { (success, error) -> Void in
                 if let error = error {
                     self.statusLabel?.text = error.localizedDescription

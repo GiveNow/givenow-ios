@@ -125,9 +125,10 @@ class Backend: NSObject {
             completionHandler(nil, error)
         }
         else {
+            // Are categories related to donation centers?
             let query = PFQuery(className: "DonationCategory")
             query.orderByAscending("priority")
-            query.limit = 9
+            //query.limit = 9
             query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
                 if let error = error {
                     completionHandler(nil, error)
