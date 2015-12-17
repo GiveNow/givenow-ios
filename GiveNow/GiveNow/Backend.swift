@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 // TODO: implement
 // See https://github.com/GiveNow/givenow-ios/issues/3
@@ -20,5 +21,9 @@ class Backend: NSObject {
     static func sharedInstance() -> Backend {
         return Backend._sharedInstance
     }
+    
+    // Parse Functions
+    // sendCode
+    // logIn
 
 }
