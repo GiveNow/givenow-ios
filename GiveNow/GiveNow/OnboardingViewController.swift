@@ -13,10 +13,37 @@ import UIKit
 // See https://github.com/GiveNow/givenow-ios/issues/5
 
 class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
-
+    
     @IBOutlet weak var pageControl : UIPageControl!
     
-    let backgroundColors = [UIColor.greenColor(), UIColor.orangeColor(), UIColor.blueColor(), UIColor.purpleColor(), UIColor.yellowColor()]
+    typealias OnboardingText = (title: String, details: String)
+    
+    struct CellConfig {
+        let color : UIColor
+        let text : OnboardingText
+        let imageName : String
+    }
+    
+    static let onboardingTextArray : [OnboardingText]  = [
+        ("Welcome to Give Now.",
+        "GiveNow lets you donate from anywhere."),
+        
+        ("We show you what's needed most in your area.",
+        "You select what you want to donate."),
+        
+        ("Tell us where to pick it up.",
+        "Simply pinpoint a spot on the map. You can even add special instructions like apartment numbers or gate codes."),
+        
+        ("We take care of the rest.",
+        "A trusted volunteer driver will pick up your donation. We'll contact you to coordinate the pickup.")
+    ]
+    
+    let onboardingConfigs = [
+        CellConfig(color: UIColor.greenColor(), text: onboardingTextArray[0], imageName: "onboarding_2_image"),
+        CellConfig(color: UIColor.orangeColor(), text: onboardingTextArray[1], imageName: "onboarding_2_image"),
+        CellConfig(color: UIColor.blueColor(), text: onboardingTextArray[2], imageName:  "onboarding_3_image"),
+        CellConfig(color: UIColor.purpleColor(), text: onboardingTextArray[3], imageName: "onboarding_4_image"),
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,9 +64,13 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     
     //MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if indexPath.row < backgroundColors.count {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("OnboardingCell", forIndexPath: indexPath)
-            cell.backgroundColor = backgroundColors[indexPath.row]
+        if indexPath.row < onboardingConfigs.count {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("OnboardingCell", forIndexPath: indexPath) as! OnboardingCollectionViewCell
+            let cellConfig = onboardingConfigs[indexPath.row]
+            cell.backgroundColor = cellConfig.color
+            cell.mainLabel.text = cellConfig.text.title
+            cell.detailsLabel.text = cellConfig.text.details
+            cell.imageView.image = UIImage(named: cellConfig.imageName)
             return cell
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SignInCell", forIndexPath: indexPath)
@@ -50,7 +81,7 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return backgroundColors.count + 1 //Sign In Cell
+        return onboardingConfigs.count + 1 //Sign In Cell
     }
     
     //MARK: UICollectionViewDelegate
@@ -60,4 +91,10 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
         self.pageControl.currentPage = Int(scrollView.contentOffset.x / pageWidth)
     }
 
+}
+
+class OnboardingCollectionViewCell : UICollectionViewCell {
+    @IBOutlet weak var mainLabel : UILabel!
+    @IBOutlet weak var detailsLabel : UILabel!
+    @IBOutlet weak var imageView : UIImageView!
 }
