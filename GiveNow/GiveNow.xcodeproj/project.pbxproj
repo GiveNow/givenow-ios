@@ -24,6 +24,16 @@
 		2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */; };
 		2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6AC1C21F40600D6C70D /* Backend.swift */; };
 		2645C6AF1C21F80000D6C70D /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6AE1C21F80000D6C70D /* AppState.swift */; };
+		C72296321C228E550097A662 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72296311C228E550097A662 /* ColorPalette.swift */; };
+		C72296341C228F150097A662 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296331C228F150097A662 /* Mapbox.framework */; };
+		C72296361C228F2E0097A662 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296351C228F2E0097A662 /* GLKit.framework */; };
+		C72296381C228F360097A662 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296371C228F360097A662 /* ImageIO.framework */; };
+		C722963A1C228F460097A662 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296391C228F460097A662 /* MobileCoreServices.framework */; };
+		C722963C1C228F540097A662 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C722963B1C228F540097A662 /* QuartzCore.framework */; };
+		C722963E1C228F630097A662 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C722963D1C228F630097A662 /* SystemConfiguration.framework */; };
+		C72296401C228F6D0097A662 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C722963F1C228F6D0097A662 /* libc++.tbd */; };
+		C72296421C228F740097A662 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296411C228F740097A662 /* libsqlite3.tbd */; };
+		C72296441C228F7C0097A662 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296431C228F7C0097A662 /* libz.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +77,16 @@
 		2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringViewController.swift; sourceTree = "<group>"; };
 		2645C6AC1C21F40600D6C70D /* Backend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		2645C6AE1C21F80000D6C70D /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		C72296311C228E550097A662 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		C72296331C228F150097A662 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = "../Pods/Mapbox-iOS-SDK/Mapbox.framework"; sourceTree = "<group>"; };
+		C72296351C228F2E0097A662 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		C72296371C228F360097A662 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		C72296391C228F460097A662 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		C722963B1C228F540097A662 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C722963D1C228F630097A662 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C722963F1C228F6D0097A662 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		C72296411C228F740097A662 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		C72296431C228F7C0097A662 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +94,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C72296441C228F7C0097A662 /* libz.tbd in Frameworks */,
+				C72296421C228F740097A662 /* libsqlite3.tbd in Frameworks */,
+				C72296401C228F6D0097A662 /* libc++.tbd in Frameworks */,
+				C722963E1C228F630097A662 /* SystemConfiguration.framework in Frameworks */,
+				C722963C1C228F540097A662 /* QuartzCore.framework in Frameworks */,
+				C722963A1C228F460097A662 /* MobileCoreServices.framework in Frameworks */,
+				C72296381C228F360097A662 /* ImageIO.framework in Frameworks */,
+				C72296361C228F2E0097A662 /* GLKit.framework in Frameworks */,
+				C72296341C228F150097A662 /* Mapbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +151,7 @@
 				2645C6AB1C21F3E100D6C70D /* Integrations */,
 				2645C6691C21E7FF00D6C70D /* AppDelegate.swift */,
 				2645C6701C21E7FF00D6C70D /* Assets.xcassets */,
+				C72296451C228F8F0097A662 /* Support */,
 				2645C6751C21E7FF00D6C70D /* Info.plist */,
 			);
 			path = GiveNow;
@@ -173,10 +203,28 @@
 		2645C6AB1C21F3E100D6C70D /* Integrations */ = {
 			isa = PBXGroup;
 			children = (
+				C72296311C228E550097A662 /* ColorPalette.swift */,
 				2645C6AC1C21F40600D6C70D /* Backend.swift */,
 				2645C6AE1C21F80000D6C70D /* AppState.swift */,
 			);
 			name = Integrations;
+			sourceTree = "<group>";
+		};
+		C72296451C228F8F0097A662 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				C72296431C228F7C0097A662 /* libz.tbd */,
+				C72296411C228F740097A662 /* libsqlite3.tbd */,
+				C722963F1C228F6D0097A662 /* libc++.tbd */,
+				C722963D1C228F630097A662 /* SystemConfiguration.framework */,
+				C722963B1C228F540097A662 /* QuartzCore.framework */,
+				C72296391C228F460097A662 /* MobileCoreServices.framework */,
+				C72296371C228F360097A662 /* ImageIO.framework */,
+				C72296351C228F2E0097A662 /* GLKit.framework */,
+				C72296331C228F150097A662 /* Mapbox.framework */,
+			);
+			name = Support;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,6 +371,7 @@
 				2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */,
 				2645C6AF1C21F80000D6C70D /* AppState.swift in Sources */,
 				2645C6A61C21F3BD00D6C70D /* OnboardingViewController.swift in Sources */,
+				C72296321C228E550097A662 /* ColorPalette.swift in Sources */,
 				2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */,
 				2645C6A21C21F38E00D6C70D /* BaseNavigationController.swift in Sources */,
 				2645C66A1C21E7FF00D6C70D /* AppDelegate.swift in Sources */,
@@ -557,6 +606,7 @@
 				2645C6901C21E7FF00D6C70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2645C6911C21E7FF00D6C70D /* Build configuration list for PBXNativeTarget "GiveNowTests" */ = {
 			isa = XCConfigurationList;
@@ -565,6 +615,7 @@
 				2645C6931C21E7FF00D6C70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2645C6941C21E7FF00D6C70D /* Build configuration list for PBXNativeTarget "GiveNowUITests" */ = {
 			isa = XCConfigurationList;
@@ -573,6 +624,7 @@
 				2645C6961C21E7FF00D6C70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
