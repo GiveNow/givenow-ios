@@ -25,19 +25,18 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     }
     
     struct Colors {
-        // #1, #3 R: 0 G: 185 B: 230 Color Primary
-        // #2 R: 10 G: 137 B: 167 Color Primary Dark
-        // #4 R: 3 G: 155 B: 229
-        // #5 R: 102 G: 187 B: 106 //accent/signin color
+        //Color Primary
         static let OnboardingColor1 = UIColor(red: 0.0/255.0, green: 185.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+        //Color Primary Dark
         static let OnboardingColor2 = UIColor(red: 10.0/255.0, green: 137.0/255.0, blue: 167.0/255.0, alpha: 1.0)
         static let OnboardingColor3 = UIColor(red: 0.0/255.0, green: 185.0/255.0, blue: 230.0/255.0, alpha: 1.0)
         static let OnboardingColor4 = UIColor(red: 3.0/255.0, green: 155.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+        //Accent color
         static let SignInColor = UIColor(red: 102.0/255.0, green: 187.0/255.0, blue: 106.0/255.0, alpha: 1.0)
     }
     
     static let onboardingTextArray : [OnboardingText]  = [
-        ("Welcome to Give Now.",
+        ("Welcome to GiveNow.",
         "GiveNow lets you donate from anywhere."),
         
         ("We show you what's needed most in your area.",
@@ -51,7 +50,7 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     ]
     
     let onboardingConfigs = [
-        CellConfig(color: Colors.OnboardingColor1, text: onboardingTextArray[0], imageName: "onboarding_2_image"),
+        CellConfig(color: Colors.OnboardingColor1, text: onboardingTextArray[0], imageName: "round_icon"),
         CellConfig(color: Colors.OnboardingColor2, text: onboardingTextArray[1], imageName: "onboarding_2_image"),
         CellConfig(color: Colors.OnboardingColor3, text: onboardingTextArray[2], imageName:  "onboarding_3_image"),
         CellConfig(color: Colors.OnboardingColor4, text: onboardingTextArray[3], imageName: "onboarding_4_image"),
@@ -59,6 +58,7 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.navigationController?.setNavigationBarHidden(true, animated: true)
 
         // Do any additional setup after loading the view.
     }
