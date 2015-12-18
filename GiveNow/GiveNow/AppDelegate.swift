@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize Parse
         if let parseApplicationId = AppState.sharedInstance().parseApplicationId,
             let parseClientKey = AppState.sharedInstance().parseClientKey {
+                Parse.registerSubclasses()
                 Parse.setApplicationId(parseApplicationId, clientKey: parseClientKey)
                 PFUser.enableAutomaticUser()
         }

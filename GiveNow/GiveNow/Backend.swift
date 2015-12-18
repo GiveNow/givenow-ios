@@ -141,5 +141,128 @@ class Backend: NSObject {
         
         completionHandler(nil, nil)
     }
+    
+    func saveDonation(donor: User, categories: [DonationCategory], completionHandler: ((Donation?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
 
+        let donation = Donation()
+        donation.donor = donor
+        donation.donationCategories = categories
+        
+        donation.saveInBackgroundWithBlock({ (success, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                completionHandler(donation, nil)
+            }
+        })
+    }
+    
+    func fetchDonationsForDonor(donor : User, completionHandler: (([Donation]?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+
+        guard let query = Donation.query() else {
+            return
+        }
+        
+        query.whereKey(Donation.Keys.donor.rawValue, equalTo: donor)
+        query.orderByAscending("createdAt")
+        query.findObjectsInBackgroundWithBlock { (results, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                if let donations = results as? [Donation] {
+                    completionHandler(donations, nil)
+                }
+                else {
+                    let userInfo = [NSLocalizedDescriptionKey : "Unexpected class"]
+                    let error = NSError(domain: "Backend", code: 1, userInfo: userInfo)
+                    completionHandler(nil, error)
+                }
+            }
+        }
+    }
+    
+    func saveVolunteer(user : User, completionHandler: ((Volunteer?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        
+        // check if the volunteer already exists for this user
+        fetchVolunteerForUser(user) { (volunteer, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                if let volunteer = volunteer {
+                    completionHandler(volunteer, nil)
+                }
+                else {
+                    // save a new volunteer if there was not an existing volunteer for this user
+                    let volunteer = Volunteer()
+                    volunteer.user = user
+                    volunteer.isApproved = false
+                    
+                    volunteer.saveInBackgroundWithBlock { (success, error) -> Void in
+                        if let error = error {
+                            completionHandler(nil, error)
+                        }
+                        else {
+                            completionHandler(volunteer, nil)
+                        }
+                    }
+                }
+            }
+        }
+     }
+    
+    func fetchVolunteerForUser(user : User, completionHandler:((Volunteer?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        
+        if let query = Volunteer.query() {
+            query.whereKey(Volunteer.Keys.user.rawValue, equalTo: user)
+            query.getFirstObjectInBackgroundWithBlock({ (result, error) -> Void in
+                if let error = error {
+                    completionHandler(nil, error)
+                }
+                else {
+                    if let volunteer = result as? Volunteer {
+                        completionHandler(volunteer, nil)
+                    }
+                    else {
+                        completionHandler(nil, nil)
+                    }
+                }
+            })
+        }
+    }
+
+}
+
+extension Parse {
+    
+    // Call this function before setApplicationId:clientKey: in your AppDelegate
+    class func registerSubclasses() {
+        
+        struct Static {
+            static var onceToken : dispatch_once_t = 0
+        }
+        dispatch_once(&Static.onceToken) {
+            User.registerSubclass()
+            DropOffAgency.registerSubclass()
+            PickupRequest.registerSubclass()
+            Donation.registerSubclass()
+            DonationCategory.registerSubclass()
+            Volunteer.registerSubclass()
+        }
+        
+    }
 }
