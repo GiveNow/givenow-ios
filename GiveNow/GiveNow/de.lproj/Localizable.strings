@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  GiveNow
+
+  Created by Brennan Stehling on 12/17/15.
+  Copyright © 2015 GiveNow. All rights reserved.
+*/
+
+/* SMS Body */
+"SMS Body"  = "{code} is your code for GiveNow.";

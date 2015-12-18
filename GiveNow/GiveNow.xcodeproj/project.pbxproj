@@ -24,6 +24,15 @@
 		2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */; };
 		2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6AC1C21F40600D6C70D /* Backend.swift */; };
 		2645C6AF1C21F80000D6C70D /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6AE1C21F80000D6C70D /* AppState.swift */; };
+		26F35DE01C228A080012C83C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DD71C228A080012C83C /* Bolts.framework */; };
+		26F35DE11C228A080012C83C /* Bolts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DD71C228A080012C83C /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26F35DE41C228A080012C83C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DDB1C228A080012C83C /* Parse.framework */; };
+		26F35DE51C228A080012C83C /* Parse.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DDB1C228A080012C83C /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26F35DE81C228A080012C83C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DDF1C228A080012C83C /* SwiftyJSON.framework */; };
+		26F35DE91C228A080012C83C /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DDF1C228A080012C83C /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26FE370F1C2297B600BED9A0 /* TestLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */; };
+		26FE37131C229B9C00BED9A0 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26FE37121C229B9C00BED9A0 /* Keys.plist */; };
+		26FE37171C22A58900BED9A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26FE37191C22A58900BED9A0 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +50,79 @@
 			remoteGlobalIDString = 2645C6651C21E7FF00D6C70D;
 			remoteInfo = GiveNow;
 		};
+		26F35DD61C228A080012C83C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 12F3596882E4D78266E28C0DE7CD0814;
+			remoteInfo = Bolts;
+		};
+		26F35DD81C228A080012C83C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E5F50D42CDF290DE54CF56D526A3A084;
+			remoteInfo = "Mapbox-iOS-SDK-Mapbox";
+		};
+		26F35DDA1C228A080012C83C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A00F5E23007D0345374B34F15972EEC1;
+			remoteInfo = Parse;
+		};
+		26F35DDC1C228A080012C83C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D8417FF39CAE9B83352914F55E1F9393;
+			remoteInfo = "Pods-GiveNow";
+		};
+		26F35DDE1C228A080012C83C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 27DA9B39E926E3715AC5183A52C1BB5A;
+			remoteInfo = SwiftyJSON;
+		};
+		26F35DE21C228A080012C83C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 708E01B006A9F88B3C13711562282B5E;
+			remoteInfo = Bolts;
+		};
+		26F35DE61C228A080012C83C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 511B536F0DE06D9C3BD65397A91990C0;
+			remoteInfo = Parse;
+		};
+		26F35DEA1C228A080012C83C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = AD2ACDEE0F2A096217A13642F95D1057;
+			remoteInfo = SwiftyJSON;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		26F35DEC1C228A080012C83C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				26F35DE51C228A080012C83C /* Parse.framework in Embed Frameworks */,
+				26F35DE11C228A080012C83C /* Bolts.framework in Embed Frameworks */,
+				26F35DE91C228A080012C83C /* SwiftyJSON.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2645C6661C21E7FF00D6C70D /* GiveNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiveNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +148,11 @@
 		2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringViewController.swift; sourceTree = "<group>"; };
 		2645C6AC1C21F40600D6C70D /* Backend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		2645C6AE1C21F80000D6C70D /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		26A2F4E61C2285E40081165D /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = ../Pods/Pods.xcodeproj; sourceTree = "<group>"; };
+		26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogInViewController.swift; sourceTree = "<group>"; };
+		26FE37121C229B9C00BED9A0 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		26FE37181C22A58900BED9A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		26FE371A1C22A59500BED9A0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +160,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26F35DE41C228A080012C83C /* Parse.framework in Frameworks */,
+				26F35DE01C228A080012C83C /* Bolts.framework in Frameworks */,
+				26F35DE81C228A080012C83C /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +186,7 @@
 		2645C65D1C21E7FF00D6C70D = {
 			isa = PBXGroup;
 			children = (
+				26A2F4E61C2285E40081165D /* Pods.xcodeproj */,
 				2645C6681C21E7FF00D6C70D /* GiveNow */,
 				2645C67D1C21E7FF00D6C70D /* GiveNowTests */,
 				2645C6881C21E7FF00D6C70D /* GiveNowUITests */,
@@ -117,12 +207,14 @@
 		2645C6681C21E7FF00D6C70D /* GiveNow */ = {
 			isa = PBXGroup;
 			children = (
+				26FE37141C22A54700BED9A0 /* Localization */,
 				2645C69E1C21F36500D6C70D /* View Controllers */,
 				2645C69D1C21F34900D6C70D /* Storyboards */,
 				2645C6AB1C21F3E100D6C70D /* Integrations */,
 				2645C6691C21E7FF00D6C70D /* AppDelegate.swift */,
 				2645C6701C21E7FF00D6C70D /* Assets.xcassets */,
 				2645C6751C21E7FF00D6C70D /* Info.plist */,
+				26FE37121C229B9C00BED9A0 /* Keys.plist */,
 			);
 			path = GiveNow;
 			sourceTree = "<group>";
@@ -166,6 +258,7 @@
 				2645C6A51C21F3BD00D6C70D /* OnboardingViewController.swift */,
 				2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */,
 				2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */,
+				26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -179,6 +272,26 @@
 			name = Integrations;
 			sourceTree = "<group>";
 		};
+		26A2F4E71C2285E40081165D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				26F35DD71C228A080012C83C /* Bolts.framework */,
+				26F35DD91C228A080012C83C /* Mapbox.bundle */,
+				26F35DDB1C228A080012C83C /* Parse.framework */,
+				26F35DDD1C228A080012C83C /* Pods_GiveNow.framework */,
+				26F35DDF1C228A080012C83C /* SwiftyJSON.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		26FE37141C22A54700BED9A0 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				26FE37191C22A58900BED9A0 /* Localizable.strings */,
+			);
+			name = Localization;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -189,10 +302,14 @@
 				2645C6621C21E7FF00D6C70D /* Sources */,
 				2645C6631C21E7FF00D6C70D /* Frameworks */,
 				2645C6641C21E7FF00D6C70D /* Resources */,
+				26F35DEC1C228A080012C83C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				26F35DE31C228A080012C83C /* PBXTargetDependency */,
+				26F35DE71C228A080012C83C /* PBXTargetDependency */,
+				26F35DEB1C228A080012C83C /* PBXTargetDependency */,
 			);
 			name = GiveNow;
 			productName = GiveNow;
@@ -265,10 +382,17 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 2645C65D1C21E7FF00D6C70D;
 			productRefGroup = 2645C6671C21E7FF00D6C70D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 26A2F4E71C2285E40081165D /* Products */;
+					ProjectRef = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2645C6651C21E7FF00D6C70D /* GiveNow */,
@@ -277,6 +401,44 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		26F35DD71C228A080012C83C /* Bolts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Bolts.framework;
+			remoteRef = 26F35DD61C228A080012C83C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		26F35DD91C228A080012C83C /* Mapbox.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Mapbox.bundle;
+			remoteRef = 26F35DD81C228A080012C83C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		26F35DDB1C228A080012C83C /* Parse.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Parse.framework;
+			remoteRef = 26F35DDA1C228A080012C83C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		26F35DDD1C228A080012C83C /* Pods_GiveNow.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_GiveNow.framework;
+			remoteRef = 26F35DDC1C228A080012C83C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		26F35DDF1C228A080012C83C /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 26F35DDE1C228A080012C83C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2645C6641C21E7FF00D6C70D /* Resources */ = {
@@ -287,6 +449,8 @@
 				2645C6711C21E7FF00D6C70D /* Assets.xcassets in Resources */,
 				2645C69C1C21F34400D6C70D /* Volunteering.storyboard in Resources */,
 				2645C66F1C21E7FF00D6C70D /* Main.storyboard in Resources */,
+				26FE37131C229B9C00BED9A0 /* Keys.plist in Resources */,
+				26FE37171C22A58900BED9A0 /* Localizable.strings in Resources */,
 				2645C69A1C21F33900D6C70D /* Donating.storyboard in Resources */,
 				2645C6981C21F32300D6C70D /* Onboarding.storyboard in Resources */,
 			);
@@ -319,6 +483,7 @@
 				2645C6AF1C21F80000D6C70D /* AppState.swift in Sources */,
 				2645C6A61C21F3BD00D6C70D /* OnboardingViewController.swift in Sources */,
 				2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */,
+				26FE370F1C2297B600BED9A0 /* TestLogInViewController.swift in Sources */,
 				2645C6A21C21F38E00D6C70D /* BaseNavigationController.swift in Sources */,
 				2645C66A1C21E7FF00D6C70D /* AppDelegate.swift in Sources */,
 				2645C6A01C21F37A00D6C70D /* BaseViewController.swift in Sources */,
@@ -354,6 +519,21 @@
 			target = 2645C6651C21E7FF00D6C70D /* GiveNow */;
 			targetProxy = 2645C6861C21E7FF00D6C70D /* PBXContainerItemProxy */;
 		};
+		26F35DE31C228A080012C83C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Bolts;
+			targetProxy = 26F35DE21C228A080012C83C /* PBXContainerItemProxy */;
+		};
+		26F35DE71C228A080012C83C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Parse;
+			targetProxy = 26F35DE61C228A080012C83C /* PBXContainerItemProxy */;
+		};
+		26F35DEB1C228A080012C83C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyJSON;
+			targetProxy = 26F35DEA1C228A080012C83C /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -371,6 +551,15 @@
 				2645C6731C21E7FF00D6C70D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		26FE37191C22A58900BED9A0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				26FE37181C22A58900BED9A0 /* Base */,
+				26FE371A1C22A59500BED9A0 /* de */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -463,6 +652,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = GiveNow/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -475,6 +665,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = GiveNow/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -550,6 +741,7 @@
 				2645C6901C21E7FF00D6C70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2645C6911C21E7FF00D6C70D /* Build configuration list for PBXNativeTarget "GiveNowTests" */ = {
 			isa = XCConfigurationList;
@@ -558,6 +750,7 @@
 				2645C6931C21E7FF00D6C70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2645C6941C21E7FF00D6C70D /* Build configuration list for PBXNativeTarget "GiveNowUITests" */ = {
 			isa = XCConfigurationList;
@@ -566,6 +759,7 @@
 				2645C6961C21E7FF00D6C70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
