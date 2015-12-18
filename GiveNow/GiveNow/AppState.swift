@@ -21,7 +21,7 @@ class AppState: NSObject {
     
     var isUserLoggedIn : Bool {
         get {
-            return PFUser.currentUser() != nil
+            return !PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser())
         }
     }
     

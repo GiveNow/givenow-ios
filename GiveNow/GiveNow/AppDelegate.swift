@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let parseApplicationId = AppState.sharedInstance().parseApplicationId,
             let parseClientKey = AppState.sharedInstance().parseClientKey {
                 Parse.setApplicationId(parseApplicationId, clientKey: parseClientKey)
+                PFUser.enableAutomaticUser()
         }
         
         return true
