@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import Parse
 
 // TODO: implement
 // See https://github.com/GiveNow/givenow-ios/issues/7
 // See https://github.com/GiveNow/givenow-ios/issues/8
 
 class VolunteeringViewController: BaseViewController {
+    
+    @IBOutlet weak var volunteeringTitleLabel: UILabel!
+    @IBOutlet weak var volunteerButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,15 +29,9 @@ class VolunteeringViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    
+    
+    
 
 }
