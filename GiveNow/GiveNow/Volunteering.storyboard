@@ -16,10 +16,56 @@
                     <view key="view" contentMode="scaleToFill" id="i5W-uJ-7Wh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P6A-7d-XKe">
+                                <rect key="frame" x="20" y="350" width="560" height="50"/>
+                                <color key="backgroundColor" red="0.40000000000000002" green="0.73333333329999995" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="czU-cV-c6r"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="I want to volunteer!">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="volunteerButtonTapped:" destination="Alj-h5-f0M" eventType="touchUpInside" id="x8K-91-8Y5"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to volunteer to pick up donations? The only thing you need is a car and some spare time!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djk-L6-M7i">
+                                <rect key="frame" x="20" y="279" width="560" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.72549019609999998" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Djk-L6-M7i" firstAttribute="centerX" secondItem="i5W-uJ-7Wh" secondAttribute="centerX" id="AcF-cI-oSo"/>
+                            <constraint firstAttribute="trailing" secondItem="Djk-L6-M7i" secondAttribute="trailing" constant="20" id="ETi-VT-Gbk"/>
+                            <constraint firstAttribute="trailing" secondItem="Djk-L6-M7i" secondAttribute="trailing" constant="20" id="Ffs-EC-pbr"/>
+                            <constraint firstItem="Djk-L6-M7i" firstAttribute="leading" secondItem="i5W-uJ-7Wh" secondAttribute="leading" constant="20" id="P3s-ew-ISv"/>
+                            <constraint firstItem="P6A-7d-XKe" firstAttribute="leading" secondItem="i5W-uJ-7Wh" secondAttribute="leading" constant="20" id="VSm-6C-1gK"/>
+                            <constraint firstAttribute="trailing" secondItem="P6A-7d-XKe" secondAttribute="trailing" constant="20" id="aVO-vi-c1f"/>
+                            <constraint firstItem="P6A-7d-XKe" firstAttribute="top" secondItem="Djk-L6-M7i" secondAttribute="bottom" constant="30" id="ep4-8V-Pi5"/>
+                            <constraint firstItem="Djk-L6-M7i" firstAttribute="leading" secondItem="i5W-uJ-7Wh" secondAttribute="leading" constant="20" id="pYO-tB-Jlo"/>
+                            <constraint firstItem="Djk-L6-M7i" firstAttribute="centerY" secondItem="i5W-uJ-7Wh" secondAttribute="centerY" id="rwy-SN-ITt"/>
+                            <constraint firstItem="Djk-L6-M7i" firstAttribute="centerY" secondItem="i5W-uJ-7Wh" secondAttribute="centerY" id="zVK-ay-oNc"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="AcF-cI-oSo"/>
+                                <exclude reference="Ffs-EC-pbr"/>
+                                <exclude reference="pYO-tB-Jlo"/>
+                                <exclude reference="rwy-SN-ITt"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Volunteering" id="9bd-sy-waa"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="volunteerButton" destination="P6A-7d-XKe" id="uLV-ro-CSr"/>
+                        <outlet property="volunteerViewControllerLabel" destination="Djk-L6-M7i" id="cDP-4n-G4f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jps-8A-NTp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,33 +7,50 @@
 //
 
 import UIKit
+import Parse
 
 // TODO: implement
 // See https://github.com/GiveNow/givenow-ios/issues/7
 // See https://github.com/GiveNow/givenow-ios/issues/8
 
 class VolunteeringViewController: BaseViewController {
+    
+    
+    @IBOutlet weak var volunteerViewControllerLabel: UILabel!
+    @IBOutlet weak var volunteerButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+    }
+    
+    
+    @IBAction func volunteerButtonTapped(sender: AnyObject) {
+        if loggedIn() == true {
+//            Send in the volunteer request and update the page
+        }
+        else {
+            //Display the login workflow
+            //Once the user has logged in, send in the volunteer request and update the page
+        }
+    }
+    
+    func loggedIn() -> Bool {
+        var currentUser = PFUser.currentUser()
+        if currentUser != nil {
+            return true
+        }
+        else {
+            return false
+        }
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }

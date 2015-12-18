@@ -41,6 +41,41 @@
 			remoteGlobalIDString = 2645C6651C21E7FF00D6C70D;
 			remoteInfo = GiveNow;
 		};
+		D27848B21C23A8D700346405 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D27848AA1C23A8D600346405 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1C076073CA8AB020AB70211764CD4544;
+			remoteInfo = Bolts;
+		};
+		D27848B41C23A8D700346405 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D27848AA1C23A8D600346405 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6F15C021A0D08C506A6C4714ECFEF778;
+			remoteInfo = "Mapbox-iOS-SDK-Mapbox";
+		};
+		D27848B61C23A8D700346405 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D27848AA1C23A8D600346405 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 38F4C37B82E39BCAAE91F1E12EB76179;
+			remoteInfo = Parse;
+		};
+		D27848B81C23A8D700346405 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D27848AA1C23A8D600346405 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D8993522A8E167AB6D94E29A67E80CB;
+			remoteInfo = "Pods-GiveNow";
+		};
+		D27848BA1C23A8D700346405 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D27848AA1C23A8D600346405 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB4CB50B42FA0112BD3CB968CB68AC93;
+			remoteInfo = SwiftyJSON;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +102,7 @@
 		2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringViewController.swift; sourceTree = "<group>"; };
 		2645C6AC1C21F40600D6C70D /* Backend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		2645C6AE1C21F80000D6C70D /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		D27848AA1C23A8D600346405 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = ../Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +137,7 @@
 				2645C67D1C21E7FF00D6C70D /* GiveNowTests */,
 				2645C6881C21E7FF00D6C70D /* GiveNowUITests */,
 				2645C6671C21E7FF00D6C70D /* Products */,
+				D27848AA1C23A8D600346405 /* Pods.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,6 +214,18 @@
 				2645C6AE1C21F80000D6C70D /* AppState.swift */,
 			);
 			name = Integrations;
+			sourceTree = "<group>";
+		};
+		D27848AB1C23A8D600346405 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D27848B31C23A8D700346405 /* Bolts.framework */,
+				D27848B51C23A8D700346405 /* Mapbox.bundle */,
+				D27848B71C23A8D700346405 /* Parse.framework */,
+				D27848B91C23A8D700346405 /* Pods_GiveNow.framework */,
+				D27848BB1C23A8D700346405 /* SwiftyJSON.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +318,12 @@
 			mainGroup = 2645C65D1C21E7FF00D6C70D;
 			productRefGroup = 2645C6671C21E7FF00D6C70D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D27848AB1C23A8D600346405 /* Products */;
+					ProjectRef = D27848AA1C23A8D600346405 /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2645C6651C21E7FF00D6C70D /* GiveNow */,
@@ -277,6 +332,44 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D27848B31C23A8D700346405 /* Bolts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Bolts.framework;
+			remoteRef = D27848B21C23A8D700346405 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D27848B51C23A8D700346405 /* Mapbox.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Mapbox.bundle;
+			remoteRef = D27848B41C23A8D700346405 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D27848B71C23A8D700346405 /* Parse.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Parse.framework;
+			remoteRef = D27848B61C23A8D700346405 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D27848B91C23A8D700346405 /* Pods_GiveNow.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_GiveNow.framework;
+			remoteRef = D27848B81C23A8D700346405 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D27848BB1C23A8D700346405 /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = D27848BA1C23A8D700346405 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2645C6641C21E7FF00D6C70D /* Resources */ = {
@@ -550,6 +643,7 @@
 				2645C6901C21E7FF00D6C70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2645C6911C21E7FF00D6C70D /* Build configuration list for PBXNativeTarget "GiveNowTests" */ = {
 			isa = XCConfigurationList;
@@ -558,6 +652,7 @@
 				2645C6931C21E7FF00D6C70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2645C6941C21E7FF00D6C70D /* Build configuration list for PBXNativeTarget "GiveNowUITests" */ = {
 			isa = XCConfigurationList;
@@ -566,6 +661,7 @@
 				2645C6961C21E7FF00D6C70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
