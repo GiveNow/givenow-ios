@@ -24,6 +24,9 @@
                                 <state key="normal" title="I want to volunteer!">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="volunteerButtonTapped:" destination="Alj-h5-f0M" eventType="touchUpInside" id="5a5-MA-fRO"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to volunteer to pick up donations? The only thing you need is a ar and some spare time!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rj9-A3-xS7">
                                 <rect key="frame" x="20" y="279" width="560" height="41"/>
@@ -47,11 +50,30 @@
                     <connections>
                         <outlet property="volunteerButton" destination="BEI-Bz-9pS" id="oof-cA-EfZ"/>
                         <outlet property="volunteeringTitleLabel" destination="Rj9-A3-xS7" id="n68-uF-Ybn"/>
+                        <segue destination="BRa-77-Bv4" kind="presentation" id="Dc0-Zh-cgW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jps-8A-NTp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="456" y="330"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="eHP-sc-vD2">
+            <objects>
+                <viewController id="BRa-77-Bv4" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Ci-xs-zYD"/>
+                        <viewControllerLayoutGuide type="bottom" id="rhr-hk-eZh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="l4h-fr-tP9">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Je7-e8-xHs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="456" y="1043"/>
         </scene>
     </scenes>
 </document>
