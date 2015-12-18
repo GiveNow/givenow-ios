@@ -42,6 +42,11 @@ class HomeViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - User Actions
+    
+    @IBAction func returnHome(segue: UIStoryboardSegue) {
+        // do nothing
+    }
 
     /*
     // MARK: - Navigation
