@@ -9,7 +9,7 @@
         <!--Onboarding-->
         <scene sceneID="erS-gD-Dyq">
             <objects>
-                <viewController id="WaI-Bh-GTN" customClass="OnboardingViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="WaI-Bh-GTN" customClass="OnboardingViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3jR-Vf-g4c"/>
                         <viewControllerLayoutGuide type="bottom" id="Whn-tj-Aen"/>
@@ -35,9 +35,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_2_image" translatesAutoresizingMaskIntoConstraints="NO" id="KxA-Uf-KFa">
-                                                    <rect key="frame" x="0.0" y="89" width="600" height="264"/>
+                                                    <rect key="frame" x="0.0" y="135" width="600" height="301"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="264" id="AhX-lG-qXC"/>
                                                         <constraint firstAttribute="height" constant="320" id="xQ1-AH-OxW"/>
                                                     </constraints>
                                                     <variation key="default">
@@ -47,13 +46,13 @@
                                                     </variation>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Onboarding Top Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="RrP-Bh-tt6">
-                                                    <rect key="frame" x="64" y="44" width="464" height="27"/>
+                                                    <rect key="frame" x="64" y="98" width="464" height="27"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                     <color key="textColor" red="1" green="0.98765432099999995" blue="0.98765432099999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Onboarding Details Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="rYN-oa-uRc">
-                                                    <rect key="frame" x="64" y="383" width="472" height="17"/>
+                                                    <rect key="frame" x="64" y="446" width="472" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="0.98765432099999995" blue="0.98765432099999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -63,15 +62,16 @@
                                         </view>
                                         <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="KxA-Uf-KFa" secondAttribute="bottom" constant="164" id="01l-Ym-AaM"/>
                                             <constraint firstAttribute="trailing" secondItem="rYN-oa-uRc" secondAttribute="trailing" constant="64" id="0fe-gx-yIe"/>
-                                            <constraint firstItem="KxA-Uf-KFa" firstAttribute="top" secondItem="RrP-Bh-tt6" secondAttribute="bottom" constant="18" id="32f-D0-15b"/>
+                                            <constraint firstItem="KxA-Uf-KFa" firstAttribute="top" secondItem="RrP-Bh-tt6" secondAttribute="bottom" constant="10" id="7ba-jg-Qeh"/>
                                             <constraint firstItem="rYN-oa-uRc" firstAttribute="leading" secondItem="gLP-uL-Pqv" secondAttribute="leading" constant="64" id="Qi3-2w-11O"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="RrP-Bh-tt6" secondAttribute="trailing" constant="64" id="YMf-Rg-ZxD"/>
-                                            <constraint firstItem="rYN-oa-uRc" firstAttribute="top" secondItem="KxA-Uf-KFa" secondAttribute="bottom" constant="30" id="a3V-sy-DDm"/>
                                             <constraint firstItem="KxA-Uf-KFa" firstAttribute="leading" secondItem="gLP-uL-Pqv" secondAttribute="leading" id="cC1-qD-QAD"/>
                                             <constraint firstAttribute="trailing" secondItem="KxA-Uf-KFa" secondAttribute="trailing" id="hBB-CW-ULi"/>
                                             <constraint firstAttribute="bottom" secondItem="rYN-oa-uRc" secondAttribute="bottom" constant="64" id="je1-BZ-0l3"/>
-                                            <constraint firstItem="RrP-Bh-tt6" firstAttribute="top" secondItem="gLP-uL-Pqv" secondAttribute="top" constant="44" id="oq1-V3-e2r"/>
+                                            <constraint firstItem="KxA-Uf-KFa" firstAttribute="top" secondItem="gLP-uL-Pqv" secondAttribute="top" constant="135" id="pGT-K4-k05"/>
+                                            <constraint firstItem="rYN-oa-uRc" firstAttribute="top" secondItem="KxA-Uf-KFa" secondAttribute="bottom" constant="10" id="q9j-fY-d2t"/>
                                             <constraint firstItem="RrP-Bh-tt6" firstAttribute="leading" secondItem="gLP-uL-Pqv" secondAttribute="leading" constant="64" id="xfI-Ab-zVo"/>
                                         </constraints>
                                         <variation key="default">
@@ -119,7 +119,7 @@
                                 </connections>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="b9n-bz-wJz">
-                                <rect key="frame" x="264" y="545" width="71" height="37"/>
+                                <rect key="frame" x="264" y="519" width="71" height="37"/>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -127,7 +127,7 @@
                             <constraint firstAttribute="bottomMargin" secondItem="kgL-U6-BFj" secondAttribute="bottom" id="08q-x6-CSb"/>
                             <constraint firstAttribute="trailing" secondItem="kgL-U6-BFj" secondAttribute="trailing" id="BLv-3j-Zpo"/>
                             <constraint firstItem="kgL-U6-BFj" firstAttribute="leading" secondItem="7Ju-Hu-XLA" secondAttribute="leading" id="Dey-Nx-XRj"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="b9n-bz-wJz" secondAttribute="bottom" constant="18" id="K2m-54-H6R"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="b9n-bz-wJz" secondAttribute="bottom" constant="44" id="K2m-54-H6R"/>
                             <constraint firstItem="b9n-bz-wJz" firstAttribute="centerX" secondItem="7Ju-Hu-XLA" secondAttribute="centerX" id="NHt-C0-SqJ"/>
                             <constraint firstAttribute="topMargin" secondItem="kgL-U6-BFj" secondAttribute="top" id="cN3-hO-F67"/>
                         </constraints>
