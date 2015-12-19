@@ -36,20 +36,16 @@ class VolunteeringViewController: BaseViewController {
     
     func initializeLabels() {
         //ToDo: Localize
-        volunteeringTitleLabel.text = "Want to volunteer to pick up donations? The only thing you need is a ar and some spare time!"
+        volunteeringTitleLabel.text = "Want to volunteer to pick up donations? The only thing you need is a car and some spare time!"
         volunteerButton.setTitle("I want to volunteer!", forState: .Normal)
     }
     
     
     @IBAction func volunteerButtonTapped(sender: AnyObject) {
         
-        // if user logged in, submit volunteer request
-        // and then update the label and text
         if AppState.sharedInstance().isUserLoggedIn {
             submitVolunteerApplicationRequest()
         }
-            
-        // if not, do login flow and then submit volunteer request
         else {
             askUserToLogin()
         }
@@ -65,9 +61,10 @@ class VolunteeringViewController: BaseViewController {
     
     func askUserToLogin() {
         //Display modal login dialogue
+        performSegueWithIdentifier("logIn", sender: nil)
         
         // after successful login
-        submitVolunteerApplicationRequest()
+//        submitVolunteerApplicationRequest()
     }
     
     func updateViewAfterSuccessfulSubmission() {
@@ -78,15 +75,22 @@ class VolunteeringViewController: BaseViewController {
         
     }
     
-//// Could use this to check if user is logged in
-//    func isLoggedIn() -> Bool {
-//        let currentUser = PFUser.currentUser()
-//        if currentUser != nil {
-//            return true
-//        } else {
-//           return false
-//        }
-//    }
+    @IBAction func loginViewDismissed(segue: UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func successfulLogin(segue: UIStoryboardSegue) {
+        submitVolunteerApplicationRequest()
+    }
+
+    func isLoggedIn() -> Bool {
+        let currentUser = PFUser.currentUser()
+        if currentUser != nil {
+            return true
+        } else {
+           return false
+        }
+    }
     
     
     
