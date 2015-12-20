@@ -28,13 +28,29 @@ class Backend: NSObject {
         return Backend._sharedInstance
     }
     
+    func logOut(completionHandler: BackendFunctionCompletionHandler?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+    
+        PFUser.logOutInBackgroundWithBlock { (error) -> Void in
+            if let error = error {
+                completionHandler(false, error)
+            }
+            else {
+                completionHandler(true, nil)
+            }
+        }
+    }
+    
     func sendCodeToPhoneNumber(phoneNumber : String, completionHandler: BackendFunctionCompletionHandler?) {
         guard let completionHandler = completionHandler else {
             return
         }
         
+        
         let smsBody = NSLocalizedString("SMS Body", comment: "SMS Body")
-        let params = ["phoneNumber" : phoneNumber, "body" : smsBody]
+        let params = ["phoneNumber" : completePhoneNumber(phoneNumber), "body" : smsBody]
         print(params)
         PFCloud.callFunctionInBackground("sendCode", withParameters: params) { (result, error) -> Void in
             if let error = error {
@@ -51,7 +67,8 @@ class Backend: NSObject {
             return
         }
         
-        let params = ["phoneNumber" : phoneNumber, "codeEntry" : codeEntry]
+        let params = ["phoneNumber" : completePhoneNumber(phoneNumber), "codeEntry" : codeEntry]
+        print(params)
         PFCloud.callFunctionInBackground("logIn", withParameters: params) { (result, error) -> Void in
             if let error = error {
                 completionHandler(false, error)
@@ -140,6 +157,11 @@ class Backend: NSObject {
         }
         
         completionHandler(nil, nil)
+    }
+    
+    private func completePhoneNumber(phoneNumber : String) -> String {
+        // Note: automatically add the country code of 1 for US
+        return phoneNumber.characters.count == 11 ? phoneNumber : "1\(phoneNumber)"
     }
 
 }

@@ -8,40 +8,65 @@
 
 import UIKit
 
+public enum VolunteeringEntryMode : Int {
+    case None = 0
+    case PhoneNumber
+    case ConfirmationCode
+}
+
 class VolunteeringModalLoginViewController: UIViewController {
     
-    var phoneNumberSubmitted:Bool!
+    @IBOutlet weak var modalTitle: UILabel?
+    @IBOutlet weak var modalDetails: UILabel?
+    @IBOutlet weak var entryTextField: UITextField?
+    @IBOutlet weak var cancelButton: UIButton?
+    @IBOutlet weak var submitButton: UIButton?
     
-    @IBOutlet weak var modalTitle: UILabel!
-    @IBOutlet weak var modalDetails: UILabel!
-    @IBOutlet weak var phoneTextField: UITextField!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var submitButton: UIButton!
-
+    private var _entryMode : VolunteeringEntryMode = .None
+    
+    var entryMode : VolunteeringEntryMode {
+        get {
+            return _entryMode
+        }
+        set {
+            if newValue != _entryMode {
+                _entryMode = newValue
+                
+                // clear out the text when changing entry modes
+                self.entryTextField?.text = nil
+                
+                if (_entryMode == .PhoneNumber) {
+                    modalTitle?.text = NSLocalizedString("Volunteering - Phone Number Modal Title", comment: "")
+                    modalDetails?.text = NSLocalizedString("Volunteering - Phone Number Modal Details", comment: "")
+                    cancelButton?.setTitle(NSLocalizedString("Cancel", comment: "Cancel"), forState: .Normal)
+                    submitButton?.setTitle(NSLocalizedString("Submit", comment: "Submit"), forState: .Normal)
+                }
+                else if (_entryMode == .ConfirmationCode) {
+                    modalTitle?.text = NSLocalizedString("Volunteering - Confirmation Number Modal Title", comment: "")
+                    modalDetails?.text = NSLocalizedString("Volunteering - Confirmation Number Modal Details", comment: "")
+                    cancelButton?.setTitle(NSLocalizedString("Cancel", comment: "Cancel"), forState: .Normal)
+                    submitButton?.setTitle(NSLocalizedString("Submit", comment: "Submit"), forState: .Normal)
+                }
+            }
+        }
+    }
+    
+    var phoneNumber : String?
+    
+    // MARK: View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeText()
-        phoneNumberSubmitted = false
-        // Do any additional setup after loading the view.
+        
+        entryMode = .PhoneNumber
     }
     
     override func viewDidAppear(animated: Bool) {
         validateSubmitButton()
+        self.entryTextField?.becomeFirstResponder()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func initializeText() {
-        //To Do: Localize this
-        modalTitle.text = "Add a phone number"
-        modalDetails.text = "We'll contact you at this number with details about volunteering. Don't worry, we won't share it with anyone!"
-        cancelButton.setTitle("Cancel", forState: .Normal)
-        submitButton.setTitle("Submit", forState: .Normal)
-    }
+    // MARK: User Actions
     
     @IBAction func loginCancelled(sender: AnyObject) {
         performSegueWithIdentifier("loginViewDismissed", sender: nil)
@@ -51,21 +76,48 @@ class VolunteeringModalLoginViewController: UIViewController {
         validateSubmitButton()
     }
     
-    func disableSubmitButton() {
-        submitButton.enabled = false
-        submitButton.titleLabel!.textColor = UIColor.lightGrayColor()
+    @IBAction func submitButtonTapped(sender: AnyObject) {
+        guard let text = entryTextField?.text else {
+            return
+        }
+        
+        if entryMode == .PhoneNumber {
+            sendCodeToPhoneNumber(text)
+        }
+        else if entryMode == .ConfirmationCode {
+            if let phoneNumber = self.phoneNumber {
+                logInWithPhoneNumber(phoneNumber, entryCode: text)
+            }
+        }
     }
     
-    func enableSubmitButton() {
-        submitButton.enabled = true
-        submitButton.titleLabel!.textColor = UIColor.whiteColor()
+    // MARK: Private
+    
+    private func disableSubmitButton() {
+        submitButton?.enabled = false
+        submitButton?.titleLabel?.textColor = UIColor.lightGrayColor()
     }
     
-    func validateSubmitButton() {
-        if phoneNumberSubmitted == false && phoneTextField.text?.characters.count == 10 {
+    private func enableSubmitButton() {
+        submitButton?.enabled = true
+        submitButton?.titleLabel?.textColor = UIColor.whiteColor()
+    }
+    
+    private func validateSubmitButton() {
+        guard let phoneNumberText = entryTextField?.text else {
+            disableSubmitButton()
+            return
+        }
+        
+        // A phone number should include the country code which is 1 for the United States.
+        // Typically the country code is assumed so perhaps it can be added automatically.
+        
+        if entryMode == .PhoneNumber &&
+            (phoneNumberText.characters.count == 10 ||
+            phoneNumberText.characters.count == 11) {
             enableSubmitButton()
         }
-        else if phoneTextField.text?.characters.count == 4 {
+        else if entryMode == .ConfirmationCode && phoneNumberText.characters.count == 4 {
             enableSubmitButton()
         }
         else {
@@ -73,45 +125,23 @@ class VolunteeringModalLoginViewController: UIViewController {
         }
     }
     
-    
-    @IBAction func submitButtonTapped(sender: AnyObject) {
-        print("submit tapped")
-        if let phoneNumber = phoneTextField?.text {
-            if self.phoneNumberSubmitted == false {
-                sendCodeToPhoneNumber(phoneNumber)
-            }
-            else {
-                
-            }
-        }
-        
-        // Send SMS to Parse
-    }
-    
-    func sendCodeToPhoneNumber(phoneNumber: String) {
+    private func sendCodeToPhoneNumber(phoneNumber: String) {
         Backend.sharedInstance().sendCodeToPhoneNumber(phoneNumber, completionHandler: { (success, error) -> Void in
             if let error = error {
-                print(error)
+                print(error.localizedDescription)
             }
             else {
-                self.updateDialogueForCodeEntry()
+                // hold onto the phone number to use when logging in
+                self.phoneNumber = phoneNumber
+                self.entryMode = .ConfirmationCode
             }
         })
     }
     
-    func updateDialogueForCodeEntry() {
-        phoneNumberSubmitted = true
-        //To Do: Localize this
-        modalTitle.text = "Enter confirmation code"
-        modalDetails.text = "You should have gotten a 4-digit confirmation code. Enter it here to complete the signup!"
-        cancelButton.setTitle("Cancel", forState: .Normal)
-        submitButton.setTitle("Submit", forState: .Normal)
-    }
-    
-    func logInWithPhoneNumber(phoneNumber: String, entryCode: String) {
+    private func logInWithPhoneNumber(phoneNumber: String, entryCode: String) {
         Backend.sharedInstance().logInWithPhoneNumber(phoneNumber, codeEntry: entryCode, completionHandler: { (success, error) -> Void in
             if let error = error {
-                print(error)
+                print(error.localizedDescription)
             }
             else {
                 self.performSegueWithIdentifier("successfulLogin", sender: nil)

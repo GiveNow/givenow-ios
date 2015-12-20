@@ -66,7 +66,7 @@ class TestLogInViewController: BaseViewController {
         }
     }
     
-    // MARK: - User Actions
+    // MARK: - Notifications
     
     func loginStatusDidChange(notification : NSNotification) {
         if AppState.sharedInstance().isUserLoggedIn {
