@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  GiveNow
+
+  Created by Brennan Stehling on 12/17/15.
+  Copyright © 2015 GiveNow. All rights reserved.
+*/
+
+/* SMS Body */
+"SMS Body"  = "{code} is your code for GiveNow.";
+
+/* Cancel */
+"Cancel" = "Cancel";
+
+/* Submit */
+"Submit" = "Submit";
+
+/* Volunteering - Title */
+"Volunteering - Title Label" = "Want to volunteer to pick up donations? The only thing you need is a car and some spare time!";
+"Volunteering - Title Button" = "I want to volunteer!";
+
+/* Volunteering - Phone Number Modal Title */
+"Volunteering - Phone Number Modal Title" = "Add a phone number";
+
+/* Volunteering - Phone Number Modal Details */
+"Volunteering - Phone Number Modal Details" = "We'll contact you at this number with details about volunteering. Don't worry, we won't share it with anyone!";
+
+/* Volunteering - Confirmation Number Modal Title */
+"Volunteering - Confirmation Number Modal Title" = "Enter confirmation code";
+
+/* Volunteering - Confirmation Number Modal Details */
+"Volunteering - Confirmation Number Modal Details" = "You should have gotten a 4-digit confirmation code. Enter it here to complete the signup!";
