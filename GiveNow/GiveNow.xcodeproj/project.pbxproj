@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2607466C1C2622B30022E0ED /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607466B1C2622B30022E0ED /* Keys.swift */; };
+		260746261C23D87D0022E0ED /* DropOffAgency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260746241C23D87D0022E0ED /* DropOffAgency.swift */; };
+		260746271C23D87D0022E0ED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260746251C23D87D0022E0ED /* User.swift */; };
 		2645C66A1C21E7FF00D6C70D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6691C21E7FF00D6C70D /* AppDelegate.swift */; };
 		2645C66F1C21E7FF00D6C70D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2645C66D1C21E7FF00D6C70D /* Main.storyboard */; };
 		2645C6711C21E7FF00D6C70D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2645C6701C21E7FF00D6C70D /* Assets.xcassets */; };
@@ -36,6 +38,10 @@
 		26FE37171C22A58900BED9A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26FE37191C22A58900BED9A0 /* Localizable.strings */; };
 		D207A3471C23B82400E93BEB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207A3461C23B82400E93BEB /* Extensions.swift */; };
 		D28A88CF1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */; };
+		26FE37231C23B80500BED9A0 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FE37221C23B80500BED9A0 /* Donation.swift */; };
+		26FE37271C23B81400BED9A0 /* DonationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FE37261C23B81400BED9A0 /* DonationCategory.swift */; };
+		26FE37291C23B95100BED9A0 /* PickupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FE37281C23B95100BED9A0 /* PickupRequest.swift */; };
+		26FE372B1C23B97400BED9A0 /* Volunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FE372A1C23B97400BED9A0 /* Volunteer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +135,9 @@
 
 /* Begin PBXFileReference section */
 		2607466B1C2622B30022E0ED /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		260746201C23C8920022E0ED /* GiveNow-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GiveNow-Bridging-Header.h"; sourceTree = "<group>"; };
+		260746241C23D87D0022E0ED /* DropOffAgency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropOffAgency.swift; sourceTree = "<group>"; };
+		260746251C23D87D0022E0ED /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2645C6661C21E7FF00D6C70D /* GiveNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiveNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2645C6691C21E7FF00D6C70D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2645C66E1C21E7FF00D6C70D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -159,6 +168,10 @@
 		26FE371A1C22A59500BED9A0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D207A3461C23B82400E93BEB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringModalLoginViewController.swift; sourceTree = "<group>"; };
+		26FE37221C23B80500BED9A0 /* Donation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
+		26FE37261C23B81400BED9A0 /* DonationCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationCategory.swift; sourceTree = "<group>"; };
+		26FE37281C23B95100BED9A0 /* PickupRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupRequest.swift; sourceTree = "<group>"; };
+		26FE372A1C23B97400BED9A0 /* Volunteer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Volunteer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +202,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		260746231C23D5E10022E0ED /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				26FE37221C23B80500BED9A0 /* Donation.swift */,
+				26FE37261C23B81400BED9A0 /* DonationCategory.swift */,
+				260746241C23D87D0022E0ED /* DropOffAgency.swift */,
+				26FE37281C23B95100BED9A0 /* PickupRequest.swift */,
+				260746251C23D87D0022E0ED /* User.swift */,
+				26FE372A1C23B97400BED9A0 /* Volunteer.swift */,
+			);
+			name = Parse;
+			sourceTree = "<group>";
+		};
 		2645C65D1C21E7FF00D6C70D = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +244,7 @@
 				2645C69D1C21F34900D6C70D /* Storyboards */,
 				2645C6AB1C21F3E100D6C70D /* Integrations */,
 				D207A3461C23B82400E93BEB /* Extensions.swift */,
+				260746201C23C8920022E0ED /* GiveNow-Bridging-Header.h */,
 				2645C6691C21E7FF00D6C70D /* AppDelegate.swift */,
 				2645C6701C21E7FF00D6C70D /* Assets.xcassets */,
 				2645C6751C21E7FF00D6C70D /* Info.plist */,
@@ -275,6 +302,7 @@
 		2645C6AB1C21F3E100D6C70D /* Integrations */ = {
 			isa = PBXGroup;
 			children = (
+				260746231C23D5E10022E0ED /* Parse */,
 				2645C6AC1C21F40600D6C70D /* Backend.swift */,
 				2645C6AE1C21F80000D6C70D /* AppState.swift */,
 			);
@@ -510,13 +538,19 @@
 				2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */,
 				2607466C1C2622B30022E0ED /* Keys.swift in Sources */,
 				2645C6AF1C21F80000D6C70D /* AppState.swift in Sources */,
+				260746271C23D87D0022E0ED /* User.swift in Sources */,
 				2645C6A61C21F3BD00D6C70D /* OnboardingViewController.swift in Sources */,
+				260746261C23D87D0022E0ED /* DropOffAgency.swift in Sources */,
 				2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */,
+				26FE37231C23B80500BED9A0 /* Donation.swift in Sources */,
 				26FE370F1C2297B600BED9A0 /* TestLogInViewController.swift in Sources */,
+				26FE372B1C23B97400BED9A0 /* Volunteer.swift in Sources */,
 				2645C6A21C21F38E00D6C70D /* BaseNavigationController.swift in Sources */,
 				2645C66A1C21E7FF00D6C70D /* AppDelegate.swift in Sources */,
 				D207A3471C23B82400E93BEB /* Extensions.swift in Sources */,
 				2645C6A01C21F37A00D6C70D /* BaseViewController.swift in Sources */,
+				26FE37271C23B81400BED9A0 /* DonationCategory.swift in Sources */,
+				26FE37291C23B95100BED9A0 /* PickupRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,8 +720,10 @@
 				INFOPLIST_FILE = GiveNow/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.givenow.GiveNow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GiveNow/GiveNow-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -699,8 +735,10 @@
 				INFOPLIST_FILE = GiveNow/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.givenow.GiveNow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GiveNow/GiveNow-Bridging-Header.h";
 			};
 			name = Release;
 		};
