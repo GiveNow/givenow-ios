@@ -246,12 +246,12 @@ class Backend: NSObject {
         
         if let query = Volunteer.query() {
             query.whereKey(Volunteer.Keys.user.rawValue, equalTo: user)
-            query.getFirstObjectInBackgroundWithBlock({ (result, error) -> Void in
+            query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
                 if let error = error {
                     completionHandler(nil, error)
                 }
                 else {
-                    if let volunteer = result as? Volunteer {
+                    if let volunteer = results?.first as? Volunteer {
                         completionHandler(volunteer, nil)
                     }
                     else {

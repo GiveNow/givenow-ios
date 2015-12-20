@@ -69,7 +69,7 @@ class TestLogInViewController: BaseViewController {
     // MARK: - Notifications
     
     func loginStatusDidChange(notification : NSNotification) {
-        if AppState.sharedInstance().isUserLoggedIn {
+        if AppState.sharedInstance().isUserRegistered {
             self.performSegueWithIdentifier("ReturnHomeSegue", sender: self)
         }
     }

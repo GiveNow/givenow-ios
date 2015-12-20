@@ -25,7 +25,7 @@ class User : PFUser {
 		case profileImage = "profileImage"
 		case name = "name"
 	}
-
+    
 	// MARK: Properties
 
 	@NSManaged var AuthData: String?

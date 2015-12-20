@@ -18,8 +18,7 @@ class VolunteeringViewController: BaseViewController {
     @IBOutlet weak var volunteeringTitleLabel: UILabel?
     @IBOutlet weak var volunteerButton: UIButton?
     
-    // Assume this will be retrieved from logged in user object
-    var phoneNumber: String?
+    // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,39 +26,58 @@ class VolunteeringViewController: BaseViewController {
         initializeLabels()
     }
     
+    // MARK: - User Actions
+    
+    @IBAction func volunteerButtonTapped(sender: AnyObject) {
+        if AppState.sharedInstance().isUserRegistered {
+            createVolunteer()
+        }
+        else {
+            promptUserToLogIn()
+        }
+    }
+    
+    @IBAction func loginViewDismissed(segue: UIStoryboardSegue) {
+        // do nothing
+    }
+    
+    @IBAction func successfulLogin(segue: UIStoryboardSegue) {
+        createVolunteer()
+    }
+
+    // MARK: - Private
+    
     func initializeLabels() {
         volunteeringTitleLabel?.text = NSLocalizedString("Volunteering - Title Label", comment: "")
         volunteerButton?.setTitle(NSLocalizedString("Volunteering - Title Button", comment: ""), forState: .Normal)
     }
     
-    @IBAction func volunteerButtonTapped(sender: AnyObject) {
-        if AppState.sharedInstance().isUserLoggedIn {
-            submitVolunteerApplicationRequest()
-        }
-        else {
-            askUserToLogin()
+    func createVolunteer() {
+        if let user = User.currentUser() {
+            Backend.sharedInstance().saveVolunteer(user, completionHandler: { (volunteer, error) -> Void in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                else {
+                    // after successful submission
+                    self.updateViewAfterCreatingVolunteer()
+                }
+            })
         }
     }
     
-    func submitVolunteerApplicationRequest() {
-        //ToDo: Create object, submit to back end
-        
-        // after successful submission
-        updateViewAfterSuccessfulSubmission()
-    }
-    
-    func askUserToLogin() {
+    func promptUserToLogIn() {
         //Display modal login dialogue
         performSegueWithIdentifier("logIn", sender: nil)
     }
     
-    func updateViewAfterSuccessfulSubmission() {
+    func updateViewAfterCreatingVolunteer() {
         // replace {PhoneNumber} with actual number
         var titleText = NSLocalizedString("Volunteering - Thanks Label", comment: "")
         
-        
-        assert(self.phoneNumber != nil, "phone number should be defined")
-        if let phoneNumber = self.phoneNumber {
+        let phoneNumber = AppState.sharedInstance().userPhoneNumber
+        assert(phoneNumber != nil, "Phone number should be defined")
+        if let phoneNumber = phoneNumber {
             titleText = titleText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: phoneNumber)
         }
         else {
@@ -70,25 +88,6 @@ class VolunteeringViewController: BaseViewController {
         volunteeringTitleLabel?.text = titleText
         volunteerButton?.setTitle(NSLocalizedString("Volunteering - Thanks Button", comment: ""), forState: .Normal)
         volunteerButton?.backgroundColor = UIColor.lightGrayColor()
-    }
-    
-    @IBAction func loginViewDismissed(segue: UIStoryboardSegue) {
-    }
-    
-    @IBAction func successfulLogin(segue: UIStoryboardSegue) {
-        if let vc = segue.sourceViewController as? VolunteeringModalLoginViewController {
-            self.phoneNumber = vc.phoneNumber
-        }
-        submitVolunteerApplicationRequest()
-    }
-
-    func isLoggedIn() -> Bool {
-        let currentUser = PFUser.currentUser()
-        if currentUser != nil {
-            return true
-        } else {
-           return false
-        }
     }
 
 }
