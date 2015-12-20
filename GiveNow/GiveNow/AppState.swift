@@ -17,9 +17,25 @@ class AppState: NSObject {
         return AppState._sharedInstance
     }
     
-    var isUserLoggedIn : Bool {
+    var isUserRegistered : Bool {
         get {
             return !PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser())
+        }
+    }
+    
+    var userPhoneNumber : String? {
+        get {
+            if self.isUserRegistered {
+                if let user = PFUser.currentUser(),
+                    let username = user.username {
+                        if username.characters.count == 10 ||
+                            username.characters.count == 11 {
+                                return username
+                        }
+                }
+            }
+            
+            return nil
         }
     }
 

@@ -34,19 +34,7 @@ class VolunteeringModalLoginViewController: UIViewController {
                 
                 // clear out the text when changing entry modes
                 self.entryTextField?.text = nil
-                
-                if (_entryMode == .PhoneNumber) {
-                    modalTitle?.text = NSLocalizedString("Volunteering - Phone Number Modal Title", comment: "")
-                    modalDetails?.text = NSLocalizedString("Volunteering - Phone Number Modal Details", comment: "")
-                    cancelButton?.setTitle(NSLocalizedString("Cancel", comment: "Cancel"), forState: .Normal)
-                    submitButton?.setTitle(NSLocalizedString("Submit", comment: "Submit"), forState: .Normal)
-                }
-                else if (_entryMode == .ConfirmationCode) {
-                    modalTitle?.text = NSLocalizedString("Volunteering - Confirmation Number Modal Title", comment: "")
-                    modalDetails?.text = NSLocalizedString("Volunteering - Confirmation Number Modal Details", comment: "")
-                    cancelButton?.setTitle(NSLocalizedString("Cancel", comment: "Cancel"), forState: .Normal)
-                    submitButton?.setTitle(NSLocalizedString("Submit", comment: "Submit"), forState: .Normal)
-                }
+                self.updateTextForEntryMode(_entryMode)
             }
         }
     }
@@ -77,16 +65,20 @@ class VolunteeringModalLoginViewController: UIViewController {
     }
     
     @IBAction func submitButtonTapped(sender: AnyObject) {
-        guard let text = entryTextField?.text else {
+        guard let entryText = entryTextField?.text else {
+            assert(false, "Entry text is required")
             return
         }
         
         if entryMode == .PhoneNumber {
-            sendCodeToPhoneNumber(text)
+            sendPhoneNumber(entryText)
         }
         else if entryMode == .ConfirmationCode {
             if let phoneNumber = self.phoneNumber {
-                logInWithPhoneNumber(phoneNumber, entryCode: text)
+                logInWithPhoneNumber(phoneNumber, codeEntry: entryText)
+            }
+            else {
+                assert(false, "Phone number should always be defined")
             }
         }
     }
@@ -94,13 +86,21 @@ class VolunteeringModalLoginViewController: UIViewController {
     // MARK: Private
     
     private func disableSubmitButton() {
-        submitButton?.enabled = false
-        submitButton?.titleLabel?.textColor = UIColor.lightGrayColor()
+        guard let submitButton = submitButton else {
+            return
+        }
+        
+        submitButton.enabled = false
+        submitButton.titleLabel?.textColor = UIColor.lightGrayColor()
     }
     
     private func enableSubmitButton() {
-        submitButton?.enabled = true
-        submitButton?.titleLabel?.textColor = UIColor.whiteColor()
+        guard let submitButton = submitButton else {
+            return
+        }
+
+        submitButton.enabled = true
+        submitButton.titleLabel?.textColor = UIColor.whiteColor()
     }
     
     private func validateSubmitButton() {
@@ -125,7 +125,7 @@ class VolunteeringModalLoginViewController: UIViewController {
         }
     }
     
-    private func sendCodeToPhoneNumber(phoneNumber: String) {
+    private func sendPhoneNumber(phoneNumber: String) {
         Backend.sharedInstance().sendCodeToPhoneNumber(phoneNumber, completionHandler: { (success, error) -> Void in
             if let error = error {
                 print(error.localizedDescription)
@@ -138,8 +138,8 @@ class VolunteeringModalLoginViewController: UIViewController {
         })
     }
     
-    private func logInWithPhoneNumber(phoneNumber: String, entryCode: String) {
-        Backend.sharedInstance().logInWithPhoneNumber(phoneNumber, codeEntry: entryCode, completionHandler: { (success, error) -> Void in
+    private func logInWithPhoneNumber(phoneNumber: String, codeEntry: String) {
+        Backend.sharedInstance().logInWithPhoneNumber(phoneNumber, codeEntry: codeEntry, completionHandler: { (success, error) -> Void in
             if let error = error {
                 print(error.localizedDescription)
             }
@@ -147,6 +147,29 @@ class VolunteeringModalLoginViewController: UIViewController {
                 self.performSegueWithIdentifier("successfulLogin", sender: nil)
             }
         })
+    }
+    
+    private func updateTextForEntryMode(entryMode : VolunteeringEntryMode) {
+        guard let modalTitle = modalTitle,
+            let modalDetails = modalDetails,
+            let cancelButton = cancelButton,
+            let submitButton = submitButton else {
+            assert(false, "Outlets are required")
+            return
+        }
+        
+        if entryMode == .PhoneNumber {
+            modalTitle.text = NSLocalizedString("Volunteering - Phone Number Modal Title", comment: "")
+            modalDetails.text = NSLocalizedString("Volunteering - Phone Number Modal Details", comment: "")
+            cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Cancel"), forState: .Normal)
+            submitButton.setTitle(NSLocalizedString("Submit", comment: "Submit"), forState: .Normal)
+        }
+        else if entryMode == .ConfirmationCode {
+            modalTitle.text = NSLocalizedString("Volunteering - Confirmation Number Modal Title", comment: "")
+            modalDetails.text = NSLocalizedString("Volunteering - Confirmation Number Modal Details", comment: "")
+            cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Cancel"), forState: .Normal)
+            submitButton.setTitle(NSLocalizedString("Submit", comment: "Submit"), forState: .Normal)
+        }
     }
 
 }

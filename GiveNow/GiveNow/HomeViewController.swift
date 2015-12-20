@@ -34,7 +34,7 @@ class HomeViewController: BaseViewController {
         
         updateLoginButton()
         
-        if AppState.sharedInstance().isUserLoggedIn {
+        if AppState.sharedInstance().isUserRegistered {
             print("show user profile and navigation")
         }
         else {
@@ -66,7 +66,7 @@ class HomeViewController: BaseViewController {
     // MARK: - Private
     
     private func updateLoginButton() {
-        self.logOutButton?.hidden = !AppState.sharedInstance().isUserLoggedIn
+        self.logOutButton?.hidden = !AppState.sharedInstance().isUserRegistered
     }
     
     // MARK: - Notifications

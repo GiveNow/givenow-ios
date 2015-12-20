@@ -33,7 +33,8 @@ class VolunteeringViewController: BaseViewController {
     }
     
     @IBAction func volunteerButtonTapped(sender: AnyObject) {
-        if AppState.sharedInstance().isUserLoggedIn {
+        if AppState.sharedInstance().isUserRegistered {
+            self.phoneNumber = AppState.sharedInstance().userPhoneNumber
             submitVolunteerApplicationRequest()
         }
         else {
@@ -56,7 +57,6 @@ class VolunteeringViewController: BaseViewController {
     func updateViewAfterSuccessfulSubmission() {
         // replace {PhoneNumber} with actual number
         var titleText = NSLocalizedString("Volunteering - Thanks Label", comment: "")
-        
         
         assert(self.phoneNumber != nil, "phone number should be defined")
         if let phoneNumber = self.phoneNumber {
