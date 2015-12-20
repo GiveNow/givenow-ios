@@ -252,7 +252,16 @@
 		260746791C265AD80022E0ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C72296351C228F2E0097A662 /* GLKit.framework */,
+				C72296371C228F360097A662 /* ImageIO.framework */,
+				C722963F1C228F6D0097A662 /* libc++.tbd */,
+				C72296411C228F740097A662 /* libsqlite3.tbd */,
+				C72296431C228F7C0097A662 /* libz.tbd */,
+				C72296331C228F150097A662 /* Mapbox.framework */,
 				260746771C265AC70022E0ED /* MapKit.framework */,
+				C72296391C228F460097A662 /* MobileCoreServices.framework */,
+				C722963B1C228F540097A662 /* QuartzCore.framework */,
+				C722963D1C228F630097A662 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -386,15 +395,6 @@
 		C72296451C228F8F0097A662 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				C72296431C228F7C0097A662 /* libz.tbd */,
-				C72296411C228F740097A662 /* libsqlite3.tbd */,
-				C722963F1C228F6D0097A662 /* libc++.tbd */,
-				C722963D1C228F630097A662 /* SystemConfiguration.framework */,
-				C722963B1C228F540097A662 /* QuartzCore.framework */,
-				C72296391C228F460097A662 /* MobileCoreServices.framework */,
-				C72296371C228F360097A662 /* ImageIO.framework */,
-				C72296351C228F2E0097A662 /* GLKit.framework */,
-				C72296331C228F150097A662 /* Mapbox.framework */,
 			);
 			name = Support;
 			path = ..;
