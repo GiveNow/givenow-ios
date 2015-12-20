@@ -193,11 +193,12 @@
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="27U-wj-ZnU" id="TLH-NJ-Ewv"/>
+                        <outlet property="entryTextField" destination="bql-gu-7Xz" id="rH9-4u-id2"/>
                         <outlet property="modalDetails" destination="7MT-fy-UFJ" id="KTr-Q0-Xqt"/>
                         <outlet property="modalTitle" destination="Das-DS-BwU" id="86v-Qy-clX"/>
-                        <outlet property="phoneTextField" destination="bql-gu-7Xz" id="6dQ-oN-tSY"/>
                         <outlet property="submitButton" destination="vg9-lo-46d" id="0Ay-9k-loi"/>
                         <segue destination="aVs-CQ-Iw5" kind="unwind" identifier="loginViewDismissed" unwindAction="loginViewDismissed:" id="iHp-UY-fw4"/>
+                        <segue destination="aVs-CQ-Iw5" kind="unwind" identifier="successfulLogin" unwindAction="successfulLogin:" id="bad-MN-ISO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Je7-e8-xHs" userLabel="First Responder" sceneMemberID="firstResponder"/>

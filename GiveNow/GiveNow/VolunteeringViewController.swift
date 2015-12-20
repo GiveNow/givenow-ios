@@ -15,41 +15,30 @@ import Parse
 
 class VolunteeringViewController: BaseViewController {
     
-    @IBOutlet weak var volunteeringTitleLabel: UILabel!
-    @IBOutlet weak var volunteerButton: UIButton!
+    @IBOutlet weak var volunteeringTitleLabel: UILabel?
+    @IBOutlet weak var volunteerButton: UIButton?
     
     // Assume this will be retrieved from logged in user object
-    var userPhoneNumber:String!
+    var phoneNumber: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initializeLabels()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func initializeLabels() {
-        //ToDo: Localize
-        volunteeringTitleLabel.text = "Want to volunteer to pick up donations? The only thing you need is a car and some spare time!"
-        volunteerButton.setTitle("I want to volunteer!", forState: .Normal)
+        volunteeringTitleLabel?.text = NSLocalizedString("Volunteering - Title Label", comment: "")
+        volunteerButton?.setTitle(NSLocalizedString("Volunteering - Title Button", comment: ""), forState: .Normal)
     }
     
-    
     @IBAction func volunteerButtonTapped(sender: AnyObject) {
-        
         if AppState.sharedInstance().isUserLoggedIn {
             submitVolunteerApplicationRequest()
         }
         else {
             askUserToLogin()
         }
-        
     }
     
     func submitVolunteerApplicationRequest() {
@@ -62,24 +51,34 @@ class VolunteeringViewController: BaseViewController {
     func askUserToLogin() {
         //Display modal login dialogue
         performSegueWithIdentifier("logIn", sender: nil)
-        
-        // after successful login
-//        submitVolunteerApplicationRequest()
     }
     
     func updateViewAfterSuccessfulSubmission() {
-        //ToDo: Localize
-        volunteeringTitleLabel.text = "Thanks for applying to volunteer! We'll contact you soon at \(userPhoneNumber)"
-        volunteerButton.setTitle("You applied to volunteer", forState: .Normal)
-        volunteerButton.backgroundColor = UIColor.lightGrayColor()
+        // replace {PhoneNumber} with actual number
+        var titleText = NSLocalizedString("Volunteering - Thanks Label", comment: "")
         
+        
+        assert(self.phoneNumber != nil, "phone number should be defined")
+        if let phoneNumber = self.phoneNumber {
+            titleText = titleText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: phoneNumber)
+        }
+        else {
+            let defaultText = NSLocalizedString("Volunteering - Your Phone Number", comment: "")
+            titleText = titleText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: defaultText)
+        }
+        
+        volunteeringTitleLabel?.text = titleText
+        volunteerButton?.setTitle(NSLocalizedString("Volunteering - Thanks Button", comment: ""), forState: .Normal)
+        volunteerButton?.backgroundColor = UIColor.lightGrayColor()
     }
     
     @IBAction func loginViewDismissed(segue: UIStoryboardSegue) {
-        
     }
     
     @IBAction func successfulLogin(segue: UIStoryboardSegue) {
+        if let vc = segue.sourceViewController as? VolunteeringModalLoginViewController {
+            self.phoneNumber = vc.phoneNumber
+        }
         submitVolunteerApplicationRequest()
     }
 
@@ -91,10 +90,5 @@ class VolunteeringViewController: BaseViewController {
            return false
         }
     }
-    
-    
-    
-    
-    
 
 }
