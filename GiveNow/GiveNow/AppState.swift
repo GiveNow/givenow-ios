@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class AppState: NSObject {
     
@@ -18,8 +19,7 @@ class AppState: NSObject {
     
     var isUserLoggedIn : Bool {
         get {
-            // TODO: implement using Parse.currentUser()
-            return false
+            return !PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser())
         }
     }
 
