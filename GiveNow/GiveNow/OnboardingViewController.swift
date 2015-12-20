@@ -14,7 +14,7 @@ import UIKit
 
 class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    @IBOutlet weak var pageControl : UIPageControl!
+    @IBOutlet weak var pageControl : UIPageControl?
     
     typealias OnboardingText = (title: String, details: String)
     
@@ -68,45 +68,48 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: UICollectionViewDelegateFlowLayout
+    // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return self.view.frame.size
     }
     
-    //MARK: UICollectionViewDataSource
+    // MARK: UICollectionViewDataSource
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if indexPath.row < onboardingConfigs.count {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("OnboardingCell", forIndexPath: indexPath) as! OnboardingCollectionViewCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("OnboardingCell", forIndexPath: indexPath)
             let cellConfig = onboardingConfigs[indexPath.row]
             cell.backgroundColor = cellConfig.color
-            cell.mainLabel.text = cellConfig.text.title
-            cell.detailsLabel.text = cellConfig.text.details
-            cell.imageView.image = UIImage(named: cellConfig.imageName)
+            if let onboardingCell = cell as? OnboardingCollectionViewCell {
+                onboardingCell.mainLabel?.text = cellConfig.text.title
+                onboardingCell.detailsLabel?.text = cellConfig.text.details
+                onboardingCell.imageView?.image = UIImage(named: cellConfig.imageName)
+            }
+            
             return cell
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SignInCell", forIndexPath: indexPath)
             cell.backgroundColor = Colors.SignInColor
             return cell
         }
-        
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return onboardingConfigs.count + 1 //Sign In Cell
     }
     
-    //MARK: UICollectionViewDelegate
+    // MARK: UICollectionViewDelegate
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         let pageWidth = self.view.frame.size.width
-        self.pageControl.currentPage = Int(scrollView.contentOffset.x / pageWidth)
+        self.pageControl?.currentPage = Int(scrollView.contentOffset.x / pageWidth)
     }
 
 }
 
 class OnboardingCollectionViewCell : UICollectionViewCell {
-    @IBOutlet weak var mainLabel : UILabel!
-    @IBOutlet weak var detailsLabel : UILabel!
-    @IBOutlet weak var imageView : UIImageView!
+    @IBOutlet weak var mainLabel : UILabel?
+    @IBOutlet weak var detailsLabel : UILabel?
+    @IBOutlet weak var imageView : UIImageView?
 }
