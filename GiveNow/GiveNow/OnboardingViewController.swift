@@ -87,7 +87,10 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
             return cell
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SignInCell", forIndexPath: indexPath)
-            cell.backgroundColor = Colors.SignInColor
+            if let signInCell = cell as? SignInCollectionViewCell {
+                signInCell.backgroundColor = Colors.SignInColor
+                signInCell.configure()
+            }
             return cell
         }
     }
@@ -109,4 +112,28 @@ class OnboardingCollectionViewCell : UICollectionViewCell {
     @IBOutlet weak var mainLabel : UILabel?
     @IBOutlet weak var detailsLabel : UILabel?
     @IBOutlet weak var imageView : UIImageView?
+}
+
+protocol SignInDelegate {
+    func signInWithNumber(number: String)
+    func invalidSignInAttempt()
+}
+
+class SignInCollectionViewCell : UICollectionViewCell {
+    @IBOutlet weak var mainLabel:  UILabel?
+    @IBOutlet weak var detailsLabel: UILabel?
+    @IBOutlet weak var entryTextField: UITextField?
+    @IBOutlet weak var orLabel: UILabel?
+    @IBOutlet weak var addNumberButton: UIButton?
+    @IBOutlet weak var anonymousLoginButton: UIButton?
+    
+    var delegate : SignInDelegate?
+    
+    func configure() {
+        self.mainLabel?.text = "Add a phone number"
+        self.detailsLabel?.text = "This only lets your driver reach you to arrange pickup. We never share your number with third parties."
+        self.orLabel?.text = "or"
+        self.addNumberButton?.setTitle("ADD A PHONE NUMBER", forState: .Normal)
+        self.anonymousLoginButton?.setTitle("ADD A PHONE NUMBER LATER", forState: .Normal)
+    }
 }

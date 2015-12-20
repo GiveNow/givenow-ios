@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="WaI-Bh-GTN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="WaI-Bh-GTN">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -85,7 +85,7 @@
                                             <outlet property="mainLabel" destination="RrP-Bh-tt6" id="0Sf-JJ-chk"/>
                                         </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SignInCell" id="gec-W2-18Q" userLabel="SignInCell" customClass="OnboardingCollectionViewCell" customModule="GiveNow" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SignInCell" id="gec-W2-18Q" userLabel="SignInCell" customClass="SignInCollectionViewCell" customModule="GiveNow" customModuleProvider="target">
                                         <rect key="frame" x="600" y="0.0" width="600" height="600"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -93,7 +93,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login Top Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="Bgr-hS-mib">
-                                                    <rect key="frame" x="64" y="98" width="464" height="27"/>
+                                                    <rect key="frame" x="30" y="98" width="532" height="27"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                     <color key="textColor" red="1" green="0.98765432099999995" blue="0.98765432099999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -113,8 +113,8 @@
                                                         <constraint firstAttribute="height" constant="1" id="FHi-Kc-cmg"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login Details Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bD1-KL-eZP">
-                                                    <rect key="frame" x="64" y="215" width="472" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login Details Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bD1-KL-eZP">
+                                                    <rect key="frame" x="18" y="215" width="564" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -162,7 +162,7 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="XFO-FE-Dv7" secondAttribute="trailing" constant="30" id="2Sq-Dn-lLg"/>
                                             <constraint firstItem="BdI-Qc-JEr" firstAttribute="centerX" secondItem="gec-W2-18Q" secondAttribute="centerX" id="2uz-bA-oX4"/>
-                                            <constraint firstItem="bD1-KL-eZP" firstAttribute="leading" secondItem="gec-W2-18Q" secondAttribute="leading" constant="64" id="49G-tv-mKo"/>
+                                            <constraint firstItem="bD1-KL-eZP" firstAttribute="leading" secondItem="gec-W2-18Q" secondAttribute="leading" constant="18" id="49G-tv-mKo"/>
                                             <constraint firstItem="N5C-ws-Kyf" firstAttribute="top" secondItem="BdI-Qc-JEr" secondAttribute="bottom" constant="84" id="4an-fd-2j9"/>
                                             <constraint firstAttribute="trailing" secondItem="N5C-ws-Kyf" secondAttribute="trailing" constant="30" id="6Xk-nz-dTe"/>
                                             <constraint firstItem="N5C-ws-Kyf" firstAttribute="leading" secondItem="gec-W2-18Q" secondAttribute="leading" constant="30" id="7Fn-Yz-t4J"/>
@@ -171,7 +171,7 @@
                                             <constraint firstItem="VaS-25-JHi" firstAttribute="top" secondItem="Dw3-Ye-au8" secondAttribute="bottom" constant="7" id="KYK-tv-paW"/>
                                             <constraint firstItem="Bgr-hS-mib" firstAttribute="top" secondItem="gec-W2-18Q" secondAttribute="top" constant="98" id="QUK-Fo-iuN"/>
                                             <constraint firstItem="XFO-FE-Dv7" firstAttribute="top" secondItem="Dw3-Ye-au8" secondAttribute="bottom" constant="16" id="V05-jZ-nKv"/>
-                                            <constraint firstAttribute="trailing" secondItem="bD1-KL-eZP" secondAttribute="trailing" constant="64" id="Xei-YY-R2H"/>
+                                            <constraint firstAttribute="trailing" secondItem="bD1-KL-eZP" secondAttribute="trailing" constant="18" id="Xei-YY-R2H"/>
                                             <constraint firstItem="XFO-FE-Dv7" firstAttribute="leading" secondItem="gec-W2-18Q" secondAttribute="leading" constant="30" id="ZUf-TH-Ab2"/>
                                             <constraint firstItem="VaS-25-JHi" firstAttribute="top" secondItem="XFO-FE-Dv7" secondAttribute="bottom" constant="7" id="bUd-h4-qst"/>
                                             <constraint firstItem="N5C-ws-Kyf" firstAttribute="top" secondItem="VaS-25-JHi" secondAttribute="bottom" constant="7" id="den-yr-0kF"/>
@@ -180,10 +180,10 @@
                                             <constraint firstItem="VaS-25-JHi" firstAttribute="centerX" secondItem="Dw3-Ye-au8" secondAttribute="centerX" id="kYs-pn-utj"/>
                                             <constraint firstItem="Dw3-Ye-au8" firstAttribute="top" secondItem="BdI-Qc-JEr" secondAttribute="bottom" constant="5" id="kdm-14-FaV"/>
                                             <constraint firstItem="N5C-ws-Kyf" firstAttribute="trailing" secondItem="XFO-FE-Dv7" secondAttribute="trailing" id="qdA-eu-oYq"/>
-                                            <constraint firstItem="Bgr-hS-mib" firstAttribute="leading" secondItem="gec-W2-18Q" secondAttribute="leading" constant="64" id="qjO-gv-MMb"/>
+                                            <constraint firstItem="Bgr-hS-mib" firstAttribute="leading" secondItem="gec-W2-18Q" secondAttribute="leading" constant="30" id="qjO-gv-MMb"/>
                                             <constraint firstItem="BdI-Qc-JEr" firstAttribute="top" secondItem="bD1-KL-eZP" secondAttribute="bottom" constant="16" id="u9Y-2C-SGT"/>
                                             <constraint firstItem="Dw3-Ye-au8" firstAttribute="width" secondItem="BdI-Qc-JEr" secondAttribute="width" id="uUW-xk-WnH"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="Bgr-hS-mib" secondAttribute="trailing" constant="64" id="xbI-HR-uLI"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="Bgr-hS-mib" secondAttribute="trailing" constant="30" id="xbI-HR-uLI"/>
                                             <constraint firstItem="Dw3-Ye-au8" firstAttribute="centerX" secondItem="BdI-Qc-JEr" secondAttribute="centerX" id="zYk-Pp-jIP"/>
                                         </constraints>
                                         <variation key="default">
@@ -195,7 +195,12 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <outlet property="mainLabel" destination="Bgr-hS-mib" id="Rh9-1F-hlf"/>
+                                            <outlet property="addNumberButton" destination="XFO-FE-Dv7" id="B1F-i8-Mun"/>
+                                            <outlet property="anonymousLoginButton" destination="N5C-ws-Kyf" id="ZkX-h8-rQR"/>
+                                            <outlet property="detailsLabel" destination="bD1-KL-eZP" id="JIl-ba-amu"/>
+                                            <outlet property="entryTextField" destination="BdI-Qc-JEr" id="UC8-oE-YCr"/>
+                                            <outlet property="mainLabel" destination="Bgr-hS-mib" id="StP-ih-5QT"/>
+                                            <outlet property="orLabel" destination="VaS-25-JHi" id="p2h-TI-Sbt"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
