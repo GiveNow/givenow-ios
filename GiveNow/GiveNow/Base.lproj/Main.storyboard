@@ -52,16 +52,25 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zod-kL-5fu">
-                                <rect key="frame" x="262.5" y="318" width="75" height="30"/>
+                                <rect key="frame" x="262" y="318" width="75" height="30"/>
                                 <state key="normal" title="Test Log In"/>
                                 <connections>
                                     <segue destination="J2z-5A-hhJ" kind="show" id="mAh-RT-ZkT"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qk2-pd-tJN">
+                                <rect key="frame" x="272.5" y="356" width="55" height="30"/>
+                                <state key="normal" title="Log Out"/>
+                                <connections>
+                                    <action selector="logOutButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OAb-Ku-eEY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="qk2-pd-tJN" firstAttribute="top" secondItem="Zod-kL-5fu" secondAttribute="bottom" constant="8" id="3aF-e0-JaD"/>
                             <constraint firstItem="Lrc-g2-vaz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4VM-qH-4Dm"/>
+                            <constraint firstItem="qk2-pd-tJN" firstAttribute="centerX" secondItem="Zod-kL-5fu" secondAttribute="centerX" id="5TQ-tX-8bQ"/>
                             <constraint firstItem="anl-EG-1gk" firstAttribute="centerX" secondItem="Lrc-g2-vaz" secondAttribute="centerX" id="6F4-oI-CnH"/>
                             <constraint firstItem="Agp-7i-bT7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GT4-8F-ub5"/>
                             <constraint firstItem="anl-EG-1gk" firstAttribute="top" secondItem="Lrc-g2-vaz" secondAttribute="bottom" constant="8" id="Je3-yV-zI1"/>
@@ -80,6 +89,9 @@
                     <navigationItem key="navigationItem" title="Give Now" id="Bw1-8P-qI6">
                         <barButtonItem key="backBarButtonItem" title=" " id="KjW-IO-D1B"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="logOutButton" destination="qk2-pd-tJN" id="bK6-VX-zJM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

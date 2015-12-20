@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2607466C1C2622B30022E0ED /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607466B1C2622B30022E0ED /* Keys.swift */; };
 		2645C66A1C21E7FF00D6C70D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6691C21E7FF00D6C70D /* AppDelegate.swift */; };
 		2645C66F1C21E7FF00D6C70D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2645C66D1C21E7FF00D6C70D /* Main.storyboard */; };
 		2645C6711C21E7FF00D6C70D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2645C6701C21E7FF00D6C70D /* Assets.xcassets */; };
@@ -33,6 +34,8 @@
 		26FE370F1C2297B600BED9A0 /* TestLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */; };
 		26FE37131C229B9C00BED9A0 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26FE37121C229B9C00BED9A0 /* Keys.plist */; };
 		26FE37171C22A58900BED9A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26FE37191C22A58900BED9A0 /* Localizable.strings */; };
+		D207A3471C23B82400E93BEB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207A3461C23B82400E93BEB /* Extensions.swift */; };
+		D28A88CF1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +128,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2607466B1C2622B30022E0ED /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		2645C6661C21E7FF00D6C70D /* GiveNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiveNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2645C6691C21E7FF00D6C70D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2645C66E1C21E7FF00D6C70D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 		26FE37121C229B9C00BED9A0 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		26FE37181C22A58900BED9A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		26FE371A1C22A59500BED9A0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D207A3461C23B82400E93BEB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringModalLoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,10 +217,12 @@
 				2645C69E1C21F36500D6C70D /* View Controllers */,
 				2645C69D1C21F34900D6C70D /* Storyboards */,
 				2645C6AB1C21F3E100D6C70D /* Integrations */,
+				D207A3461C23B82400E93BEB /* Extensions.swift */,
 				2645C6691C21E7FF00D6C70D /* AppDelegate.swift */,
 				2645C6701C21E7FF00D6C70D /* Assets.xcassets */,
 				2645C6751C21E7FF00D6C70D /* Info.plist */,
 				26FE37121C229B9C00BED9A0 /* Keys.plist */,
+				2607466B1C2622B30022E0ED /* Keys.swift */,
 			);
 			path = GiveNow;
 			sourceTree = "<group>";
@@ -258,6 +266,7 @@
 				2645C6A51C21F3BD00D6C70D /* OnboardingViewController.swift */,
 				2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */,
 				2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */,
+				D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */,
 				26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */,
 			);
 			name = "View Controllers";
@@ -303,6 +312,7 @@
 				2645C6631C21E7FF00D6C70D /* Frameworks */,
 				2645C6641C21E7FF00D6C70D /* Resources */,
 				26F35DEC1C228A080012C83C /* Embed Frameworks */,
+				2607466D1C2629150022E0ED /* Update Keys */,
 			);
 			buildRules = (
 			);
@@ -472,20 +482,40 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2607466D1C2629150022E0ED /* Update Keys */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Keys";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "UPDATE_SCRIPT=${PROJECT_DIR}/update_keys.sh\n\nif [ -f \"${UPDATE_SCRIPT}\" ]; then\n    sh ${UPDATE_SCRIPT}\nelse\n    echo \"### Script not found! ###\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2645C6621C21E7FF00D6C70D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D28A88CF1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift in Sources */,
 				2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */,
 				2645C6A41C21F3A900D6C70D /* HomeViewController.swift in Sources */,
 				2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */,
+				2607466C1C2622B30022E0ED /* Keys.swift in Sources */,
 				2645C6AF1C21F80000D6C70D /* AppState.swift in Sources */,
 				2645C6A61C21F3BD00D6C70D /* OnboardingViewController.swift in Sources */,
 				2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */,
 				26FE370F1C2297B600BED9A0 /* TestLogInViewController.swift in Sources */,
 				2645C6A21C21F38E00D6C70D /* BaseNavigationController.swift in Sources */,
 				2645C66A1C21E7FF00D6C70D /* AppDelegate.swift in Sources */,
+				D207A3471C23B82400E93BEB /* Extensions.swift in Sources */,
 				2645C6A01C21F37A00D6C70D /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
