@@ -35,6 +35,8 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
         static let SignInColor = UIColor(red: 102.0/255.0, green: 187.0/255.0, blue: 106.0/255.0, alpha: 1.0)
     }
     
+    
+    //TODO: Localize
     static let onboardingTextArray : [OnboardingText]  = [
         ("Welcome to GiveNow.",
         "GiveNow lets you donate from anywhere."),
@@ -61,11 +63,6 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
         //self.navigationController?.setNavigationBarHidden(true, animated: true)
 
         // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //MARK: UICollectionViewDelegateFlowLayout
