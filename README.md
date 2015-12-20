@@ -22,4 +22,18 @@ the project can be built.
 Since the `--no-integrate` switch is used the workspace which is created by default is
 not created. This requires the `Pods` project to be referenced as a sub project and
 configured manually, making it easier to manage changes.
-  
+
+## Keys
+
+Keys are required for Parse and Mapbox. These string values are stored outside of
+source control so these values are not exposed publicly. These values are found in
+`~/.givenowkeys` in the user's home directory and read with a build script which
+updates `Keys.plist` in the build output folder.
+
+```sh
+#!/bin/sh
+
+export ParseApplicationId="INSERT_VALUE_HERE"
+export ParseClientKey="INSERT_VALUE_HERE"
+export MapboxToken="INSERT_VALUE_HERE"
+```
