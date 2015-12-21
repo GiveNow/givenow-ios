@@ -184,6 +184,9 @@
                                                         <action selector="backButtonTapped:" destination="gec-W2-18Q" eventType="touchUpInside" id="QO9-aj-Y5s"/>
                                                     </connections>
                                                 </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="utf-NN-rU2">
+                                                    <rect key="frame" x="538" y="247" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -203,6 +206,7 @@
                                             <constraint firstItem="yAc-dA-SO9" firstAttribute="centerY" secondItem="BdI-Qc-JEr" secondAttribute="centerY" id="LFk-q5-o8n"/>
                                             <constraint firstItem="XFO-FE-Dv7" firstAttribute="top" secondItem="bD1-KL-eZP" secondAttribute="bottom" constant="-7" id="MVa-vl-sdb"/>
                                             <constraint firstItem="Bgr-hS-mib" firstAttribute="top" secondItem="gec-W2-18Q" secondAttribute="top" constant="98" id="QUK-Fo-iuN"/>
+                                            <constraint firstItem="utf-NN-rU2" firstAttribute="centerX" secondItem="XFO-FE-Dv7" secondAttribute="centerX" id="QuQ-kk-KAt"/>
                                             <constraint firstItem="N5C-ws-Kyf" firstAttribute="leading" secondItem="gec-W2-18Q" secondAttribute="leading" constant="30" id="Rja-w4-c2G"/>
                                             <constraint firstAttribute="trailing" secondItem="N5C-ws-Kyf" secondAttribute="trailing" constant="30" id="VZA-4x-KGH"/>
                                             <constraint firstAttribute="trailing" secondItem="bD1-KL-eZP" secondAttribute="trailing" constant="18" id="Xei-YY-R2H"/>
@@ -210,6 +214,7 @@
                                             <constraint firstItem="BdI-Qc-JEr" firstAttribute="centerY" secondItem="gec-W2-18Q" secondAttribute="centerY" constant="-43.5" id="jxV-O5-9dM"/>
                                             <constraint firstItem="VaS-25-JHi" firstAttribute="centerX" secondItem="Dw3-Ye-au8" secondAttribute="centerX" id="kYs-pn-utj"/>
                                             <constraint firstItem="Dw3-Ye-au8" firstAttribute="top" secondItem="BdI-Qc-JEr" secondAttribute="bottom" constant="5" id="kdm-14-FaV"/>
+                                            <constraint firstItem="utf-NN-rU2" firstAttribute="centerY" secondItem="XFO-FE-Dv7" secondAttribute="centerY" id="pw7-E3-G8S"/>
                                             <constraint firstItem="Bgr-hS-mib" firstAttribute="leading" secondItem="gec-W2-18Q" secondAttribute="leading" constant="30" id="qjO-gv-MMb"/>
                                             <constraint firstItem="BdI-Qc-JEr" firstAttribute="top" secondItem="bD1-KL-eZP" secondAttribute="bottom" constant="16" id="u9Y-2C-SGT"/>
                                             <constraint firstItem="Dw3-Ye-au8" firstAttribute="width" secondItem="BdI-Qc-JEr" secondAttribute="width" id="uUW-xk-WnH"/>
@@ -226,6 +231,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="utf-NN-rU2" id="KEq-Me-SUB"/>
                                             <outlet property="anonymousLoginButton" destination="N5C-ws-Kyf" id="ZkX-h8-rQR"/>
                                             <outlet property="backButton" destination="yAc-dA-SO9" id="qLG-k0-4hh"/>
                                             <outlet property="detailsLabel" destination="bD1-KL-eZP" id="JIl-ba-amu"/>

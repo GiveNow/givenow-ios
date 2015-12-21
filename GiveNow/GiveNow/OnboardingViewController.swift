@@ -120,13 +120,14 @@ protocol SignInDelegate {
 }
 
 class SignInCollectionViewCell : UICollectionViewCell {
-    @IBOutlet weak var mainLabel:  UILabel?
-    @IBOutlet weak var detailsLabel: UILabel?
-    @IBOutlet weak var entryTextField: UITextField?
-    @IBOutlet weak var orLabel: UILabel?
-    @IBOutlet weak var submitButton: UIButton?
-    @IBOutlet weak var backButton: UIButton?
-    @IBOutlet weak var anonymousLoginButton: UIButton?
+    @IBOutlet weak var mainLabel :  UILabel?
+    @IBOutlet weak var detailsLabel : UILabel?
+    @IBOutlet weak var entryTextField : UITextField?
+    @IBOutlet weak var orLabel : UILabel?
+    @IBOutlet weak var submitButton : UIButton?
+    @IBOutlet weak var backButton : UIButton?
+    @IBOutlet weak var anonymousLoginButton : UIButton?
+    @IBOutlet weak var activityIndicator : UIActivityIndicatorView?
     
     private var _entryMode : VolunteeringEntryMode = .None
     private var phoneNumber : String?
@@ -257,7 +258,13 @@ class SignInCollectionViewCell : UICollectionViewCell {
     }
     
     private func sendPhoneNumber(phoneNumber: String) {
+        self.submitButton?.hidden = true
+        self.activityIndicator?.startAnimating()
+        
         Backend.sharedInstance().sendCodeToPhoneNumber(phoneNumber, completionHandler: { (success, error) -> Void in
+            self.activityIndicator?.stopAnimating()
+            self.submitButton?.hidden = false
+            
             if let error = error {
                 print(error.localizedDescription)
             }
@@ -270,7 +277,14 @@ class SignInCollectionViewCell : UICollectionViewCell {
     }
     
     private func logInWithPhoneNumber(phoneNumber: String, codeEntry: String) {
+        self.submitButton?.hidden = true
+        self.activityIndicator?.startAnimating()
+        
         Backend.sharedInstance().logInWithPhoneNumber(phoneNumber, codeEntry: codeEntry, completionHandler: { (success, error) -> Void in
+       
+            self.activityIndicator?.stopAnimating()
+            self.submitButton?.hidden = false
+            
             if let error = error {
                 print(error.localizedDescription)
             }
