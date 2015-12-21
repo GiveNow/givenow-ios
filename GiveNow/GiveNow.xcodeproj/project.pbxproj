@@ -283,6 +283,7 @@
 				2645C6881C21E7FF00D6C70D /* GiveNowUITests */,
 				260746791C265AD80022E0ED /* Frameworks */,
 				2645C6671C21E7FF00D6C70D /* Products */,
+				D27848AA1C23A8D600346405 /* Pods.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
