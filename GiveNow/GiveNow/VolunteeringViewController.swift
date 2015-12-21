@@ -15,42 +15,79 @@ import Parse
 
 class VolunteeringViewController: BaseViewController {
     
+    @IBOutlet weak var volunteeringTitleLabel: UILabel?
+    @IBOutlet weak var volunteerButton: UIButton?
     
-    @IBOutlet weak var volunteerViewControllerLabel: UILabel!
-    @IBOutlet weak var volunteerButton: UIButton!
+    // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
         
+        initializeLabels()
     }
     
+    // MARK: - User Actions
     
     @IBAction func volunteerButtonTapped(sender: AnyObject) {
-        if loggedIn() == true {
-//            Send in the volunteer request and update the page
+        if AppState.sharedInstance().isUserRegistered {
+            createVolunteer()
         }
         else {
-            //Display the login workflow
-            //Once the user has logged in, send in the volunteer request and update the page
+            promptUserToLogIn()
         }
     }
     
-    func loggedIn() -> Bool {
-        var currentUser = PFUser.currentUser()
-        if currentUser != nil {
-            return true
-        }
-        else {
-            return false
-        }
+    @IBAction func loginViewDismissed(segue: UIStoryboardSegue) {
+        // do nothing
     }
     
+    @IBAction func successfulLogin(segue: UIStoryboardSegue) {
+        createVolunteer()
+    }
 
+    // MARK: - Private
     
+    func initializeLabels() {
+        volunteeringTitleLabel?.text = NSLocalizedString("Volunteering - Title Label", comment: "")
+        volunteerButton?.setTitle(NSLocalizedString("Volunteering - Title Button", comment: ""), forState: .Normal)
+    }
+    
+    func createVolunteer() {
+        if let user = User.currentUser() {
+            Backend.sharedInstance().saveVolunteer(user, completionHandler: { (volunteer, error) -> Void in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                else {
+                    // after successful submission
+                    self.updateViewAfterCreatingVolunteer()
+                }
+            })
+        }
+    }
+    
+    func promptUserToLogIn() {
+        //Display modal login dialogue
+        performSegueWithIdentifier("logIn", sender: nil)
+    }
+    
+    func updateViewAfterCreatingVolunteer() {
+        // replace {PhoneNumber} with actual number
+        var titleText = NSLocalizedString("Volunteering - Thanks Label", comment: "")
+        
+        let phoneNumber = AppState.sharedInstance().userPhoneNumber
+        assert(phoneNumber != nil, "Phone number should be defined")
+        if let phoneNumber = phoneNumber {
+            titleText = titleText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: phoneNumber)
+        }
+        else {
+            let defaultText = NSLocalizedString("Volunteering - Your Phone Number", comment: "")
+            titleText = titleText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: defaultText)
+        }
+        
+        volunteeringTitleLabel?.text = titleText
+        volunteerButton?.setTitle(NSLocalizedString("Volunteering - Thanks Button", comment: ""), forState: .Normal)
+        volunteerButton?.backgroundColor = UIColor.lightGrayColor()
+    }
 
 }

@@ -7,24 +7,51 @@
 //
 
 import UIKit
+import Mapbox
+import CoreLocation
 
 // TODO: implement
 // See https://github.com/GiveNow/givenow-ios/issues/6
 
 class DonatingViewController: BaseViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBOutlet var headingContainerView: UIView?
+    @IBOutlet var pickupLocationButton: UIButton?
+    @IBOutlet var mapView: MGLMapView?
+    
+    var locationManger: CLLocationManager? {
+        didSet {
+            locationManger?.delegate = self
+            locationManger?.requestWhenInUseAuthorization()
+            locationManger?.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+            locationManger?.activityType = .OtherNavigation
+            locationManger?.startUpdatingLocation()
+        }
     }
     
+    required  init?(coder aDecoder: NSCoder) {
+        locationManger = CLLocationManager()
+        super.init(coder: aDecoder)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        headingContainerView?.backgroundColor = ColorPalette().Heading
+        pickupLocationButton?.backgroundColor = ColorPalette().Confirmation
+        pickupLocationButton?.setTitleColor(.whiteColor(), forState: .Normal)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        awakeFromNib()
+    }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+//        mapView.
+//        MKMapRect(origin: MKMapPoint(, size: <#T##MKMapSize#>)
+//        mapView?.setVisibleMapRect(<#T##mapRect: MKMapRect##MKMapRect#>, animated: <#T##Bool#>)
+    }
     /*
     // MARK: - Navigation
 
@@ -35,4 +62,19 @@ class DonatingViewController: BaseViewController {
     }
     */
 
+}
+
+extension DonatingViewController: CLLocationManagerDelegate {
+
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let lastLocation = locations.last
+        let latitude = lastLocation?.coordinate.latitude ?? 0
+        let longitude = lastLocation?.coordinate.longitude ?? 0
+//        let origin = MKMapPointMake(latitude, longitude)
+//        
+//        let size = MKMapSize(width: 200, height: 200)
+//        let mapRect = MKMapRect(origin: origin, size: size)
+//        mapView?.setVisibleMapRect(mapRect, animated: true)
+        manager.stopUpdatingLocation()
+    }
 }
