@@ -6,8 +6,7 @@ use_frameworks!
 
 target 'GiveNow' do
     pod 'SwiftyJSON', '~> 2.3'
-    #pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-    #pod 'SwiftyJSON', :git => 'https://github.com/brennanMKE/SwiftyJSON.git', :branch => "update-podspec-dependencies"
     pod 'Parse', '~> 1.11'
     pod 'Mapbox-iOS-SDK', '~> 3.0'
+    pod 'libPhoneNumber-iOS', '~> 0.8'
 end

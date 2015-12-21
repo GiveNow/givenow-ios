@@ -21,16 +21,31 @@ class GiveNowTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testValidPhoneNumbers() {
+        XCTAssert(Backend.sharedInstance().isValidPhoneNumber("+14158099909"), "Phone number should be valid")
+        XCTAssert(Backend.sharedInstance().isValidPhoneNumber("+49 1573 598 4834"), "Phone number should be valid")
+        XCTAssert(Backend.sharedInstance().isValidPhoneNumber("+4915735984834"), "Phone number should be valid")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
+    func testInvalidPhoneNumbers() {
+        XCTAssert(!Backend.sharedInstance().isValidPhoneNumber("4158099909"), "Phone number should be valid")
+        XCTAssert(!Backend.sharedInstance().isValidPhoneNumber("1573 598 4834"), "Phone number should be valid")
+        XCTAssert(!Backend.sharedInstance().isValidPhoneNumber("15735984834"), "Phone number should be valid")
+        XCTAssert(!Backend.sharedInstance().isValidPhoneNumber("2421"), "Phone number should be valid")
     }
     
+    func testPhoneCountryCodes() {
+        let usLocale = NSLocale(localeIdentifier: "en_US")
+        let deLocale = NSLocale(localeIdentifier: "de_DE")
+        
+        let usCountryCode = Backend.sharedInstance().phoneCountryCodeForLocale(usLocale)
+        let deCountryCode = Backend.sharedInstance().phoneCountryCodeForLocale(deLocale)
+        
+        XCTAssert(usCountryCode == 1)
+        XCTAssert(deCountryCode == 49)
+    }
+    
+    
+    
+
 }

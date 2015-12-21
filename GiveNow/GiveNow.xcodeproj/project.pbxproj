@@ -29,6 +29,9 @@
 		2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */; };
 		2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6AC1C21F40600D6C70D /* Backend.swift */; };
 		2645C6AF1C21F80000D6C70D /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6AE1C21F80000D6C70D /* AppState.swift */; };
+		267BF1E31C27F68800A76425 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267BF1E21C27F68800A76425 /* IntegrationTests.swift */; };
+		26A62ACE1C27E2D900D49311 /* libPhoneNumber_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A62AC21C27CF2800D49311 /* libPhoneNumber_iOS.framework */; };
+		26A62ACF1C27E2D900D49311 /* libPhoneNumber_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26A62AC21C27CF2800D49311 /* libPhoneNumber_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26F35DE01C228A080012C83C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DD71C228A080012C83C /* Bolts.framework */; };
 		26F35DE11C228A080012C83C /* Bolts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DD71C228A080012C83C /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26F35DE41C228A080012C83C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DDB1C228A080012C83C /* Parse.framework */; };
@@ -70,6 +73,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2645C6651C21E7FF00D6C70D;
 			remoteInfo = GiveNow;
+		};
+		26A62AC11C27CF2800D49311 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 41F65385E27502540F0133F96F03A4A5;
+			remoteInfo = "libPhoneNumber-iOS";
+		};
+		26A62AD01C27E2D900D49311 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 230F06C649365BFB9A3B54AAE6CD35CE;
+			remoteInfo = "libPhoneNumber-iOS";
 		};
 		26F35DD61C228A080012C83C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -124,7 +141,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = AD2ACDEE0F2A096217A13642F95D1057;
+			remoteGlobalIDString = 571775EC1F866F58FF108F69B9A2FF12;
 			remoteInfo = SwiftyJSON;
 		};
 /* End PBXContainerItemProxy section */
@@ -136,6 +153,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				26A62ACF1C27E2D900D49311 /* libPhoneNumber_iOS.framework in Embed Frameworks */,
 				26F35DE51C228A080012C83C /* Parse.framework in Embed Frameworks */,
 				26F35DE11C228A080012C83C /* Bolts.framework in Embed Frameworks */,
 				26F35DE91C228A080012C83C /* SwiftyJSON.framework in Embed Frameworks */,
@@ -175,6 +193,7 @@
 		2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringViewController.swift; sourceTree = "<group>"; };
 		2645C6AC1C21F40600D6C70D /* Backend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		2645C6AE1C21F80000D6C70D /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		267BF1E21C27F68800A76425 /* IntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		26A2F4E61C2285E40081165D /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = ../Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		26A62AB71C26BA9000D49311 /* Germany.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Germany.gpx; sourceTree = "<group>"; };
 		26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogInViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +235,7 @@
 				C72296341C228F150097A662 /* Mapbox.framework in Frameworks */,
 				26F35DE41C228A080012C83C /* Parse.framework in Frameworks */,
 				26F35DE01C228A080012C83C /* Bolts.framework in Frameworks */,
+				26A62ACE1C27E2D900D49311 /* libPhoneNumber_iOS.framework in Frameworks */,
 				26F35DE81C228A080012C83C /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +304,7 @@
 				2645C6881C21E7FF00D6C70D /* GiveNowUITests */,
 				260746791C265AD80022E0ED /* Frameworks */,
 				2645C6671C21E7FF00D6C70D /* Products */,
+				D27848AA1C23A8D600346405 /* Pods.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -320,8 +341,9 @@
 		2645C67D1C21E7FF00D6C70D /* GiveNowTests */ = {
 			isa = PBXGroup;
 			children = (
-				2645C67E1C21E7FF00D6C70D /* GiveNowTests.swift */,
 				2645C6801C21E7FF00D6C70D /* Info.plist */,
+				2645C67E1C21E7FF00D6C70D /* GiveNowTests.swift */,
+				267BF1E21C27F68800A76425 /* IntegrationTests.swift */,
 			);
 			path = GiveNowTests;
 			sourceTree = "<group>";
@@ -377,6 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				26F35DD71C228A080012C83C /* Bolts.framework */,
+				26A62AC21C27CF2800D49311 /* libPhoneNumber_iOS.framework */,
 				26F35DD91C228A080012C83C /* Mapbox.bundle */,
 				26F35DDB1C228A080012C83C /* Parse.framework */,
 				26F35DDD1C228A080012C83C /* Pods_GiveNow.framework */,
@@ -421,6 +444,7 @@
 				26F35DE31C228A080012C83C /* PBXTargetDependency */,
 				26F35DE71C228A080012C83C /* PBXTargetDependency */,
 				26F35DEB1C228A080012C83C /* PBXTargetDependency */,
+				26A62AD11C27E2D900D49311 /* PBXTargetDependency */,
 			);
 			name = GiveNow;
 			productName = GiveNow;
@@ -522,6 +546,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		26A62AC21C27CF2800D49311 /* libPhoneNumber_iOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = libPhoneNumber_iOS.framework;
+			remoteRef = 26A62AC11C27CF2800D49311 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		26F35DD71C228A080012C83C /* Bolts.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -641,6 +672,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				267BF1E31C27F68800A76425 /* IntegrationTests.swift in Sources */,
 				2645C67F1C21E7FF00D6C70D /* GiveNowTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,6 +697,11 @@
 			isa = PBXTargetDependency;
 			target = 2645C6651C21E7FF00D6C70D /* GiveNow */;
 			targetProxy = 2645C6861C21E7FF00D6C70D /* PBXContainerItemProxy */;
+		};
+		26A62AD11C27E2D900D49311 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libPhoneNumber-iOS";
+			targetProxy = 26A62AD01C27E2D900D49311 /* PBXContainerItemProxy */;
 		};
 		26F35DE31C228A080012C83C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

@@ -128,9 +128,9 @@ class DonatingViewController: BaseViewController {
 extension DonatingViewController: CLLocationManagerDelegate {
 
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let lastLocation = locations.last
-        let latitude = lastLocation?.coordinate.latitude ?? 0
-        let longitude = lastLocation?.coordinate.longitude ?? 0
+//        let lastLocation = locations.last
+//        let latitude = lastLocation?.coordinate.latitude ?? 0
+//        let longitude = lastLocation?.coordinate.longitude ?? 0
 //        let origin = MKMapPointMake(latitude, longitude)
 //        
 //        let size = MKMapSize(width: 200, height: 200)
