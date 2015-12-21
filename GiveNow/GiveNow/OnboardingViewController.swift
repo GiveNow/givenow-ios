@@ -119,17 +119,13 @@ protocol SignInDelegate {
     func invalidSignInAttempt()
 }
 
-//Sign in text view 
-//formats phone number
-//updated text with valid phone number or sms code
-//submitted
-
 class SignInCollectionViewCell : UICollectionViewCell {
     @IBOutlet weak var mainLabel:  UILabel?
     @IBOutlet weak var detailsLabel: UILabel?
     @IBOutlet weak var entryTextField: UITextField?
     @IBOutlet weak var orLabel: UILabel?
     @IBOutlet weak var submitButton: UIButton?
+    @IBOutlet weak var backButton: UIButton?
     @IBOutlet weak var anonymousLoginButton: UIButton?
     
     private var _entryMode : VolunteeringEntryMode = .None
@@ -165,16 +161,18 @@ class SignInCollectionViewCell : UICollectionViewCell {
             self.entryMode = .PhoneNumber
             self.mainLabel?.text = "Add a phone number"
             self.detailsLabel?.text = "This only lets your driver reach you to arrange pickup. We never share your number with third parties."
-            self.entryTextField?.placeholder = ""
+            self.entryTextField?.placeholder = "+1 234 456 7890"
             self.orLabel?.text = "or"
-            self.submitButton?.setTitle("ADD A PHONE NUMBER", forState: .Normal)
+            self.submitButton?.setTitle(">", forState: .Normal)
+            self.backButton?.hidden = true
             self.anonymousLoginButton?.setTitle("ADD A PHONE NUMBER LATER", forState: .Normal)
         case .ConfirmationCode:
             self.mainLabel?.text = "Add a phone number"
             self.detailsLabel?.text = "We sent a 4-digit SMS code to +1 314-814-0897. Enter it in below."
             self.entryTextField?.placeholder = "SMS Code"
             self.orLabel?.text = "or"
-            self.submitButton?.setTitle("ENTER SMS CODE", forState: .Normal)
+            self.submitButton?.setTitle(">", forState: .Normal)
+            self.backButton?.hidden = false
             self.anonymousLoginButton?.setTitle("ADD A PHONE NUMBER LATER", forState: .Normal)
         }
     }
@@ -206,6 +204,10 @@ class SignInCollectionViewCell : UICollectionViewCell {
                 assert(false, "Phone number should always be defined")
             }
         }
+    }
+    
+    @IBAction func backButtonTapped(sender: AnyObject) {
+        self.entryMode = .PhoneNumber
     }
     
     @IBAction func anonymousLoginButtonTapped(sender: AnyObject) {
