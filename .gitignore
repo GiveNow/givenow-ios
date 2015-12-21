@@ -1,5 +1,7 @@
 
 # Created by https://www.gitignore.io/api/xcode
+*.orig
+.DS_Store
 
 ### Xcode ###
 # Xcode
@@ -29,3 +31,6 @@ xcuserdata
 ## CocoaPods
 Pods
 
+## Keys
+Keys.plist
+Keys.local.plist
