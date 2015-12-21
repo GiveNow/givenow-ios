@@ -24,6 +24,8 @@ class VolunteeringModalLoginViewController: UIViewController {
     
     private var _entryMode : VolunteeringEntryMode = .None
     
+    let backend = Backend.sharedInstance()
+    
     var entryMode : VolunteeringEntryMode {
         get {
             return _entryMode
@@ -31,9 +33,6 @@ class VolunteeringModalLoginViewController: UIViewController {
         set {
             if newValue != _entryMode {
                 _entryMode = newValue
-                
-                // clear out the text when changing entry modes
-                self.entryTextField?.text = nil
                 self.updateTextForEntryMode(_entryMode)
             }
         }
@@ -126,7 +125,7 @@ class VolunteeringModalLoginViewController: UIViewController {
     }
     
     private func sendPhoneNumber(phoneNumber: String) {
-        Backend.sharedInstance().sendCodeToPhoneNumber(phoneNumber, completionHandler: { (success, error) -> Void in
+        backend.sendCodeToPhoneNumber(phoneNumber, completionHandler: { (success, error) -> Void in
             if let error = error {
                 print(error.localizedDescription)
             }
@@ -139,7 +138,7 @@ class VolunteeringModalLoginViewController: UIViewController {
     }
     
     private func logInWithPhoneNumber(phoneNumber: String, codeEntry: String) {
-        Backend.sharedInstance().logInWithPhoneNumber(phoneNumber, codeEntry: codeEntry, completionHandler: { (success, error) -> Void in
+        backend.logInWithPhoneNumber(phoneNumber, codeEntry: codeEntry, completionHandler: { (success, error) -> Void in
             if let error = error {
                 print(error.localizedDescription)
             }
@@ -158,13 +157,22 @@ class VolunteeringModalLoginViewController: UIViewController {
             return
         }
         
+        // clear out the text when changing entry modes
         if entryMode == .PhoneNumber {
+            if let countryCallingCode = backend.phoneCountryCodeForPhoneNumberCurrentLocale() {
+                self.entryTextField?.text = "+\(countryCallingCode)"
+            }
+            else {
+                self.entryTextField?.text = nil
+            }
+            
             modalTitle.text = NSLocalizedString("Volunteering - Phone Number Modal Title", comment: "")
             modalDetails.text = NSLocalizedString("Volunteering - Phone Number Modal Details", comment: "")
             cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Cancel"), forState: .Normal)
             submitButton.setTitle(NSLocalizedString("Submit", comment: "Submit"), forState: .Normal)
         }
         else if entryMode == .ConfirmationCode {
+            self.entryTextField?.text = nil
             modalTitle.text = NSLocalizedString("Volunteering - Confirmation Number Modal Title", comment: "")
             modalDetails.text = NSLocalizedString("Volunteering - Confirmation Number Modal Details", comment: "")
             cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Cancel"), forState: .Normal)

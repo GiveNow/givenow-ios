@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import Parse
+import libPhoneNumber_iOS
 
 // TODO: implement
 // See https://github.com/GiveNow/givenow-ios/issues/3
@@ -422,9 +423,56 @@ class Backend: NSObject {
         }
     }
     
+    func phoneCountryCodeForPhoneNumberCurrentLocale() -> Int? {
+        let locale = NSLocale.currentLocale()
+        return phoneCountryCodeForLocale(locale)
+    }
+    
+    func phoneCountryCodeForLocale(locale : NSLocale) -> Int? {
+        if let countryCode = locale.objectForKey(NSLocaleCountryCode) as? String {
+            let phoneUtil = NBPhoneNumberUtil()
+            let value = Int(phoneUtil.getCountryCodeForRegion(countryCode))
+            
+            print(value)
+            
+            return value
+        }
+        
+        return nil
+    }
+    
+    func isValidPhoneNumber(phoneNumber : String) -> Bool {
+        var isValid = false
+        
+        if phoneNumber.hasPrefix("+") {
+            let phoneUtil = NBPhoneNumberUtil()
+            let parsedNumber = try? phoneUtil.parseWithPhoneCarrierRegion(phoneNumber)
+            
+            if let parsedNumber = parsedNumber {
+                isValid = phoneUtil.isValidNumber(parsedNumber)
+            }
+        }
+        
+        return isValid
+    }
+    
     private func completePhoneNumber(phoneNumber : String) -> String {
-        // Note: automatically add the country code of 1 for US
-        return phoneNumber.characters.count == 11 ? phoneNumber : "1\(phoneNumber)"
+        // Note: automatically add the country calling code for the current locale
+        if phoneNumber.characters.count >= 10 && phoneNumber.hasPrefix("+") {
+            return phoneNumber
+        }
+        else {
+            var phoneCountryCode = phoneCountryCodeForPhoneNumberCurrentLocale()
+            if phoneCountryCode == nil {
+                phoneCountryCode = 1
+            }
+            
+            if let phoneCountryCode = phoneCountryCode {
+                return "+\(phoneCountryCode)\(phoneNumber)"
+            }
+        }
+        
+        return phoneNumber
     }
 
 }
