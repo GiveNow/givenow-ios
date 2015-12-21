@@ -7,30 +7,39 @@
 //
 
 import UIKit
-import Mapbox
+import MapKit
+//import Mapbox
 import CoreLocation
 
 // TODO: implement
 // See https://github.com/GiveNow/givenow-ios/issues/6
 
+public enum SystemPermissionStatus : Int {
+    case NotDetermined = 0
+    case Allowed
+    case Denied
+}
+
 class DonatingViewController: BaseViewController {
 
     @IBOutlet var headingContainerView: UIView?
     @IBOutlet var pickupLocationButton: UIButton?
-    @IBOutlet var mapView: MGLMapView?
+    @IBOutlet var mapView: MKMapView?
     
-    var locationManger: CLLocationManager? {
+    var locationManager: CLLocationManager? {
         didSet {
-            locationManger?.delegate = self
-            locationManger?.requestWhenInUseAuthorization()
-            locationManger?.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-            locationManger?.activityType = .OtherNavigation
-            locationManger?.startUpdatingLocation()
+            if let locationManager = locationManager {
+                locationManager.delegate = self
+                locationManager.requestWhenInUseAuthorization()
+                locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+                locationManager.activityType = .OtherNavigation
+                locationManager.startUpdatingLocation()
+            }
         }
     }
     
-    required  init?(coder aDecoder: NSCoder) {
-        locationManger = CLLocationManager()
+    required init?(coder aDecoder: NSCoder) {
+        locationManager = CLLocationManager()
         super.init(coder: aDecoder)
     }
     
@@ -48,19 +57,72 @@ class DonatingViewController: BaseViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-//        MKMapRect(origin: MKMapPoint(, size: <#T##MKMapSize#>)
-//        mapView?.setVisibleMapRect(<#T##mapRect: MKMapRect##MKMapRect#>, animated: <#T##Bool#>)
-    }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let status = locationStatus()
+        if status == .NotDetermined {
+            promptForLocationAuthorization()
+        }
+        else if status == .Allowed {
+            zoomIntoLocation(true)
+        }
     }
-    */
-
+    
+    func zoomIntoLocation(animated : Bool) {
+        if let locationManager = self.locationManager,
+            let location = locationManager.location {
+                if CLLocationCoordinate2DIsValid(location.coordinate) {
+                    let latitudeInMeters : CLLocationDistance = 30000
+                    let longitudeInMeters : CLLocationDistance = 30000
+                    let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
+                    
+                    self.mapView?.setRegion(coordinateRegion, animated: animated)
+                    
+//                    let north = max(min(coordinateRegion.center.latitude + (coordinateRegion.span.latitudeDelta * 0.5), 90.0), -90.0)
+//                    let south = max(min(coordinateRegion.center.latitude - (coordinateRegion.span.latitudeDelta * 0.5), 90.0), -90.0)
+//                    let east = max(min(coordinateRegion.center.longitude + (coordinateRegion.span.longitudeDelta * 0.5), 180.0), -180.0)
+//                    let west = max(min(coordinateRegion.center.longitude - (coordinateRegion.span.longitudeDelta * 0.5), 180.0), -180.0)
+//                    
+//                    let sw = CLLocationCoordinate2DMake(south, west)
+//                    let ne = CLLocationCoordinate2DMake(north, east)
+//                    
+//                    let bounds : MGLCoordinateBounds = MGLCoordinateBounds(sw: sw, ne: ne)
+//                    self.mapView?.setVisibleCoordinateBounds(bounds, animated: animated)
+                }
+                else {
+                    print("Location is not valid")
+                }
+        }
+        else {
+            if self.locationManager == nil {
+                print("Location manager is nil")
+            }
+            if self.locationManager?.location == nil {
+                print("Location is nil")
+            }
+        }
+    }
+    
+    func locationStatus() -> SystemPermissionStatus {
+        let status = CLLocationManager.authorizationStatus()
+        
+        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
+            return .Allowed
+        }
+        if status == .Restricted || status == .Denied {
+            return .Denied
+        }
+        
+        return .NotDetermined
+    }
+    
+    func promptForLocationAuthorization() {
+        if let locationManager = self.locationManager {
+            locationManager.requestAlwaysAuthorization()
+        }
+        
+//        locationManager.requestAlwaysAuthorization()
+    }
+    
 }
 
 extension DonatingViewController: CLLocationManagerDelegate {

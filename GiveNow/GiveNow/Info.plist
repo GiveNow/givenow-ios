@@ -22,8 +22,6 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MGLMapboxAccessToken</key>
-	<string>sk.eyJ1Ijoic2F1bG1vcmEiLCJhIjoiY2lpOXN3cDZ4MDBjeHR2bHphNDEwY2I5dyJ9.ITbGw4wQ8UPu9D5Kfu1qRg</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We like to know where you are!</string>
 	<key>UIBackgroundModes</key>
