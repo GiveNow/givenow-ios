@@ -30,6 +30,7 @@
 		2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6AC1C21F40600D6C70D /* Backend.swift */; };
 		2645C6AF1C21F80000D6C70D /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6AE1C21F80000D6C70D /* AppState.swift */; };
 		267BF1E31C27F68800A76425 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267BF1E21C27F68800A76425 /* IntegrationTests.swift */; };
+		267BF1F21C28019900A76425 /* Pickup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 267BF1F11C28019900A76425 /* Pickup.storyboard */; };
 		26A62ACE1C27E2D900D49311 /* libPhoneNumber_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A62AC21C27CF2800D49311 /* libPhoneNumber_iOS.framework */; };
 		26A62ACF1C27E2D900D49311 /* libPhoneNumber_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26A62AC21C27CF2800D49311 /* libPhoneNumber_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26F35DE01C228A080012C83C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DD71C228A080012C83C /* Bolts.framework */; };
@@ -194,6 +195,7 @@
 		2645C6AC1C21F40600D6C70D /* Backend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		2645C6AE1C21F80000D6C70D /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		267BF1E21C27F68800A76425 /* IntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
+		267BF1F11C28019900A76425 /* Pickup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pickup.storyboard; sourceTree = "<group>"; };
 		26A2F4E61C2285E40081165D /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = ../Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		26A62AB71C26BA9000D49311 /* Germany.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Germany.gpx; sourceTree = "<group>"; };
 		26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogInViewController.swift; sourceTree = "<group>"; };
@@ -304,7 +306,6 @@
 				2645C6881C21E7FF00D6C70D /* GiveNowUITests */,
 				260746791C265AD80022E0ED /* Frameworks */,
 				2645C6671C21E7FF00D6C70D /* Products */,
-				D27848AA1C23A8D600346405 /* Pods.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -360,6 +361,7 @@
 		2645C69D1C21F34900D6C70D /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				267BF1F11C28019900A76425 /* Pickup.storyboard */,
 				2645C6721C21E7FF00D6C70D /* LaunchScreen.storyboard */,
 				2645C66D1C21E7FF00D6C70D /* Main.storyboard */,
 				2645C6971C21F32300D6C70D /* Onboarding.storyboard */,
@@ -603,6 +605,7 @@
 				26FE37131C229B9C00BED9A0 /* Keys.plist in Resources */,
 				26FE37171C22A58900BED9A0 /* Localizable.strings in Resources */,
 				2645C69A1C21F33900D6C70D /* Donating.storyboard in Resources */,
+				267BF1F21C28019900A76425 /* Pickup.storyboard in Resources */,
 				2645C6981C21F32300D6C70D /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
