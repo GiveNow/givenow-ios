@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import Mapbox
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let parseClientKey = Keys.sharedInstance().parseClientKey {
                 Parse.setApplicationId(parseApplicationId, clientKey: parseClientKey)
                 PFUser.enableAutomaticUser()
+        }
+        
+        if let mapboxToken = Keys.sharedInstance().mapboxToken {
+            MGLAccountManager.setAccessToken(mapboxToken)
         }
         
         return true
