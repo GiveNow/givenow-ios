@@ -119,21 +119,163 @@ protocol SignInDelegate {
     func invalidSignInAttempt()
 }
 
+//Sign in text view 
+//formats phone number
+//updated text with valid phone number or sms code
+//submitted
+
 class SignInCollectionViewCell : UICollectionViewCell {
     @IBOutlet weak var mainLabel:  UILabel?
     @IBOutlet weak var detailsLabel: UILabel?
     @IBOutlet weak var entryTextField: UITextField?
     @IBOutlet weak var orLabel: UILabel?
-    @IBOutlet weak var addNumberButton: UIButton?
+    @IBOutlet weak var submitButton: UIButton?
     @IBOutlet weak var anonymousLoginButton: UIButton?
+    
+    private var _entryMode : VolunteeringEntryMode = .None
+    private var phoneNumber : String?
+    
+    var entryMode : VolunteeringEntryMode {
+        get {
+            return _entryMode
+        }
+        set {
+            if newValue != _entryMode {
+                _entryMode = newValue
+                
+                // clear out the text when changing entry modes
+                self.entryTextField?.text = nil
+                self.updateViewsForEntryMode(_entryMode)
+            }
+        }
+    }
     
     var delegate : SignInDelegate?
     
     func configure() {
-        self.mainLabel?.text = "Add a phone number"
-        self.detailsLabel?.text = "This only lets your driver reach you to arrange pickup. We never share your number with third parties."
-        self.orLabel?.text = "or"
-        self.addNumberButton?.setTitle("ADD A PHONE NUMBER", forState: .Normal)
-        self.anonymousLoginButton?.setTitle("ADD A PHONE NUMBER LATER", forState: .Normal)
+        self.validateSubmitButton()
+        self.updateViewsForEntryMode(entryMode)
+        self.entryTextField?.becomeFirstResponder()
+    }
+    
+    //TODO: Localize
+    private func updateViewsForEntryMode(entryMode: VolunteeringEntryMode) {
+        switch entryMode {
+        case .PhoneNumber, .None:
+            self.entryMode = .PhoneNumber
+            self.mainLabel?.text = "Add a phone number"
+            self.detailsLabel?.text = "This only lets your driver reach you to arrange pickup. We never share your number with third parties."
+            self.entryTextField?.placeholder = ""
+            self.orLabel?.text = "or"
+            self.submitButton?.setTitle("ADD A PHONE NUMBER", forState: .Normal)
+            self.anonymousLoginButton?.setTitle("ADD A PHONE NUMBER LATER", forState: .Normal)
+        case .ConfirmationCode:
+            self.mainLabel?.text = "Add a phone number"
+            self.detailsLabel?.text = "We sent a 4-digit SMS code to +1 314-814-0897. Enter it in below."
+            self.entryTextField?.placeholder = "SMS Code"
+            self.orLabel?.text = "or"
+            self.submitButton?.setTitle("ENTER SMS CODE", forState: .Normal)
+            self.anonymousLoginButton?.setTitle("ADD A PHONE NUMBER LATER", forState: .Normal)
+        }
+    }
+    
+    // MARK: User Actions
+    
+    @IBAction func loginCancelled(sender: AnyObject) {
+        //performSegueWithIdentifier("loginViewDismissed", sender: nil)
+    }
+    
+    @IBAction func phoneTextFieldEditingChanged(sender: AnyObject) {
+        validateSubmitButton()
+    }
+    
+    @IBAction func submitButtonTapped(sender: AnyObject) {
+        guard let entryText = entryTextField?.text else {
+            assert(false, "Entry text is required")
+            return
+        }
+        
+        if entryMode == .PhoneNumber {
+            sendPhoneNumber(entryText)
+        }
+        else if entryMode == .ConfirmationCode {
+            if let phoneNumber = self.phoneNumber {
+                logInWithPhoneNumber(phoneNumber, codeEntry: entryText)
+            }
+            else {
+                assert(false, "Phone number should always be defined")
+            }
+        }
+    }
+    
+    @IBAction func anonymousLoginButtonTapped(sender: AnyObject) {
+        NSLog("Anonymous login button tapped")
+    }
+    
+    // MARK: Private
+    
+    private func disableSubmitButton() {
+        guard let submitButton = submitButton else {
+            return
+        }
+        
+        submitButton.enabled = false
+        submitButton.titleLabel?.textColor = UIColor.lightGrayColor()
+    }
+    
+    private func enableSubmitButton() {
+        guard let submitButton = submitButton else {
+            return
+        }
+        
+        submitButton.enabled = true
+        submitButton.titleLabel?.textColor = UIColor.whiteColor()
+    }
+    
+    private func validateSubmitButton() {
+        guard let phoneNumberText = entryTextField?.text else {
+            disableSubmitButton()
+            return
+        }
+        
+        // A phone number should include the country code which is 1 for the United States.
+        // Typically the country code is assumed so perhaps it can be added automatically.
+        
+        if entryMode == .PhoneNumber &&
+            (phoneNumberText.characters.count == 10 ||
+                phoneNumberText.characters.count == 11) {
+                    enableSubmitButton()
+        }
+        else if entryMode == .ConfirmationCode && phoneNumberText.characters.count == 4 {
+            enableSubmitButton()
+        }
+        else {
+            disableSubmitButton()
+        }
+    }
+    
+    private func sendPhoneNumber(phoneNumber: String) {
+        Backend.sharedInstance().sendCodeToPhoneNumber(phoneNumber, completionHandler: { (success, error) -> Void in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                // hold onto the phone number to use when logging in
+                self.phoneNumber = phoneNumber
+                self.entryMode = .ConfirmationCode
+            }
+        })
+    }
+    
+    private func logInWithPhoneNumber(phoneNumber: String, codeEntry: String) {
+        Backend.sharedInstance().logInWithPhoneNumber(phoneNumber, codeEntry: codeEntry, completionHandler: { (success, error) -> Void in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                NSLog("Login successful")
+                //self.performSegueWithIdentifier("successfulLogin", sender: nil)
+            }
+        })
     }
 }
