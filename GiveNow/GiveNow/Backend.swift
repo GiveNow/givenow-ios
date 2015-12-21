@@ -271,8 +271,17 @@ class Backend: NSObject {
             if let error = error {
                 completionHandler(nil, error)
             }
+            else if results != nil {
+                if let pickupRequests = results as? [PickupRequest] {
+                    completionHandler(pickupRequests, nil)
+                }
+                else {
+                    print("Could not cast as pickup request")
+                    print(results)
+                }
+            }
             else {
-                completionHandler(results, nil)
+                print("Did not get any results")
             }
         })
     }
@@ -353,7 +362,7 @@ class Backend: NSObject {
         let query = queryAllPickupRequests()
         query.whereKey("donation", equalTo: donation.objectId!)
         return query
-    }
+    } 
     
     // MARK: Volunteer
     

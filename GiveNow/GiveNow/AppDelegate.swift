@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // Initialize Parse
+        Parse.registerSubclasses()
         if let parseApplicationId = Keys.sharedInstance().parseApplicationId,
             let parseClientKey = Keys.sharedInstance().parseClientKey {
                 Parse.setApplicationId(parseApplicationId, clientKey: parseClientKey)
