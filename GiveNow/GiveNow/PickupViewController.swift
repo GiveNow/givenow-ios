@@ -115,12 +115,35 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate {
             }
             else if let pickupRequests = result as? [PickupRequest] {
                 self.openPickupRequests = pickupRequests
+                self.addOpenPickupRequestToMap()
             }
         })
     
     }
     
-    
-    
+    func addOpenPickupRequestToMap() {
+        for pickupRequest in openPickupRequests {
+            let latitude = pickupRequest.location!.latitude
+            let longitude = pickupRequest.location!.longitude
+            let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude)
+            mapView.addAnnotation(donationPoint)
+            print(donationPoint)
+        }
+    }
 
+}
+
+class PickupRequestMapPoint: NSObject, MKAnnotation {
+    var latitude: Double
+    var longitude:Double
+    
+    var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+    
+    init(latitude: Double, longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+    
 }
