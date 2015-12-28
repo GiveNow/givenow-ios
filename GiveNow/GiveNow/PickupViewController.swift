@@ -18,7 +18,7 @@ import CoreLocation
 //Select a donation and send notification to confirm donation is ready for pick up
 //Set donation as picked up and dropped off
 
-class PickupViewController: BaseViewController, CLLocationManagerDelegate {
+class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -40,12 +40,15 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate {
     }
     
     var openPickupRequests:[PickupRequest]!
+    var myDashboardPickupRequests:[PickupRequest]!
     
     let backend = Backend.sharedInstance()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchPickupRequests()
+        mapView.delegate = self
+        fetchOpenPickupRequests()
+        fetchMyDashboardPickupRequests()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -107,7 +110,7 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate {
         }
     }
     
-    func fetchPickupRequests() {        
+    func fetchOpenPickupRequests() {
         let query = backend.queryOpenPickupRequests()
         backend.fetchPickupRequestsWithQuery(query, completionHandler: { (result, error) -> Void in
             if error != nil {
@@ -121,29 +124,141 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate {
     
     }
     
+    func fetchMyDashboardPickupRequests() {
+        let query = backend.queryMyDashboardPickups()
+        backend.fetchPickupRequestsWithQuery(query, completionHandler: { (result, error) -> Void in
+            if error != nil {
+                print(error)
+            }
+            else if let pickupRequests = result as? [PickupRequest] {
+                self.myDashboardPickupRequests = pickupRequests
+                self.addMyDashboardPickupRequestsToMap()
+            }
+        })
+        
+    }
+    
     func addOpenPickupRequestToMap() {
         for pickupRequest in openPickupRequests {
             let latitude = pickupRequest.location!.latitude
             let longitude = pickupRequest.location!.longitude
-            let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude)
+            let title = "Open donation"
+            let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
             mapView.addAnnotation(donationPoint)
             print(donationPoint)
         }
+    }
+    
+    func addMyDashboardPickupRequestsToMap() {
+        for pickupRequest in myDashboardPickupRequests {
+            let latitude = pickupRequest.location!.latitude
+            let longitude = pickupRequest.location!.longitude
+            let title = "Claimed donation"
+            let dashboardPoint = MyDashboardPickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
+            mapView.addAnnotation(dashboardPoint)
+            print(dashboardPoint)
+        }
+    }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if let pickupRequestMapPoint = view.annotation as? PickupRequestMapPoint {
+            let pickupRequest = pickupRequestMapPoint.pickupRequest
+            backend.claimOpenPickupRequest(pickupRequest, completionHandler: { (result, error) -> Void in
+                if error != nil {
+                    print(error)
+                }
+                else {
+                    mapView.removeAnnotation(pickupRequestMapPoint)
+                    self.fetchMyDashboardPickupRequests()
+                }
+            })
+        }
+        else if let myDashboardPickupRequestMapPoint = view.annotation as? MyDashboardPickupRequestMapPoint {
+            let pickupRequest = myDashboardPickupRequestMapPoint.pickupRequest
+            backend.cancelClaimedPickupRequest(pickupRequest, completionHandler: { (result, error) -> Void in
+                if error != nil {
+                    print(error)
+                }
+                else {
+                    mapView.removeAnnotation(myDashboardPickupRequestMapPoint)
+                    self.fetchOpenPickupRequests()
+                }
+            })
+        }
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is PickupRequestMapPoint {
+            let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pickupRequest")
+            pinAnnotationView.pinColor = .Purple
+            pinAnnotationView.canShowCallout = true
+            
+            let selectButton = UIButton()
+            selectButton.frame.size.width = 80
+            selectButton.frame.size.height = 44
+            selectButton.setTitle("Claim", forState: .Normal)
+            selectButton.backgroundColor = UIColor.purpleColor()
+
+            pinAnnotationView.leftCalloutAccessoryView = selectButton
+            
+            return pinAnnotationView
+        }
+        else if annotation is MyDashboardPickupRequestMapPoint {
+            let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "myDashboardPickupRequest")
+            pinAnnotationView.pinColor = .Green
+            pinAnnotationView.canShowCallout = true
+            
+            let cancelButton = UIButton()
+            cancelButton.frame.size.width = 80
+            cancelButton.frame.size.height = 44
+            cancelButton.setTitle("Cancel", forState: .Normal)
+            cancelButton.backgroundColor = UIColor.redColor()
+            
+            pinAnnotationView.leftCalloutAccessoryView = cancelButton
+            
+            return pinAnnotationView
+        }
+        return nil
     }
 
 }
 
 class PickupRequestMapPoint: NSObject, MKAnnotation {
     var latitude: Double
-    var longitude:Double
+    var longitude: Double
+    var title:String?
+    var pickupRequest:PickupRequest!
     
     var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
-    init(latitude: Double, longitude: Double) {
+    init(latitude: Double, longitude: Double, title: String, pickupRequest: PickupRequest) {
         self.latitude = latitude
         self.longitude = longitude
+        self.title = title
+        self.pickupRequest = pickupRequest
     }
     
 }
+
+class MyDashboardPickupRequestMapPoint: NSObject, MKAnnotation {
+    var latitude: Double
+    var longitude: Double
+    var title:String?
+    var pickupRequest:PickupRequest!
+    
+    var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+    
+    init(latitude: Double, longitude: Double, title: String, pickupRequest: PickupRequest) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.title = title
+        self.pickupRequest = pickupRequest
+    }
+    
+}
+
+
