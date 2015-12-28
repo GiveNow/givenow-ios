@@ -20,37 +20,59 @@ import UIKit
 
 class HomeViewController: BaseViewController {
 
+    @IBOutlet weak var logOutButton: UIButton?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("loginStatusDidChange:"), name: LoginStatusDidChangeNotification, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if AppState.sharedInstance().isUserLoggedIn {
+        updateLoginButton()
+        
+        if AppState.sharedInstance().isUserRegistered {
             print("show user profile and navigation")
         }
         else {
             print("show onboarding flow")
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: LoginStatusDidChangeNotification, object: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - User Actions
+    
+    @IBAction func returnHome(segue: UIStoryboardSegue) {
+        // do nothing
     }
-    */
+    
+    @IBAction func logOutButtonTapped(sender: AnyObject) {
+        Backend.sharedInstance().logOut { (success, error) -> Void in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                self.updateLoginButton()
+            }
+        }
+    }
+    
+    // MARK: - Private
+    
+    private func updateLoginButton() {
+        self.logOutButton?.hidden = !AppState.sharedInstance().isUserRegistered
+    }
+    
+    // MARK: - Notifications
+    
+    func loginStatusDidChange(notification : NSNotification) {
+        updateLoginButton()
+    }
 
 }

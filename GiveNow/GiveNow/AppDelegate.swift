@@ -7,15 +7,29 @@
 //
 
 import UIKit
+import Parse
+import Mapbox
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Initialize Parse
+        if let parseApplicationId = Keys.sharedInstance().parseApplicationId,
+            let parseClientKey = Keys.sharedInstance().parseClientKey {
+                Parse.registerSubclasses()
+                Parse.setApplicationId(parseApplicationId, clientKey: parseClientKey)
+                PFUser.enableAutomaticUser()
+        }
+        
+        if let mapboxToken = Keys.sharedInstance().mapboxToken {
+            MGLAccountManager.setAccessToken(mapboxToken)
+        }
+        
         return true
     }
 
