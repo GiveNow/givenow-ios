@@ -363,7 +363,6 @@
 		2645C69D1C21F34900D6C70D /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				267BF1F51C2801CA00A76425 /* PickupViewController.swift */,
 				267BF1F11C28019900A76425 /* Pickup.storyboard */,
 				2645C6721C21E7FF00D6C70D /* LaunchScreen.storyboard */,
 				2645C66D1C21E7FF00D6C70D /* Main.storyboard */,
@@ -384,6 +383,7 @@
 				2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */,
 				2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */,
 				D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */,
+				267BF1F51C2801CA00A76425 /* PickupViewController.swift */,
 				26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */,
 			);
 			name = "View Controllers";
