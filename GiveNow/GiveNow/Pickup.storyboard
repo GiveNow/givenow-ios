@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ehW-T2-K1f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9Xv-gM-mHf">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MH5-YL-f4n">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MH5-YL-f4n">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                             </mapView>
                         </subviews>
@@ -29,13 +29,55 @@
                             <constraint firstAttribute="trailing" secondItem="MH5-YL-f4n" secondAttribute="trailing" id="vSE-th-UfK"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Pickup Requests" image="person_pin" id="6hm-Oc-e1h" userLabel="Open Pickup Requests"/>
                     <connections>
                         <outlet property="mapView" destination="MH5-YL-f4n" id="ltC-Jh-9A1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zn1-3z-2OX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="455" y="353"/>
+            <point key="canvasLocation" x="685" y="145"/>
+        </scene>
+        <!--Dashboard-->
+        <scene sceneID="aBk-SD-YLH">
+            <objects>
+                <viewController id="yRF-1Z-Nye" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TCu-Lc-zJa"/>
+                        <viewControllerLayoutGuide type="bottom" id="UIC-GA-hje"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="W2o-0B-CAg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Dashboard" image="dashboard" id="MgJ-9y-84s"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gjI-zW-tzV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="685" y="826"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="vpn-6D-xbG">
+            <objects>
+                <tabBarController id="9Xv-gM-mHf" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="lNZ-2w-MKS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ehW-T2-K1f" kind="relationship" relationship="viewControllers" id="cOq-vM-pUb"/>
+                        <segue destination="yRF-1Z-Nye" kind="relationship" relationship="viewControllers" id="avt-ly-WzB"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Te0-YU-VN9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-132" y="493"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dashboard" width="48" height="48"/>
+        <image name="person_pin" width="48" height="48"/>
+    </resources>
 </document>

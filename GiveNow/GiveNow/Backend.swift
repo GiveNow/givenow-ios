@@ -389,11 +389,12 @@ class Backend: NSObject {
     }
     
     // MARK: Donated pickup requests
+    
     func queryPickupRequestForDonation(donation: Donation) -> PFQuery {
         let query = queryAllPickupRequests()
         query.whereKey("donation", equalTo: donation.objectId!)
         return query
-    } 
+    }
     
     // MARK: Volunteer
     

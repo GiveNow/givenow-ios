@@ -139,10 +139,17 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMap
     }
     
     func addOpenPickupRequestToMap() {
+        print(openPickupRequests)
         for pickupRequest in openPickupRequests {
             let latitude = pickupRequest.location!.latitude
             let longitude = pickupRequest.location!.longitude
-            let title = "Open donation"
+            var title:String!
+            if pickupRequest.address != nil {
+                title = pickupRequest.address!
+            }
+            else {
+                title = "Unknown address"
+            }
             let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
             mapView.addAnnotation(donationPoint)
             print(donationPoint)
@@ -196,7 +203,7 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMap
             let selectButton = UIButton()
             selectButton.frame.size.width = 80
             selectButton.frame.size.height = 44
-            selectButton.setTitle("Claim", forState: .Normal)
+            selectButton.setTitle("Accept", forState: .Normal)
             selectButton.backgroundColor = UIColor.purpleColor()
 
             pinAnnotationView.leftCalloutAccessoryView = selectButton
