@@ -385,6 +385,7 @@
 				D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */,
 				267BF1F51C2801CA00A76425 /* PickupViewController.swift */,
 				26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */,
+				267BF1F51C2801CA00A76425 /* PickupViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
