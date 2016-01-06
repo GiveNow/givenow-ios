@@ -341,9 +341,16 @@ class Backend: NSObject {
     }
     
     // query pickup requests I have accepted but not picked up
-    func queryMyDashboardPickups() -> PFQuery {
+    func queryMyDashboardPendingPickups() -> PFQuery {
         let query = queryActivePickupRequests()
         query.whereKey("pendingVolunteer", equalTo: User.currentUser()!)
+        query.whereKeyDoesNotExist("donation")
+        return query
+    }
+    
+    func queryMyDashboardConfirmedPickups() -> PFQuery {
+        let query = queryActivePickupRequests()
+        query.whereKey("confirmedVolunteer", equalTo: User.currentUser()!)
         query.whereKeyDoesNotExist("donation")
         return query
     }
