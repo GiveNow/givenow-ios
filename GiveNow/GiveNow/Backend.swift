@@ -95,6 +95,42 @@ class Backend: NSObject {
         }
     }
     
+    // MARK: Donation Categories
+
+    
+    func queryTopNineDonationCategories() -> PFQuery {
+        let query = PFQuery(className: "DonationCategory")
+        query.orderByAscending("priority")
+        query.limit = 9
+        return query
+    }
+    
+    func fetchDonationCategoriesWithQuery(query: PFQuery, completionHandler: BackendQueryCompletionHandler?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else if results != nil {
+                if let donationCategories = results as? [DonationCategory] {
+                    completionHandler(donationCategories, nil)
+                }
+                else {
+                    print("Could not cast as donation category")
+                    print(results)
+                }
+            }
+            else {
+                print("Did not get any results")
+            }
+        })
+    }
+    
+    
+    // MARK: Donation Centers
+    
     func fetchDonationCentersNearCoordinate(coordinate : CLLocationCoordinate2D, completionHandler: BackendQueryCompletionHandler?) {
         guard let completionHandler = completionHandler else {
             return
@@ -160,6 +196,8 @@ class Backend: NSObject {
         completionHandler(nil, nil)
     }
     
+    // MARK: Donation
+    
     func saveDonation(donor: User, categories: [DonationCategory], completionHandler: ((Donation?, NSError?) -> Void)?) {
         guard let completionHandler = completionHandler else {
             return
@@ -206,6 +244,8 @@ class Backend: NSObject {
             }
         }
     }
+    
+    //MARK: Pickup Request
     
     func savePickupRequest(donationCategories: [DonationCategory], address: String, location: PFGeoPoint, note: String, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
         guard let completionHandler = completionHandler else {

@@ -111,7 +111,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1su-Rg-Wbj">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="donationCategory" id="1su-Rg-Wbj">
                                 <rect key="frame" x="0.0" y="64" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -126,6 +126,9 @@
                             <outlet property="delegate" destination="fab-oH-Vgh" id="Epg-2X-bC0"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <outlet property="donationCategoriesCollection" destination="LK8-Z7-CIk" id="tzq-U5-o95"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="arb-el-I6r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

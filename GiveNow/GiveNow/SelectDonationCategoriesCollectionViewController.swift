@@ -8,12 +8,18 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "donationCategory"
+private let backend = Backend.sharedInstance()
 
 class SelectDonationCategoriesCollectionViewController: UICollectionViewController {
+    
+    @IBOutlet var donationCategoriesCollection: UICollectionView!
+    var donationCategories:[DonationCategory]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchDonationCategories()
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -28,16 +34,21 @@ class SelectDonationCategoriesCollectionViewController: UICollectionViewControll
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    
+    // MARK: Getting data from Parse
+    
+    func fetchDonationCategories(){
+        let query = backend.queryTopNineDonationCategories()
+        backend.fetchDonationCategoriesWithQuery(query, completionHandler: {(result, error) -> Void in
+            if error != nil {
+                print(error)
+            }
+            else {
+                self.donationCategories = result as! [DonationCategory]
+                print(self.donationCategories)
+            }
+        })
     }
-    */
 
     // MARK: UICollectionViewDataSource
 
