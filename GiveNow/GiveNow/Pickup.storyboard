@@ -113,9 +113,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6Vi-30-sFu">
-                                <rect key="frame" x="0.0" y="20" width="600" height="471"/>
-                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgo-ly-EC1">
                                 <rect key="frame" x="0.0" y="491" width="600" height="60"/>
                                 <constraints>
@@ -126,27 +123,80 @@
                                     <action selector="donationPickedUp:" destination="x3u-qc-vy0" eventType="touchUpInside" id="TGA-FQ-a95"/>
                                 </connections>
                             </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOI-dO-QV2">
+                                <rect key="frame" x="0.0" y="443" width="600" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="BDB-Y5-lW4"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="VNa-jB-Rw6"/>
+                                    <barButtonItem style="plain" id="9DQ-9f-vP1">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Y3d-DU-CRm" userLabel="call">
+                                            <rect key="frame" x="119" y="0.0" width="48" height="48"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button" image="phone"/>
+                                            <connections>
+                                                <action selector="callButtonTapped:" destination="x3u-qc-vy0" eventType="touchUpInside" id="W1f-eG-Og5"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="0TF-gQ-1Ws"/>
+                                    <barButtonItem style="plain" id="qJ2-BD-WJN">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7Q9-KS-ZqA" userLabel="message">
+                                            <rect key="frame" x="276" y="0.0" width="48" height="48"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button" image="textsms"/>
+                                            <connections>
+                                                <action selector="messageButtonTapped:" destination="x3u-qc-vy0" eventType="touchUpInside" id="7as-kq-yjZ"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="gbO-T4-vsB"/>
+                                    <barButtonItem style="plain" id="NEf-Uy-kKE">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Bv9-Tz-TSl" userLabel="navigate">
+                                            <rect key="frame" x="433" y="0.0" width="48" height="48"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button" image="navigation"/>
+                                            <connections>
+                                                <action selector="navigationButtonTapped:" destination="x3u-qc-vy0" eventType="touchUpInside" id="szH-Hl-xB7"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="cKY-W8-6mv"/>
+                                </items>
+                            </toolbar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6Vi-30-sFu">
+                                <rect key="frame" x="0.0" y="20" width="600" height="423"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="IOI-dO-QV2" firstAttribute="leading" secondItem="BPZ-mE-nkj" secondAttribute="leading" id="5fm-qn-y2n"/>
                             <constraint firstItem="6Vi-30-sFu" firstAttribute="top" secondItem="La5-zJ-nzv" secondAttribute="bottom" id="5op-ae-2Ma"/>
                             <constraint firstItem="n5o-cV-GmE" firstAttribute="top" secondItem="qgo-ly-EC1" secondAttribute="bottom" id="6Ln-8v-fTX"/>
                             <constraint firstItem="qgo-ly-EC1" firstAttribute="leading" secondItem="BPZ-mE-nkj" secondAttribute="leading" id="9lV-4b-yks"/>
+                            <constraint firstAttribute="trailing" secondItem="IOI-dO-QV2" secondAttribute="trailing" id="FJT-ey-tA2"/>
+                            <constraint firstItem="qgo-ly-EC1" firstAttribute="top" secondItem="IOI-dO-QV2" secondAttribute="bottom" id="NDy-jh-j0O"/>
+                            <constraint firstItem="IOI-dO-QV2" firstAttribute="top" secondItem="6Vi-30-sFu" secondAttribute="bottom" id="Sr8-F5-1vD"/>
                             <constraint firstItem="6Vi-30-sFu" firstAttribute="leading" secondItem="BPZ-mE-nkj" secondAttribute="leading" id="drz-3A-Xoz"/>
                             <constraint firstAttribute="trailing" secondItem="6Vi-30-sFu" secondAttribute="trailing" id="fZo-zA-VJt"/>
                             <constraint firstAttribute="trailing" secondItem="qgo-ly-EC1" secondAttribute="trailing" id="qAp-zp-ugH"/>
                             <constraint firstItem="n5o-cV-GmE" firstAttribute="top" secondItem="6Vi-30-sFu" secondAttribute="bottom" constant="60" id="tjF-pT-5eu"/>
-                            <constraint firstItem="qgo-ly-EC1" firstAttribute="top" secondItem="6Vi-30-sFu" secondAttribute="bottom" id="vvT-m7-Wv6"/>
+                            <constraint firstItem="qgo-ly-EC1" firstAttribute="top" secondItem="6Vi-30-sFu" secondAttribute="bottom" constant="50" id="vvT-m7-Wv6"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="vvT-m7-Wv6"/>
                                 <exclude reference="tjF-pT-5eu"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="callButton" destination="Y3d-DU-CRm" id="bCh-0T-PXj"/>
                         <outlet property="donationPickedUpButton" destination="qgo-ly-EC1" id="57r-dQ-4xe"/>
                         <outlet property="mapView" destination="6Vi-30-sFu" id="O2x-JB-67S"/>
+                        <outlet property="messageButton" destination="7Q9-KS-ZqA" id="lp3-X6-IpU"/>
+                        <outlet property="navigationButton" destination="Bv9-Tz-TSl" id="juW-vq-ShU"/>
                         <segue destination="JIT-jV-7Nb" kind="unwind" identifier="donationCompleted" unwindAction="donationCompleted:" id="mOE-wL-QMZ"/>
                     </connections>
                 </viewController>
@@ -176,6 +226,9 @@
     </scenes>
     <resources>
         <image name="dashboard" width="48" height="48"/>
+        <image name="navigation" width="48" height="48"/>
         <image name="person_pin" width="48" height="48"/>
+        <image name="phone" width="48" height="48"/>
+        <image name="textsms" width="48" height="48"/>
     </resources>
 </document>

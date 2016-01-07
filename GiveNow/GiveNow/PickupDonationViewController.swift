@@ -16,6 +16,10 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var donationPickedUpButton: UIButton!
     
+    @IBOutlet weak var callButton: UIButton!
+    @IBOutlet weak var messageButton: UIButton!
+    @IBOutlet weak var navigationButton: UIButton!
+    
     var pickupRequest:PickupRequest!
     let backend = Backend.sharedInstance()
     
@@ -122,15 +126,32 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
             }
         })
     }
+    
+    //MARK: Toolbar buttons
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func callButtonTapped(sender: AnyObject) {
+        print("Call phone")
     }
-    */
+    
+    @IBAction func messageButtonTapped(sender: AnyObject) {
+        print("Send SMS")
+    }
+    
+    @IBAction func navigationButtonTapped(sender: AnyObject) {
+        print("Navigate!")
+        let latitude = pickupRequest.location!.latitude
+        let longitude = pickupRequest.location!.longitude
+        let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let placeMark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placeMark)
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+        
+        mapItem.openInMapsWithLaunchOptions(launchOptions)
+        
+        
+    }
+    
+    
+    
 
 }
