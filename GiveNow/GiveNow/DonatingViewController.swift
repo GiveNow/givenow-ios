@@ -123,6 +123,11 @@ class DonatingViewController: BaseViewController {
 //        locationManager.requestAlwaysAuthorization()
     }
     
+    @IBAction func setPickupLocationButtonTapped(sender: AnyObject) {
+        self.performSegueWithIdentifier("selectCategories", sender: nil)
+    }
+    
+    
 }
 
 extension DonatingViewController: CLLocationManagerDelegate {

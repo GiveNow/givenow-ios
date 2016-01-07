@@ -27,6 +27,9 @@
                                     <constraint firstAttribute="height" constant="50" id="57W-Fl-xvG"/>
                                 </constraints>
                                 <state key="normal" title="Set Pickup Location"/>
+                                <connections>
+                                    <action selector="setPickupLocationButtonTapped:" destination="LdM-nb-XRS" eventType="touchUpInside" id="Ssj-v0-65y"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PnK-if-tY5" userLabel="Heading View">
                                 <rect key="frame" x="20" y="64" width="560" height="81"/>
@@ -87,11 +90,46 @@
                         <outlet property="headingContainerView" destination="PnK-if-tY5" id="4rw-ir-Jxh"/>
                         <outlet property="mapView" destination="VID-4N-S16" id="UEQ-Nr-img"/>
                         <outlet property="pickupLocationButton" destination="aCv-dI-Tpw" id="QjL-be-NBs"/>
+                        <segue destination="fab-oH-Vgh" kind="show" identifier="selectCategories" id="8DP-34-urA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IT0-QH-Vbg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="372" y="242"/>
+        </scene>
+        <!--Select Donation Categories Collection View Controller-->
+        <scene sceneID="jqr-iV-icy">
+            <objects>
+                <collectionViewController id="fab-oH-Vgh" customClass="SelectDonationCategoriesCollectionViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="LK8-Z7-CIk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ls9-Tm-GRE">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1su-Rg-Wbj">
+                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="fab-oH-Vgh" id="2wW-BW-h9r"/>
+                            <outlet property="delegate" destination="fab-oH-Vgh" id="Epg-2X-bC0"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="arb-el-I6r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1071" y="242"/>
         </scene>
     </scenes>
     <resources>
