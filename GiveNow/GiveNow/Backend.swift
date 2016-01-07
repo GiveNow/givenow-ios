@@ -341,9 +341,16 @@ class Backend: NSObject {
     }
     
     // query pickup requests I have accepted but not picked up
-    func queryMyDashboardPickups() -> PFQuery {
+    func queryMyDashboardPendingPickups() -> PFQuery {
         let query = queryActivePickupRequests()
         query.whereKey("pendingVolunteer", equalTo: User.currentUser()!)
+        query.whereKeyDoesNotExist("donation")
+        return query
+    }
+    
+    func queryMyDashboardConfirmedPickups() -> PFQuery {
+        let query = queryActivePickupRequests()
+        query.whereKey("confirmedVolunteer", equalTo: User.currentUser()!)
         query.whereKeyDoesNotExist("donation")
         return query
     }
@@ -381,6 +388,52 @@ class Backend: NSObject {
         return query
     }
     
+    // MARK: Donated pickup requests
+    
+    func saveDonationForPickupRequest(pickupRequest: PickupRequest, completionHandler: ((Donation?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        
+        let donation = Donation()
+        donation.donor = pickupRequest.donor
+        donation.donationCategories = pickupRequest.donationCategories
+        
+        donation.saveInBackgroundWithBlock({ (success, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                self.addDonationToPickupRequest(donation, pickupRequest: pickupRequest, completionHandler: {(pickupRequest, error) -> Void in
+                    if let error = error {
+                        completionHandler(nil, error)
+                    }
+                    else {
+                        completionHandler(donation, nil)
+                    }
+                })
+            }
+        })
+        
+    }
+    
+    func addDonationToPickupRequest(donation: Donation, pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        pickupRequest.donation = donation
+        pickupRequest.isActive = false
+        pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                completionHandler(pickupRequest, nil)
+            }
+        })
+    }
+    
+    
     // query my completed requests
     func queryMyCompletedRequests() -> PFQuery {
         let query = queryMyPickupRequests()
@@ -388,12 +441,11 @@ class Backend: NSObject {
         return query
     }
     
-    // MARK: Donated pickup requests
     func queryPickupRequestForDonation(donation: Donation) -> PFQuery {
         let query = queryAllPickupRequests()
         query.whereKey("donation", equalTo: donation.objectId!)
         return query
-    } 
+    }
     
     // MARK: Volunteer
     

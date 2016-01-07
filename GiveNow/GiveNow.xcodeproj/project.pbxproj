@@ -58,6 +58,9 @@
 		C72296421C228F740097A662 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296411C228F740097A662 /* libsqlite3.tbd */; };
 		C72296441C228F7C0097A662 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296431C228F7C0097A662 /* libz.tbd */; };
 		D207A3471C23B82400E93BEB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207A3461C23B82400E93BEB /* Extensions.swift */; };
+		D2186FB11C3CC3FC001551EF /* MyDashboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */; };
+		D2186FB51C3CC632001551EF /* PickupRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */; };
+		D2186FB71C3CE917001551EF /* PickupDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FB61C3CE917001551EF /* PickupDonationViewController.swift */; };
 		D28A88CF1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -219,6 +222,9 @@
 		C72296411C228F740097A662 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		C72296431C228F7C0097A662 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		D207A3461C23B82400E93BEB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDashboardTableViewController.swift; sourceTree = "<group>"; };
+		D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupRequestTableViewCell.swift; sourceTree = "<group>"; };
+		D2186FB61C3CE917001551EF /* PickupDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupDonationViewController.swift; sourceTree = "<group>"; };
 		D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringModalLoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -383,9 +389,11 @@
 				2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */,
 				2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */,
 				D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */,
-				267BF1F51C2801CA00A76425 /* PickupViewController.swift */,
 				26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */,
 				267BF1F51C2801CA00A76425 /* PickupViewController.swift */,
+				D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */,
+				D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */,
+				D2186FB61C3CE917001551EF /* PickupDonationViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -652,7 +660,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2186FB11C3CC3FC001551EF /* MyDashboardTableViewController.swift in Sources */,
 				D28A88CF1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift in Sources */,
+				D2186FB51C3CC632001551EF /* PickupRequestTableViewCell.swift in Sources */,
 				2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */,
 				2645C6A41C21F3A900D6C70D /* HomeViewController.swift in Sources */,
 				2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */,
@@ -662,6 +672,7 @@
 				2645C6A61C21F3BD00D6C70D /* OnboardingViewController.swift in Sources */,
 				C72296321C228E550097A662 /* ColorPalette.swift in Sources */,
 				260746261C23D87D0022E0ED /* DropOffAgency.swift in Sources */,
+				D2186FB71C3CE917001551EF /* PickupDonationViewController.swift in Sources */,
 				2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */,
 				26FE37231C23B80500BED9A0 /* Donation.swift in Sources */,
 				26FE370F1C2297B600BED9A0 /* TestLogInViewController.swift in Sources */,
