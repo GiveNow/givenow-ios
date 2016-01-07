@@ -144,7 +144,17 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
     }
     
     @IBAction func messageButtonTapped(sender: AnyObject) {
-        print("Send SMS")
+        let phoneNumber = "5555555555"
+        sendMessage(phoneNumber)
+    }
+    
+    private func sendMessage(phoneNumber:String) {
+        if let messageURL:NSURL = NSURL(string:"sms://\(phoneNumber)") {
+            let application:UIApplication = UIApplication.sharedApplication()
+            if (application.canOpenURL(messageURL)) {
+                application.openURL(messageURL);
+            }
+        }
     }
     
     @IBAction func navigationButtonTapped(sender: AnyObject) {
