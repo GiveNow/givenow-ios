@@ -130,7 +130,17 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
     //MARK: Toolbar buttons
 
     @IBAction func callButtonTapped(sender: AnyObject) {
-        print("Call phone")
+        let phoneNumber = "5555555555"
+        callNumber(phoneNumber)
+    }
+    
+    private func callNumber(phoneNumber:String) {
+        if let phoneCallURL:NSURL = NSURL(string:"tel://\(phoneNumber)") {
+            let application:UIApplication = UIApplication.sharedApplication()
+            if (application.canOpenURL(phoneCallURL)) {
+                application.openURL(phoneCallURL);
+            }
+        }
     }
     
     @IBAction func messageButtonTapped(sender: AnyObject) {
