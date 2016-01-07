@@ -113,7 +113,14 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
     }
     
     @IBAction func donationPickedUp(sender: AnyObject) {
-        
+        backend.saveDonationForPickupRequest(pickupRequest, completionHandler: {(donation, error) -> Void in
+            if let error = error {
+                print(error)
+            }
+            else {
+                self.performSegueWithIdentifier("donationCompleted", sender: nil)
+            }
+        })
     }
 
     /*

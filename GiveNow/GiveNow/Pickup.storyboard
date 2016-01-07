@@ -147,9 +147,11 @@
                     <connections>
                         <outlet property="donationPickedUpButton" destination="qgo-ly-EC1" id="57r-dQ-4xe"/>
                         <outlet property="mapView" destination="6Vi-30-sFu" id="O2x-JB-67S"/>
+                        <segue destination="JIT-jV-7Nb" kind="unwind" identifier="donationCompleted" unwindAction="donationCompleted:" id="mOE-wL-QMZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KOZ-6o-l8j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="JIT-jV-7Nb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1408" y="855"/>
         </scene>

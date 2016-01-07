@@ -131,6 +131,12 @@ class MyDashboardTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func donationCompleted(segue: UIStoryboardSegue) {
+        fetchMyDashboardPendingPickups()
+        fetchMyDashboardConfirmedPickups()
+        dashboardTable.reloadData()
+    }
+    
     
 
     /*
