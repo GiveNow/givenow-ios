@@ -130,7 +130,7 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
     //MARK: Toolbar buttons
 
     @IBAction func callButtonTapped(sender: AnyObject) {
-        let phoneNumber = "5555555555"
+        let phoneNumber = pickupRequest.donor!.username!
         callNumber(phoneNumber)
     }
     
@@ -144,7 +144,7 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
     }
     
     @IBAction func messageButtonTapped(sender: AnyObject) {
-        let phoneNumber = "5555555555"
+        let phoneNumber = pickupRequest.donor!.username!
         sendMessage(phoneNumber)
     }
     
