@@ -127,6 +127,16 @@ class DonatingViewController: BaseViewController {
         self.performSegueWithIdentifier("selectCategories", sender: nil)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "selectCategories" {
+            let location = mapView?.centerCoordinate
+            let address = "Test"
+            let destinationController = segue.destinationViewController as! DonationCategoriesViewController
+            destinationController.location = location
+            destinationController.address = address
+        }
+    }
+    
     
 }
 

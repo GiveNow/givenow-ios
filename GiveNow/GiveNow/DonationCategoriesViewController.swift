@@ -1,5 +1,5 @@
 //
-//  SelectDonationCategoriesCollectionViewController.swift
+//  DonationCategoriesViewController.swift
 //  GiveNow
 //
 //  Created by Evan Waters on 1/7/16.
@@ -7,29 +7,35 @@
 //
 
 import UIKit
+import MapKit
 
 private let reuseIdentifier = "donationCategory"
 private let backend = Backend.sharedInstance()
 
-class SelectDonationCategoriesCollectionViewController: UICollectionViewController {
+class DonationCategoriesViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
-    @IBOutlet var donationCategoriesCollection: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     var donationCategories:[DonationCategory]!
+    var location:CLLocationCoordinate2D!
+    var address:String!
+    
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var pickupRequestAddressLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchDonationCategories()
+        pickupRequestAddressLabel.text = address
         
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Register cell classes
         self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -45,61 +51,65 @@ class SelectDonationCategoriesCollectionViewController: UICollectionViewControll
             }
             else {
                 self.donationCategories = result as! [DonationCategory]
-                print(self.donationCategories)
+                self.collectionView.reloadData()
             }
         })
     }
-
+    
     // MARK: UICollectionViewDataSource
-
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
     }
-
-
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+    
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if donationCategories != nil {
+            return donationCategories.count
+        }
+        else {
+            return 0
+        }
     }
-
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
-    
+        
         // Configure the cell
-    
+        
         return cell
     }
-
+    
     // MARK: UICollectionViewDelegate
-
+    
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+    return true
     }
     */
-
+    
     /*
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+    return true
     }
     */
-
+    
     /*
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
     override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
+    return false
     }
-
+    
     override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
+    return false
     }
-
+    
     override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
     
     }
     */
+    
 
 }
