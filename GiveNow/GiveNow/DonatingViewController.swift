@@ -26,9 +26,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     @IBOutlet var mapView: MKMapView?
     
     var searchController:UISearchController!
-    var localSearchRequest:MKLocalSearchRequest!
-    var localSearch:MKLocalSearch!
-    var localSearchResponse:MKLocalSearchResponse!
     
     var searchResults = [MKMapItem]()
     var searchResultsTableView = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0), style: .Grouped)
@@ -79,6 +76,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         view.addSubview(searchResultsTableView)
         searchResultsTableView.rowHeight = 60.0
         searchResultsTableView.frame = CGRect(x: 0.0, y: 64.0, width: view.frame.width, height: view.frame.height - 64)
+        searchResultsTableView.tableHeaderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: 0.0))
         searchResultsTableView.hidden = true
     }
 
@@ -172,13 +170,25 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     
     // MARK: - Search
     
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        searchResultsTableView.hidden = false
+        if searchController.searchBar.text != nil {
+            searchMapView(searchController.searchBar.text!)
+        }
+        return true
+    }
+    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-        
-        localSearchRequest = MKLocalSearchRequest()
+        searchResults = [MKMapItem]()
+        searchMapView(searchText)
+    }
+    
+    func searchMapView(searchText: String) {
+        let localSearchRequest = MKLocalSearchRequest()
         localSearchRequest.naturalLanguageQuery = searchText
         localSearchRequest.region = mapView!.region
-        localSearch = MKLocalSearch(request: localSearchRequest)
+        
+        let localSearch = MKLocalSearch(request: localSearchRequest)
         localSearch.startWithCompletionHandler{(localSearchResponse, error) -> Void in
             
             if error != nil {
@@ -188,23 +198,13 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                 print("No results returned")
             }
             else {
-                let mapItem = localSearchResponse!.mapItems[0]
-                self.searchResults.append(mapItem)
+                for mapItem in localSearchResponse!.mapItems {
+                    self.searchResults.append(mapItem)
+                }
                 self.searchResultsTableView.reloadData()
             }
         }
-    }
-    
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        searchResultsTableView.hidden = false
-        return true
-    }
-    
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-    }
-    
-    func addTableToSearchController() {
-        
+
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
@@ -214,7 +214,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchResultsTableView.hidden = true
     }
-
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -239,9 +238,11 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         cell.addSubview(mapItemAddressLabel)
         return cell
     }
+
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let mapItem = searchResults[indexPath.row]
+        print(mapItem)
     }
     
     func nameForMapItem(mapItem: MKMapItem) -> String {
@@ -260,7 +261,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
             if addressDictionary["FormattedAddressLines"] != nil {
                 if let formattedAddressLines = addressDictionary["FormattedAddressLines"] as? [String] {
                     for line in formattedAddressLines {
-                        print(line)
                         address += line + " "
                     }
                 }
@@ -268,25 +268,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         }
         return address
     }
-    
-    func parseMapItem(mapItem: MKMapItem) {
-        if mapItem.name != nil {
-            print(mapItem.name!)
-        }
-        print(mapItem.placemark.coordinate)
-        if mapItem.placemark.addressDictionary != nil {
-            let addressDictionary = mapItem.placemark.addressDictionary!
-            if addressDictionary["FormattedAddressLines"] != nil {
-                if let formattedAddressLines = addressDictionary["FormattedAddressLines"] as? [String] {
-                    for line in formattedAddressLines {
-                        print(line)
-                    }
-                }
-            }
-        }
-    }
-    
-    
     
     
     // MARK: - Geocoding
