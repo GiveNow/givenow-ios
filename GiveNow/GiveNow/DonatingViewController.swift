@@ -101,17 +101,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
                     
                     self.mapView?.setRegion(coordinateRegion, animated: animated)
-                    
-//                    let north = max(min(coordinateRegion.center.latitude + (coordinateRegion.span.latitudeDelta * 0.5), 90.0), -90.0)
-//                    let south = max(min(coordinateRegion.center.latitude - (coordinateRegion.span.latitudeDelta * 0.5), 90.0), -90.0)
-//                    let east = max(min(coordinateRegion.center.longitude + (coordinateRegion.span.longitudeDelta * 0.5), 180.0), -180.0)
-//                    let west = max(min(coordinateRegion.center.longitude - (coordinateRegion.span.longitudeDelta * 0.5), 180.0), -180.0)
-//                    
-//                    let sw = CLLocationCoordinate2DMake(south, west)
-//                    let ne = CLLocationCoordinate2DMake(north, east)
-//                    
-//                    let bounds : MGLCoordinateBounds = MGLCoordinateBounds(sw: sw, ne: ne)
-//                    self.mapView?.setVisibleCoordinateBounds(bounds, animated: animated)
                 }
                 else {
                     print("Location is not valid")
@@ -242,8 +231,21 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let mapItem = searchResults[indexPath.row]
-        print(mapItem)
+        searchController.searchBar.text = addressForMapItem(mapItem)
+        searchResultsTableView.hidden = true
+        searchController.dismissViewControllerAnimated(true, completion: {() -> Void in
+            self.centerMapOnMapItem(mapItem)
+        })
     }
+    
+    func centerMapOnMapItem(mapItem: MKMapItem) {
+        let currentRegion = mapView!.region
+        let newCenter = coordinatesForMapItem(mapItem)
+        let newRegion = MKCoordinateRegion(center: newCenter, span: currentRegion.span)
+        mapView!.setRegion(newRegion, animated: true)
+    }
+    
+    
     
     func nameForMapItem(mapItem: MKMapItem) -> String {
         if mapItem.name != nil {
@@ -267,6 +269,10 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
             }
         }
         return address
+    }
+    
+    func coordinatesForMapItem(mapItem: MKMapItem) -> CLLocationCoordinate2D {
+        return mapItem.placemark.coordinate
     }
     
     
