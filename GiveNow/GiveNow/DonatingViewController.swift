@@ -20,11 +20,15 @@ public enum SystemPermissionStatus : Int {
     case Denied
 }
 
-class DonatingViewController: BaseViewController, MKMapViewDelegate {
+class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBarDelegate, UISearchControllerDelegate {
 
     @IBOutlet var pickupLocationButton: UIButton?
     @IBOutlet var mapView: MKMapView?
-    @IBOutlet weak var locationSearchBar: UISearchBar!
+    
+    var searchController:UISearchController!
+    var localSearchRequest:MKLocalSearchRequest!
+    var localSearch:MKLocalSearch!
+    var localSearchResponse:MKLocalSearchResponse!
     
     var locationManager: CLLocationManager? {
         didSet {
@@ -51,7 +55,19 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initializeSearchController()
         awakeFromNib()
+    }
+    
+    func initializeSearchController() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.delegate = self
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        searchController.delegate = self
+        navigationItem.titleView = searchController.searchBar
+        
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -130,8 +146,8 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate {
         if segue.identifier == "selectCategories" {
             let location = mapView?.centerCoordinate
             var address:String!
-            if locationSearchBar.text != nil {
-                address = locationSearchBar.text!
+            if searchController.searchBar.text != nil {
+                address = searchController.searchBar.text!
             }
             else {
                 address = ""
@@ -142,12 +158,95 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate {
         }
     }
     
+    // MARK: - Search
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+        
+        localSearchRequest = MKLocalSearchRequest()
+        localSearchRequest.naturalLanguageQuery = searchText
+        localSearchRequest.region = mapView!.region
+        localSearch = MKLocalSearch(request: localSearchRequest)
+        localSearch.startWithCompletionHandler{(localSearchResponse, error) -> Void in
+            
+            if error != nil {
+                print(error)
+            }
+            else if localSearchResponse == nil {
+                print("No results returned")
+            }
+            else {
+                let mapItem = localSearchResponse!.mapItems[0]
+                if mapItem.name != nil {
+                    print(mapItem.name!)
+                }
+                print(mapItem.placemark.coordinate)
+                if mapItem.placemark.addressDictionary != nil {
+                    let addressDictionary = mapItem.placemark.addressDictionary!
+                    if addressDictionary["FormattedAddressLines"] != nil {
+                        if let formattedAddressLines = addressDictionary["FormattedAddressLines"] as? [String] {
+                            for line in formattedAddressLines {
+                                print(line)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+//        //1
+//        searchBar.resignFirstResponder()
+//        dismissViewControllerAnimated(true, completion: nil)
+//        if self.mapView.annotations.count != 0{
+//            annotation = self.mapView.annotations[0]
+//            self.mapView.removeAnnotation(annotation)
+//        }
+//        //2
+//        localSearchRequest = MKLocalSearchRequest()
+//        localSearchRequest.naturalLanguageQuery = searchBar.text
+//        localSearch = MKLocalSearch(request: localSearchRequest)
+//        localSearch.startWithCompletionHandler { (localSearchResponse, error) -> Void in
+//            
+//            if localSearchResponse == nil{
+//                let alertController = UIAlertController(title: nil, message: "Place Not Found", preferredStyle: UIAlertControllerStyle.Alert)
+//                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+//                self.presentViewController(alertController, animated: true, completion: nil)
+//                return
+//            }
+//            //3
+//            self.pointAnnotation = MKPointAnnotation()
+//            self.pointAnnotation.title = searchBar.text
+//            self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: localSearchResponse!.boundingRegion.center.latitude, longitude:     localSearchResponse!.boundingRegion.center.longitude)
+//            
+//            
+//            self.pinAnnotationView = MKPinAnnotationView(annotation: self.pointAnnotation, reuseIdentifier: nil)
+//            self.mapView.centerCoordinate = self.pointAnnotation.coordinate
+//            self.mapView.addAnnotation(self.pinAnnotationView.annotation!)
+//        }
+        
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        
+    }
+    
+    
+    
+    
+    
     // MARK: - Geocoding
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         setAddressFromCoordinates()
     }
-    
     
     func setAddressFromCoordinates() {
         let geocoder = CLGeocoder()
@@ -165,7 +264,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate {
                     let addressDictionary = placemark.addressDictionary
                     if addressDictionary != nil {
                         if let street = addressDictionary!["Street"] as? String {
-                            self.locationSearchBar.text = street
+                            self.searchController.searchBar.text = street
                         }
                     }
                 }
