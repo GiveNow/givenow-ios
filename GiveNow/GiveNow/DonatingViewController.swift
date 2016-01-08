@@ -20,7 +20,7 @@ public enum SystemPermissionStatus : Int {
     case Denied
 }
 
-class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBarDelegate, UISearchControllerDelegate {
+class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var pickupLocationButton: UIButton?
     @IBOutlet var mapView: MKMapView?
@@ -29,6 +29,9 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     var localSearchRequest:MKLocalSearchRequest!
     var localSearch:MKLocalSearch!
     var localSearchResponse:MKLocalSearchResponse!
+    
+    var searchResults = [MKMapItem]()
+    var searchResultsTableView = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0), style: .Grouped)
     
     var locationManager: CLLocationManager? {
         didSet {
@@ -56,6 +59,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeSearchController()
+        initializeSearchResultsTable()
         awakeFromNib()
     }
     
@@ -64,10 +68,18 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.delegate = self
         searchController.dimsBackgroundDuringPresentation = false
-        
         searchController.delegate = self
         navigationItem.titleView = searchController.searchBar
         
+    }
+    
+    func initializeSearchResultsTable() {
+        searchResultsTableView.delegate = self
+        searchResultsTableView.dataSource = self
+        view.addSubview(searchResultsTableView)
+        searchResultsTableView.rowHeight = 60.0
+        searchResultsTableView.frame = CGRect(x: 0.0, y: 64.0, width: view.frame.width, height: view.frame.height - 64)
+        searchResultsTableView.hidden = true
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -177,67 +189,102 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
             }
             else {
                 let mapItem = localSearchResponse!.mapItems[0]
-                if mapItem.name != nil {
-                    print(mapItem.name!)
-                }
-                print(mapItem.placemark.coordinate)
-                if mapItem.placemark.addressDictionary != nil {
-                    let addressDictionary = mapItem.placemark.addressDictionary!
-                    if addressDictionary["FormattedAddressLines"] != nil {
-                        if let formattedAddressLines = addressDictionary["FormattedAddressLines"] as? [String] {
-                            for line in formattedAddressLines {
-                                print(line)
-                            }
-                        }
-                    }
-                }
+                self.searchResults.append(mapItem)
+                self.searchResultsTableView.reloadData()
             }
         }
-        
-//        //1
-//        searchBar.resignFirstResponder()
-//        dismissViewControllerAnimated(true, completion: nil)
-//        if self.mapView.annotations.count != 0{
-//            annotation = self.mapView.annotations[0]
-//            self.mapView.removeAnnotation(annotation)
-//        }
-//        //2
-//        localSearchRequest = MKLocalSearchRequest()
-//        localSearchRequest.naturalLanguageQuery = searchBar.text
-//        localSearch = MKLocalSearch(request: localSearchRequest)
-//        localSearch.startWithCompletionHandler { (localSearchResponse, error) -> Void in
-//            
-//            if localSearchResponse == nil{
-//                let alertController = UIAlertController(title: nil, message: "Place Not Found", preferredStyle: UIAlertControllerStyle.Alert)
-//                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-//                self.presentViewController(alertController, animated: true, completion: nil)
-//                return
-//            }
-//            //3
-//            self.pointAnnotation = MKPointAnnotation()
-//            self.pointAnnotation.title = searchBar.text
-//            self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: localSearchResponse!.boundingRegion.center.latitude, longitude:     localSearchResponse!.boundingRegion.center.longitude)
-//            
-//            
-//            self.pinAnnotationView = MKPinAnnotationView(annotation: self.pointAnnotation, reuseIdentifier: nil)
-//            self.mapView.centerCoordinate = self.pointAnnotation.coordinate
-//            self.mapView.addAnnotation(self.pinAnnotationView.annotation!)
-//        }
+    }
+    
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        searchResultsTableView.hidden = false
+        return true
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    }
+    
+    func addTableToSearchController() {
         
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        
+        searchResultsTableView.hidden = true
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchResultsTableView.hidden = true
+    }
+
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchResults.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        let mapItem = searchResults[indexPath.row]
+        
+        let mapItemNameLabel = UILabel(frame: CGRect(x: 10.0, y: 5.0, width: view.frame.width - 20.0, height: 22.0))
+        mapItemNameLabel.text = nameForMapItem(mapItem)
+        cell.addSubview(mapItemNameLabel)
+        
+        let mapItemAddressLabel = UILabel(frame: CGRect(x: 10.0, y: 27.0, width: view.frame.width - 20.0, height: 22.0))
+        mapItemAddressLabel.text = addressForMapItem(mapItem)
+        mapItemAddressLabel.textColor = UIColor.lightGrayColor()
+        mapItemAddressLabel.font = UIFont.italicSystemFontOfSize(13.0)
+        cell.addSubview(mapItemAddressLabel)
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        
+    func nameForMapItem(mapItem: MKMapItem) -> String {
+        if mapItem.name != nil {
+            return mapItem.name!
+        }
+        else {
+            return ""
+        }
     }
     
+    func addressForMapItem(mapItem: MKMapItem) -> String {
+        var address = ""
+        if mapItem.placemark.addressDictionary != nil {
+            let addressDictionary = mapItem.placemark.addressDictionary!
+            if addressDictionary["FormattedAddressLines"] != nil {
+                if let formattedAddressLines = addressDictionary["FormattedAddressLines"] as? [String] {
+                    for line in formattedAddressLines {
+                        print(line)
+                        address += line + " "
+                    }
+                }
+            }
+        }
+        return address
+    }
+    
+    func parseMapItem(mapItem: MKMapItem) {
+        if mapItem.name != nil {
+            print(mapItem.name!)
+        }
+        print(mapItem.placemark.coordinate)
+        if mapItem.placemark.addressDictionary != nil {
+            let addressDictionary = mapItem.placemark.addressDictionary!
+            if addressDictionary["FormattedAddressLines"] != nil {
+                if let formattedAddressLines = addressDictionary["FormattedAddressLines"] as? [String] {
+                    for line in formattedAddressLines {
+                        print(line)
+                    }
+                }
+            }
+        }
+    }
     
     
     
