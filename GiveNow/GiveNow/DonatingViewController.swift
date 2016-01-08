@@ -260,11 +260,17 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         var address = ""
         if mapItem.placemark.addressDictionary != nil {
             let addressDictionary = mapItem.placemark.addressDictionary!
-            if addressDictionary["FormattedAddressLines"] != nil {
-                if let formattedAddressLines = addressDictionary["FormattedAddressLines"] as? [String] {
-                    for line in formattedAddressLines {
-                        address += line + " "
-                    }
+            address = getAddressFromAddressDictionary(addressDictionary)
+        }
+        return address
+    }
+    
+    func getAddressFromAddressDictionary(addressDictionary: [NSObject: AnyObject]) -> String {
+        var address = ""
+        if addressDictionary["FormattedAddressLines"] != nil {
+            if let formattedAddressLines = addressDictionary["FormattedAddressLines"] as? [String] {
+                for line in formattedAddressLines {
+                    address += line + " "
                 }
             }
         }
@@ -295,11 +301,10 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
             else {
                 if placemarks != nil {
                     let placemark = placemarks![0]
-                    let addressDictionary = placemark.addressDictionary
-                    if addressDictionary != nil {
-                        if let street = addressDictionary!["Street"] as? String {
-                            self.searchController.searchBar.text = street
-                        }
+                    if placemark.addressDictionary != nil {
+                        let addressDictionary = placemark.addressDictionary!
+                        let address = self.getAddressFromAddressDictionary(addressDictionary)
+                        self.searchController.searchBar.text = address
                     }
                 }
             }
