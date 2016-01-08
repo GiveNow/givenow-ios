@@ -268,7 +268,7 @@ class Backend: NSObject {
     
     //MARK: Pickup Request
     
-    func savePickupRequest(donationCategories: [DonationCategory], address: String, location: PFGeoPoint, note: String, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+    func savePickupRequest(donationCategories: [DonationCategory], address: String, location: PFGeoPoint, note: String?, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
         guard let completionHandler = completionHandler else {
             return
         }
@@ -277,7 +277,12 @@ class Backend: NSObject {
         pickupRequest.donationCategories = donationCategories
         pickupRequest.address = address
         pickupRequest.location = location
-        pickupRequest.note = note
+        pickupRequest.isActive = true
+        pickupRequest.donor = User.currentUser()
+        
+        if note != nil {
+        pickupRequest.note = note!
+        }
         
         pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
             if let error = error {

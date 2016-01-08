@@ -74,5 +74,11 @@ class HomeViewController: BaseViewController {
     func loginStatusDidChange(notification : NSNotification) {
         updateLoginButton()
     }
+    
+    // MARK: - Segues
+    
+    @IBAction func pickupRequestCreated(segue: UIStoryboardSegue) {
+        
+    }
 
 }

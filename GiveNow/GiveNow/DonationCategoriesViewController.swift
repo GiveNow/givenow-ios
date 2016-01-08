@@ -13,7 +13,7 @@ import Parse
 private let reuseIdentifier = "donationCategory"
 private let backend = Backend.sharedInstance()
 
-class DonationCategoriesViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class DonationCategoriesViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var donationCategories:[DonationCategory]!
@@ -22,9 +22,11 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var pickupRequestAddressLabel: UILabel!
+    @IBOutlet weak var noteTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        noteTextField.delegate = self
         fetchDonationCategories()
         pickupRequestAddressLabel.text = address
     }
@@ -32,6 +34,11 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return false
     }
     
     // MARK: Getting data from Parse
@@ -86,11 +93,9 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         cell.categoryLabel.text = donationCategory.getName()
         
         if donationCategory.selected == true {
-            print("Highlighting cell")
             highlightCell(cell)
         }
         else {
-            print("Unhighlighting cell")
             unHighlightCell(cell)
         }
     }
@@ -117,7 +122,6 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print("Cell selected")
         
         let donationCategory = donationCategories[indexPath.row]
         
@@ -143,8 +147,24 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     //MARK: Completing selection
     
     @IBAction func giveNowButtonTapped(sender: AnyObject) {
+        savePickupRequest()
+    }
+    
+    func savePickupRequest() {
         let selectedDonationCategories = donationCategories.filter() {$0.selected == true}
-        print(selectedDonationCategories)
+        let latitude = location.latitude
+        let longitude = location.longitude
+        let pfLocation = PFGeoPoint(latitude: latitude, longitude: longitude)
+        let note = noteTextField.text
+        backend.savePickupRequest(selectedDonationCategories, address: address, location: pfLocation, note: note, completionHandler: { (result, error) -> Void in
+            if error != nil {
+                print(error)
+            }
+            else {
+                print(result)
+                self.performSegueWithIdentifier("pickupRequestCompleted", sender: nil)
+            }
+        })
     }
     
 

@@ -138,14 +138,30 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9d-3G-8Oc">
+                                        <rect key="frame" x="20" y="120" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b3x-AK-RwX" userLabel="noteTextField">
+                                        <rect key="frame" x="93" y="116" width="487" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.72549021244049072" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="fXK-zM-pEn" firstAttribute="centerY" secondItem="Z3Q-88-9yq" secondAttribute="centerY" id="14P-gG-gMk"/>
                                     <constraint firstItem="Z3Q-88-9yq" firstAttribute="leading" secondItem="ofB-37-sWl" secondAttribute="leading" constant="20" id="4xI-vq-5Rh"/>
                                     <constraint firstItem="fXK-zM-pEn" firstAttribute="leading" secondItem="Z3Q-88-9yq" secondAttribute="trailing" constant="5" id="LcN-NB-6Ua"/>
+                                    <constraint firstItem="b3x-AK-RwX" firstAttribute="centerY" secondItem="K9d-3G-8Oc" secondAttribute="centerY" id="MyI-6R-m28"/>
                                     <constraint firstAttribute="trailing" secondItem="fXK-zM-pEn" secondAttribute="trailing" constant="10" id="P54-78-VGm"/>
+                                    <constraint firstItem="b3x-AK-RwX" firstAttribute="leading" secondItem="fXK-zM-pEn" secondAttribute="leading" id="SDU-tQ-acY"/>
+                                    <constraint firstItem="K9d-3G-8Oc" firstAttribute="leading" secondItem="ofB-37-sWl" secondAttribute="leading" constant="20" id="WZW-NU-oY8"/>
+                                    <constraint firstItem="K9d-3G-8Oc" firstAttribute="top" secondItem="Z3Q-88-9yq" secondAttribute="bottom" constant="10" id="YEe-LA-Swu"/>
                                     <constraint firstAttribute="height" constant="200" id="up0-vK-8LD"/>
+                                    <constraint firstAttribute="trailing" secondItem="b3x-AK-RwX" secondAttribute="trailing" constant="20" id="vEE-as-KTs"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ohA-ph-S3Q">
@@ -228,10 +244,13 @@
                     <connections>
                         <outlet property="addressLabel" destination="Z3Q-88-9yq" id="pG6-z1-LoM"/>
                         <outlet property="collectionView" destination="ohA-ph-S3Q" id="wM4-J1-pC1"/>
+                        <outlet property="noteTextField" destination="b3x-AK-RwX" id="ktJ-GC-JXq"/>
                         <outlet property="pickupRequestAddressLabel" destination="fXK-zM-pEn" id="hwc-XN-ixS"/>
+                        <segue destination="Kip-pf-66s" kind="unwind" identifier="pickupRequestCompleted" unwindAction="pickupRequestCreated:" id="1aw-K1-qXI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qha-Wb-W79" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Kip-pf-66s" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1100" y="242"/>
         </scene>
