@@ -20,11 +20,12 @@ public enum SystemPermissionStatus : Int {
     case Denied
 }
 
-class DonatingViewController: BaseViewController {
+class DonatingViewController: BaseViewController, MKMapViewDelegate {
 
     @IBOutlet var headingContainerView: UIView?
     @IBOutlet var pickupLocationButton: UIButton?
     @IBOutlet var mapView: MKMapView?
+    @IBOutlet weak var locationTextField: UITextField!
     
     var locationManager: CLLocationManager? {
         didSet {
@@ -130,11 +131,48 @@ class DonatingViewController: BaseViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "selectCategories" {
             let location = mapView?.centerCoordinate
-            let address = "Test"
+            var address:String!
+            if locationTextField.text != nil {
+                address = locationTextField.text!
+            }
+            else {
+                address = ""
+            }
             let destinationController = segue.destinationViewController as! DonationCategoriesViewController
             destinationController.location = location
             destinationController.address = address
         }
+    }
+    
+    // MARK: - Geocoding
+    
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        setAddressFromCoordinates()
+    }
+    
+    
+    func setAddressFromCoordinates() {
+        let geocoder = CLGeocoder()
+        let coordinates = mapView?.centerCoordinate
+        let latitude = coordinates!.latitude
+        let longitude = coordinates!.longitude
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        geocoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
+            if error != nil {
+                print(error)
+            }
+            else {
+                if placemarks != nil {
+                    let placemark = placemarks![0]
+                    let addressDictionary = placemark.addressDictionary
+                    if addressDictionary != nil {
+                        if let street = addressDictionary!["Street"] as? String {
+                            self.locationTextField.text = street
+                        }
+                    }
+                }
+            }
+        })
     }
     
     
