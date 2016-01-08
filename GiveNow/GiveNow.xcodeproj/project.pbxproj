@@ -62,6 +62,7 @@
 		D2186FB51C3CC632001551EF /* PickupRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */; };
 		D2186FB71C3CE917001551EF /* PickupDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FB61C3CE917001551EF /* PickupDonationViewController.swift */; };
 		D2186FBF1C3F2965001551EF /* DonationCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FBE1C3F2965001551EF /* DonationCategoriesViewController.swift */; };
+		D2186FC11C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FC01C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift */; };
 		D28A88CF1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -227,6 +228,7 @@
 		D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupRequestTableViewCell.swift; sourceTree = "<group>"; };
 		D2186FB61C3CE917001551EF /* PickupDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupDonationViewController.swift; sourceTree = "<group>"; };
 		D2186FBE1C3F2965001551EF /* DonationCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationCategoriesViewController.swift; sourceTree = "<group>"; };
+		D2186FC01C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringModalLoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -397,6 +399,7 @@
 				D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */,
 				D2186FB61C3CE917001551EF /* PickupDonationViewController.swift */,
 				D2186FBE1C3F2965001551EF /* DonationCategoriesViewController.swift */,
+				D2186FC01C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -681,6 +684,7 @@
 				26FE37231C23B80500BED9A0 /* Donation.swift in Sources */,
 				26FE370F1C2297B600BED9A0 /* TestLogInViewController.swift in Sources */,
 				26FE372B1C23B97400BED9A0 /* Volunteer.swift in Sources */,
+				D2186FC11C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift in Sources */,
 				2645C6A21C21F38E00D6C70D /* BaseNavigationController.swift in Sources */,
 				267BF1F61C2801CA00A76425 /* PickupViewController.swift in Sources */,
 				2645C66A1C21E7FF00D6C70D /* AppDelegate.swift in Sources */,

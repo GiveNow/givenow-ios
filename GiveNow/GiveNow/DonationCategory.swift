@@ -21,6 +21,21 @@ class DonationCategory : PFObject, PFSubclassing {
 	class func parseClassName() -> String {
 		return "DonationCategory"
 	}
+    
+    func getName() -> String? {
+        let preferredLanguage = NSLocale.preferredLanguages()[0]
+        if preferredLanguage == "en-US" {
+            return self.name_en
+        }
+        else if preferredLanguage == "de" {
+            return self.name_de
+        }
+        else {
+            print(preferredLanguage)
+            return nil
+        }
+    }
+    
 
 	// MARK: Parse Keys
 

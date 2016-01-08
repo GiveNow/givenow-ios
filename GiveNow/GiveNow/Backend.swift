@@ -18,6 +18,7 @@ import libPhoneNumber_iOS
 
 public typealias BackendFunctionCompletionHandler = (Bool, NSError?) -> Void
 public typealias BackendQueryCompletionHandler = ([PFObject]?, NSError?) -> Void
+public typealias BackendImageDownloadCompletionHandler = (UIImage?, NSError?) -> Void
 
 let LoginStatusDidChangeNotification = "LoginStatusDidChangeNotification"
 
@@ -126,6 +127,26 @@ class Backend: NSObject {
                 print("Did not get any results")
             }
         })
+    }
+    
+    func getImageForDonationCategory(donationCategory: DonationCategory, completionHandler: BackendImageDownloadCompletionHandler?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        if donationCategory.image != nil {
+            donationCategory.image?.getDataInBackgroundWithBlock({(data, error) -> Void in
+                if error != nil {
+                    completionHandler(nil, error)
+                }
+                else if data != nil {
+                    let image = UIImage(data: data!)
+                    completionHandler(image, nil)
+                }
+                else {
+                    completionHandler(nil, nil)
+                }
+            })
+        }
     }
     
     

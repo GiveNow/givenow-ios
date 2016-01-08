@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Parse
 
 private let reuseIdentifier = "donationCategory"
 private let backend = Backend.sharedInstance()
@@ -29,9 +30,9 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        
-        // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+//        
+//        // Register cell classes
+//        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         // Do any additional setup after loading the view.
     }
@@ -62,7 +63,6 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         return 1
     }
     
-    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if donationCategories != nil {
             return donationCategories.count
@@ -73,12 +73,39 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
-        
-        // Configure the cell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DonationCategoryCollectionViewCell
+        let donationCategory = donationCategories[indexPath.row]
+        configureDonationCategoryCell(cell, donationCategory: donationCategory)
         
         return cell
     }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        //Assuming a margin of 10.0, and three columns
+        let dimension = (view.frame.width - 40) / 3
+        let size = CGSize(width: dimension, height: dimension)
+        return size
+    }
+    
+    func configureDonationCategoryCell(cell: DonationCategoryCollectionViewCell, donationCategory: DonationCategory) {
+        
+        addImageToCell(cell, donationCategory: donationCategory)
+        cell.categoryLabel.text = donationCategory.getName()
+
+    }
+    
+    func addImageToCell(cell: DonationCategoryCollectionViewCell, donationCategory: DonationCategory) {
+        backend.getImageForDonationCategory(donationCategory, completionHandler: {(image, error) -> Void in
+            if image != nil {
+                cell.categoryImage.image = image
+            }
+            else if error != nil {
+                print(error)
+            }
+        })
+    }
+    
     
     // MARK: UICollectionViewDelegate
     
