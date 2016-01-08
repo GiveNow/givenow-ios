@@ -56,4 +56,8 @@ class DonationCategory : PFObject, PFSubclassing {
 	@NSManaged var name_de: String?
 	@NSManaged var description_de: String?
 	@NSManaged var name_en: String?
+    
+    // MARK: Custom properties
+    // Doing this as a workaround; could not get the collectionview cell selection to work
+    var selected:Bool?
 }

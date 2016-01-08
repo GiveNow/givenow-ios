@@ -27,14 +27,6 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         super.viewDidLoad()
         fetchDonationCategories()
         pickupRequestAddressLabel.text = address
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-//        
-//        // Register cell classes
-//        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,7 +84,15 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         
         addImageToCell(cell, donationCategory: donationCategory)
         cell.categoryLabel.text = donationCategory.getName()
-
+        
+        if donationCategory.selected == true {
+            print("Highlighting cell")
+            highlightCell(cell)
+        }
+        else {
+            print("Unhighlighting cell")
+            unHighlightCell(cell)
+        }
     }
     
     func addImageToCell(cell: DonationCategoryCollectionViewCell, donationCategory: DonationCategory) {
@@ -106,37 +106,46 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         })
     }
     
+    //MARK: Selecting cells
     
-    // MARK: UICollectionViewDelegate
-    
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-    return true
-    }
-    */
-    
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-    return true
-    }
-    */
-    
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-    return false
+    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
     }
     
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-    return false
+    func collectionView(collectionView: UICollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
     }
     
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print("Cell selected")
+        
+        let donationCategory = donationCategories[indexPath.row]
+        
+        if donationCategory.selected == nil || donationCategory.selected == false {
+            donationCategory.selected = true
+        }
+        else {
+            donationCategory.selected = false
+        }
+        collectionView.reloadItemsAtIndexPaths([indexPath])
     }
-    */
+    
+    func highlightCell(cell: DonationCategoryCollectionViewCell) {
+        cell.categoryLabel.backgroundColor = UIColor.colorAccent()
+        cell.categoryLabel.textColor = UIColor.whiteColor()
+    }
+    
+    func unHighlightCell(cell: DonationCategoryCollectionViewCell) {
+        cell.categoryLabel.backgroundColor = UIColor.lightGrayColor()
+        cell.categoryLabel.textColor = UIColor.colorPrimaryDark()
+    }
+    
+    //MARK: Completing selection
+    
+    @IBAction func giveNowButtonTapped(sender: AnyObject) {
+        let selectedDonationCategories = donationCategories.filter() {$0.selected == true}
+        print(selectedDonationCategories)
+    }
     
 
 }

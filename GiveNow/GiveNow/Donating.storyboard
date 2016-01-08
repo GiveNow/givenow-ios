@@ -119,6 +119,9 @@
                                 <state key="normal" title="Give Now">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="giveNowButtonTapped:" destination="xqe-tM-5xe" eventType="touchUpInside" id="5RK-fA-YED"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofB-37-sWl">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
