@@ -22,10 +22,9 @@ public enum SystemPermissionStatus : Int {
 
 class DonatingViewController: BaseViewController, MKMapViewDelegate {
 
-    @IBOutlet var headingContainerView: UIView?
     @IBOutlet var pickupLocationButton: UIButton?
     @IBOutlet var mapView: MKMapView?
-    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var locationSearchBar: UISearchBar!
     
     var locationManager: CLLocationManager? {
         didSet {
@@ -46,7 +45,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        headingContainerView?.backgroundColor = ColorPalette().Heading
         pickupLocationButton?.backgroundColor = ColorPalette().Confirmation
         pickupLocationButton?.setTitleColor(.whiteColor(), forState: .Normal)
     }
@@ -132,8 +130,8 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate {
         if segue.identifier == "selectCategories" {
             let location = mapView?.centerCoordinate
             var address:String!
-            if locationTextField.text != nil {
-                address = locationTextField.text!
+            if locationSearchBar.text != nil {
+                address = locationSearchBar.text!
             }
             else {
                 address = ""
@@ -167,7 +165,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate {
                     let addressDictionary = placemark.addressDictionary
                     if addressDictionary != nil {
                         if let street = addressDictionary!["Street"] as? String {
-                            self.locationTextField.text = street
+                            self.locationSearchBar.text = street
                         }
                     }
                 }
