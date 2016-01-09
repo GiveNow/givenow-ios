@@ -169,7 +169,12 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         searchResults = [MKMapItem]()
-        searchMapView(searchText)
+        if searchText == "" {
+            self.searchResultsTableView.reloadData()
+        }
+        else {
+            searchMapView(searchText)
+        }
     }
     
     func searchMapView(searchText: String) {
@@ -190,8 +195,8 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                 for mapItem in localSearchResponse!.mapItems {
                     self.searchResults.append(mapItem)
                 }
-                self.searchResultsTableView.reloadData()
             }
+            self.searchResultsTableView.reloadData()
         }
 
     }
