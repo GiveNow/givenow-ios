@@ -203,10 +203,15 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchResultsTableView.hidden = true
+        setAddressFromCoordinates()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchResultsTableView.hidden = true
+        if searchResults.count > 0 {
+            let mapItem = searchResults[0]
+            centerMapOnMapItem(mapItem)
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
