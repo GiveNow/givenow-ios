@@ -24,6 +24,8 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
 
     @IBOutlet var pickupLocationButton: UIButton?
     @IBOutlet var mapView: MKMapView?
+
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     var searchController:UISearchController!
     
@@ -57,7 +59,16 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         super.viewDidLoad()
         initializeSearchController()
         initializeSearchResultsTable()
+        initializeMenuButton()
         awakeFromNib()
+    }
+    
+    func initializeMenuButton() {
+        if self.revealViewController() != nil {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
     }
     
     func initializeSearchController() {
