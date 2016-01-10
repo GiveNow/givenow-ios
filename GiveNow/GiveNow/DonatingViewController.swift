@@ -25,6 +25,8 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     @IBOutlet var pickupLocationButton: UIButton?
     @IBOutlet var mapView: MKMapView?
     
+    var shouldUpdateSearchBarWithMapCenter = false
+    
     var searchController:UISearchController!
     
     var searchResults = [MKMapItem]()
@@ -100,7 +102,9 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                     let longitudeInMeters : CLLocationDistance = 30000
                     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
                     
-                    self.mapView?.setRegion(coordinateRegion, animated: animated)
+                    self.mapView?.setRegion(coordinateRegion, animated: true)
+                    self.shouldUpdateSearchBarWithMapCenter = true
+                    print("This is here")
                 }
                 else {
                     print("Location is not valid")
@@ -241,7 +245,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let mapItem = searchResults[indexPath.row]
-        searchController.searchBar.text = addressForMapItem(mapItem)
+        searchController.searchBar.text = nameForMapItem(mapItem)
         searchResultsTableView.hidden = true
         searchController.dismissViewControllerAnimated(true, completion: {() -> Void in
             self.centerMapOnMapItem(mapItem)
@@ -254,8 +258,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         let newRegion = MKCoordinateRegion(center: newCenter, span: currentRegion.span)
         mapView!.setRegion(newRegion, animated: true)
     }
-    
-    
     
     func nameForMapItem(mapItem: MKMapItem) -> String {
         if mapItem.name != nil {
@@ -295,7 +297,9 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     // MARK: - Geocoding
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        setAddressFromCoordinates()
+        if shouldUpdateSearchBarWithMapCenter == true {
+            setAddressFromCoordinates()
+        }
     }
     
     func setAddressFromCoordinates() {
@@ -311,11 +315,14 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
             else {
                 if placemarks != nil {
                     let placemark = placemarks![0]
-                    if placemark.addressDictionary != nil {
-                        let addressDictionary = placemark.addressDictionary!
-                        let address = self.getAddressFromAddressDictionary(addressDictionary)
-                        self.searchController.searchBar.text = address
+                    if placemark.name != nil {
+                        self.searchController.searchBar.text = placemark.name!
                     }
+//                    if placemark.addressDictionary != nil {
+//                        let addressDictionary = placemark.addressDictionary!
+//                        let address = self.getAddressFromAddressDictionary(addressDictionary)
+//                        self.searchController.searchBar.text = address
+//                    }
                 }
             }
         })
