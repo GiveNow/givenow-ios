@@ -164,15 +164,13 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
         let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let placeMark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placeMark)
+        
         mapItem.name = "Donation Location"
         let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
         
         mapItem.openInMapsWithLaunchOptions(launchOptions)
         
-        
     }
-    
-    
     
 
 }
