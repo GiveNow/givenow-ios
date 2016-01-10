@@ -33,9 +33,6 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrc-g2-vaz">
                                 <rect key="frame" x="256" y="173" width="87" height="30"/>
                                 <state key="normal" title="Onboarding"/>
-                                <connections>
-                                    <segue destination="ecX-Pv-I9H" kind="show" id="DbI-ST-l1Q"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anl-EG-1gk">
                                 <rect key="frame" x="256" y="211" width="87" height="30"/>
@@ -44,9 +41,6 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwc-j6-v2N">
                                 <rect key="frame" x="256" y="249" width="87" height="30"/>
                                 <state key="normal" title="Volunteering"/>
-                                <connections>
-                                    <segue destination="NyQ-uJ-cMG" kind="show" id="JbK-nu-7pi"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zod-kL-5fu">
                                 <rect key="frame" x="262" y="319" width="75" height="30"/>
@@ -65,9 +59,6 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vbo-9e-I2U">
                                 <rect key="frame" x="212" y="395" width="177" height="30"/>
                                 <state key="normal" title="Volunteer Pickup Request"/>
-                                <connections>
-                                    <segue destination="YrF-Q7-mZi" kind="show" id="OVA-u6-X2f"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -213,37 +204,45 @@
             </objects>
             <point key="canvasLocation" x="1753" y="1181"/>
         </scene>
-        <!--Onboarding-->
+        <!--Onboard-->
         <scene sceneID="t3K-1I-9VK">
             <objects>
-                <viewControllerPlaceholder storyboardName="Onboarding" id="ecX-Pv-I9H" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Onboard" id="ecX-Pv-I9H" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWJ-fd-FLG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2201.5" y="357"/>
+            <point key="canvasLocation" x="1560.5" y="-249"/>
         </scene>
-        <!--Donating-->
+        <!--Donate-->
         <scene sceneID="5fc-KP-c2h">
             <objects>
-                <viewControllerPlaceholder storyboardName="Donating" id="t8l-FU-hPT" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Donate" id="t8l-FU-hPT" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QEs-2T-yD3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="817.5" y="184"/>
+            <point key="canvasLocation" x="773" y="423"/>
         </scene>
-        <!--Volunteering-->
+        <!--Apply-->
         <scene sceneID="3WX-2e-Hfe">
             <objects>
-                <viewControllerPlaceholder storyboardName="Volunteering" id="NyQ-uJ-cMG" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Apply" id="NyQ-uJ-cMG" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XPj-Vq-pNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2205" y="458"/>
+            <point key="canvasLocation" x="1552" y="-147"/>
         </scene>
-        <!--Pickup-->
+        <!--Dashboard-->
         <scene sceneID="AlK-rx-7Qq">
             <objects>
-                <viewControllerPlaceholder storyboardName="Pickup" id="YrF-Q7-mZi" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Dashboard" id="YrF-Q7-mZi" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SwN-kY-LDK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2187" y="515"/>
+            <point key="canvasLocation" x="1540" y="-55"/>
+        </scene>
+        <!--Donate-->
+        <scene sceneID="5GY-L9-P3T">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Donate" id="40P-58-ULY" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IzB-qx-LY0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1540" y="-348"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="szF-3H-X8w">
@@ -267,10 +266,10 @@
             </objects>
             <point key="canvasLocation" x="263" y="329"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Nav Menu Table View Controller-->
         <scene sceneID="n0H-50-vvO">
             <objects>
-                <tableViewController id="b2Q-EZ-7JF" sceneMemberID="viewController">
+                <tableViewController id="b2Q-EZ-7JF" customClass="NavMenuTableViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="C3t-kd-IGe">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -290,28 +289,52 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Section-2" id="KW8-h2-gaS" userLabel="Actions">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="J7O-z5-8UR">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="giveNow" id="J7O-z5-8UR">
                                         <rect key="frame" x="0.0" y="100" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J7O-z5-8UR" id="HVI-Rc-QmO">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Give Now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewN-fH-SAj">
+                                                    <rect key="frame" x="15" y="11" width="73" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="N1N-AK-Mt2">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="volunteer" id="N1N-AK-Mt2">
                                         <rect key="frame" x="0.0" y="144" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N1N-AK-Mt2" id="VY7-7v-68s">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Volunteer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L2O-JE-2Tm">
+                                                    <rect key="frame" x="17" y="11" width="74" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KJM-dx-VUx">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dropOff" id="KJM-dx-VUx">
                                         <rect key="frame" x="0.0" y="188" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KJM-dx-VUx" id="DrK-ll-Bx7">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Drop Off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xU-XE-3zD">
+                                                    <rect key="frame" x="14" y="11" width="67" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -334,10 +357,16 @@
                             <outlet property="delegate" destination="b2Q-EZ-7JF" id="cOO-r4-9UU"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="40P-58-ULY" kind="custom" identifier="donate" customClass="SWRevealViewControllerSeguePushController" id="wVK-vk-thp"/>
+                        <segue destination="ecX-Pv-I9H" kind="custom" identifier="onboard" customClass="SWRevealViewControllerSeguePushController" id="TQL-rY-YQ3"/>
+                        <segue destination="NyQ-uJ-cMG" kind="custom" identifier="apply" customClass="SWRevealViewControllerSeguePushController" id="dPu-u8-4XA"/>
+                        <segue destination="YrF-Q7-mZi" kind="custom" identifier="dashboard" customClass="SWRevealViewControllerSeguePushController" id="Ng0-Bl-Ktj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J9r-4h-ASM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1063" y="-543"/>
+            <point key="canvasLocation" x="1021" y="-201"/>
         </scene>
         <!--Base Navigation Controller-->
         <scene sceneID="xWp-6H-dfU">
