@@ -66,11 +66,16 @@ class TestLogInViewController: BaseViewController {
         }
     }
     
+    
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: {})
+    }
+    
     // MARK: - Notifications
     
     func loginStatusDidChange(notification : NSNotification) {
         if AppState.sharedInstance().isUserRegistered {
-            self.performSegueWithIdentifier("ReturnHomeSegue", sender: self)
+            self.performSegueWithIdentifier("logInCompleted", sender: self)
         }
     }
 

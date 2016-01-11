@@ -62,9 +62,12 @@
                             <constraint firstItem="BEI-Bz-9pS" firstAttribute="leading" secondItem="i5W-uJ-7Wh" secondAttribute="leading" constant="20" id="p5l-MQ-T8c"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Volunteering" id="9bd-sy-waa"/>
+                    <navigationItem key="navigationItem" title="Volunteering" id="9bd-sy-waa">
+                        <barButtonItem key="leftBarButtonItem" title="Nav" id="c3I-bt-XmB"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="menuButton" destination="c3I-bt-XmB" id="Ouc-1m-qlC"/>
                         <outlet property="volunteerButton" destination="BEI-Bz-9pS" id="oof-cA-EfZ"/>
                         <outlet property="volunteeringTitleLabel" destination="Rj9-A3-xS7" id="n68-uF-Ybn"/>
                         <segue destination="BRa-77-Bv4" kind="presentation" identifier="logIn" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Dc0-Zh-cgW"/>

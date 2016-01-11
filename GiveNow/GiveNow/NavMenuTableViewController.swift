@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Parse
 
 class NavMenuTableViewController: UITableViewController {
 
+    @IBOutlet weak var nameLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        configureProfileCell()
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +38,29 @@ class NavMenuTableViewController: UITableViewController {
         }
     }
     
+//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        let cell = UITableViewCell()
+//        if indexPath.section == 0 {
+//            configureProfileCell(cell)
+//        }
+//        return cell
+//    }
+    
+    func configureProfileCell() {
+        if User.currentUser() != nil {
+            let user = User.currentUser()!
+            if user.name != nil {
+                nameLabel.text = user.name!
+            }
+            else {
+                nameLabel.text = "Unknown User"
+            }
+        }
+        else {
+            nameLabel.text = "Not logged in"
+        }
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)!
         if cell.reuseIdentifier != nil {
@@ -42,24 +68,29 @@ class NavMenuTableViewController: UITableViewController {
             case "giveNow":
                 performSegueWithIdentifier("donate", sender: nil)
             case "volunteer":
-                performSegueWithIdentifier("dashboard", sender: nil)
-//            case "dropOff":
-//                performSegueWithIdentifier("dropOff", sender: nil)
+                volunteerTapped()
+            case "dropOff":
+                print("No action yet")
+            case "logIn":
+                performSegueWithIdentifier("logIn", sender: nil)
             default:
                 print("No action")
             }
         }
     }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    
+    func volunteerTapped() {
+        if AppState.sharedInstance().isUserRegistered {
+            performSegueWithIdentifier("dashboard", sender: nil)
+        }
+        else {
+            performSegueWithIdentifier("apply", sender: nil)
+        }
     }
-    */
+    
+    @IBAction func loginCompleted(segue: UIStoryboardSegue) {
+        tableView.reloadData()
+    }
 
     /*
     // Override to support conditional editing of the table view.
