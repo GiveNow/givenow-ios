@@ -13,6 +13,8 @@ class NavMenuTableViewController: UITableViewController {
 
     @IBOutlet weak var nameLabel: UILabel!
     
+    let backend = Backend.sharedInstance()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureProfileCell()
@@ -81,7 +83,15 @@ class NavMenuTableViewController: UITableViewController {
     
     func volunteerTapped() {
         if AppState.sharedInstance().isUserRegistered {
-            performSegueWithIdentifier("dashboard", sender: nil)
+            let user = User.currentUser()!
+            backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, error) -> Void in
+                if volunteer != nil && volunteer?.isApproved == true {
+                    self.performSegueWithIdentifier("dashboard", sender: nil)
+                }
+                else {
+                    self.performSegueWithIdentifier("apply", sender: nil)
+                }
+            })
         }
         else {
             performSegueWithIdentifier("apply", sender: nil)
