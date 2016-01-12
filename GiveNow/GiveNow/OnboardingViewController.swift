@@ -60,6 +60,8 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loginCompleted:", name: "loginCompleted", object: nil)
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
@@ -94,6 +96,10 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     }
     
     @IBAction func addAPhoneNumberLater(sender: AnyObject) {
+        performSegueWithIdentifier("onboardingCompleted", sender: nil)
+    }
+    
+    func loginCompleted(notification: NSNotification) {
         performSegueWithIdentifier("onboardingCompleted", sender: nil)
     }
     
@@ -229,6 +235,7 @@ class SignUpCollectionViewCell : UICollectionViewCell {
             }
             else {
                 print("Done!")
+                NSNotificationCenter.defaultCenter().postNotificationName("loginCompleted", object: nil)
             }
         })
     }
