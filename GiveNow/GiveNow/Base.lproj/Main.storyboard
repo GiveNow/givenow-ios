@@ -6,91 +6,6 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Give Now-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Profile and Navigation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Agp-7i-bT7">
-                                <rect key="frame" x="196" y="84" width="208" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Quick &amp; Dirty Implementation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etm-uf-rbx">
-                                <rect key="frame" x="188" y="112" width="225" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrc-g2-vaz">
-                                <rect key="frame" x="256" y="173" width="87" height="30"/>
-                                <state key="normal" title="Onboarding"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anl-EG-1gk">
-                                <rect key="frame" x="256" y="211" width="87" height="30"/>
-                                <state key="normal" title="Donating"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwc-j6-v2N">
-                                <rect key="frame" x="256" y="249" width="87" height="30"/>
-                                <state key="normal" title="Volunteering"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zod-kL-5fu">
-                                <rect key="frame" x="262" y="319" width="75" height="30"/>
-                                <state key="normal" title="Test Log In"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qk2-pd-tJN">
-                                <rect key="frame" x="272" y="357" width="55" height="30"/>
-                                <state key="normal" title="Log Out"/>
-                                <connections>
-                                    <action selector="logOutButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OAb-Ku-eEY"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vbo-9e-I2U">
-                                <rect key="frame" x="212" y="395" width="177" height="30"/>
-                                <state key="normal" title="Volunteer Pickup Request"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="qk2-pd-tJN" firstAttribute="top" secondItem="Zod-kL-5fu" secondAttribute="bottom" constant="8" id="3aF-e0-JaD"/>
-                            <constraint firstItem="Lrc-g2-vaz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4VM-qH-4Dm"/>
-                            <constraint firstItem="qk2-pd-tJN" firstAttribute="centerX" secondItem="Zod-kL-5fu" secondAttribute="centerX" id="5TQ-tX-8bQ"/>
-                            <constraint firstItem="anl-EG-1gk" firstAttribute="centerX" secondItem="Lrc-g2-vaz" secondAttribute="centerX" id="6F4-oI-CnH"/>
-                            <constraint firstItem="Agp-7i-bT7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GT4-8F-ub5"/>
-                            <constraint firstItem="anl-EG-1gk" firstAttribute="top" secondItem="Lrc-g2-vaz" secondAttribute="bottom" constant="8" id="Je3-yV-zI1"/>
-                            <constraint firstItem="Zod-kL-5fu" firstAttribute="top" secondItem="bwc-j6-v2N" secondAttribute="bottom" constant="40" id="Lxw-TZ-X6X"/>
-                            <constraint firstItem="bwc-j6-v2N" firstAttribute="top" secondItem="anl-EG-1gk" secondAttribute="bottom" constant="8" id="TAB-n4-YgZ"/>
-                            <constraint firstItem="Vbo-9e-I2U" firstAttribute="top" secondItem="qk2-pd-tJN" secondAttribute="bottom" constant="8" id="b9S-Xt-hua"/>
-                            <constraint firstItem="bwc-j6-v2N" firstAttribute="width" secondItem="Lrc-g2-vaz" secondAttribute="width" id="bOb-qI-8K6"/>
-                            <constraint firstItem="Vbo-9e-I2U" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eXR-2l-uLJ"/>
-                            <constraint firstItem="anl-EG-1gk" firstAttribute="width" secondItem="Lrc-g2-vaz" secondAttribute="width" id="eYk-R1-0Bp"/>
-                            <constraint firstItem="etm-uf-rbx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ejN-or-PFU"/>
-                            <constraint firstItem="bwc-j6-v2N" firstAttribute="centerX" secondItem="Lrc-g2-vaz" secondAttribute="centerX" id="i3Y-Qk-xB5"/>
-                            <constraint firstItem="Lrc-g2-vaz" firstAttribute="top" secondItem="etm-uf-rbx" secondAttribute="bottom" constant="40" id="lRl-43-2Sa"/>
-                            <constraint firstItem="etm-uf-rbx" firstAttribute="top" secondItem="Agp-7i-bT7" secondAttribute="bottom" constant="8" id="llf-iC-9bD"/>
-                            <constraint firstItem="Zod-kL-5fu" firstAttribute="centerX" secondItem="bwc-j6-v2N" secondAttribute="centerX" id="nKE-hq-5Ir"/>
-                            <constraint firstItem="Agp-7i-bT7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="qzD-V6-6Ar"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Give Now" id="Bw1-8P-qI6">
-                        <barButtonItem key="backBarButtonItem" title=" " id="KjW-IO-D1B"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="logOutButton" destination="qk2-pd-tJN" id="bK6-VX-zJM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1672" y="1241"/>
-        </scene>
         <!--Test Log In-->
         <scene sceneID="RUn-Oo-exn">
             <objects>
@@ -399,24 +314,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J9r-4h-ASM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1021" y="-201"/>
-        </scene>
-        <!--Base Navigation Controller-->
-        <scene sceneID="xWp-6H-dfU">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e3f-Jn-9PU" customClass="BaseNavigationController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AN0-vN-iVd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="aGD-Qy-mvi"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MJg-W1-vHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="945" y="1241"/>
         </scene>
     </scenes>
 </document>

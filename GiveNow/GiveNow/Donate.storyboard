@@ -21,6 +21,14 @@
             </objects>
             <point key="canvasLocation" x="-408" y="242"/>
         </scene>
+        <!--Onboard-->
+        <scene sceneID="OqA-Ct-DgT">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Onboard" id="LLB-g6-5J0" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8EB-Dw-AeK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="842.5" y="-164"/>
+        </scene>
         <!--Donating-->
         <scene sceneID="8uE-QJ-E4D">
             <objects>
@@ -80,6 +88,7 @@
                         <outlet property="pickupLocationButton" destination="aCv-dI-Tpw" id="QjL-be-NBs"/>
                         <outlet property="searchDisplayController" destination="DiB-u8-tzc" id="2VU-Df-w1e"/>
                         <segue destination="xqe-tM-5xe" kind="show" identifier="selectCategories" id="vSF-G5-EV9"/>
+                        <segue destination="LLB-g6-5J0" kind="presentation" identifier="onboarding" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="ZI4-p8-pjk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IT0-QH-Vbg" userLabel="First Responder" sceneMemberID="firstResponder"/>
