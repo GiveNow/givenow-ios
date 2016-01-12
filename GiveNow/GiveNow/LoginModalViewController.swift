@@ -22,5 +22,8 @@ class LoginModalViewController: UIViewController {
     }
     
     
+    @IBAction func backgroundTapped(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: {})
+    }
 
 }

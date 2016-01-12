@@ -82,11 +82,8 @@ class VolunteeringViewController: BaseViewController {
         //Display modal login dialogue
         loginModalViewController.modalPresentationStyle = .OverFullScreen
         loginModalViewController.modalTransitionStyle = .CrossDissolve
+        
         presentViewController(loginModalViewController, animated: true, completion: {})
-        
-        
-//        performSegueWithIdentifier("logIn", sender: nil)
-        
     }
     
     func updateViewAfterCreatingVolunteer() {
