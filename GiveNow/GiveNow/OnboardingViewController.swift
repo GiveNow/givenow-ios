@@ -85,7 +85,6 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SignInCell", forIndexPath: indexPath) as! SignUpCollectionViewCell
             cell.backgroundColor = Colors.SignInColor
-            cell.entryMode = .PhoneNumber
             return cell
         }
     }
@@ -143,6 +142,18 @@ class SignUpCollectionViewCell : UICollectionViewCell {
         }
     }
     
+    override func awakeFromNib() {
+        formatButton(backButton, imageName: "arrow-back")
+        formatButton(doneButton, imageName: "checkmark")
+        entryMode = .PhoneNumber
+        super.awakeFromNib()
+    }
+    
+    func formatButton(button: UIButton, imageName: String){
+        button.setImage(UIImage(named: imageName)!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        button.tintColor = UIColor.whiteColor()
+    }
+    
     func updateViewForEntryMode(entryMode: EntryMode) {
         guard let instructionsLabel = instructionsLabel,
             let textField = textField,
@@ -172,5 +183,56 @@ class SignUpCollectionViewCell : UICollectionViewCell {
             print("No action")
         }
     }
+    
+    @IBAction func doneButtonTapped(sender: AnyObject) {
+        guard let entryText = textField?.text else {
+            assert(false, "Entry text is required")
+            return
+        }
+        
+        if entryMode == .PhoneNumber {
+            sendPhoneNumber(entryText)
+        }
+        else if entryMode == .ConfirmationCode {
+            if let phoneNumber = self.phoneNumber {
+                logInWithPhoneNumber(phoneNumber, codeEntry: entryText)
+            }
+            else {
+                assert(false, "Phone number should always be defined")
+            }
+        }
+    }
+    
+    @IBAction func backButtonTapped(sender: AnyObject) {
+        entryMode = .PhoneNumber
+        textField.text = phoneNumber
+    }
+    
+    private func sendPhoneNumber(phoneNumber: String) {
+        backend.sendCodeToPhoneNumber(phoneNumber, completionHandler: { (success, error) -> Void in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                // hold onto the phone number to use when logging in
+                self.phoneNumber = phoneNumber
+                self.textField.placeholder = "5555"
+                self.entryMode = .ConfirmationCode
+            }
+        })
+    }
+    
+    private func logInWithPhoneNumber(phoneNumber: String, codeEntry: String) {
+        backend.logInWithPhoneNumber(phoneNumber, codeEntry: codeEntry, completionHandler: { (success, error) -> Void in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                print("Done!")
+            }
+        })
+    }
+    
+    
     
 }

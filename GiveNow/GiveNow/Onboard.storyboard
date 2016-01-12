@@ -103,6 +103,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="240" id="7YX-Z9-lMG"/>
                                                     </constraints>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
                                                 </textField>
@@ -155,6 +156,9 @@
                                                         <constraint firstAttribute="width" constant="40" id="sfu-bq-LTi"/>
                                                     </constraints>
                                                     <state key="normal" image="arrow-back"/>
+                                                    <connections>
+                                                        <action selector="backButtonTapped:" destination="gec-W2-18Q" eventType="touchUpInside" id="GgP-2E-yT8"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbv-ms-fHr">
                                                     <rect key="frame" x="430" y="237" width="40" height="40"/>
@@ -163,6 +167,9 @@
                                                         <constraint firstAttribute="height" constant="40" id="qsB-8z-6pa"/>
                                                     </constraints>
                                                     <state key="normal" image="checkmark"/>
+                                                    <connections>
+                                                        <action selector="doneButtonTapped:" destination="gec-W2-18Q" eventType="touchUpInside" id="hGu-j6-Pui"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

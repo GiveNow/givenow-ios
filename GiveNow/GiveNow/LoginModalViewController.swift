@@ -82,8 +82,6 @@ class LoginModalViewController: UIViewController {
                 assert(false, "Phone number should always be defined")
             }
         }
-        
-        
     }
     
     @IBAction func backButtonTapped(sender: AnyObject) {
