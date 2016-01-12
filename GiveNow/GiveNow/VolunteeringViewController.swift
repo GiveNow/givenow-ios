@@ -13,11 +13,13 @@ import Parse
 // See https://github.com/GiveNow/givenow-ios/issues/7
 // See https://github.com/GiveNow/givenow-ios/issues/8
 
-class VolunteeringViewController: BaseViewController {
+class VolunteeringViewController: BaseViewController, LoginModalViewControllerDelegate {
     
-    @IBOutlet weak var volunteeringTitleLabel: UILabel?
-    @IBOutlet weak var volunteerButton: UIButton?
+    @IBOutlet weak var volunteeringTitleLabel: UILabel!
+    @IBOutlet weak var volunteerButton: UIButton!
     @IBOutlet weak var menuButton: UIBarButtonItem!
+    
+    let backend = Backend.sharedInstance()
     
     // MARK: - Nib setup
     let loginModalViewController = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
@@ -27,7 +29,7 @@ class VolunteeringViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeMenuButton()
-        initializeLabels()
+        checkPendingVolunteer()
     }
     
     func initializeMenuButton() {
@@ -53,18 +55,13 @@ class VolunteeringViewController: BaseViewController {
         // do nothing
     }
     
-    @IBAction func successfulLogin(segue: UIStoryboardSegue) {
+    func successfulLogin(controller: LoginModalViewController) {
         createVolunteer()
     }
 
     // MARK: - Private
     
-    func initializeLabels() {
-        volunteeringTitleLabel?.text = NSLocalizedString("Volunteering - Title Label", comment: "")
-        volunteerButton?.setTitle(NSLocalizedString("Volunteering - Title Button", comment: ""), forState: .Normal)
-    }
-    
-    func createVolunteer() {
+    private func createVolunteer() {
         if let user = User.currentUser() {
             Backend.sharedInstance().saveVolunteer(user, completionHandler: { (volunteer, error) -> Void in
                 if let error = error {
@@ -72,21 +69,22 @@ class VolunteeringViewController: BaseViewController {
                 }
                 else {
                     // after successful submission
-                    self.updateViewAfterCreatingVolunteer()
+                    self.updateViewForPendingVolunteer()
                 }
             })
         }
     }
     
-    func promptUserToLogIn() {
+    private func promptUserToLogIn() {
         //Display modal login dialogue
         loginModalViewController.modalPresentationStyle = .OverFullScreen
         loginModalViewController.modalTransitionStyle = .CrossDissolve
+        loginModalViewController.delegate = self
         
         presentViewController(loginModalViewController, animated: true, completion: {})
     }
     
-    func updateViewAfterCreatingVolunteer() {
+    private func updateViewForPendingVolunteer() {
         // replace {PhoneNumber} with actual number
         var titleText = NSLocalizedString("Volunteering - Thanks Label", comment: "")
         
@@ -100,9 +98,37 @@ class VolunteeringViewController: BaseViewController {
             titleText = titleText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: defaultText)
         }
         
-        volunteeringTitleLabel?.text = titleText
+        volunteeringTitleLabel.text = titleText
         volunteerButton?.setTitle(NSLocalizedString("Volunteering - Thanks Button", comment: ""), forState: .Normal)
         volunteerButton?.backgroundColor = UIColor.lightGrayColor()
+        volunteerButton.hidden = false
+    }
+    
+    private func checkPendingVolunteer() {
+        volunteeringTitleLabel.text = ""
+        volunteerButton.hidden = true
+        volunteerButton.setTitle("", forState: .Normal)
+        if AppState.sharedInstance().isUserRegistered {
+            let user = User.currentUser()!
+            backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, user) -> Void in
+                if volunteer != nil && volunteer!.isApproved == false {
+                    self.updateViewForPendingVolunteer()
+                }
+                else {
+                    self.updateViewForApplicant()
+                }
+            })
+        }
+        else {
+            self.updateViewForApplicant()
+        }
+    }
+    
+    private func updateViewForApplicant() {
+        
+        volunteeringTitleLabel.text = NSLocalizedString("Volunteering - Title Label", comment: "")
+        volunteerButton.setTitle(NSLocalizedString("Volunteering - Title Button", comment: ""), forState: .Normal)
+        volunteerButton.hidden = false
     }
 
 }

@@ -36,7 +36,7 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BhC-3Q-ACa" userLabel="modalForm">
-                    <rect key="frame" x="50" y="50" width="500" height="280"/>
+                    <rect key="frame" x="50" y="80" width="500" height="250"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="instructionsLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mji-Sv-9Km">
                             <rect key="frame" x="20" y="20" width="460" height="21"/>
@@ -50,8 +50,8 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+1 555 444 3333" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P11-Jj-eYs" userLabel="textField">
-                            <rect key="frame" x="60" y="236" width="380" height="24"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+1 555 444 3333" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P11-Jj-eYs" userLabel="textField">
+                            <rect key="frame" x="60" y="206" width="380" height="24"/>
                             <color key="backgroundColor" red="0.40000000600000002" green="0.73333334920000004" blue="0.41568627949999998" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="T6n-20-PQe"/>
@@ -61,14 +61,14 @@
                             <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nck-rT-bgv" userLabel="bottomBorderView">
-                            <rect key="frame" x="60" y="258" width="380" height="2"/>
+                            <rect key="frame" x="60" y="228" width="380" height="2"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="2" id="Jvv-La-Boh"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPc-Vp-c4h" userLabel="backButton">
-                            <rect key="frame" x="10" y="228" width="40" height="40"/>
+                            <rect key="frame" x="10" y="198" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="WvX-zn-IPD"/>
                                 <constraint firstAttribute="height" constant="40" id="aDX-Cv-kJ7"/>
@@ -79,7 +79,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lue-cS-qMz" userLabel="doneButton">
-                            <rect key="frame" x="450" y="228" width="40" height="40"/>
+                            <rect key="frame" x="450" y="198" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="8e5-Cr-MR3"/>
                                 <constraint firstAttribute="width" constant="40" id="Gp6-Dv-glr"/>
@@ -134,7 +134,7 @@
                 <constraint firstAttribute="bottom" secondItem="iyv-jx-uX3" secondAttribute="bottom" id="Whi-WG-X2d"/>
                 <constraint firstAttribute="trailing" secondItem="aiI-Sj-3Hx" secondAttribute="trailing" id="Wpo-Rc-RYE"/>
                 <constraint firstItem="iyv-jx-uX3" firstAttribute="top" secondItem="aiI-Sj-3Hx" secondAttribute="bottom" id="bh6-mT-9Ow"/>
-                <constraint firstItem="BhC-3Q-ACa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="oZg-HL-vpB"/>
+                <constraint firstItem="BhC-3Q-ACa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="oZg-HL-vpB"/>
                 <constraint firstItem="iyv-jx-uX3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xuT-Iy-dvB"/>
                 <constraint firstAttribute="trailing" secondItem="BhC-3Q-ACa" secondAttribute="trailing" constant="50" id="zwu-Fe-sb1"/>
             </constraints>

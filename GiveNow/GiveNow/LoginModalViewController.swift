@@ -14,7 +14,13 @@ public enum EntryMode : Int {
     case ConfirmationCode
 }
 
+protocol LoginModalViewControllerDelegate{
+    func successfulLogin(controller:LoginModalViewController)
+}
+
 class LoginModalViewController: UIViewController {
+    
+    var delegate:LoginModalViewControllerDelegate!
 
     @IBOutlet weak var instructionsLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
@@ -68,11 +74,21 @@ class LoginModalViewController: UIViewController {
         if entryMode == .PhoneNumber {
             sendPhoneNumber(entryText)
         }
+        else if entryMode == .ConfirmationCode {
+            if let phoneNumber = self.phoneNumber {
+                logInWithPhoneNumber(phoneNumber, codeEntry: entryText)
+            }
+            else {
+                assert(false, "Phone number should always be defined")
+            }
+        }
         
         
     }
     
     @IBAction func backButtonTapped(sender: AnyObject) {
+        entryMode = .PhoneNumber
+        textField.text = phoneNumber
     }
     
     
@@ -116,7 +132,21 @@ class LoginModalViewController: UIViewController {
             else {
                 // hold onto the phone number to use when logging in
                 self.phoneNumber = phoneNumber
+                self.textField.placeholder = "5555"
                 self.entryMode = .ConfirmationCode
+            }
+        })
+    }
+    
+    private func logInWithPhoneNumber(phoneNumber: String, codeEntry: String) {
+        backend.logInWithPhoneNumber(phoneNumber, codeEntry: codeEntry, completionHandler: { (success, error) -> Void in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                self.dismissViewControllerAnimated(true, completion: {() -> Void in
+                    self.delegate.successfulLogin(self)
+                })
             }
         })
     }

@@ -67,7 +67,6 @@
 		D2186FD11C431EA9001551EF /* DashboardTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FD01C431EA9001551EF /* DashboardTabViewController.swift */; };
 		D23BBF511C457F1B00E68AF9 /* LoginModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF4F1C457F1B00E68AF9 /* LoginModalViewController.swift */; };
 		D23BBF521C457F1B00E68AF9 /* LoginModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF501C457F1B00E68AF9 /* LoginModalViewController.xib */; };
-		D28A88CF1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,7 +237,6 @@
 		D2186FD01C431EA9001551EF /* DashboardTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTabViewController.swift; sourceTree = "<group>"; };
 		D23BBF4F1C457F1B00E68AF9 /* LoginModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModalViewController.swift; sourceTree = "<group>"; };
 		D23BBF501C457F1B00E68AF9 /* LoginModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginModalViewController.xib; sourceTree = "<group>"; };
-		D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringModalLoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -493,7 +491,6 @@
 			children = (
 				2645C69B1C21F34400D6C70D /* Apply.storyboard */,
 				2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */,
-				D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */,
 			);
 			name = Apply;
 			sourceTree = "<group>";
@@ -731,7 +728,6 @@
 			files = (
 				D2186FBF1C3F2965001551EF /* DonationCategoriesViewController.swift in Sources */,
 				D2186FB11C3CC3FC001551EF /* MyDashboardTableViewController.swift in Sources */,
-				D28A88CF1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift in Sources */,
 				D2186FB51C3CC632001551EF /* PickupRequestTableViewCell.swift in Sources */,
 				D2186FD11C431EA9001551EF /* DashboardTabViewController.swift in Sources */,
 				2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */,
