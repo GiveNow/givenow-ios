@@ -72,7 +72,6 @@
                         <outlet property="menuButton" destination="c3I-bt-XmB" id="Ouc-1m-qlC"/>
                         <outlet property="volunteerButton" destination="BEI-Bz-9pS" id="oof-cA-EfZ"/>
                         <outlet property="volunteeringTitleLabel" destination="Rj9-A3-xS7" id="n68-uF-Ybn"/>
-                        <segue destination="BRa-77-Bv4" kind="presentation" identifier="logIn" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Dc0-Zh-cgW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jps-8A-NTp" userLabel="First Responder" sceneMemberID="firstResponder"/>

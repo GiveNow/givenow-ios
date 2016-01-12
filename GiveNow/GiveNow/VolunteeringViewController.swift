@@ -19,6 +19,9 @@ class VolunteeringViewController: BaseViewController {
     @IBOutlet weak var volunteerButton: UIButton?
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
+    // MARK: - Nib setup
+    let loginModalViewController = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
+    
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -77,7 +80,13 @@ class VolunteeringViewController: BaseViewController {
     
     func promptUserToLogIn() {
         //Display modal login dialogue
-        performSegueWithIdentifier("logIn", sender: nil)
+        loginModalViewController.modalPresentationStyle = .OverFullScreen
+        loginModalViewController.modalTransitionStyle = .CrossDissolve
+        presentViewController(loginModalViewController, animated: true, completion: {})
+        
+        
+//        performSegueWithIdentifier("logIn", sender: nil)
+        
     }
     
     func updateViewAfterCreatingVolunteer() {

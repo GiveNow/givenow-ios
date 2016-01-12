@@ -65,6 +65,8 @@
 		D2186FCD1C41F4C8001551EF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2186FCC1C41F4C8001551EF /* SWRevealViewController.m */; };
 		D2186FCF1C431A78001551EF /* NavMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FCE1C431A78001551EF /* NavMenuTableViewController.swift */; };
 		D2186FD11C431EA9001551EF /* DashboardTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FD01C431EA9001551EF /* DashboardTabViewController.swift */; };
+		D23BBF511C457F1B00E68AF9 /* LoginModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF4F1C457F1B00E68AF9 /* LoginModalViewController.swift */; };
+		D23BBF521C457F1B00E68AF9 /* LoginModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF501C457F1B00E68AF9 /* LoginModalViewController.xib */; };
 		D28A88CF1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -234,6 +236,8 @@
 		D2186FCC1C41F4C8001551EF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		D2186FCE1C431A78001551EF /* NavMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavMenuTableViewController.swift; sourceTree = "<group>"; };
 		D2186FD01C431EA9001551EF /* DashboardTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTabViewController.swift; sourceTree = "<group>"; };
+		D23BBF4F1C457F1B00E68AF9 /* LoginModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModalViewController.swift; sourceTree = "<group>"; };
+		D23BBF501C457F1B00E68AF9 /* LoginModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginModalViewController.xib; sourceTree = "<group>"; };
 		D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringModalLoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -393,6 +397,8 @@
 			children = (
 				2645C6A11C21F38E00D6C70D /* BaseNavigationController.swift */,
 				2645C69F1C21F37A00D6C70D /* BaseViewController.swift */,
+				D23BBF4F1C457F1B00E68AF9 /* LoginModalViewController.swift */,
+				D23BBF501C457F1B00E68AF9 /* LoginModalViewController.xib */,
 			);
 			name = "Shared View Controllers";
 			sourceTree = "<group>";
@@ -486,8 +492,8 @@
 			isa = PBXGroup;
 			children = (
 				2645C69B1C21F34400D6C70D /* Apply.storyboard */,
-				D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */,
 				2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */,
+				D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */,
 			);
 			name = Apply;
 			sourceTree = "<group>";
@@ -680,6 +686,7 @@
 				26FE37171C22A58900BED9A0 /* Localizable.strings in Resources */,
 				2645C69A1C21F33900D6C70D /* Donate.storyboard in Resources */,
 				267BF1F21C28019900A76425 /* Dashboard.storyboard in Resources */,
+				D23BBF521C457F1B00E68AF9 /* LoginModalViewController.xib in Resources */,
 				2645C6981C21F32300D6C70D /* Onboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -733,6 +740,7 @@
 				2607466C1C2622B30022E0ED /* Keys.swift in Sources */,
 				2645C6AF1C21F80000D6C70D /* AppState.swift in Sources */,
 				260746271C23D87D0022E0ED /* User.swift in Sources */,
+				D23BBF511C457F1B00E68AF9 /* LoginModalViewController.swift in Sources */,
 				2645C6A61C21F3BD00D6C70D /* OnboardingViewController.swift in Sources */,
 				C72296321C228E550097A662 /* ColorPalette.swift in Sources */,
 				260746261C23D87D0022E0ED /* DropOffAgency.swift in Sources */,
