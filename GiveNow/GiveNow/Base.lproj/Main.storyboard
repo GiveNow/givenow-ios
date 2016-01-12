@@ -376,6 +376,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="logInLabel" destination="L3N-ay-xxQ" id="cch-G8-TLD"/>
                         <outlet property="nameLabel" destination="JBa-cS-Cx0" id="zgu-0a-4Cg"/>
                         <outlet property="usernameLabel" destination="bBh-uW-Jvu" id="Fvj-JL-xMx"/>
                         <segue destination="40P-58-ULY" kind="custom" identifier="donate" customClass="SWRevealViewControllerSeguePushController" id="wVK-vk-thp"/>

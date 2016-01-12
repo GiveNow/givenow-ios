@@ -13,11 +13,13 @@ class NavMenuTableViewController: UITableViewController {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var logInLabel: UILabel!
     
     let backend = Backend.sharedInstance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureLoginLabel()
         configureProfileCell()
     }
 
@@ -68,6 +70,15 @@ class NavMenuTableViewController: UITableViewController {
         }
     }
     
+    func configureLoginLabel() {
+        if AppState.sharedInstance().isUserRegistered {
+            logInLabel.text = "Log out"
+        }
+        else {
+            logInLabel.text = "Log in"
+        }
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)!
         if cell.reuseIdentifier != nil {
@@ -79,10 +90,21 @@ class NavMenuTableViewController: UITableViewController {
             case "dropOff":
                 print("No action yet")
             case "logIn":
-                performSegueWithIdentifier("logIn", sender: nil)
+                logInOutTapped()
             default:
                 print("No action")
             }
+        }
+    }
+    
+    func logInOutTapped() {
+        if AppState.sharedInstance().isUserRegistered {
+            User.logOut()
+            configureProfileCell()
+            configureLoginLabel()
+        }
+        else {
+            performSegueWithIdentifier("logIn", sender: nil)
         }
     }
     
@@ -104,6 +126,7 @@ class NavMenuTableViewController: UITableViewController {
     }
     
     @IBAction func loginCompleted(segue: UIStoryboardSegue) {
+        configureLoginLabel()
         configureProfileCell()
     }
 
