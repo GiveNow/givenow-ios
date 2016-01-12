@@ -60,9 +60,6 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.navigationController?.setNavigationBarHidden(true, animated: true)
-
-        // Do any additional setup after loading the view.
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
@@ -86,8 +83,9 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
             
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SignInCell", forIndexPath: indexPath)
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SignInCell", forIndexPath: indexPath) as! SignUpCollectionViewCell
             cell.backgroundColor = Colors.SignInColor
+            cell.entryMode = .PhoneNumber
             return cell
         }
     }
@@ -113,4 +111,66 @@ class OnboardingCollectionViewCell : UICollectionViewCell {
     @IBOutlet weak var mainLabel : UILabel?
     @IBOutlet weak var detailsLabel : UILabel?
     @IBOutlet weak var imageView : UIImageView?
+}
+
+// MARK: Log in
+//Duplicating functionality from modal login - would be good to reuse more of this
+class SignUpCollectionViewCell : UICollectionViewCell {
+    
+   
+    @IBOutlet weak var instructionsLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var orLabel: UILabel!
+    @IBOutlet weak var addPhoneLaterButton: UIButton!
+    
+    var phoneNumber:String!
+    let backend = Backend.sharedInstance()
+    
+    private var _entryMode : EntryMode = .None
+    
+    var entryMode : EntryMode {
+        get {
+            return _entryMode
+        }
+        set {
+            if newValue != _entryMode {
+                _entryMode = newValue
+                self.updateViewForEntryMode(_entryMode)
+            }
+        }
+    }
+    
+    func updateViewForEntryMode(entryMode: EntryMode) {
+        guard let instructionsLabel = instructionsLabel,
+            let textField = textField,
+            let detailLabel = detailLabel,
+            let backButton = backButton
+            else {
+                assert(false, "Outlets are required")
+        }
+        
+        switch entryMode {
+        case .PhoneNumber:
+            if let countryCallingCode = backend.phoneCountryCodeForPhoneNumberCurrentLocale() {
+                textField.text = "+\(countryCallingCode)"
+            }
+            else {
+                textField.text = nil
+            }
+            instructionsLabel.text = NSLocalizedString("Volunteering - Phone Number Modal Title", comment: "")
+            detailLabel.text = NSLocalizedString("Volunteering - Phone Number Modal Details", comment: "")
+            backButton.hidden = true
+        case .ConfirmationCode:
+            textField.text = nil
+            instructionsLabel.text = NSLocalizedString("Volunteering - Confirmation Number Modal Title", comment: "")
+            detailLabel.text = NSLocalizedString("Volunteering - Confirmation Number Modal Details", comment: "")
+            backButton.hidden = false
+        default:
+            print("No action")
+        }
+    }
+    
 }
