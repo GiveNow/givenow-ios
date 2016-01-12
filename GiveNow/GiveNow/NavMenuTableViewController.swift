@@ -12,6 +12,7 @@ import Parse
 class NavMenuTableViewController: UITableViewController {
 
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     let backend = Backend.sharedInstance()
     
@@ -40,26 +41,21 @@ class NavMenuTableViewController: UITableViewController {
         }
     }
     
-//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell = UITableViewCell()
-//        if indexPath.section == 0 {
-//            configureProfileCell(cell)
-//        }
-//        return cell
-//    }
-    
     func configureProfileCell() {
-        if User.currentUser() != nil {
+        if AppState.sharedInstance().isUserRegistered {
             let user = User.currentUser()!
             if user.name != nil {
                 nameLabel.text = user.name!
+                usernameLabel.text = user.username!
             }
             else {
                 nameLabel.text = "Unknown User"
+                usernameLabel.text = ""
             }
         }
         else {
             nameLabel.text = "Not logged in"
+            usernameLabel.text = ""
         }
     }
     
@@ -99,7 +95,7 @@ class NavMenuTableViewController: UITableViewController {
     }
     
     @IBAction func loginCompleted(segue: UIStoryboardSegue) {
-        tableView.reloadData()
+        configureProfileCell()
     }
 
     /*
