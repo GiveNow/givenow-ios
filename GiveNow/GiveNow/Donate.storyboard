@@ -79,7 +79,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Donating" id="Tvw-Ie-FQz">
-                        <barButtonItem key="leftBarButtonItem" title="Nav" id="jhn-mN-Qmk" userLabel="menuButton"/>
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="jhn-mN-Qmk" userLabel="menuButton">
+                            <color key="tintColor" red="0.043137254899999998" green="0.043137254899999998" blue="0.043137254899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -263,5 +265,6 @@
     </scenes>
     <resources>
         <image name="location_pin" width="30" height="55"/>
+        <image name="menu" width="24" height="24"/>
     </resources>
 </document>
