@@ -21,10 +21,10 @@
             </objects>
             <point key="canvasLocation" x="1" y="393"/>
         </scene>
-        <!--View Controller-->
+        <!--Drop Off View Controller-->
         <scene sceneID="6ir-sj-FGv">
             <objects>
-                <viewController id="TS0-yR-z4y" sceneMemberID="viewController">
+                <viewController id="TS0-yR-z4y" customClass="DropOffViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Mqp-av-CpG"/>
                         <viewControllerLayoutGuide type="bottom" id="cyR-ar-Is9"/>
@@ -34,11 +34,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="2ml-ub-2M9"/>
+                    <navigationItem key="navigationItem" id="2ml-ub-2M9">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="F10-s1-UjP" userLabel="menuButton">
+                            <color key="tintColor" red="0.043137254899999998" green="0.043137254899999998" blue="0.043137254899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="F10-s1-UjP" id="zqd-WP-dFx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yAC-as-3Ue" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="702" y="393"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="menu" width="24" height="24"/>
+    </resources>
 </document>

@@ -67,6 +67,7 @@
 		D23BBF511C457F1B00E68AF9 /* LoginModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF4F1C457F1B00E68AF9 /* LoginModalViewController.swift */; };
 		D23BBF521C457F1B00E68AF9 /* LoginModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF501C457F1B00E68AF9 /* LoginModalViewController.xib */; };
 		D23BBF591C45C4B900E68AF9 /* DropOff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */; };
+		D23BBF5D1C45C65700E68AF9 /* DropOffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -237,6 +238,7 @@
 		D23BBF4F1C457F1B00E68AF9 /* LoginModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModalViewController.swift; sourceTree = "<group>"; };
 		D23BBF501C457F1B00E68AF9 /* LoginModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginModalViewController.xib; sourceTree = "<group>"; };
 		D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DropOff.storyboard; sourceTree = "<group>"; };
+		D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropOffViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -508,6 +510,7 @@
 			isa = PBXGroup;
 			children = (
 				D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */,
+				D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */,
 			);
 			name = DropOff;
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 				D2186FB51C3CC632001551EF /* PickupRequestTableViewCell.swift in Sources */,
 				D2186FD11C431EA9001551EF /* DashboardTabViewController.swift in Sources */,
 				2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */,
+				D23BBF5D1C45C65700E68AF9 /* DropOffViewController.swift in Sources */,
 				D2186FCD1C41F4C8001551EF /* SWRevealViewController.m in Sources */,
 				2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */,
 				2607466C1C2622B30022E0ED /* Keys.swift in Sources */,
