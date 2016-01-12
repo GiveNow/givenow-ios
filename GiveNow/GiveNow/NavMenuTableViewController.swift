@@ -9,11 +9,14 @@
 import UIKit
 import Parse
 
-class NavMenuTableViewController: UITableViewController {
+class NavMenuTableViewController: UITableViewController, LoginModalViewControllerDelegate {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var logInLabel: UILabel!
+    
+    // MARK: - Nib setup
+    let loginModalViewController = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
     
     let backend = Backend.sharedInstance()
     
@@ -75,7 +78,7 @@ class NavMenuTableViewController: UITableViewController {
             logInLabel.text = "Log out"
         }
         else {
-            logInLabel.text = "Log in"
+            logInLabel.text = "Add phone number"
         }
     }
     
@@ -104,7 +107,11 @@ class NavMenuTableViewController: UITableViewController {
             configureLoginLabel()
         }
         else {
-            performSegueWithIdentifier("logIn", sender: nil)
+            loginModalViewController.modalPresentationStyle = .OverFullScreen
+            loginModalViewController.modalTransitionStyle = .CrossDissolve
+            loginModalViewController.delegate = self
+            
+            presentViewController(loginModalViewController, animated: true, completion: {})
         }
     }
     
@@ -125,18 +132,16 @@ class NavMenuTableViewController: UITableViewController {
         }
     }
     
+    func successfulLogin(controller: LoginModalViewController) {
+        configureLoginLabel()
+        configureProfileCell()
+    }
+    
     @IBAction func loginCompleted(segue: UIStoryboardSegue) {
         configureLoginLabel()
         configureProfileCell()
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
 
     /*
     // Override to support editing the table view.

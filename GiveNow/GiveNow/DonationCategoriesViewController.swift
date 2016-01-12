@@ -13,7 +13,7 @@ import Parse
 private let reuseIdentifier = "donationCategory"
 private let backend = Backend.sharedInstance()
 
-class DonationCategoriesViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UITextFieldDelegate {
+class DonationCategoriesViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UITextFieldDelegate, LoginModalViewControllerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var donationCategories:[DonationCategory]!
@@ -23,6 +23,9 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var pickupRequestAddressLabel: UILabel!
     @IBOutlet weak var noteTextField: UITextField!
+    
+    // MARK: - Nib setup
+    let loginModalViewController = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,7 +150,16 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     //MARK: Completing selection
     
     @IBAction func giveNowButtonTapped(sender: AnyObject) {
-        savePickupRequest()
+        if AppState.sharedInstance().isUserRegistered {
+            savePickupRequest()
+        }
+        else {
+            loginModalViewController.modalPresentationStyle = .OverFullScreen
+            loginModalViewController.modalTransitionStyle = .CrossDissolve
+            loginModalViewController.delegate = self
+            
+            presentViewController(loginModalViewController, animated: true, completion: {})
+        }
     }
     
     func savePickupRequest() {
@@ -161,11 +173,14 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
                 print(error)
             }
             else {
-                print(result)
-                self.performSegueWithIdentifier("pickupRequestCompleted", sender: nil)
+                print("Pickup request created")
+                // Need to implement new view showing this
             }
         })
     }
     
+    func successfulLogin(controller: LoginModalViewController) {
+        savePickupRequest()
+    }
 
 }
