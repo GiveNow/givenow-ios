@@ -23,7 +23,6 @@
 		2645C69C1C21F34400D6C70D /* Apply.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2645C69B1C21F34400D6C70D /* Apply.storyboard */; };
 		2645C6A01C21F37A00D6C70D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C69F1C21F37A00D6C70D /* BaseViewController.swift */; };
 		2645C6A21C21F38E00D6C70D /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A11C21F38E00D6C70D /* BaseNavigationController.swift */; };
-		2645C6A41C21F3A900D6C70D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A31C21F3A900D6C70D /* HomeViewController.swift */; };
 		2645C6A61C21F3BD00D6C70D /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A51C21F3BD00D6C70D /* OnboardingViewController.swift */; };
 		2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */; };
 		2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */; };
@@ -197,7 +196,6 @@
 		2645C69B1C21F34400D6C70D /* Apply.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Apply.storyboard; sourceTree = "<group>"; };
 		2645C69F1C21F37A00D6C70D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2645C6A11C21F38E00D6C70D /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
-		2645C6A31C21F3A900D6C70D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		2645C6A51C21F3BD00D6C70D /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonatingViewController.swift; sourceTree = "<group>"; };
 		2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringViewController.swift; sourceTree = "<group>"; };
@@ -341,13 +339,19 @@
 		2645C6681C21E7FF00D6C70D /* GiveNow */ = {
 			isa = PBXGroup;
 			children = (
+				D23BBF4E1C457C5500E68AF9 /* Onboard */,
+				D23BBF4D1C457C1B00E68AF9 /* Apply */,
+				D23BBF4C1C457BCF00E68AF9 /* Dashboard */,
+				D23BBF4B1C457B5C00E68AF9 /* Donate */,
+				D23BBF481C457B0E00E68AF9 /* Main */,
 				26FE37141C22A54700BED9A0 /* Localization */,
-				2645C69E1C21F36500D6C70D /* View Controllers */,
+				2645C69E1C21F36500D6C70D /* Shared View Controllers */,
 				2645C69D1C21F34900D6C70D /* Storyboards */,
 				2645C6AB1C21F3E100D6C70D /* Integrations */,
 				2607467A1C265B130022E0ED /* Mapbox */,
 				D207A3461C23B82400E93BEB /* Extensions.swift */,
 				260746201C23C8920022E0ED /* GiveNow-Bridging-Header.h */,
+				2645C6721C21E7FF00D6C70D /* LaunchScreen.storyboard */,
 				2645C6691C21E7FF00D6C70D /* AppDelegate.swift */,
 				2645C6701C21E7FF00D6C70D /* Assets.xcassets */,
 				C72296451C228F8F0097A662 /* Support */,
@@ -380,37 +384,17 @@
 		2645C69D1C21F34900D6C70D /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				267BF1F11C28019900A76425 /* Dashboard.storyboard */,
-				2645C6721C21E7FF00D6C70D /* LaunchScreen.storyboard */,
-				2645C66D1C21E7FF00D6C70D /* Main.storyboard */,
-				2645C6971C21F32300D6C70D /* Onboard.storyboard */,
-				2645C6991C21F33900D6C70D /* Donate.storyboard */,
-				2645C69B1C21F34400D6C70D /* Apply.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
-		2645C69E1C21F36500D6C70D /* View Controllers */ = {
+		2645C69E1C21F36500D6C70D /* Shared View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				2645C6A11C21F38E00D6C70D /* BaseNavigationController.swift */,
 				2645C69F1C21F37A00D6C70D /* BaseViewController.swift */,
-				2645C6A31C21F3A900D6C70D /* HomeViewController.swift */,
-				2645C6A51C21F3BD00D6C70D /* OnboardingViewController.swift */,
-				2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */,
-				2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */,
-				D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */,
-				26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */,
-				267BF1F51C2801CA00A76425 /* PickupViewController.swift */,
-				D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */,
-				D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */,
-				D2186FB61C3CE917001551EF /* PickupDonationViewController.swift */,
-				D2186FBE1C3F2965001551EF /* DonationCategoriesViewController.swift */,
-				D2186FC01C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift */,
-				D2186FCE1C431A78001551EF /* NavMenuTableViewController.swift */,
-				D2186FD01C431EA9001551EF /* DashboardTabViewController.swift */,
 			);
-			name = "View Controllers";
+			name = "Shared View Controllers";
 			sourceTree = "<group>";
 		};
 		2645C6AB1C21F3E100D6C70D /* Integrations */ = {
@@ -462,6 +446,59 @@
 				D2186FCC1C41F4C8001551EF /* SWRevealViewController.m */,
 			);
 			name = SWRevealViewController;
+			sourceTree = "<group>";
+		};
+		D23BBF481C457B0E00E68AF9 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2645C66D1C21E7FF00D6C70D /* Main.storyboard */,
+				D2186FCE1C431A78001551EF /* NavMenuTableViewController.swift */,
+				26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		D23BBF4B1C457B5C00E68AF9 /* Donate */ = {
+			isa = PBXGroup;
+			children = (
+				2645C6991C21F33900D6C70D /* Donate.storyboard */,
+				2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */,
+				D2186FBE1C3F2965001551EF /* DonationCategoriesViewController.swift */,
+				D2186FC01C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift */,
+			);
+			name = Donate;
+			sourceTree = "<group>";
+		};
+		D23BBF4C1C457BCF00E68AF9 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				267BF1F11C28019900A76425 /* Dashboard.storyboard */,
+				D2186FD01C431EA9001551EF /* DashboardTabViewController.swift */,
+				267BF1F51C2801CA00A76425 /* PickupViewController.swift */,
+				D2186FB61C3CE917001551EF /* PickupDonationViewController.swift */,
+				D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */,
+				D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */,
+			);
+			name = Dashboard;
+			sourceTree = "<group>";
+		};
+		D23BBF4D1C457C1B00E68AF9 /* Apply */ = {
+			isa = PBXGroup;
+			children = (
+				2645C69B1C21F34400D6C70D /* Apply.storyboard */,
+				D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */,
+				2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */,
+			);
+			name = Apply;
+			sourceTree = "<group>";
+		};
+		D23BBF4E1C457C5500E68AF9 /* Onboard */ = {
+			isa = PBXGroup;
+			children = (
+				2645C6971C21F32300D6C70D /* Onboard.storyboard */,
+				2645C6A51C21F3BD00D6C70D /* OnboardingViewController.swift */,
+			);
+			name = Onboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -692,7 +729,6 @@
 				D2186FD11C431EA9001551EF /* DashboardTabViewController.swift in Sources */,
 				2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */,
 				D2186FCD1C41F4C8001551EF /* SWRevealViewController.m in Sources */,
-				2645C6A41C21F3A900D6C70D /* HomeViewController.swift in Sources */,
 				2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */,
 				2607466C1C2622B30022E0ED /* Keys.swift in Sources */,
 				2645C6AF1C21F80000D6C70D /* AppState.swift in Sources */,
