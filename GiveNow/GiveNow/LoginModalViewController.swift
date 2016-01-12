@@ -24,6 +24,8 @@ class LoginModalViewController: UIViewController {
     
     private var _entryMode : EntryMode = .None
     
+    var phoneNumber:String!
+    
     let backend = Backend.sharedInstance()
     
     var entryMode : EntryMode {
@@ -54,14 +56,34 @@ class LoginModalViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: {})
     }
     
+    // MARK: User Actions
+    
+    
+    @IBAction func doneButtonTapped(sender: AnyObject) {
+        guard let entryText = textField?.text else {
+            assert(false, "Entry text is required")
+            return
+        }
+        
+        if entryMode == .PhoneNumber {
+            sendPhoneNumber(entryText)
+        }
+        
+        
+    }
+    
+    @IBAction func backButtonTapped(sender: AnyObject) {
+    }
+    
+    
     // MARK: Private
     
     private func updateViewForEntryMode(entryMode: EntryMode) {
         guard let instructionsLabel = instructionsLabel,
             let textField = textField,
             let detailLabel = detailLabel,
-            let backButton = backButton,
-            let doneButton = doneButton else {
+            let backButton = backButton
+            else {
                 assert(false, "Outlets are required")
         }
         
@@ -84,6 +106,19 @@ class LoginModalViewController: UIViewController {
         default:
             print("No action")
         }
+    }
+    
+    private func sendPhoneNumber(phoneNumber: String) {
+        backend.sendCodeToPhoneNumber(phoneNumber, completionHandler: { (success, error) -> Void in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                // hold onto the phone number to use when logging in
+                self.phoneNumber = phoneNumber
+                self.entryMode = .ConfirmationCode
+            }
+        })
     }
 
 }
