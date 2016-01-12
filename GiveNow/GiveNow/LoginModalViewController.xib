@@ -8,6 +8,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginModalViewController" customModule="GiveNow" customModuleProvider="target">
             <connections>
+                <outlet property="backButton" destination="gPc-Vp-c4h" id="K9B-Vm-RH6"/>
+                <outlet property="detailLabel" destination="h7P-sk-FHE" id="MOW-O1-73F"/>
+                <outlet property="doneButton" destination="Lue-cS-qMz" id="CMW-io-AFx"/>
+                <outlet property="instructionsLabel" destination="Mji-Sv-9Km" id="5Jv-lg-Ezq"/>
+                <outlet property="textField" destination="P11-Jj-eYs" id="8cG-XA-yzn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -45,7 +50,7 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+1 555 444 3333" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P11-Jj-eYs" userLabel="textField">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+1 555 444 3333" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P11-Jj-eYs" userLabel="textField">
                             <rect key="frame" x="60" y="236" width="380" height="24"/>
                             <color key="backgroundColor" red="0.40000000600000002" green="0.73333334920000004" blue="0.41568627949999998" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -62,19 +67,19 @@
                                 <constraint firstAttribute="height" constant="2" id="Jvv-La-Boh"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPc-Vp-c4h">
-                            <rect key="frame" x="20" y="233" width="30" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPc-Vp-c4h" userLabel="backButton">
+                            <rect key="frame" x="10" y="228" width="40" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="WvX-zn-IPD"/>
-                                <constraint firstAttribute="height" constant="30" id="aDX-Cv-kJ7"/>
+                                <constraint firstAttribute="width" constant="40" id="WvX-zn-IPD"/>
+                                <constraint firstAttribute="height" constant="40" id="aDX-Cv-kJ7"/>
                             </constraints>
                             <state key="normal" image="arrow-back"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lue-cS-qMz">
-                            <rect key="frame" x="450" y="233" width="30" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lue-cS-qMz" userLabel="doneButton">
+                            <rect key="frame" x="450" y="228" width="40" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="8e5-Cr-MR3"/>
-                                <constraint firstAttribute="width" constant="30" id="Gp6-Dv-glr"/>
+                                <constraint firstAttribute="height" constant="40" id="8e5-Cr-MR3"/>
+                                <constraint firstAttribute="width" constant="40" id="Gp6-Dv-glr"/>
                             </constraints>
                             <state key="normal" image="checkmark"/>
                         </button>
@@ -83,11 +88,11 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="h7P-sk-FHE" secondAttribute="trailing" constant="20" id="0er-EC-2QA"/>
                         <constraint firstItem="Mji-Sv-9Km" firstAttribute="leading" secondItem="BhC-3Q-ACa" secondAttribute="leading" constant="20" id="0fp-0e-0ke"/>
-                        <constraint firstItem="gPc-Vp-c4h" firstAttribute="leading" secondItem="BhC-3Q-ACa" secondAttribute="leading" constant="20" id="1K0-Hh-OoI"/>
+                        <constraint firstItem="gPc-Vp-c4h" firstAttribute="leading" secondItem="BhC-3Q-ACa" secondAttribute="leading" constant="10" id="1K0-Hh-OoI"/>
                         <constraint firstItem="gPc-Vp-c4h" firstAttribute="centerY" secondItem="P11-Jj-eYs" secondAttribute="centerY" id="45V-u3-b2s"/>
                         <constraint firstItem="P11-Jj-eYs" firstAttribute="leading" secondItem="BhC-3Q-ACa" secondAttribute="leading" constant="60" id="9wh-TB-dqw"/>
                         <constraint firstAttribute="trailing" secondItem="P11-Jj-eYs" secondAttribute="trailing" constant="60" id="BlZ-pj-veG"/>
-                        <constraint firstAttribute="trailing" secondItem="Lue-cS-qMz" secondAttribute="trailing" constant="20" id="L3i-qS-qBh"/>
+                        <constraint firstAttribute="trailing" secondItem="Lue-cS-qMz" secondAttribute="trailing" constant="10" id="L3i-qS-qBh"/>
                         <constraint firstItem="h7P-sk-FHE" firstAttribute="top" secondItem="Mji-Sv-9Km" secondAttribute="bottom" constant="20" id="QlZ-I0-Xhx"/>
                         <constraint firstItem="Mji-Sv-9Km" firstAttribute="top" secondItem="BhC-3Q-ACa" secondAttribute="top" constant="20" id="R6y-MN-yDl"/>
                         <constraint firstItem="Lue-cS-qMz" firstAttribute="centerY" secondItem="P11-Jj-eYs" secondAttribute="centerY" id="R7m-hh-ZZE"/>
@@ -97,9 +102,19 @@
                         <constraint firstItem="P11-Jj-eYs" firstAttribute="leading" secondItem="gPc-Vp-c4h" secondAttribute="trailing" constant="10" id="ePU-T7-dKY"/>
                         <constraint firstItem="nck-rT-bgv" firstAttribute="top" secondItem="P11-Jj-eYs" secondAttribute="bottom" constant="-2" id="iu1-Fj-A2d"/>
                         <constraint firstItem="Lue-cS-qMz" firstAttribute="leading" secondItem="P11-Jj-eYs" secondAttribute="trailing" constant="10" id="jmK-yn-wRU"/>
+                        <constraint firstItem="nck-rT-bgv" firstAttribute="width" secondItem="P11-Jj-eYs" secondAttribute="width" id="oQx-3b-Dyr"/>
+                        <constraint firstItem="nck-rT-bgv" firstAttribute="centerX" secondItem="P11-Jj-eYs" secondAttribute="centerX" id="qVb-QQ-Qzj"/>
                         <constraint firstAttribute="trailing" secondItem="nck-rT-bgv" secondAttribute="trailing" constant="60" id="qvr-4L-Fb4"/>
                         <constraint firstItem="h7P-sk-FHE" firstAttribute="leading" secondItem="BhC-3Q-ACa" secondAttribute="leading" constant="20" id="rKN-NY-UA4"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="9wh-TB-dqw"/>
+                            <exclude reference="BlZ-pj-veG"/>
+                            <exclude reference="ZFh-iB-oz4"/>
+                            <exclude reference="qvr-4L-Fb4"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
