@@ -24,6 +24,8 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
 
     @IBOutlet var pickupLocationButton: UIButton?
     @IBOutlet var mapView: MKMapView?
+
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     var shouldUpdateSearchBarWithMapCenter = false
     
@@ -57,9 +59,27 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        detectFirstLaunch()
         initializeSearchController()
         initializeSearchResultsTable()
+        initializeMenuButton()
         awakeFromNib()
+    }
+    
+    func detectFirstLaunch(){
+        let firstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
+        if !firstLaunch {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
+            performSegueWithIdentifier("onboarding", sender: nil)
+        }
+    }
+    
+    func initializeMenuButton() {
+        if self.revealViewController() != nil {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
     }
     
     func initializeSearchController() {
@@ -326,6 +346,9 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                 }
             }
         })
+    }
+    
+    @IBAction func onboardingCompleted(segue: UIStoryboardSegue) {
     }
     
     

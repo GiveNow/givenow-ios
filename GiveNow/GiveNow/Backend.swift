@@ -295,39 +295,6 @@ class Backend: NSObject {
 
     }
     
-//    func updatePickupRequest(pickupRequest: PickupRequest, pendingVolunteer: User?, confirmedVolunteer: User?, donation: Donation?, donationCategories: [DonationCategory]?, address: String?, location: PFGeoPoint?, note: String?, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
-//        guard let completionHandler = completionHandler else {
-//            return
-//        }
-//        
-//        let query = PFObject.query()!
-//        query.getObjectInBackgroundWithId(pickupRequest.objectId!) { (object, error) -> Void in
-//            if error != nil {
-//                completionHandler(nil, error)
-//            }
-//            else {
-//                if pendingVolunteer != nil { pickupRequest.pendingVolunteer = pendingVolunteer }
-//                if confirmedVolunteer != nil { pickupRequest.confirmedVolunteer = confirmedVolunteer }
-//                if donation != nil { pickupRequest.donation = donation }
-//                if donationCategories != nil { pickupRequest.donationCategories = donationCategories }
-//                if address != nil { pickupRequest.address = address }
-//                if location != nil { pickupRequest.location = location }
-//                if note != nil { pickupRequest.note = note }
-//                
-//                pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
-//                    if let error = error {
-//                        completionHandler(nil, error)
-//                    }
-//                    else {
-//                        completionHandler(pickupRequest, nil)
-//                    }
-//                })
-//                
-//                
-//            }
-//        }
-//    }
-    
     func claimOpenPickupRequest(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
         guard let completionHandler = completionHandler else {
             return

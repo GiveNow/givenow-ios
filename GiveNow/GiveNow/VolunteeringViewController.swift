@@ -17,13 +17,22 @@ class VolunteeringViewController: BaseViewController {
     
     @IBOutlet weak var volunteeringTitleLabel: UILabel?
     @IBOutlet weak var volunteerButton: UIButton?
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initializeMenuButton()
         initializeLabels()
+    }
+    
+    func initializeMenuButton() {
+        if self.revealViewController() != nil {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
     }
     
     // MARK: - User Actions

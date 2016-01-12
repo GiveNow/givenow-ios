@@ -96,6 +96,10 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
         return onboardingConfigs.count + 1 //Sign In Cell
     }
     
+    @IBAction func addAPhoneNumberLater(sender: AnyObject) {
+        performSegueWithIdentifier("onboardingCompleted", sender: nil)
+    }
+    
     // MARK: UICollectionViewDelegate
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
