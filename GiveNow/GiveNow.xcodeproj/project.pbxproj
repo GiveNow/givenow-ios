@@ -39,7 +39,6 @@
 		26F35DE51C228A080012C83C /* Parse.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DDB1C228A080012C83C /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26F35DE81C228A080012C83C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DDF1C228A080012C83C /* SwiftyJSON.framework */; };
 		26F35DE91C228A080012C83C /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DDF1C228A080012C83C /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		26FE370F1C2297B600BED9A0 /* TestLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */; };
 		26FE37131C229B9C00BED9A0 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26FE37121C229B9C00BED9A0 /* Keys.plist */; };
 		26FE37171C22A58900BED9A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26FE37191C22A58900BED9A0 /* Localizable.strings */; };
 		26FE37231C23B80500BED9A0 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FE37221C23B80500BED9A0 /* Donation.swift */; };
@@ -207,7 +206,6 @@
 		267BF1F51C2801CA00A76425 /* PickupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupViewController.swift; sourceTree = "<group>"; };
 		26A2F4E61C2285E40081165D /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = ../Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		26A62AB71C26BA9000D49311 /* Germany.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Germany.gpx; sourceTree = "<group>"; };
-		26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogInViewController.swift; sourceTree = "<group>"; };
 		26FE37121C229B9C00BED9A0 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		26FE37181C22A58900BED9A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		26FE371A1C22A59500BED9A0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -457,7 +455,6 @@
 			children = (
 				2645C66D1C21E7FF00D6C70D /* Main.storyboard */,
 				D2186FCE1C431A78001551EF /* NavMenuTableViewController.swift */,
-				26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -743,7 +740,6 @@
 				D2186FB71C3CE917001551EF /* PickupDonationViewController.swift in Sources */,
 				2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */,
 				26FE37231C23B80500BED9A0 /* Donation.swift in Sources */,
-				26FE370F1C2297B600BED9A0 /* TestLogInViewController.swift in Sources */,
 				26FE372B1C23B97400BED9A0 /* Volunteer.swift in Sources */,
 				D2186FC11C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift in Sources */,
 				D2186FCF1C431A78001551EF /* NavMenuTableViewController.swift in Sources */,
