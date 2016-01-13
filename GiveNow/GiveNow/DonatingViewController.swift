@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-//import Mapbox
+import Parse
 import CoreLocation
 
 // TODO: implement
@@ -28,6 +28,8 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     var shouldUpdateSearchBarWithMapCenter = false
+    
+    let backend = Backend.sharedInstance()
     
     var searchController:UISearchController!
     
@@ -63,8 +65,10 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         initializeSearchController()
         initializeSearchResultsTable()
         initializeMenuButton()
+        displayPendingDonationViewIfNeeded()
         awakeFromNib()
     }
+    
     
     func detectFirstLaunch(){
         let firstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
@@ -100,6 +104,18 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         searchResultsTableView.frame = CGRect(x: 0.0, y: 64.0, width: view.frame.width, height: view.frame.height - 64)
         searchResultsTableView.tableHeaderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: 0.0))
         searchResultsTableView.hidden = true
+    }
+    
+    func displayPendingDonationViewIfNeeded() {
+        let query = backend.queryMyNewRequests()
+        backend.fetchPickupRequestsWithQuery(query, completionHandler: {(result, error) -> Void in
+            if error != nil {
+                print(error)
+            }
+            else if result != nil {
+                self.performSegueWithIdentifier("viewNewDonation", sender: nil)
+            }
+        })
     }
 
     override func viewDidAppear(animated: Bool) {

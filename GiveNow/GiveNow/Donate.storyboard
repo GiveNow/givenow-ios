@@ -91,7 +91,7 @@
                         <outlet property="searchDisplayController" destination="DiB-u8-tzc" id="2VU-Df-w1e"/>
                         <segue destination="xqe-tM-5xe" kind="show" identifier="selectCategories" id="vSF-G5-EV9"/>
                         <segue destination="LLB-g6-5J0" kind="presentation" identifier="onboarding" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="ZI4-p8-pjk"/>
-                        <segue destination="Pzq-Il-PbH" kind="presentation" identifier="viewPendingDonation" id="cyl-dn-ArZ"/>
+                        <segue destination="Pzq-Il-PbH" kind="presentation" identifier="viewNewDonation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="cyl-dn-ArZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IT0-QH-Vbg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -118,7 +118,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JU6-xw-LN8">
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JU6-xw-LN8">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" red="0.039215687662363052" green="0.5372549295425415" blue="0.65490198135375977" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
