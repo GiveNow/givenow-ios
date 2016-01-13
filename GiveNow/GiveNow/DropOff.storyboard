@@ -21,7 +21,7 @@
             </objects>
             <point key="canvasLocation" x="1" y="393"/>
         </scene>
-        <!--Drop Off View Controller-->
+        <!--Drop Off-->
         <scene sceneID="6ir-sj-FGv">
             <objects>
                 <viewController id="TS0-yR-z4y" customClass="DropOffViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,7 +33,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fK1-PW-xYv">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fK1-PW-xYv">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </mapView>
                         </subviews>
@@ -45,7 +45,7 @@
                             <constraint firstAttribute="trailing" secondItem="fK1-PW-xYv" secondAttribute="trailing" id="uVd-YG-vDY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="2ml-ub-2M9">
+                    <navigationItem key="navigationItem" title="Drop Off" id="2ml-ub-2M9">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="F10-s1-UjP" userLabel="menuButton">
                             <color key="tintColor" red="0.043137254899999998" green="0.043137254899999998" blue="0.043137254899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>

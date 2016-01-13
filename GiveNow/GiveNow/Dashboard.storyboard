@@ -165,7 +165,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="cKY-W8-6mv"/>
                                 </items>
                             </toolbar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6Vi-30-sFu">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Vi-30-sFu">
                                 <rect key="frame" x="0.0" y="20" width="600" height="423"/>
                             </mapView>
                         </subviews>
