@@ -456,6 +456,21 @@ class Backend: NSObject {
         })
     }
     
+    func markPickupRequestAsInactive(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        pickupRequest.isActive = false
+        pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                completionHandler(pickupRequest, nil)
+            }
+        })
+    }
+    
     
     // query my completed requests
     func queryMyCompletedRequests() -> PFQuery {

@@ -251,9 +251,11 @@
                         <outlet property="donationIcon" destination="3t5-83-5bO" id="dvx-ze-MA6"/>
                         <outlet property="headerLabel" destination="TnD-2f-K77" id="cDy-nX-hoG"/>
                         <outlet property="yourDonationLabel" destination="fMS-eM-U7k" id="q5Q-uo-1ZA"/>
+                        <segue destination="WZI-qI-iBd" kind="unwind" identifier="newPickupCanceled" unwindAction="newPickupCancelled:" id="e7F-WH-UvG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RR9-nY-Hmu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="WZI-qI-iBd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="372" y="984"/>
         </scene>

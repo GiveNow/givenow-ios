@@ -42,6 +42,14 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
+        backend.markPickupRequestAsInactive(pickupRequest, completionHandler: {(result, error) -> Void in
+            if error != nil {
+                print(error)
+            }
+            else {
+                self.performSegueWithIdentifier("newPickupCanceled", sender: nil)
+            }
+        })
     }
     
     // MARK: Collection View configuration
