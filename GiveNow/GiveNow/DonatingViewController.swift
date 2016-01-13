@@ -338,11 +338,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                     if placemark.name != nil {
                         self.searchController.searchBar.text = placemark.name!
                     }
-//                    if placemark.addressDictionary != nil {
-//                        let addressDictionary = placemark.addressDictionary!
-//                        let address = self.getAddressFromAddressDictionary(addressDictionary)
-//                        self.searchController.searchBar.text = address
-//                    }
                 }
             }
         })
