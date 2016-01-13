@@ -20,7 +20,7 @@ public enum SystemPermissionStatus : Int {
     case Denied
 }
 
-class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate {
+class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet var pickupLocationButton: UIButton?
     @IBOutlet var mapView: MKMapView?
@@ -97,7 +97,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         searchController.dimsBackgroundDuringPresentation = false
         searchController.delegate = self
         navigationItem.titleView = searchController.searchBar
-        
+        searchController.searchBar.tintColor = UIColor.colorPrimaryDark()
     }
     
     func initializeSearchResultsTable() {
@@ -114,6 +114,21 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         searchResultsTableView.rowHeight = 60.0
         searchResultsTableView.tableHeaderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: 1.0))
         searchResultsTableView.hidden = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: Selector("backgroundTapped:"))
+        tap.delegate = self
+        backgroundView.addGestureRecognizer(tap)
+    }
+    
+    func backgroundTapped(sender: UIGestureRecognizer? = nil) {
+        hideSearchResultsTable()
+        searchController.dismissViewControllerAnimated(true, completion: {})
+    }
+    
+    func hideSearchResultsTable() {
+        searchResultsTableView.hidden = true
+        searchResults = [MKMapItem]()
+        searchResultsTableView.reloadData()
     }
     
     func displayPendingDonationViewIfNeeded() {
@@ -272,16 +287,16 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchResultsTableView.hidden = true
+        hideSearchResultsTable()
         setAddressFromCoordinates()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchResultsTableView.hidden = true
         if searchResults.count > 0 {
             let mapItem = searchResults[0]
             centerMapOnMapItem(mapItem)
         }
+        hideSearchResultsTable()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -312,7 +327,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let mapItem = searchResults[indexPath.row]
         searchController.searchBar.text = nameForMapItem(mapItem)
-        searchResultsTableView.hidden = true
+        hideSearchResultsTable()
         searchController.dismissViewControllerAnimated(true, completion: {() -> Void in
             self.centerMapOnMapItem(mapItem)
         })
