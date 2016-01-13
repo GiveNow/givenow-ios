@@ -212,6 +212,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jIA-ea-vVb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.039215687659999998" green="0.53725492949999998" blue="0.6549019814" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="9Xv-gM-mHf" kind="relationship" relationship="rootViewController" id="DAj-rX-ped"/>
@@ -221,20 +226,30 @@
             </objects>
             <point key="canvasLocation" x="-845" y="493"/>
         </scene>
-        <!--My Dashboard-->
+        <!--Volunteer-->
         <scene sceneID="vpn-6D-xbG">
             <objects>
                 <tabBarController id="9Xv-gM-mHf" customClass="DashboardTabViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="My Dashboard" id="0eg-rX-hSM">
+                    <navigationItem key="navigationItem" title="Volunteer" id="0eg-rX-hSM">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="wLn-WX-NmH">
                             <color key="tintColor" red="0.043137254899999998" green="0.043137254899999998" blue="0.043137254899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="lNZ-2w-MKS">
+                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" id="lNZ-2w-MKS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.40000000596046448" green="0.73333334922790527" blue="0.41568627953529358" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="keyPath">
+                            <color key="value" red="0.40000000596046448" green="0.73333334922790527" blue="0.41568627953529358" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="menuButton" destination="wLn-WX-NmH" id="Czj-kR-5Pc"/>
                         <segue destination="ehW-T2-K1f" kind="relationship" relationship="viewControllers" id="cOq-vM-pUb"/>
