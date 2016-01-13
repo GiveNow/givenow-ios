@@ -14,7 +14,7 @@
                         <viewControllerLayoutGuide type="bottom" id="RX2-Av-Ilo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="aHS-eo-poZ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MH5-YL-f4n">
@@ -43,12 +43,12 @@
             <objects>
                 <tableViewController id="gc7-Ui-MZc" customClass="MyDashboardTableViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="71" sectionHeaderHeight="28" sectionFooterHeight="28" id="m7X-vS-91J">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="pickupRequest" rowHeight="71" id="hra-5r-kYJ" customClass="PickupRequestTableViewCell" customModule="GiveNow" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="71"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="71"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hra-5r-kYJ" id="bx0-es-7ut">
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="70"/>
@@ -110,11 +110,11 @@
                         <viewControllerLayoutGuide type="bottom" id="n5o-cV-GmE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="BPZ-mE-nkj">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgo-ly-EC1">
-                                <rect key="frame" x="0.0" y="491" width="600" height="60"/>
+                                <rect key="frame" x="0.0" y="427" width="600" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Ebu-5L-q2i"/>
                                 </constraints>
@@ -124,7 +124,7 @@
                                 </connections>
                             </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOI-dO-QV2">
-                                <rect key="frame" x="0.0" y="443" width="600" height="48"/>
+                                <rect key="frame" x="0.0" y="379" width="600" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="BDB-Y5-lW4"/>
                                 </constraints>
@@ -209,11 +209,11 @@
         <scene sceneID="nbH-SD-8Se">
             <objects>
                 <navigationController id="yLw-GU-UCJ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jIA-ea-vVb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="jIA-ea-vVb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="0.039215687659999998" green="0.53725492949999998" blue="0.6549019814" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.7254902124" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>

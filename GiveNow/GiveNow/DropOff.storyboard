@@ -9,11 +9,11 @@
         <scene sceneID="atJ-ot-TNS">
             <objects>
                 <navigationController id="TDF-vo-PIt" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J4R-b3-BZe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="J4R-b3-BZe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.039215687662363052" green="0.5372549295425415" blue="0.65490198135375977" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.72549021244049072" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
@@ -35,10 +35,10 @@
                         <viewControllerLayoutGuide type="bottom" id="cyR-ar-Is9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zwx-TM-9Cv">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fK1-PW-xYv">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fK1-PW-xYv">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </mapView>
                         </subviews>

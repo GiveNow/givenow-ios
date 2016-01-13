@@ -9,11 +9,11 @@
         <scene sceneID="RUl-ng-FTG">
             <objects>
                 <navigationController id="Ndd-yi-BrV" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7wp-vx-xGx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="7wp-vx-xGx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="0.039215687659999998" green="0.53725492949999998" blue="0.6549019814" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.7254902124" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
@@ -307,7 +307,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofB-37-sWl">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="166"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3Q-88-9yq">
                                         <rect key="frame" x="20" y="89" width="68" height="21"/>
@@ -346,12 +346,18 @@
                                     <constraint firstItem="b3x-AK-RwX" firstAttribute="leading" secondItem="fXK-zM-pEn" secondAttribute="leading" id="SDU-tQ-acY"/>
                                     <constraint firstItem="K9d-3G-8Oc" firstAttribute="leading" secondItem="ofB-37-sWl" secondAttribute="leading" constant="20" id="WZW-NU-oY8"/>
                                     <constraint firstItem="K9d-3G-8Oc" firstAttribute="top" secondItem="Z3Q-88-9yq" secondAttribute="bottom" constant="10" id="YEe-LA-Swu"/>
+                                    <constraint firstAttribute="bottom" secondItem="b3x-AK-RwX" secondAttribute="bottom" constant="20" id="moc-pA-zG6"/>
                                     <constraint firstAttribute="height" constant="200" id="up0-vK-8LD"/>
                                     <constraint firstAttribute="trailing" secondItem="b3x-AK-RwX" secondAttribute="trailing" constant="20" id="vEE-as-KTs"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="up0-vK-8LD"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ohA-ph-S3Q">
-                                <rect key="frame" x="0.0" y="200" width="600" height="340"/>
+                                <rect key="frame" x="0.0" y="166" width="600" height="374"/>
                                 <color key="backgroundColor" red="0.88235294818878174" green="0.96078431606292725" blue="0.99607843160629272" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0I5-mA-ENC">
                                     <size key="itemSize" width="149" height="148"/>
