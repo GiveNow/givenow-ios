@@ -333,6 +333,10 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         })
     }
     
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        searchController.searchBar.resignFirstResponder()
+    }
+    
     func centerMapOnMapItem(mapItem: MKMapItem) {
         let currentRegion = mapView!.region
         let newCenter = coordinatesForMapItem(mapItem)
