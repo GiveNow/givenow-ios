@@ -15,6 +15,7 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     
     var nameLabel:UILabel!
     var usernameLabel:UILabel!
+    var profileImage = UIImageView()
     
     // MARK: - Nib setup
     let loginModalViewController = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
@@ -36,18 +37,21 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
         view.addSubview(anotherHeaderView)
         
         let headerView = UIView()
-        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 160)
         headerView.backgroundColor = UIColor.colorPrimaryDark()
         tableView.tableHeaderView = headerView
         
+        profileImage.frame = CGRect(x: 20, y: 13, width: 80, height: 80)
+        headerView.addSubview(profileImage)
+        
         nameLabel = UILabel()
-        nameLabel.frame = CGRect(x: 20, y: 60, width: view.frame.width - 40, height: 24)
+        nameLabel.frame = CGRect(x: 30, y: 93, width: view.frame.width - 50, height: 24)
         nameLabel.font = UIFont.boldSystemFontOfSize(17.0)
         nameLabel.textColor = UIColor.whiteColor()
         headerView.addSubview(nameLabel)
         
         usernameLabel = UILabel()
-        usernameLabel.frame = CGRect(x: 20, y: 84, width: view.frame.width - 40, height: 17)
+        usernameLabel.frame = CGRect(x: 30, y: 117, width: view.frame.width - 50, height: 17)
         usernameLabel.font = UIFont.boldSystemFontOfSize(15.0)
         usernameLabel.textColor = UIColor.whiteColor()
         headerView.addSubview(usernameLabel)
@@ -93,10 +97,15 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
                 nameLabel.text = "Unknown User"
                 usernameLabel.text = ""
             }
+            if let image = UIImage(named: "round_icon") {
+                print("set image")
+                profileImage.image = image
+            }
         }
         else {
             nameLabel.text = "Not logged in"
             usernameLabel.text = ""
+            profileImage.image = nil
         }
     }
     
