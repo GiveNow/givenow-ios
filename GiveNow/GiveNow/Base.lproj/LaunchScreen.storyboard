@@ -17,17 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give Now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7oU-wW-Exd">
-                                <rect key="frame" x="264" y="290" width="73" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="round_icon" translatesAutoresizingMaskIntoConstraints="NO" id="l2K-vn-rCB">
+                                <rect key="frame" x="200" y="200" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="1QX-qD-dtF"/>
+                                    <constraint firstAttribute="width" constant="200" id="HL0-Cb-F5S"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.7254902124" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="7oU-wW-Exd" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="m6o-ZL-1ct"/>
-                            <constraint firstItem="7oU-wW-Exd" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="vVS-y8-4yK"/>
+                            <constraint firstItem="l2K-vn-rCB" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="AHM-14-h8v"/>
+                            <constraint firstItem="l2K-vn-rCB" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="WHH-c3-qUq"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -36,4 +37,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="round_icon" width="512" height="512"/>
+    </resources>
 </document>
