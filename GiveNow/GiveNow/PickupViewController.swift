@@ -123,7 +123,6 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMap
     }
     
     func addOpenPickupRequestToMap() {
-        print(openPickupRequests)
         for pickupRequest in openPickupRequests {
             let latitude = pickupRequest.location!.latitude
             let longitude = pickupRequest.location!.longitude

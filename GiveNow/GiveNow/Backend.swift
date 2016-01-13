@@ -152,24 +152,36 @@ class Backend: NSObject {
     
     // MARK: Donation Centers
     
-    func fetchDonationCentersNearCoordinate(coordinate : CLLocationCoordinate2D, completionHandler: BackendQueryCompletionHandler?) {
+    func queryDropOffAgencies() -> PFQuery {
+        let query = PFQuery(className: "DropOffAgency")
+        return query
+    }
+    
+    func fetchDropOffAgencies(completionHandler: BackendQueryCompletionHandler?) {
         guard let completionHandler = completionHandler else {
             return
         }
-        
-        let geoPoint = PFGeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        let query = PFQuery(className: "DropOffAgency")
-        query.whereKey("agencyGeoLocation", nearGeoPoint: geoPoint)
-        query.limit = 20
+        let query = self.queryDropOffAgencies()
         query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
             if let error = error {
                 completionHandler(nil, error)
             }
+            else if results != nil {
+                if let dropOffAgencies = results as? [DropOffAgency] {
+                    completionHandler(dropOffAgencies, nil)
+                }
+                else {
+                    print("Could not cast as dropoff agency")
+                    print(results)
+                }
+            }
             else {
-                completionHandler(results, nil)
+                print("Did not get any results")
             }
         })
     }
+    
+    // MARK: Donation
     
     func fetchDonationsFromUser(user : PFUser, completionHandler: BackendQueryCompletionHandler?) {
         guard let completionHandler = completionHandler else {
@@ -188,36 +200,6 @@ class Backend: NSObject {
             }
         })
     }
-    
-    func fetchCategoriesForDonationCenter(donationCenter : PFObject, completionHandler: BackendQueryCompletionHandler?) {
-        guard let completionHandler = completionHandler else {
-            return
-        }
-        
-        if !"DropOffAgency".isEqualToString(donationCenter.parseClassName) {
-            let userInfo = [NSLocalizedDescriptionKey : "Invalid Parse Class: \(donationCenter.parseClassName)"]
-            let error = NSError(domain: "Backend", code: 1, userInfo: userInfo)
-            completionHandler(nil, error)
-        }
-        else {
-            // Are categories related to donation centers?
-            let query = PFQuery(className: "DonationCategory")
-            query.orderByAscending("priority")
-            //query.limit = 9
-            query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
-                if let error = error {
-                    completionHandler(nil, error)
-                }
-                else {
-                    completionHandler(results, nil)
-                }
-            })
-        }
-        
-        completionHandler(nil, nil)
-    }
-    
-    // MARK: Donation
     
     func saveDonation(donor: User, categories: [DonationCategory], completionHandler: ((Donation?, NSError?) -> Void)?) {
         guard let completionHandler = completionHandler else {
