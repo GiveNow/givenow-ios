@@ -28,6 +28,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     var shouldUpdateSearchBarWithMapCenter = false
+    var newPickupRequest:PickupRequest!
     
     let backend = Backend.sharedInstance()
     
@@ -112,10 +113,15 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                 print(error)
             }
             else if result != nil {
-                self.performSegueWithIdentifier("viewNewDonation", sender: nil)
+                if let pickupRequest = result![0] as? PickupRequest {
+                    self.newPickupRequest = pickupRequest
+                    self.performSegueWithIdentifier("viewNewDonation", sender: nil)
+                }
             }
         })
     }
+    
+    
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -174,8 +180,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         if let locationManager = self.locationManager {
             locationManager.requestAlwaysAuthorization()
         }
-        
-//        locationManager.requestAlwaysAuthorization()
     }
     
     @IBAction func setPickupLocationButtonTapped(sender: AnyObject) {
@@ -195,6 +199,10 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
             let destinationController = segue.destinationViewController as! DonationCategoriesViewController
             destinationController.location = location
             destinationController.address = address
+        }
+        else if segue.identifier == "viewNewDonation" {
+            let destinationController = segue.destinationViewController as! MyPendingDonationViewController
+            destinationController.pickupRequest = newPickupRequest
         }
     }
     
