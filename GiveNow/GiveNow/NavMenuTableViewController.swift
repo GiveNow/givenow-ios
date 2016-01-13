@@ -11,9 +11,10 @@ import Parse
 
 class NavMenuTableViewController: UITableViewController, LoginModalViewControllerDelegate {
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var logInLabel: UILabel!
+    
+    var nameLabel:UILabel!
+    var usernameLabel:UILabel!
     
     // MARK: - Nib setup
     let loginModalViewController = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
@@ -22,8 +23,34 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureHeaderView()
         configureLoginLabel()
-        configureProfileCell()
+        configureProfileInfo()
+    }
+    
+    func configureHeaderView() {
+        //Create a view and put it behind the status bar
+        let anotherHeaderView = UIView()
+        anotherHeaderView.frame = CGRect(x: 0, y: -20, width: view.frame.width, height: 20)
+        anotherHeaderView.backgroundColor = UIColor.colorPrimaryDark()
+        view.addSubview(anotherHeaderView)
+        
+        let headerView = UIView()
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
+        headerView.backgroundColor = UIColor.colorPrimaryDark()
+        tableView.tableHeaderView = headerView
+        
+        nameLabel = UILabel()
+        nameLabel.frame = CGRect(x: 20, y: 60, width: view.frame.width - 40, height: 24)
+        nameLabel.font = UIFont.boldSystemFontOfSize(17.0)
+        nameLabel.textColor = UIColor.whiteColor()
+        headerView.addSubview(nameLabel)
+        
+        usernameLabel = UILabel()
+        usernameLabel.frame = CGRect(x: 20, y: 84, width: view.frame.width - 40, height: 17)
+        usernameLabel.font = UIFont.boldSystemFontOfSize(15.0)
+        usernameLabel.textColor = UIColor.whiteColor()
+        headerView.addSubview(usernameLabel)
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,28 +61,28 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
-    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        switch indexPath.section {
-        case 0:
-            return false
-        default:
-            return true
-        }
-    }
+//    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+//        switch indexPath.section {
+//        case 0:
+//            return false
+//        default:
+//            return true
+//        }
+//    }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 1:
+        case 0:
             return 3
         default:
             return 1
         }
     }
     
-    func configureProfileCell() {
+    func configureProfileInfo() {
         if AppState.sharedInstance().isUserRegistered {
             let user = User.currentUser()!
             if user.name != nil {
@@ -103,7 +130,7 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     func logInOutTapped() {
         if AppState.sharedInstance().isUserRegistered {
             User.logOut()
-            configureProfileCell()
+            configureProfileInfo()
             configureLoginLabel()
         }
         else {
@@ -134,12 +161,12 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     
     func successfulLogin(controller: LoginModalViewController) {
         configureLoginLabel()
-        configureProfileCell()
+        configureProfileInfo()
     }
     
     @IBAction func loginCompleted(segue: UIStoryboardSegue) {
         configureLoginLabel()
-        configureProfileCell()
+        configureProfileInfo()
     }
 
 
