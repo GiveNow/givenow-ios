@@ -65,7 +65,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         initializeSearchController()
         initializeSearchResultsTable()
         initializeMenuButton()
-        displayPendingDonationViewIfNeeded()
         awakeFromNib()
     }
     
@@ -128,6 +127,8 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         else if status == .Allowed {
             zoomIntoLocation(true)
         }
+        
+        displayPendingDonationViewIfNeeded()
     }
     
     func zoomIntoLocation(animated : Bool) {

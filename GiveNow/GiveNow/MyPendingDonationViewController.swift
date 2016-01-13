@@ -9,11 +9,17 @@
 import UIKit
 
 class MyPendingDonationViewController: BaseViewController {
+    
+    @IBOutlet weak var donationIcon: UIImageView!
+    @IBOutlet weak var yourDonationLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    var pickupRequest:PickupRequest!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setDonationIcon()
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +27,14 @@ class MyPendingDonationViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func setDonationIcon() {
+        donationIcon.image = UIImage(named: "store")!.imageWithRenderingMode(.AlwaysTemplate)
+        donationIcon.tintColor = UIColor.whiteColor()
     }
-    */
+    
+
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
+    }
+
 
 }
