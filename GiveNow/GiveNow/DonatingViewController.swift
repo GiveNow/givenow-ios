@@ -124,8 +124,8 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     }
     
     func addPendingDonationChildView() {
-        print(newPickupRequest)
         if storyboard != nil {
+            searchController.searchBar.hidden = true
             let pendingDonationViewController = storyboard!.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
             pendingDonationViewController.pickupRequest = newPickupRequest
             addChildViewController(pendingDonationViewController)
