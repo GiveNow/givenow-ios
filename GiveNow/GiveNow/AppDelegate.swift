@@ -30,6 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             MGLAccountManager.setAccessToken(mapboxToken)
         }
         
+        // Making status bar white
+        application.statusBarStyle = UIStatusBarStyle.LightContent
+        
         return true
     }
 
