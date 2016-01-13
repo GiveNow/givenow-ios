@@ -35,7 +35,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     var searchController:UISearchController!
     
     var searchResults = [MKMapItem]()
-    var searchResultsTableView = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0), style: .Grouped)
+    var searchResultsTableView: UITableView!
     
     var locationManager: CLLocationManager? {
         didSet {
@@ -101,12 +101,18 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     }
     
     func initializeSearchResultsTable() {
+        let frame = CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: view.frame.height)
+        searchResultsTableView = UITableView(frame: frame, style: .Grouped)
+        searchResultsTableView.backgroundColor = UIColor.clearColor()
+        let backgroundView = UIView(frame: frame)
+        backgroundView.backgroundColor = UIColor.darkGrayColor()
+        backgroundView.alpha = 0.5
+        searchResultsTableView.backgroundView = backgroundView
         searchResultsTableView.delegate = self
         searchResultsTableView.dataSource = self
         view.addSubview(searchResultsTableView)
         searchResultsTableView.rowHeight = 60.0
-        searchResultsTableView.frame = CGRect(x: 0.0, y: 64.0, width: view.frame.width, height: view.frame.height - 64)
-        searchResultsTableView.tableHeaderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: 0.0))
+        searchResultsTableView.tableHeaderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: 1.0))
         searchResultsTableView.hidden = true
     }
     
