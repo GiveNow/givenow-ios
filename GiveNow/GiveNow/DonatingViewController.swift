@@ -113,9 +113,11 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                 print(error)
             }
             else if result != nil {
-                if let pickupRequest = result![0] as? PickupRequest {
-                    self.newPickupRequest = pickupRequest
-                    self.performSegueWithIdentifier("viewNewDonation", sender: nil)
+                if result!.count > 0 {
+                    if let pickupRequest = result![0] as? PickupRequest {
+                        self.newPickupRequest = pickupRequest
+                        self.performSegueWithIdentifier("viewNewDonation", sender: nil)
+                    }
                 }
             }
         })
@@ -371,10 +373,13 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     @IBAction func onboardingCompleted(segue: UIStoryboardSegue) {
     }
     
+    @IBAction func newPickupRequestCreated(segue: UIStoryboardSegue) {
+        
+    }
+    
     @IBAction func newPickupCancelled(segue: UIStoryboardSegue) {
         newPickupRequest = nil
     }
-    
     
 }
 

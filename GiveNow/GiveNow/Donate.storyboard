@@ -408,7 +408,7 @@
                         <outlet property="collectionView" destination="ohA-ph-S3Q" id="wM4-J1-pC1"/>
                         <outlet property="noteTextField" destination="b3x-AK-RwX" id="ktJ-GC-JXq"/>
                         <outlet property="pickupRequestAddressLabel" destination="fXK-zM-pEn" id="hwc-XN-ixS"/>
-                        <segue destination="Kip-pf-66s" kind="unwind" identifier="pickupRequestCompleted" unwindAction="pickupRequestCreated:" id="1aw-K1-qXI"/>
+                        <segue destination="Kip-pf-66s" kind="unwind" identifier="newPickupRequestCreated" unwindAction="newPickupRequestCreated:" id="HDw-Rl-ZQ2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qha-Wb-W79" userLabel="First Responder" sceneMemberID="firstResponder"/>
