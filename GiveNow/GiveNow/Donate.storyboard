@@ -316,7 +316,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="addressLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXK-zM-pEn" userLabel="pickupRequesetAddress">
-                                        <rect key="frame" x="93" y="89" width="497" height="21"/>
+                                        <rect key="frame" x="98" y="89" width="492" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -328,7 +328,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b3x-AK-RwX" userLabel="noteTextField">
-                                        <rect key="frame" x="93" y="116" width="487" height="30"/>
+                                        <rect key="frame" x="98" y="116" width="482" height="30"/>
                                         <color key="backgroundColor" red="0.039215687659999998" green="0.53725492949999998" blue="0.6549019814" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -340,7 +340,7 @@
                                 <constraints>
                                     <constraint firstItem="fXK-zM-pEn" firstAttribute="centerY" secondItem="Z3Q-88-9yq" secondAttribute="centerY" id="14P-gG-gMk"/>
                                     <constraint firstItem="Z3Q-88-9yq" firstAttribute="leading" secondItem="ofB-37-sWl" secondAttribute="leading" constant="20" id="4xI-vq-5Rh"/>
-                                    <constraint firstItem="fXK-zM-pEn" firstAttribute="leading" secondItem="Z3Q-88-9yq" secondAttribute="trailing" constant="5" id="LcN-NB-6Ua"/>
+                                    <constraint firstItem="fXK-zM-pEn" firstAttribute="leading" secondItem="Z3Q-88-9yq" secondAttribute="trailing" constant="10" id="LcN-NB-6Ua"/>
                                     <constraint firstItem="b3x-AK-RwX" firstAttribute="centerY" secondItem="K9d-3G-8Oc" secondAttribute="centerY" id="MyI-6R-m28"/>
                                     <constraint firstAttribute="trailing" secondItem="fXK-zM-pEn" secondAttribute="trailing" constant="10" id="P54-78-VGm"/>
                                     <constraint firstItem="b3x-AK-RwX" firstAttribute="leading" secondItem="fXK-zM-pEn" secondAttribute="leading" id="SDU-tQ-acY"/>

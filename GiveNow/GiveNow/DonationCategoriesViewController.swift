@@ -144,7 +144,7 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     
     func unHighlightCell(cell: DonationCategoryCollectionViewCell) {
         cell.categoryLabel.backgroundColor = UIColor.lightGrayColor()
-        cell.categoryLabel.textColor = UIColor.colorPrimaryDark()
+        cell.categoryLabel.textColor = UIColor.whiteColor()
     }
     
     //MARK: Completing selection

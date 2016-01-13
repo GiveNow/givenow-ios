@@ -154,7 +154,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
             let pendingDonationViewController = storyboard!.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
             pendingDonationViewController.pickupRequest = newPickupRequest
             addChildViewController(pendingDonationViewController)
-            pendingDonationViewController.view.frame = CGRect(x: 0, y: 64, width: view.frame.width, height: view.frame.height - 64)
+            pendingDonationViewController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
             view.addSubview(pendingDonationViewController.view)
             pendingDonationViewController.didMoveToParentViewController(self)
         }
