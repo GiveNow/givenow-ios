@@ -12,6 +12,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7wp-vx-xGx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.039215687659999998" green="0.53725492949999998" blue="0.6549019814" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="LdM-nb-XRS" kind="relationship" relationship="rootViewController" id="5aa-UG-HKN"/>
@@ -29,7 +34,7 @@
             </objects>
             <point key="canvasLocation" x="842.5" y="-164"/>
         </scene>
-        <!--Donating-->
+        <!--Select Address-->
         <scene sceneID="8uE-QJ-E4D">
             <objects>
                 <viewController id="LdM-nb-XRS" customClass="DonatingViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
@@ -52,7 +57,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="57W-Fl-xvG"/>
                                 </constraints>
-                                <state key="normal" title="Set Pickup Location"/>
+                                <state key="normal" title="Set Pickup Location">
+                                    <color key="titleShadowColor" red="0.40000000600000002" green="0.73333334920000004" blue="0.41568627949999998" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="setPickupLocationButtonTapped:" destination="LdM-nb-XRS" eventType="touchUpInside" id="Ssj-v0-65y"/>
                                 </connections>
@@ -78,7 +85,7 @@
                             <constraint firstItem="Dqa-ec-ITD" firstAttribute="top" secondItem="VID-4N-S16" secondAttribute="bottom" constant="49" id="vaT-tV-Eet"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Donating" id="Tvw-Ie-FQz">
+                    <navigationItem key="navigationItem" title="Select Address" id="Tvw-Ie-FQz">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="jhn-mN-Qmk" userLabel="menuButton">
                             <color key="tintColor" red="0.043137254899999998" green="0.043137254899999998" blue="0.043137254899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
@@ -305,23 +312,25 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3Q-88-9yq">
                                         <rect key="frame" x="20" y="89" width="68" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="addressLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXK-zM-pEn" userLabel="pickupRequesetAddress">
                                         <rect key="frame" x="93" y="89" width="497" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9d-3G-8Oc">
                                         <rect key="frame" x="20" y="120" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b3x-AK-RwX" userLabel="noteTextField">
                                         <rect key="frame" x="93" y="116" width="487" height="30"/>
+                                        <color key="backgroundColor" red="0.039215687659999998" green="0.53725492949999998" blue="0.6549019814" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>

@@ -56,7 +56,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        pickupLocationButton?.backgroundColor = ColorPalette().Confirmation
+        pickupLocationButton?.backgroundColor = UIColor.colorAccent()
         pickupLocationButton?.setTitleColor(.whiteColor(), forState: .Normal)
     }
     
@@ -80,6 +80,10 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     
     func initializeMenuButton() {
         if self.revealViewController() != nil {
+            if let menuImage = UIImage(named: "menu") {
+                self.menuButton.image = menuImage.imageWithRenderingMode(.AlwaysTemplate)
+                self.menuButton.tintColor = UIColor.whiteColor()
+            }
             self.menuButton.target = self.revealViewController()
             self.menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())

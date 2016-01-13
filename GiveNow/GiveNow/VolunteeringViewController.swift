@@ -38,7 +38,6 @@ class VolunteeringViewController: BaseViewController, LoginModalViewControllerDe
                 self.menuButton.image = menuImage.imageWithRenderingMode(.AlwaysTemplate)
                 self.menuButton.tintColor = UIColor.whiteColor()
             }
-            
             self.menuButton.target = self.revealViewController()
             self.menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
