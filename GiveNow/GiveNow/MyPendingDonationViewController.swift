@@ -27,7 +27,6 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
         setDonationIcon()
         collectionView.delegate = self
         collectionView.dataSource = self
-        print(pickupRequest)
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,8 +35,10 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     }
     
     func setDonationIcon() {
-        donationIcon.image = UIImage(named: "store")!.imageWithRenderingMode(.AlwaysTemplate)
-        donationIcon.tintColor = UIColor.whiteColor()
+        if let image = UIImage(named: "store") {
+            donationIcon.image = image.imageWithRenderingMode(.AlwaysTemplate)
+            donationIcon.tintColor = UIColor.whiteColor()
+        }
     }
     
 
