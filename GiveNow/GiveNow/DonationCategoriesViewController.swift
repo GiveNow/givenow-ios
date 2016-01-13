@@ -173,8 +173,7 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
                 print(error)
             }
             else {
-                print("Pickup request created")
-                // Need to implement new view showing this
+                self.performSegueWithIdentifier("newPickupRequestCreated", sender: nil)
             }
         })
     }

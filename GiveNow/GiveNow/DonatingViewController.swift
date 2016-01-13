@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-//import Mapbox
+import Parse
 import CoreLocation
 
 // TODO: implement
@@ -28,6 +28,9 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     var shouldUpdateSearchBarWithMapCenter = false
+    var newPickupRequest:PickupRequest!
+    
+    let backend = Backend.sharedInstance()
     
     var searchController:UISearchController!
     
@@ -66,6 +69,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         awakeFromNib()
     }
     
+    
     func detectFirstLaunch(){
         let firstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
         if !firstLaunch {
@@ -101,6 +105,25 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         searchResultsTableView.tableHeaderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: 0.0))
         searchResultsTableView.hidden = true
     }
+    
+    func displayPendingDonationViewIfNeeded() {
+        let query = backend.queryMyNewRequests()
+        backend.fetchPickupRequestsWithQuery(query, completionHandler: {(result, error) -> Void in
+            if error != nil {
+                print(error)
+            }
+            else if result != nil {
+                if result!.count > 0 {
+                    if let pickupRequest = result![0] as? PickupRequest {
+                        self.newPickupRequest = pickupRequest
+                        self.performSegueWithIdentifier("viewNewDonation", sender: nil)
+                    }
+                }
+            }
+        })
+    }
+    
+    
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -112,6 +135,8 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         else if status == .Allowed {
             zoomIntoLocation(true)
         }
+        
+        displayPendingDonationViewIfNeeded()
     }
     
     func zoomIntoLocation(animated : Bool) {
@@ -157,8 +182,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         if let locationManager = self.locationManager {
             locationManager.requestAlwaysAuthorization()
         }
-        
-//        locationManager.requestAlwaysAuthorization()
     }
     
     @IBAction func setPickupLocationButtonTapped(sender: AnyObject) {
@@ -178,6 +201,10 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
             let destinationController = segue.destinationViewController as! DonationCategoriesViewController
             destinationController.location = location
             destinationController.address = address
+        }
+        else if segue.identifier == "viewNewDonation" {
+            let destinationController = segue.destinationViewController as! MyPendingDonationViewController
+            destinationController.pickupRequest = newPickupRequest
         }
     }
     
@@ -338,11 +365,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                     if placemark.name != nil {
                         self.searchController.searchBar.text = placemark.name!
                     }
-//                    if placemark.addressDictionary != nil {
-//                        let addressDictionary = placemark.addressDictionary!
-//                        let address = self.getAddressFromAddressDictionary(addressDictionary)
-//                        self.searchController.searchBar.text = address
-//                    }
                 }
             }
         })
@@ -351,6 +373,13 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     @IBAction func onboardingCompleted(segue: UIStoryboardSegue) {
     }
     
+    @IBAction func newPickupRequestCreated(segue: UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func newPickupCancelled(segue: UIStoryboardSegue) {
+        newPickupRequest = nil
+    }
     
 }
 

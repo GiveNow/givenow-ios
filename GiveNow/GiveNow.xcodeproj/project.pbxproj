@@ -68,6 +68,7 @@
 		D23BBF521C457F1B00E68AF9 /* LoginModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF501C457F1B00E68AF9 /* LoginModalViewController.xib */; };
 		D23BBF591C45C4B900E68AF9 /* DropOff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */; };
 		D23BBF5D1C45C65700E68AF9 /* DropOffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */; };
+		D23BBF631C45D3CF00E68AF9 /* MyPendingDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF621C45D3CF00E68AF9 /* MyPendingDonationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -239,6 +240,7 @@
 		D23BBF501C457F1B00E68AF9 /* LoginModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginModalViewController.xib; sourceTree = "<group>"; };
 		D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DropOff.storyboard; sourceTree = "<group>"; };
 		D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropOffViewController.swift; sourceTree = "<group>"; };
+		D23BBF621C45D3CF00E68AF9 /* MyPendingDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPendingDonationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -471,6 +473,7 @@
 				2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */,
 				D2186FBE1C3F2965001551EF /* DonationCategoriesViewController.swift */,
 				D2186FC01C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift */,
+				D23BBF621C45D3CF00E68AF9 /* MyPendingDonationViewController.swift */,
 			);
 			name = Donate;
 			sourceTree = "<group>";
@@ -762,6 +765,7 @@
 				2645C6A21C21F38E00D6C70D /* BaseNavigationController.swift in Sources */,
 				267BF1F61C2801CA00A76425 /* PickupViewController.swift in Sources */,
 				2645C66A1C21E7FF00D6C70D /* AppDelegate.swift in Sources */,
+				D23BBF631C45D3CF00E68AF9 /* MyPendingDonationViewController.swift in Sources */,
 				D207A3471C23B82400E93BEB /* Extensions.swift in Sources */,
 				2645C6A01C21F37A00D6C70D /* BaseViewController.swift in Sources */,
 				26FE37271C23B81400BED9A0 /* DonationCategory.swift in Sources */,

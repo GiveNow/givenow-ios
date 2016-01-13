@@ -387,6 +387,14 @@ class Backend: NSObject {
         return query
     }
     
+    // query pickup requests I have made that do not have a pending volunteer or confirmed volunteer
+    func queryMyNewRequests() -> PFQuery {
+        let query = queryMyPickupRequests()
+        query.whereKeyDoesNotExist("pendingVolunteer")
+        query.whereKeyDoesNotExist("confirmedVolunteer")
+        return query
+    }
+    
     // query pickup requests I have made, which currently have a pending volunteer, but no confirmed volunteer
     func queryMyPendingRequests() -> PFQuery {
         let query = queryMyPickupRequests()
@@ -437,6 +445,21 @@ class Backend: NSObject {
             return
         }
         pickupRequest.donation = donation
+        pickupRequest.isActive = false
+        pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                completionHandler(pickupRequest, nil)
+            }
+        })
+    }
+    
+    func markPickupRequestAsInactive(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
         pickupRequest.isActive = false
         pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
             if let error = error {
