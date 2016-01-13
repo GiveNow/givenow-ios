@@ -91,7 +91,7 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
             case "volunteer":
                 volunteerTapped()
             case "dropOff":
-                print("No action yet")
+                performSegueWithIdentifier("dropOff", sender: nil)
             case "logIn":
                 logInOutTapped()
             default:
