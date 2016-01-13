@@ -91,7 +91,6 @@
                         <outlet property="searchDisplayController" destination="DiB-u8-tzc" id="2VU-Df-w1e"/>
                         <segue destination="xqe-tM-5xe" kind="show" identifier="selectCategories" id="vSF-G5-EV9"/>
                         <segue destination="LLB-g6-5J0" kind="presentation" identifier="onboarding" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="ZI4-p8-pjk"/>
-                        <segue destination="Pzq-Il-PbH" kind="presentation" identifier="viewNewDonation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="cyl-dn-ArZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IT0-QH-Vbg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -109,7 +108,7 @@
         <!--My Pending Donation View Controller-->
         <scene sceneID="Mkp-aZ-wSg">
             <objects>
-                <viewController id="Pzq-Il-PbH" customClass="MyPendingDonationViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pendingDonationView" id="Pzq-Il-PbH" customClass="MyPendingDonationViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5gw-i8-h2D"/>
                         <viewControllerLayoutGuide type="bottom" id="8gf-A4-lSf"/>
@@ -122,9 +121,15 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" red="0.039215687662363052" green="0.5372549295425415" blue="0.65490198135375977" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting for volunteer to accept your request!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TnD-2f-K77">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L0J-0F-WTG" userLabel="Header View">
                                 <rect key="frame" x="0.0" y="20" width="600" height="60"/>
                                 <color key="backgroundColor" red="0.039215687659999998" green="0.53725492949999998" blue="0.6549019814" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="FnW-kV-xbZ"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting for volunteer to accept your request!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TnD-2f-K77">
+                                <rect key="frame" x="20" y="20" width="560" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="w58-Z1-BcD"/>
                                 </constraints>
@@ -231,6 +236,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="8gf-A4-lSf" firstAttribute="top" secondItem="JU6-xw-LN8" secondAttribute="bottom" id="0R3-sB-zYL"/>
+                            <constraint firstItem="L0J-0F-WTG" firstAttribute="leading" secondItem="HRV-Ok-zJv" secondAttribute="leading" id="17W-wJ-poh"/>
                             <constraint firstAttribute="trailing" secondItem="JU6-xw-LN8" secondAttribute="trailing" id="3FX-UC-NTq"/>
                             <constraint firstItem="4Mm-QT-A2D" firstAttribute="leading" secondItem="HRV-Ok-zJv" secondAttribute="leading" id="9aS-Un-8GN"/>
                             <constraint firstItem="oQN-uo-gRS" firstAttribute="top" secondItem="4Mm-QT-A2D" secondAttribute="bottom" id="9eg-qr-Dth"/>
@@ -238,12 +244,20 @@
                             <constraint firstItem="TnD-2f-K77" firstAttribute="leading" secondItem="HRV-Ok-zJv" secondAttribute="leading" id="Gro-BS-VIi"/>
                             <constraint firstItem="8gf-A4-lSf" firstAttribute="top" secondItem="oQN-uo-gRS" secondAttribute="bottom" id="H3Q-Yx-WL4"/>
                             <constraint firstItem="oQN-uo-gRS" firstAttribute="leading" secondItem="HRV-Ok-zJv" secondAttribute="leading" id="KRv-Rh-yav"/>
+                            <constraint firstAttribute="trailing" secondItem="L0J-0F-WTG" secondAttribute="trailing" id="Qj2-LR-6De"/>
                             <constraint firstItem="JU6-xw-LN8" firstAttribute="top" secondItem="5gw-i8-h2D" secondAttribute="bottom" id="Snx-x9-8Gh"/>
                             <constraint firstAttribute="trailing" secondItem="oQN-uo-gRS" secondAttribute="trailing" id="U4k-CK-sED"/>
                             <constraint firstItem="JU6-xw-LN8" firstAttribute="leading" secondItem="HRV-Ok-zJv" secondAttribute="leading" id="bRl-Hc-O81"/>
-                            <constraint firstAttribute="trailing" secondItem="TnD-2f-K77" secondAttribute="trailing" id="boR-qv-YLA"/>
+                            <constraint firstAttribute="trailing" secondItem="TnD-2f-K77" secondAttribute="trailing" constant="20" id="boR-qv-YLA"/>
+                            <constraint firstItem="TnD-2f-K77" firstAttribute="leading" secondItem="HRV-Ok-zJv" secondAttribute="leading" constant="20" id="cbP-3o-obL"/>
+                            <constraint firstItem="L0J-0F-WTG" firstAttribute="top" secondItem="5gw-i8-h2D" secondAttribute="bottom" id="xPd-mI-Xgc"/>
                             <constraint firstAttribute="trailing" secondItem="4Mm-QT-A2D" secondAttribute="trailing" id="xmf-3C-pUC"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Gro-BS-VIi"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="71a-1l-1Lj" id="f0s-1V-eCX"/>

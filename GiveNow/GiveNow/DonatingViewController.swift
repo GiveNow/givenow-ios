@@ -116,14 +116,24 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                 if result!.count > 0 {
                     if let pickupRequest = result![0] as? PickupRequest {
                         self.newPickupRequest = pickupRequest
-                        self.performSegueWithIdentifier("viewNewDonation", sender: nil)
+                        self.addPendingDonationChildView()
                     }
                 }
             }
         })
     }
     
-    
+    func addPendingDonationChildView() {
+        if storyboard != nil {
+            searchController.searchBar.hidden = true
+            let pendingDonationViewController = storyboard!.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
+            pendingDonationViewController.pickupRequest = newPickupRequest
+            addChildViewController(pendingDonationViewController)
+            pendingDonationViewController.view.frame = CGRect(x: 0, y: 64, width: view.frame.width, height: view.frame.height - 64)
+            view.addSubview(pendingDonationViewController.view)
+            pendingDonationViewController.didMoveToParentViewController(self)
+        }
+    }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -149,7 +159,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                     
                     self.mapView?.setRegion(coordinateRegion, animated: true)
                     self.shouldUpdateSearchBarWithMapCenter = true
-                    print("This is here")
                 }
                 else {
                     print("Location is not valid")
@@ -375,10 +384,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     
     @IBAction func newPickupRequestCreated(segue: UIStoryboardSegue) {
         
-    }
-    
-    @IBAction func newPickupCancelled(segue: UIStoryboardSegue) {
-        newPickupRequest = nil
     }
     
 }
