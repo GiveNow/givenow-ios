@@ -221,11 +221,11 @@
             </objects>
             <point key="canvasLocation" x="-845" y="493"/>
         </scene>
-        <!--Dashboard Tab View Controller-->
+        <!--My Dashboard-->
         <scene sceneID="vpn-6D-xbG">
             <objects>
                 <tabBarController id="9Xv-gM-mHf" customClass="DashboardTabViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="0eg-rX-hSM">
+                    <navigationItem key="navigationItem" title="My Dashboard" id="0eg-rX-hSM">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="wLn-WX-NmH">
                             <color key="tintColor" red="0.043137254899999998" green="0.043137254899999998" blue="0.043137254899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
