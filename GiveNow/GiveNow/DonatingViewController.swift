@@ -159,7 +159,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                     
                     self.mapView?.setRegion(coordinateRegion, animated: true)
                     self.shouldUpdateSearchBarWithMapCenter = true
-                    print("This is here")
                 }
                 else {
                     print("Location is not valid")
