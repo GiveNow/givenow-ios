@@ -134,7 +134,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
             pendingDonationViewController.didMoveToParentViewController(self)
         }
     }
-    
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -386,10 +385,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     
     @IBAction func newPickupRequestCreated(segue: UIStoryboardSegue) {
         
-    }
-    
-    @IBAction func newPickupCancelled(segue: UIStoryboardSegue) {
-        newPickupRequest = nil
     }
     
 }

@@ -48,7 +48,13 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
                 print(error)
             }
             else {
-                self.performSegueWithIdentifier("newPickupCanceled", sender: nil)
+                if let parent = self.parentViewController as? DonatingViewController {
+                    parent.searchController.searchBar.hidden = false
+                    parent.newPickupRequest = nil
+                }
+                self.willMoveToParentViewController(nil)
+                self.view.removeFromSuperview()
+                self.removeFromParentViewController()
             }
         })
     }
