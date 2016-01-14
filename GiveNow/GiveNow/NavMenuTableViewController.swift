@@ -195,9 +195,14 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     
     func sendUserToOnboardingFlow() {
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "FirstLaunch")
-        self.willMoveToParentViewController(nil)
-        self.view.removeFromSuperview()
-        self.removeFromParentViewController()
+        if let parent = parentViewController as? SWRevealViewController {
+            if let initial = parent.parentViewController as? InitialViewController {
+                initial.displayOnboardingViewController()
+            }
+            parent.willMoveToParentViewController(nil)
+            parent.view.removeFromSuperview()
+            parent.removeFromParentViewController()
+        }
     }
     
     func volunteerTapped() {
