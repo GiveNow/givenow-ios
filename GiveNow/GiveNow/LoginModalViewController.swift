@@ -21,6 +21,7 @@ protocol LoginModalViewControllerDelegate{
 class LoginModalViewController: UIViewController {
     
     var delegate:LoginModalViewControllerDelegate!
+    var isModal:Bool!
 
     @IBOutlet weak var instructionsLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
@@ -188,9 +189,15 @@ class LoginModalViewController: UIViewController {
                 print(error.localizedDescription)
             }
             else {
-                self.dismissViewControllerAnimated(true, completion: {() -> Void in
+                if self.isModal == true {
+                    self.dismissViewControllerAnimated(true, completion: {() -> Void in
+                        print("Telling them")
+                        self.delegate.successfulLogin(self)
+                    })
+                }
+                else {
                     self.delegate.successfulLogin(self)
-                })
+                }
             }
         })
     }

@@ -45,6 +45,7 @@ class ModalBackgroundViewController: UIViewController, UIGestureRecognizerDelega
     func displayModalLoginView() {
         let modalLoginView = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
         modalLoginView.delegate = self
+        modalLoginView.isModal = true
         addChildViewController(modalLoginView)
         
         let frame = CGRect(x: 20, y: 80, width: view.frame.width - 40, height: view.frame.height/2 - 80)
