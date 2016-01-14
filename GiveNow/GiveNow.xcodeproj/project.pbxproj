@@ -527,13 +527,13 @@
 		D2CEB8CF1C483FEE003F4CC0 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				D23CF8121C4724210070AEAA /* Initial */,
+				D23BBF4E1C457C5500E68AF9 /* Onboard */,
 				D23BBF481C457B0E00E68AF9 /* Main */,
 				D23BBF4B1C457B5C00E68AF9 /* Donate */,
-				D23BBF4C1C457BCF00E68AF9 /* Dashboard */,
 				D23BBF4D1C457C1B00E68AF9 /* Apply */,
-				D23BBF4E1C457C5500E68AF9 /* Onboard */,
+				D23BBF4C1C457BCF00E68AF9 /* Dashboard */,
 				D23BBF551C45C49600E68AF9 /* DropOff */,
-				D23CF8121C4724210070AEAA /* Initial */,
 			);
 			name = Features;
 			sourceTree = "<group>";

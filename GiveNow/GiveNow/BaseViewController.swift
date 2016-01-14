@@ -79,5 +79,11 @@ class BaseViewController: UIViewController {
         vc.view.removeFromSuperview()
         vc.removeFromParentViewController()
     }
+    
+    func fetchViewControllerFromStoryboard(storyboardName: String, storyboardIdentifier: String) -> UIViewController {
+        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier(storyboardIdentifier)
+        return vc
+    }
 
 }
