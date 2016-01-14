@@ -35,6 +35,15 @@
 "validate_sms_code" = "Du bekommst einen 4-stelligen Code per SMS.\nBitte gib ihn unten ein.";
 "confirmation_code_error" = "Bestätigungscode ist ungültig";
 
+/* Main Menu */
+"unknown_user" = "Unbekannter Benutzer";
+"not_logged_in" = "Nicht eingeloggt";
+"title_sign_out" = "Abmelden";
+"add_phone_number" = "Telefonnummer hinzufügen";
+"navigation_item_1" = "Sachen spenden";
+"navigation_item_2" = "Helfer";
+"navigation_item_3" = "Hilfsorganisationen";
+
 /* VOLUNTEERING */
 
 /* Volunteering - Title */

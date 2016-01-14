@@ -36,6 +36,16 @@
 "validate_sms_code" = "We sent a 4-digit SMS code to your phone number. Enter it in below.";
 "confirmation_code_error" = "Confirmation code is invalid";
 
+/* Main Menu */
+"unknown_user" = "Unknown User";
+"not_logged_in" = "Not logged in";
+"title_sign_out" = "Sign Out";
+"add_phone_number" = "Add phone number";
+"navigation_item_1" = "Give Now";
+"navigation_item_2" = "Volunteer";
+"navigation_item_3" = "Dropoff Centers";
+
+
 
 /* Volunteering - Title */
 "Volunteering - Title Label" = "Want to volunteer to pick up donations? The only thing you need is a car and some spare time!";

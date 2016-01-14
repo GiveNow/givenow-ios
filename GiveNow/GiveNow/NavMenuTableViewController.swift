@@ -87,7 +87,7 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
                 usernameLabel.text = user.username!
             }
             else {
-                nameLabel.text = "Unknown User"
+                nameLabel.text = NSLocalizedString("unknown_user", comment: "")
                 usernameLabel.text = ""
             }
             if let image = UIImage(named: "round_icon") {
@@ -96,7 +96,7 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
             }
         }
         else {
-            nameLabel.text = "Not logged in"
+            nameLabel.text = NSLocalizedString("not_logged_in", comment: "")
             usernameLabel.text = ""
             profileImage.image = nil
         }
@@ -104,10 +104,10 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
     
     func getLoginLabel() -> String {
         if AppState.sharedInstance().isUserRegistered {
-            return "Log out"
+            return NSLocalizedString("title_sign_out", comment: "")
         }
         else {
-            return "Add phone number"
+            return NSLocalizedString("add_phone_number", comment: "")
         }
     }
     
@@ -117,13 +117,13 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
             switch indexPath.row {
             case 0:
                 cell.menuImage.image = self.templatedImageFromName("pin-drop")
-                cell.cellLabel.text = "Give Now"
+                cell.cellLabel.text = NSLocalizedString("navigation_item_1", comment: "")
             case 1:
                 cell.menuImage.image = self.templatedImageFromName("car")
-                cell.cellLabel.text = "Volunteer"
+                cell.cellLabel.text = NSLocalizedString("navigation_item_2", comment: "")
             default:
                 cell.menuImage.image = templatedImageFromName("city")
-                cell.cellLabel.text = "Drop Off"
+                cell.cellLabel.text = NSLocalizedString("navigation_item_3", comment: "")
             }
         }
         else {
