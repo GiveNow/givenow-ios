@@ -243,11 +243,9 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="pageControl" destination="b9n-bz-wJz" id="sRU-T6-OmO"/>
-                        <segue destination="ZIb-FV-XXf" kind="unwind" identifier="onboardingCompleted" unwindAction="onboardingCompleted:" id="oaz-ja-dDu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c6f-Oo-nNJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="ZIb-FV-XXf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="306" y="175"/>
         </scene>

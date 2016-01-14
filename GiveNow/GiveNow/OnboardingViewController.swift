@@ -97,15 +97,22 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     
     @IBAction func addAPhoneNumberLater(sender: AnyObject) {
         dismissOnboardingView()
-//        performSegueWithIdentifier("onboardingCompleted", sender: nil)
     }
     
     func loginCompleted(notification: NSNotification) {
-        performSegueWithIdentifier("onboardingCompleted", sender: nil)
+        dismissOnboardingView()
     }
     
     func dismissOnboardingView() {
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
+        
+        if let parent = self.parentViewController as? InitialViewController {
+            parent.displayMainViewController()
+        }
+        else {
+            print("Not the parent")
+        }
+        
         self.willMoveToParentViewController(nil)
         self.view.removeFromSuperview()
         self.removeFromParentViewController()

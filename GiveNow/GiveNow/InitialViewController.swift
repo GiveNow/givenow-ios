@@ -12,11 +12,7 @@ class InitialViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
         detectFirstLaunch()
-        super.viewDidAppear(true)
     }
     
     func detectFirstLaunch(){
