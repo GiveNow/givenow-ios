@@ -27,7 +27,6 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHeaderView()
-//        configureLoginLabel()
         configureProfileInfo()
     }
     
@@ -103,14 +102,14 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
         }
     }
     
-//    func configureLoginLabel() {
-//        if AppState.sharedInstance().isUserRegistered {
-//            logInLabel.text = "Log out"
-//        }
-//        else {
-//            logInLabel.text = "Add phone number"
-//        }
-//    }
+    func getLoginLabel() -> String {
+        if AppState.sharedInstance().isUserRegistered {
+            return "Log out"
+        }
+        else {
+            return "Add phone number"
+        }
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("menuCell") as! MenuTableViewCell
@@ -129,7 +128,7 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
         }
         else {
             cell.menuImage.image = templatedImageFromName("power")
-            cell.cellLabel.text = "Log out"
+            cell.cellLabel.text = self.getLoginLabel()
         }
         if indexPath == selectedIndex {
             highlightCell(cell)
@@ -183,8 +182,7 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     func logInOutTapped() {
         if AppState.sharedInstance().isUserRegistered {
             User.logOut()
-            configureProfileInfo()
-//            configureLoginLabel()
+            sendUserToOnboardingFlow()
         }
         else {
             loginModalViewController.modalPresentationStyle = .OverFullScreen
@@ -193,6 +191,13 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
             
             presentViewController(loginModalViewController, animated: true, completion: {})
         }
+    }
+    
+    func sendUserToOnboardingFlow() {
+        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "FirstLaunch")
+        self.willMoveToParentViewController(nil)
+        self.view.removeFromSuperview()
+        self.removeFromParentViewController()
     }
     
     func volunteerTapped() {
@@ -213,13 +218,13 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     }
     
     func successfulLogin(controller: LoginModalViewController) {
-//        configureLoginLabel()
         configureProfileInfo()
+        tableView.reloadData()
     }
     
     @IBAction func loginCompleted(segue: UIStoryboardSegue) {
-//        configureLoginLabel()
         configureProfileInfo()
+        tableView.reloadData()
     }
 
 }
