@@ -408,9 +408,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         })
     }
     
-    @IBAction func onboardingCompleted(segue: UIStoryboardSegue) {
-    }
-    
     @IBAction func newPickupRequestCreated(segue: UIStoryboardSegue) {
         
     }
