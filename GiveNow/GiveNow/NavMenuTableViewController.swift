@@ -186,11 +186,6 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
         }
         else {
             createModalBackgroundView()
-//            loginModalViewController.modalPresentationStyle = .OverFullScreen
-//            loginModalViewController.modalTransitionStyle = .CrossDissolve
-//            loginModalViewController.delegate = self
-//            
-//            presentViewController(loginModalViewController, animated: true, completion: {})
         }
     }
 
