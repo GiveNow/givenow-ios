@@ -9,7 +9,7 @@
         <!--Onboarding-->
         <scene sceneID="erS-gD-Dyq">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="WaI-Bh-GTN" customClass="OnboardingViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="onboarding" automaticallyAdjustsScrollViewInsets="NO" id="WaI-Bh-GTN" customClass="OnboardingViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3jR-Vf-g4c"/>
                         <viewControllerLayoutGuide type="bottom" id="Whn-tj-Aen"/>

@@ -56,7 +56,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="szF-3H-X8w">
             <objects>
-                <viewController id="Y46-gm-tya" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="reveal" id="Y46-gm-tya" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kBY-Y4-I24"/>
                         <viewControllerLayoutGuide type="bottom" id="BhX-zo-LMc"/>

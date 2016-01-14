@@ -62,20 +62,10 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detectFirstLaunch()
         initializeSearchController()
         initializeSearchResultsTable()
         initializeMenuButton()
         awakeFromNib()
-    }
-    
-    
-    func detectFirstLaunch(){
-        let firstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
-        if !firstLaunch {
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
-            performSegueWithIdentifier("onboarding", sender: nil)
-        }
     }
     
     func initializeMenuButton() {

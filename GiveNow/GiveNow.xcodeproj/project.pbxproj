@@ -69,6 +69,8 @@
 		D23BBF591C45C4B900E68AF9 /* DropOff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */; };
 		D23BBF5D1C45C65700E68AF9 /* DropOffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */; };
 		D23BBF631C45D3CF00E68AF9 /* MyPendingDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF621C45D3CF00E68AF9 /* MyPendingDonationViewController.swift */; };
+		D23CF8161C47243F0070AEAA /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23CF8151C47243F0070AEAA /* Initial.storyboard */; };
+		D23CF8181C4724650070AEAA /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CF8171C4724650070AEAA /* InitialViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -241,6 +243,8 @@
 		D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DropOff.storyboard; sourceTree = "<group>"; };
 		D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropOffViewController.swift; sourceTree = "<group>"; };
 		D23BBF621C45D3CF00E68AF9 /* MyPendingDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPendingDonationViewController.swift; sourceTree = "<group>"; };
+		D23CF8151C47243F0070AEAA /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
+		D23CF8171C4724650070AEAA /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +349,7 @@
 		2645C6681C21E7FF00D6C70D /* GiveNow */ = {
 			isa = PBXGroup;
 			children = (
+				D23CF8121C4724210070AEAA /* Initial */,
 				D23BBF551C45C49600E68AF9 /* DropOff */,
 				D23BBF4E1C457C5500E68AF9 /* Onboard */,
 				D23BBF4D1C457C1B00E68AF9 /* Apply */,
@@ -516,6 +521,15 @@
 				D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */,
 			);
 			name = DropOff;
+			sourceTree = "<group>";
+		};
+		D23CF8121C4724210070AEAA /* Initial */ = {
+			isa = PBXGroup;
+			children = (
+				D23CF8151C47243F0070AEAA /* Initial.storyboard */,
+				D23CF8171C4724650070AEAA /* InitialViewController.swift */,
+			);
+			name = Initial;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -690,6 +704,7 @@
 			files = (
 				2645C6741C21E7FF00D6C70D /* LaunchScreen.storyboard in Resources */,
 				2645C6711C21E7FF00D6C70D /* Assets.xcassets in Resources */,
+				D23CF8161C47243F0070AEAA /* Initial.storyboard in Resources */,
 				2645C69C1C21F34400D6C70D /* Apply.storyboard in Resources */,
 				260746761C265A710022E0ED /* Mapbox.bundle in Resources */,
 				2645C66F1C21E7FF00D6C70D /* Main.storyboard in Resources */,
@@ -756,6 +771,7 @@
 				2645C6A61C21F3BD00D6C70D /* OnboardingViewController.swift in Sources */,
 				C72296321C228E550097A662 /* ColorPalette.swift in Sources */,
 				260746261C23D87D0022E0ED /* DropOffAgency.swift in Sources */,
+				D23CF8181C4724650070AEAA /* InitialViewController.swift in Sources */,
 				D2186FB71C3CE917001551EF /* PickupDonationViewController.swift in Sources */,
 				2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */,
 				26FE37231C23B80500BED9A0 /* Donation.swift in Sources */,
