@@ -17,6 +17,8 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     var usernameLabel:UILabel!
     var profileImage = UIImageView()
     
+    var selectedIndex = NSIndexPath(forItem: 0, inSection: 0)
+    
     // MARK: - Nib setup
     let loginModalViewController = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
     
@@ -25,7 +27,7 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHeaderView()
-        configureLoginLabel()
+//        configureLoginLabel()
         configureProfileInfo()
     }
     
@@ -67,15 +69,7 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
-    
-//    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-//        switch indexPath.section {
-//        case 0:
-//            return false
-//        default:
-//            return true
-//        }
-//    }
+
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
@@ -109,38 +103,88 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
         }
     }
     
-    func configureLoginLabel() {
-        if AppState.sharedInstance().isUserRegistered {
-            logInLabel.text = "Log out"
+//    func configureLoginLabel() {
+//        if AppState.sharedInstance().isUserRegistered {
+//            logInLabel.text = "Log out"
+//        }
+//        else {
+//            logInLabel.text = "Add phone number"
+//        }
+//    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("menuCell") as! MenuTableViewCell
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                cell.imageView!.image = self.templatedImageFromName("pin-drop")
+                cell.cellLabel.text = "Give Now"
+            case 1:
+                cell.imageView!.image = self.templatedImageFromName("car")
+                cell.cellLabel.text = "Volunteer"
+            default:
+                cell.imageView!.image = templatedImageFromName("city")
+                cell.cellLabel.text = "Drop Off"
+            }
         }
         else {
-            logInLabel.text = "Add phone number"
+            cell.imageView!.image = templatedImageFromName("power")
+            cell.cellLabel.text = "Log out"
+        }
+        if indexPath == selectedIndex {
+            highlightCell(cell)
+        }
+        else {
+            unhighlightCell(cell)
+        }
+        return cell
+    }
+    
+    func templatedImageFromName(name: String) -> UIImage {
+        if let image = UIImage(named: name) {
+            return image.imageWithRenderingMode(.AlwaysTemplate)
+        }
+        else {
+            return UIImage()
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)!
-        if cell.reuseIdentifier != nil {
-            switch cell.reuseIdentifier! {
-            case "giveNow":
-                performSegueWithIdentifier("donate", sender: nil)
-            case "volunteer":
-                volunteerTapped()
-            case "dropOff":
-                performSegueWithIdentifier("dropOff", sender: nil)
-            case "logIn":
-                logInOutTapped()
-            default:
-                print("No action")
-            }
-        }
+    func highlightCell(cell: MenuTableViewCell) {
+        cell.backgroundColor = UIColor.colorAccent()
+        cell.cellImage.tintColor = UIColor.whiteColor()
+        cell.cellLabel.textColor = UIColor.whiteColor()
     }
+    
+    func unhighlightCell(cell: MenuTableViewCell) {
+        cell.backgroundColor = UIColor.whiteColor()
+        cell.cellImage.tintColor = UIColor.blackColor()
+        cell.cellLabel.textColor = UIColor.blackColor()
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                performSegueWithIdentifier("donate", sender: nil)
+            case 1:
+                volunteerTapped()
+            default:
+                performSegueWithIdentifier("dropOff", sender: nil)
+            }
+            self.selectedIndex = indexPath
+        }
+        else {
+            logInOutTapped()
+        }
+        tableView.reloadData()
+    }
+    
     
     func logInOutTapped() {
         if AppState.sharedInstance().isUserRegistered {
             User.logOut()
             configureProfileInfo()
-            configureLoginLabel()
+//            configureLoginLabel()
         }
         else {
             loginModalViewController.modalPresentationStyle = .OverFullScreen
@@ -169,51 +213,21 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     }
     
     func successfulLogin(controller: LoginModalViewController) {
-        configureLoginLabel()
+//        configureLoginLabel()
         configureProfileInfo()
     }
     
     @IBAction func loginCompleted(segue: UIStoryboardSegue) {
-        configureLoginLabel()
+//        configureLoginLabel()
         configureProfileInfo()
     }
 
+}
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+class MenuTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var cellImage: UIImageView!
+    @IBOutlet weak var cellLabel: UILabel!
+    
 }
