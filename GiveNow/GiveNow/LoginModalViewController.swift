@@ -128,13 +128,13 @@ class LoginModalViewController: BaseViewController {
             else {
                 textField.text = nil
             }
-            instructionsLabel.text = NSLocalizedString("Volunteering - Phone Number Modal Title", comment: "")
-            detailLabel.text = NSLocalizedString("Volunteering - Phone Number Modal Details", comment: "")
+            instructionsLabel.text = NSLocalizedString("phone_number_verification_title", comment: "")
+            detailLabel.text = NSLocalizedString("phone_number_disclaimer", comment: "")
             backButton.hidden = true
         case .ConfirmationCode:
             textField.text = nil
-            instructionsLabel.text = NSLocalizedString("Volunteering - Confirmation Number Modal Title", comment: "")
-            detailLabel.text = NSLocalizedString("Volunteering - Confirmation Number Modal Details", comment: "")
+            instructionsLabel.text = NSLocalizedString("confirmation_code_title", comment: "")
+            detailLabel.text = NSLocalizedString("validate_sms_code", comment: "")
             backButton.hidden = false
         default:
             print("No action")
@@ -142,13 +142,12 @@ class LoginModalViewController: BaseViewController {
     }
     
     private func updateViewForInvalidPhoneNumber() {
-        instructionsLabel.text = "Please enter a valid phone number"
-        detailLabel.text = "Example: +49 123 456 7890"
+        detailLabel.text = NSLocalizedString("phone_number_verification_error_number_invalid", comment: "")
         backButton.hidden = true
     }
     
     private func updateViewForInvalidConfirmationCode() {
-        instructionsLabel.text = "Confirmation code is invalid"
+        instructionsLabel.text = NSLocalizedString("confirmation_code_error", comment: "")
         detailLabel.text = ""
     }
     
@@ -191,7 +190,6 @@ class LoginModalViewController: BaseViewController {
             else {
                 if self.isModal == true {
                     self.dismissViewControllerAnimated(true, completion: {() -> Void in
-                        print("Telling them")
                         self.delegate.successfulLogin(self)
                     })
                 }

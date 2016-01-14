@@ -132,5 +132,11 @@ class SignUpCollectionViewCell : UICollectionViewCell {
     @IBOutlet weak var orLabel: UILabel!
     @IBOutlet weak var addPhoneLaterButton: UIButton!
     
+    override func awakeFromNib() {
+        orLabel.text = NSLocalizedString("onboarding_or", comment: "")
+        addPhoneLaterButton.setTitle(NSLocalizedString("onboarding_add_phone_number_later_button", comment: ""), forState: .Normal)
+        super.awakeFromNib()
+    }
+    
     
 }

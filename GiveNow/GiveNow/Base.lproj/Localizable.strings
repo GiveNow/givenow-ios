@@ -20,27 +20,26 @@
 "onboarding_4_title" = "We take care of the rest.";
 "onboarding_4_description" =  "A trusted volunteer driver will pick up your donation. We'll contact you to coordinate the pickup.";
 
+"onboarding_or" = "or";
+"onboarding_add_phone_number_later_button" = "Add a phone number later";
+
 /* LOGIN */
 "SMS Body"  = "{code} is your code for GiveNow.";
 "Cancel" = "Cancel";
 "Submit" = "Submit";
 
+"phone_number_verification_title" = "Add a phone number";
+"phone_number_disclaimer" = "This only lets your driver reach you to arrange pickup. We never share your number with third parties.";
+"phone_number_verification_error_number_invalid" = "Please enter a valid phone number.\nExample: +49 123 456 7890";
+
+"confirmation_code_title" = "Enter confirmation code";
+"validate_sms_code" = "We sent a 4-digit SMS code to your phone number. Enter it in below.";
+"confirmation_code_error" = "Confirmation code is invalid";
+
 
 /* Volunteering - Title */
 "Volunteering - Title Label" = "Want to volunteer to pick up donations? The only thing you need is a car and some spare time!";
 "Volunteering - Title Button" = "I want to volunteer!";
-
-/* Volunteering - Phone Number Modal Title */
-"Volunteering - Phone Number Modal Title" = "Add a phone number";
-
-/* Volunteering - Phone Number Modal Details */
-"Volunteering - Phone Number Modal Details" = "We'll contact you at this number with details about volunteering. Don't worry, we won't share it with anyone!";
-
-/* Volunteering - Confirmation Number Modal Title */
-"Volunteering - Confirmation Number Modal Title" = "Enter confirmation code";
-
-/* Volunteering - Confirmation Number Modal Details */
-"Volunteering - Confirmation Number Modal Details" = "You should have gotten a 4-digit confirmation code. Enter it here to complete the signup!";
 
 /* Volunteering - Thanks Label */
 "Volunteering - Thanks Label" = "Thanks for applying to volunteer! We'll contact you soon at {PhoneNumber}";

@@ -52,7 +52,7 @@
                                                         <constraint firstAttribute="height" constant="40" id="Bo1-bU-486"/>
                                                     </constraints>
                                                     <size key="titleShadowOffset" width="0.0" height="4"/>
-                                                    <state key="normal" title="ADD A PHONE NUMBER LATER">
+                                                    <state key="normal" title="addPhoneNumberLaterButon">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <variation key="default">

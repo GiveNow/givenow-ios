@@ -19,28 +19,27 @@
 "onboarding_4_title" = "Den Rest erledigen freiwillige Helfer.";
 "onboarding_4_description" =  "Ein Helfer wird nun deine Spende abholen.\nEr wird sich bei dir melden um einen Termin mit dir zu vereinbaren.";
 
+"onboarding_or" = "oder";
+"onboarding_add_phone_number_later_button" = "Telefonnummer später hinzufügen";
+
 /* LOGIN */
 "SMS Body"  = "{code} ist dein Code für GiveNow.";
 "Cancel" = "Abbrechen";
 "Submit" = "Absenden";
+
+"phone_number_verification_title" = "Telefonnummer hinzufügen";
+"phone_number_disclaimer" = "Diese wird nur benötigt, damit der Helfer dich zur Terminvereinbarung erreichen kann.\nDeine Telefonnummer wird nicht mit weiteren Personen oder Organisationen geteilt.";
+"phone_number_verification_error_number_invalid" = "Bitte eine gültige Telefonnummer angeben.\nBeispiel: +49 123 456 7890";
+
+"confirmation_code_title" = "Geben Sie den Bestätigungscode ein";
+"validate_sms_code" = "Du bekommst einen 4-stelligen Code per SMS.\nBitte gib ihn unten ein.";
+"confirmation_code_error" = "Bestätigungscode ist ungültig";
 
 /* VOLUNTEERING */
 
 /* Volunteering - Title */
 "Volunteering - Title Label" = "Want to volunteer to pick up donations? The only thing you need is a car and some spare time!";
 "Volunteering - Title Button" = "I want to volunteer!";
-
-/* Volunteering - Phone Number Modal Title */
-"Volunteering - Phone Number Modal Title" = "Add a phone number";
-
-/* Volunteering - Phone Number Modal Details */
-"Volunteering - Phone Number Modal Details" = "We'll contact you at this number with details about volunteering. Don't worry, we won't share it with anyone!";
-
-/* Volunteering - Confirmation Number Modal Title */
-"Volunteering - Confirmation Number Modal Title" = "Enter confirmation code";
-
-/* Volunteering - Confirmation Number Modal Details */
-"Volunteering - Confirmation Number Modal Details" = "You should have gotten a 4-digit confirmation code. Enter it here to complete the signup!";
 
 /* Volunteering - Thanks Label */
 "Volunteering - Thanks Label" = "Thanks for applying to volunteer! We'll contact you soon at {PhoneNumber}";
