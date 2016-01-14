@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class NavMenuTableViewController: UITableViewController, LoginModalViewControllerDelegate {
+class NavMenuTableViewController: UITableViewController, ModalBackgroundViewControllerDelegate {
 
     @IBOutlet weak var logInLabel: UILabel!
     
@@ -185,12 +185,21 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
             sendUserToOnboardingFlow()
         }
         else {
-            loginModalViewController.modalPresentationStyle = .OverFullScreen
-            loginModalViewController.modalTransitionStyle = .CrossDissolve
-            loginModalViewController.delegate = self
-            
-            presentViewController(loginModalViewController, animated: true, completion: {})
+            createModalBackgroundView()
+//            loginModalViewController.modalPresentationStyle = .OverFullScreen
+//            loginModalViewController.modalTransitionStyle = .CrossDissolve
+//            loginModalViewController.delegate = self
+//            
+//            presentViewController(loginModalViewController, animated: true, completion: {})
         }
+    }
+
+    func createModalBackgroundView() {
+        let modalBackground = ModalBackgroundViewController()
+        modalBackground.modalPresentationStyle = .OverFullScreen
+        modalBackground.modalTransitionStyle = .CrossDissolve
+        modalBackground.delegate = self
+        presentViewController(modalBackground, animated: true, completion: {})
     }
     
     func sendUserToOnboardingFlow() {
@@ -222,7 +231,7 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
         }
     }
     
-    func successfulLogin(controller: LoginModalViewController) {
+    func modalViewDismissedWithResult(controller: ModalBackgroundViewController) {
         configureProfileInfo()
         tableView.reloadData()
     }
@@ -239,5 +248,57 @@ class MenuTableViewCell: UITableViewCell {
     
     @IBOutlet weak var menuImage: UIImageView!
     @IBOutlet weak var cellLabel: UILabel!
+    
+}
+
+protocol ModalBackgroundViewControllerDelegate {
+    func modalViewDismissedWithResult(controller:ModalBackgroundViewController)
+}
+
+class ModalBackgroundViewController: UIViewController, UIGestureRecognizerDelegate, LoginModalViewControllerDelegate {
+    
+    var delegate:ModalBackgroundViewControllerDelegate!
+    var backgroundView:UIView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureBackgroundView()
+        displayModalLoginView()
+    }
+    
+    func configureBackgroundView() {
+        backgroundView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: view.frame.height))
+        backgroundView.backgroundColor = UIColor.darkGrayColor()
+        backgroundView.alpha = 0.8
+        view.addSubview(backgroundView)
+        
+        addTapGestureRecognizer()
+    }
+    
+    func addTapGestureRecognizer() {
+        let tap = UITapGestureRecognizer(target: self, action: Selector("backgroundTapped:"))
+        tap.delegate = self
+        backgroundView.addGestureRecognizer(tap)
+    }
+    
+    func backgroundTapped(sender: UIGestureRecognizer? = nil) {
+        dismissViewControllerAnimated(true, completion: {})
+    }
+    
+    func displayModalLoginView() {
+        let modalLoginView = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
+        modalLoginView.delegate = self
+        addChildViewController(modalLoginView)
+        
+        let frame = CGRect(x: 20, y: 80, width: view.frame.width - 40, height: view.frame.height/2 - 80)
+        modalLoginView.view.frame = frame
+        view.addSubview(modalLoginView.view)
+        modalLoginView.didMoveToParentViewController(self)
+    }
+    
+    func successfulLogin(controller: LoginModalViewController) {
+        delegate.modalViewDismissedWithResult(self)
+        dismissViewControllerAnimated(true, completion: {})
+    }
     
 }

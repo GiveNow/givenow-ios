@@ -407,9 +407,9 @@
 			children = (
 				2645C6A11C21F38E00D6C70D /* BaseNavigationController.swift */,
 				2645C69F1C21F37A00D6C70D /* BaseViewController.swift */,
+				D23CF8191C472F760070AEAA /* MyLocationButton.swift */,
 				D23BBF4F1C457F1B00E68AF9 /* LoginModalViewController.swift */,
 				D23BBF501C457F1B00E68AF9 /* LoginModalViewController.xib */,
-				D23CF8191C472F760070AEAA /* MyLocationButton.swift */,
 			);
 			name = "Shared View Controllers";
 			sourceTree = "<group>";

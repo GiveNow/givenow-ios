@@ -71,10 +71,6 @@ class LoginModalViewController: UIViewController {
         button.tintColor = UIColor.whiteColor()
     }
     
-    @IBAction func backgroundTapped(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: {})
-    }
-    
     // MARK: User Actions
     
     
@@ -150,6 +146,11 @@ class LoginModalViewController: UIViewController {
         backButton.hidden = true
     }
     
+    private func updateViewForInvalidConfirmationCode() {
+        instructionsLabel.text = "Confirmation code is invalid"
+        detailLabel.text = ""
+    }
+    
     private func sendPhoneNumber(phoneNumber: String) {
         showActivityIndicator()
         backend.sendCodeToPhoneNumber(phoneNumber, completionHandler: { (success, error) -> Void in
@@ -183,6 +184,7 @@ class LoginModalViewController: UIViewController {
         backend.logInWithPhoneNumber(phoneNumber, codeEntry: codeEntry, completionHandler: { (success, error) -> Void in
             if let error = error {
                 self.hideActivityIndicator()
+                self.updateViewForInvalidConfirmationCode()
                 print(error.localizedDescription)
             }
             else {
