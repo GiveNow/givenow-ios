@@ -27,12 +27,8 @@ extension UIColor {
         return UIColor(red: 102/255, green: 187/255, blue: 106/255, alpha: 1.0)
     }
     
+    class func colorAlternate() -> UIColor {
+        return UIColor(red: 3.0/255.0, green: 155.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+    }
+    
 }
-
-
-
-
-//<color name="colorPrimary">#ff00b9e6</color>
-//<color name="colorPrimaryDark">#ff0a89a7</color>
-//<color name="colorPrimaryLight">#ffe1f5fe</color>
-//<color name="colorAccent">#ff66bb6a</color>
