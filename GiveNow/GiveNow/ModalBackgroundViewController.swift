@@ -12,7 +12,7 @@ protocol ModalBackgroundViewControllerDelegate {
     func modalViewDismissedWithResult(controller:ModalBackgroundViewController)
 }
 
-class ModalBackgroundViewController: UIViewController, UIGestureRecognizerDelegate, LoginModalViewControllerDelegate {
+class ModalBackgroundViewController: BaseViewController, UIGestureRecognizerDelegate, LoginModalViewControllerDelegate {
     
     var delegate:ModalBackgroundViewControllerDelegate!
     var backgroundView:UIView!

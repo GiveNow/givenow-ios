@@ -18,7 +18,7 @@ protocol LoginModalViewControllerDelegate{
     func successfulLogin(controller:LoginModalViewController)
 }
 
-class LoginModalViewController: UIViewController {
+class LoginModalViewController: BaseViewController {
     
     var delegate:LoginModalViewControllerDelegate!
     var isModal:Bool!

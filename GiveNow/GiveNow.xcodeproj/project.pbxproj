@@ -353,16 +353,9 @@
 		2645C6681C21E7FF00D6C70D /* GiveNow */ = {
 			isa = PBXGroup;
 			children = (
-				D23CF8121C4724210070AEAA /* Initial */,
-				D23BBF551C45C49600E68AF9 /* DropOff */,
-				D23BBF4E1C457C5500E68AF9 /* Onboard */,
-				D23BBF4D1C457C1B00E68AF9 /* Apply */,
-				D23BBF4C1C457BCF00E68AF9 /* Dashboard */,
-				D23BBF4B1C457B5C00E68AF9 /* Donate */,
-				D23BBF481C457B0E00E68AF9 /* Main */,
+				D2CEB8CF1C483FEE003F4CC0 /* Features */,
 				26FE37141C22A54700BED9A0 /* Localization */,
 				2645C69E1C21F36500D6C70D /* Shared View Controllers */,
-				2645C69D1C21F34900D6C70D /* Storyboards */,
 				2645C6AB1C21F3E100D6C70D /* Integrations */,
 				2607467A1C265B130022E0ED /* Mapbox */,
 				D207A3461C23B82400E93BEB /* Extensions.swift */,
@@ -395,13 +388,6 @@
 				2645C68B1C21E7FF00D6C70D /* Info.plist */,
 			);
 			path = GiveNowUITests;
-			sourceTree = "<group>";
-		};
-		2645C69D1C21F34900D6C70D /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		2645C69E1C21F36500D6C70D /* Shared View Controllers */ = {
@@ -536,6 +522,20 @@
 				D23CF8171C4724650070AEAA /* InitialViewController.swift */,
 			);
 			name = Initial;
+			sourceTree = "<group>";
+		};
+		D2CEB8CF1C483FEE003F4CC0 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				D23BBF481C457B0E00E68AF9 /* Main */,
+				D23BBF4B1C457B5C00E68AF9 /* Donate */,
+				D23BBF4C1C457BCF00E68AF9 /* Dashboard */,
+				D23BBF4D1C457C1B00E68AF9 /* Apply */,
+				D23BBF4E1C457C5500E68AF9 /* Onboard */,
+				D23BBF551C45C49600E68AF9 /* DropOff */,
+				D23CF8121C4724210070AEAA /* Initial */,
+			);
+			name = Features;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
