@@ -597,6 +597,20 @@ class Backend: NSObject {
         
         return phoneNumber
     }
+    
+    func formatPhoneNumber(phoneNumberString: String) -> String {
+        let phoneUtil = NBPhoneNumberUtil()
+        do {
+            let phoneNumber = try phoneUtil.parse(phoneNumberString, defaultRegion: "US")
+            let formattedString = try phoneUtil.format(phoneNumber, numberFormat: .E164)
+            return formattedString
+        }
+        catch let error as NSError {
+            print(error.localizedDescription)
+            return phoneNumberString
+        }
+        
+    }
 
 }
 

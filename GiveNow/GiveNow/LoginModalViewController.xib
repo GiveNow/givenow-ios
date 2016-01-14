@@ -47,6 +47,7 @@
                             <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                             <connections>
                                 <action selector="phoneTextFieldEditingChanged:" destination="-1" eventType="editingChanged" id="xWx-4x-cBf"/>
+                                <action selector="textFieldValueChanged:" destination="-1" eventType="valueChanged" id="b6m-fO-FEu"/>
                             </connections>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nck-rT-bgv" userLabel="bottomBorderView">

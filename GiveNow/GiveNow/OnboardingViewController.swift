@@ -60,8 +60,6 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loginCompleted:", name: "loginCompleted", object: nil)
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
@@ -116,10 +114,6 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     @IBAction func addAPhoneNumberLater(sender: AnyObject) {
         dismissOnboardingView()
     }
-    
-//    func loginCompleted(notification: NSNotification) {
-//        dismissOnboardingView()
-//    }
     
     func dismissOnboardingView() {
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
