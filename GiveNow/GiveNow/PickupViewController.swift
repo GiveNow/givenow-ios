@@ -21,6 +21,7 @@ import CoreLocation
 class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var myLocationButton: MyLocationButton!
     
     var locationManager: CLLocationManager? {
         didSet {
@@ -58,6 +59,15 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMap
         }
         else if status == .Allowed {
             zoomIntoLocation(true)
+        }
+    }
+    
+    @IBAction func myLocationTapped(sender: AnyObject) {
+        if let location = locationManager?.location {
+            let coord = location.coordinate
+            let currentRegion = mapView!.region
+            let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
+            mapView!.setRegion(newRegion, animated: true)
         }
     }
 

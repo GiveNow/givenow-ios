@@ -14,6 +14,7 @@ class DropOffViewController: BaseViewController, CLLocationManagerDelegate, MKMa
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var myLocationButton: MyLocationButton!
     
     var dropOffAgencies:[DropOffAgency]!
     
@@ -41,6 +42,15 @@ class DropOffViewController: BaseViewController, CLLocationManagerDelegate, MKMa
         initializeMenuButton()
         mapView.delegate = self
         fetchDropOffAgencies()
+    }
+    
+    @IBAction func myLocationTapped(sender: AnyObject) {
+        if let location = locationManager?.location {
+            let coord = location.coordinate
+            let currentRegion = mapView!.region
+            let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
+            mapView!.setRegion(newRegion, animated: true)
+        }
     }
     
     override func viewDidAppear(animated: Bool) {

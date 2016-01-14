@@ -71,13 +71,29 @@
                                     <constraint firstAttribute="height" constant="52" id="ZTW-EZ-fTV"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0U-KG-Zgd" customClass="MyLocationButton" customModule="GiveNow" customModuleProvider="target">
+                                <rect key="frame" x="536" y="486" width="44" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="jG4-E4-nX8"/>
+                                    <constraint firstAttribute="height" constant="44" id="kai-ld-I8G"/>
+                                </constraints>
+                                <state key="normal" image="my-location">
+                                    <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="myLocationTapped:" destination="LdM-nb-XRS" eventType="touchUpInside" id="QpS-Kg-FLI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="L0U-KG-Zgd" secondAttribute="trailing" constant="20" id="7wa-ZF-Rf9"/>
                             <constraint firstItem="VID-4N-S16" firstAttribute="trailing" secondItem="aCv-dI-Tpw" secondAttribute="trailing" id="AO1-rM-gCz"/>
                             <constraint firstItem="VID-4N-S16" firstAttribute="top" secondItem="CIT-Xb-fKC" secondAttribute="bottom" id="Dzg-Uj-IAW"/>
                             <constraint firstItem="aCv-dI-Tpw" firstAttribute="centerX" secondItem="HSQ-Wz-Aom" secondAttribute="centerX" id="EOI-Ct-cz6"/>
                             <constraint firstAttribute="trailing" secondItem="VID-4N-S16" secondAttribute="trailing" id="JRm-kQ-rje"/>
+                            <constraint firstItem="aCv-dI-Tpw" firstAttribute="top" secondItem="L0U-KG-Zgd" secondAttribute="bottom" constant="20" id="M6J-6A-qWm"/>
                             <constraint firstItem="VID-4N-S16" firstAttribute="leading" secondItem="aCv-dI-Tpw" secondAttribute="leading" id="YKy-wt-Sl0"/>
                             <constraint firstItem="VID-4N-S16" firstAttribute="centerY" secondItem="HSQ-Wz-Aom" secondAttribute="centerY" constant="26" id="aGU-GK-nc1"/>
                             <constraint firstItem="VID-4N-S16" firstAttribute="leading" secondItem="qGH-Dv-e79" secondAttribute="leading" id="dIw-Rd-D6K"/>
@@ -94,6 +110,7 @@
                     <connections>
                         <outlet property="mapView" destination="VID-4N-S16" id="UEQ-Nr-img"/>
                         <outlet property="menuButton" destination="jhn-mN-Qmk" id="Tx9-QT-hnI"/>
+                        <outlet property="myLocationButton" destination="L0U-KG-Zgd" id="Hrh-DE-3DB"/>
                         <outlet property="pickupLocationButton" destination="aCv-dI-Tpw" id="QjL-be-NBs"/>
                         <outlet property="searchDisplayController" destination="DiB-u8-tzc" id="2VU-Df-w1e"/>
                         <segue destination="xqe-tM-5xe" kind="show" identifier="selectCategories" id="vSF-G5-EV9"/>
@@ -450,6 +467,7 @@
     <resources>
         <image name="location_pin" width="30" height="55"/>
         <image name="menu" width="24" height="24"/>
+        <image name="my-location" width="24" height="24"/>
         <image name="store" width="24" height="24"/>
     </resources>
 </document>

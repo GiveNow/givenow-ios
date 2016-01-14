@@ -24,6 +24,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
 
     @IBOutlet var pickupLocationButton: UIButton?
     @IBOutlet var mapView: MKMapView?
+    @IBOutlet weak var myLocationButton: MyLocationButton!
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
@@ -77,6 +78,15 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
             self.menuButton.target = self.revealViewController()
             self.menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+    }
+    
+    @IBAction func myLocationTapped(sender: AnyObject) {
+        if let location = locationManager?.location {
+            let coord = location.coordinate
+            let currentRegion = mapView!.region
+            let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
+            mapView!.setRegion(newRegion, animated: true)
         }
     }
     
