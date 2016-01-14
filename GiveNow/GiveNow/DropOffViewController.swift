@@ -147,15 +147,15 @@ class DropOffViewController: BaseViewController, CLLocationManagerDelegate, MKMa
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is DropOffAgencyMapPoint {
             let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "dropOffAgency")
-            pinAnnotationView.pinColor = .Purple
+            pinAnnotationView.pinColor = .Green
             pinAnnotationView.canShowCallout = true
             
             let directionsButton = UIButton()
-            directionsButton.frame.size.width = 80
+            directionsButton.frame.size.width = 44
             directionsButton.frame.size.height = 44
             directionsButton.tintColor = UIColor.whiteColor()
-            directionsButton.setImage(UIImage(named: "car")!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-            directionsButton.backgroundColor = UIColor.purpleColor()
+            directionsButton.setImage(UIImage(named: "navigation")!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            directionsButton.backgroundColor = UIColor.colorAccent()
             
             pinAnnotationView.leftCalloutAccessoryView = directionsButton
             

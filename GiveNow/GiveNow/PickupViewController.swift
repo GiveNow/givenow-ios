@@ -156,14 +156,14 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMap
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is PickupRequestMapPoint {
             let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pickupRequest")
-            pinAnnotationView.pinColor = .Purple
+            pinAnnotationView.pinColor = .Green
             pinAnnotationView.canShowCallout = true
             
             let selectButton = UIButton()
             selectButton.frame.size.width = 80
             selectButton.frame.size.height = 44
             selectButton.setTitle("Accept", forState: .Normal)
-            selectButton.backgroundColor = UIColor.purpleColor()
+            selectButton.backgroundColor = UIColor.colorAccent()
 
             pinAnnotationView.leftCalloutAccessoryView = selectButton
             

@@ -44,6 +44,20 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
         super.viewDidLoad()
         mapView.delegate = self
         addPickupRequestToMap()
+        formatButtons()
+    }
+    
+    func formatButtons() {
+        tintButton(callButton, imageName: "phone")
+        tintButton(messageButton, imageName: "textsms")
+        tintButton(navigationButton, imageName: "navigation")
+    }
+    
+    func tintButton(button: UIButton, imageName: String) {
+        if let image = UIImage(named: imageName) {
+            button.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            button.tintColor = UIColor.colorAccent()
+        }
     }
 
     override func viewDidAppear(animated: Bool) {
