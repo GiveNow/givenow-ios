@@ -12,13 +12,16 @@ class InitialViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         detectFirstLaunch()
+        super.viewDidAppear(true)
     }
     
     func detectFirstLaunch(){
         let firstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
         if !firstLaunch {
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
             displayOnboardingViewController()
         }
         else {
