@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginModalViewController" customModule="GiveNow" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="dhj-wo-OtT" id="ckC-DM-j0R"/>
                 <outlet property="backButton" destination="gPc-Vp-c4h" id="K9B-Vm-RH6"/>
                 <outlet property="detailLabel" destination="h7P-sk-FHE" id="MOW-O1-73F"/>
                 <outlet property="doneButton" destination="Lue-cS-qMz" id="CMW-io-AFx"/>
@@ -51,7 +52,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+1 555 444 3333" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P11-Jj-eYs" userLabel="textField">
-                            <rect key="frame" x="60" y="206" width="380" height="24"/>
+                            <rect key="frame" x="80" y="206" width="340" height="24"/>
                             <color key="backgroundColor" red="0.40000000600000002" green="0.73333334920000004" blue="0.41568627949999998" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="T6n-20-PQe"/>
@@ -59,19 +60,29 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                            <connections>
+                                <action selector="phoneTextFieldEditingChanged:" destination="-1" eventType="editingChanged" id="xWx-4x-cBf"/>
+                            </connections>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nck-rT-bgv" userLabel="bottomBorderView">
-                            <rect key="frame" x="60" y="228" width="380" height="2"/>
+                            <rect key="frame" x="80" y="228" width="340" height="2"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="2" id="Jvv-La-Boh"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPc-Vp-c4h" userLabel="backButton">
-                            <rect key="frame" x="10" y="198" width="40" height="40"/>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="dhj-wo-OtT">
+                            <rect key="frame" x="430" y="188" width="60" height="60"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="40" id="WvX-zn-IPD"/>
-                                <constraint firstAttribute="height" constant="40" id="aDX-Cv-kJ7"/>
+                                <constraint firstAttribute="height" constant="60" id="DJS-ko-8sN"/>
+                                <constraint firstAttribute="width" constant="60" id="WUI-Ky-wqi"/>
+                            </constraints>
+                        </activityIndicatorView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPc-Vp-c4h" userLabel="backButton">
+                            <rect key="frame" x="10" y="188" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="WvX-zn-IPD"/>
+                                <constraint firstAttribute="height" constant="60" id="aDX-Cv-kJ7"/>
                             </constraints>
                             <state key="normal" image="arrow-back"/>
                             <connections>
@@ -79,10 +90,10 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lue-cS-qMz" userLabel="doneButton">
-                            <rect key="frame" x="450" y="198" width="40" height="40"/>
+                            <rect key="frame" x="430" y="188" width="60" height="60"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="8e5-Cr-MR3"/>
-                                <constraint firstAttribute="width" constant="40" id="Gp6-Dv-glr"/>
+                                <constraint firstAttribute="height" constant="60" id="8e5-Cr-MR3"/>
+                                <constraint firstAttribute="width" constant="60" id="Gp6-Dv-glr"/>
                             </constraints>
                             <state key="normal" image="checkmark"/>
                             <connections>
@@ -98,10 +109,12 @@
                         <constraint firstItem="gPc-Vp-c4h" firstAttribute="centerY" secondItem="P11-Jj-eYs" secondAttribute="centerY" id="45V-u3-b2s"/>
                         <constraint firstItem="P11-Jj-eYs" firstAttribute="leading" secondItem="BhC-3Q-ACa" secondAttribute="leading" constant="60" id="9wh-TB-dqw"/>
                         <constraint firstAttribute="trailing" secondItem="P11-Jj-eYs" secondAttribute="trailing" constant="60" id="BlZ-pj-veG"/>
+                        <constraint firstItem="dhj-wo-OtT" firstAttribute="centerY" secondItem="Lue-cS-qMz" secondAttribute="centerY" id="FHD-Lu-MIP"/>
                         <constraint firstAttribute="trailing" secondItem="Lue-cS-qMz" secondAttribute="trailing" constant="10" id="L3i-qS-qBh"/>
                         <constraint firstItem="h7P-sk-FHE" firstAttribute="top" secondItem="Mji-Sv-9Km" secondAttribute="bottom" constant="20" id="QlZ-I0-Xhx"/>
                         <constraint firstItem="Mji-Sv-9Km" firstAttribute="top" secondItem="BhC-3Q-ACa" secondAttribute="top" constant="20" id="R6y-MN-yDl"/>
                         <constraint firstItem="Lue-cS-qMz" firstAttribute="centerY" secondItem="P11-Jj-eYs" secondAttribute="centerY" id="R7m-hh-ZZE"/>
+                        <constraint firstItem="dhj-wo-OtT" firstAttribute="centerX" secondItem="Lue-cS-qMz" secondAttribute="centerX" id="UaR-5o-PBI"/>
                         <constraint firstItem="nck-rT-bgv" firstAttribute="leading" secondItem="BhC-3Q-ACa" secondAttribute="leading" constant="60" id="ZFh-iB-oz4"/>
                         <constraint firstAttribute="bottom" secondItem="P11-Jj-eYs" secondAttribute="bottom" constant="20" id="Zby-fY-lZ5"/>
                         <constraint firstAttribute="trailing" secondItem="Mji-Sv-9Km" secondAttribute="trailing" constant="20" id="eMf-Vv-QgR"/>
@@ -151,7 +164,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="arrow-back" width="24" height="24"/>
-        <image name="checkmark" width="24" height="24"/>
+        <image name="arrow-back" width="192" height="192"/>
+        <image name="checkmark" width="256" height="256"/>
     </resources>
 </document>

@@ -11,7 +11,6 @@ import UIKit
 public enum EntryMode : Int {
     case None = 0
     case PhoneNumber
-    case InvalidPhoneNumber
     case ConfirmationCode
 }
 
@@ -28,6 +27,7 @@ class LoginModalViewController: UIViewController {
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var _entryMode : EntryMode = .None
     
@@ -52,6 +52,18 @@ class LoginModalViewController: UIViewController {
         formatButton(backButton, imageName: "arrow-back")
         formatButton(doneButton, imageName: "checkmark")
         entryMode = .PhoneNumber
+        configure()
+    }
+    
+    func configure() {
+        validateSubmitButton()
+        updateViewForEntryMode(entryMode)
+        hideActivityIndicator()
+        textField?.becomeFirstResponder()
+    }
+    
+    @IBAction func phoneTextFieldEditingChanged(sender: AnyObject) {
+        validateSubmitButton()
     }
     
     func formatButton(button: UIButton, imageName: String){
@@ -72,7 +84,7 @@ class LoginModalViewController: UIViewController {
             return
         }
         
-        if entryMode == .PhoneNumber || entryMode == .InvalidPhoneNumber {
+        if entryMode == .PhoneNumber {
             validatePhoneNumber(entryText)
         }
         else if entryMode == .ConfirmationCode {
@@ -98,8 +110,7 @@ class LoginModalViewController: UIViewController {
             sendPhoneNumber(entryText)
         }
         else {
-            entryMode = .InvalidPhoneNumber
-            updateViewForEntryMode(entryMode)
+            updateViewForInvalidPhoneNumber()
         }
     }
     
@@ -123,10 +134,6 @@ class LoginModalViewController: UIViewController {
             instructionsLabel.text = NSLocalizedString("Volunteering - Phone Number Modal Title", comment: "")
             detailLabel.text = NSLocalizedString("Volunteering - Phone Number Modal Details", comment: "")
             backButton.hidden = true
-        case .InvalidPhoneNumber:
-            instructionsLabel.text = "Please enter a valid phone number"
-            detailLabel.text = "Example: +49 123 456 7890"
-            backButton.hidden = true
         case .ConfirmationCode:
             textField.text = nil
             instructionsLabel.text = NSLocalizedString("Volunteering - Confirmation Number Modal Title", comment: "")
@@ -137,12 +144,20 @@ class LoginModalViewController: UIViewController {
         }
     }
     
+    private func updateViewForInvalidPhoneNumber() {
+        instructionsLabel.text = "Please enter a valid phone number"
+        detailLabel.text = "Example: +49 123 456 7890"
+        backButton.hidden = true
+    }
+    
     private func sendPhoneNumber(phoneNumber: String) {
+        showActivityIndicator()
         backend.sendCodeToPhoneNumber(phoneNumber, completionHandler: { (success, error) -> Void in
             if let error = error {
                 print(error.localizedDescription)
             }
             else {
+                self.hideActivityIndicator()
                 // hold onto the phone number to use when logging in
                 self.phoneNumber = phoneNumber
                 self.textField.placeholder = "5555"
@@ -151,9 +166,23 @@ class LoginModalViewController: UIViewController {
         })
     }
     
+    func showActivityIndicator() {
+        doneButton.hidden = true
+        activityIndicator.hidden = false
+        activityIndicator.startAnimating()
+    }
+    
+    func hideActivityIndicator() {
+        doneButton.hidden = false
+        activityIndicator.hidden = true
+        activityIndicator.stopAnimating()
+    }
+    
     private func logInWithPhoneNumber(phoneNumber: String, codeEntry: String) {
+        showActivityIndicator()
         backend.logInWithPhoneNumber(phoneNumber, codeEntry: codeEntry, completionHandler: { (success, error) -> Void in
             if let error = error {
+                self.hideActivityIndicator()
                 print(error.localizedDescription)
             }
             else {
@@ -162,6 +191,46 @@ class LoginModalViewController: UIViewController {
                 })
             }
         })
+    }
+    
+    private func validateSubmitButton() {
+        guard let phoneNumberText = textField?.text else {
+            disableDoneButton()
+            return
+        }
+        
+        // A phone number should include the country code which is 1 for the United States.
+        // Typically the country code is assumed so perhaps it can be added automatically.
+        
+        if entryMode == .PhoneNumber &&
+            (phoneNumberText.characters.count >= 10 &&
+                phoneNumberText.characters.count <= 12) {
+                    enableDoneButton()
+        }
+        else if entryMode == .ConfirmationCode && phoneNumberText.characters.count == 4 {
+            enableDoneButton()
+        }
+        else {
+            disableDoneButton()
+        }
+    }
+    
+    private func disableDoneButton() {
+        guard let doneButton = doneButton else {
+            return
+        }
+        
+        doneButton.enabled = false
+        doneButton.titleLabel?.textColor = UIColor.lightGrayColor()
+    }
+    
+    private func enableDoneButton() {
+        guard let doneButton = doneButton else {
+            return
+        }
+        
+        doneButton.enabled = true
+        doneButton.titleLabel?.textColor = UIColor.whiteColor()
     }
 
 }
