@@ -13,7 +13,7 @@ import Parse
 // See https://github.com/GiveNow/givenow-ios/issues/7
 // See https://github.com/GiveNow/givenow-ios/issues/8
 
-class VolunteeringViewController: BaseViewController, LoginModalViewControllerDelegate {
+class VolunteeringViewController: BaseViewController, ModalBackgroundViewControllerDelegate {
     
     @IBOutlet weak var volunteeringTitleLabel: UILabel!
     @IBOutlet weak var volunteerButton: UIButton!
@@ -59,7 +59,7 @@ class VolunteeringViewController: BaseViewController, LoginModalViewControllerDe
         // do nothing
     }
     
-    func successfulLogin(controller: LoginModalViewController) {
+    func modalViewDismissedWithResult(controller: ModalBackgroundViewController) {
         createVolunteer()
     }
 
@@ -80,12 +80,15 @@ class VolunteeringViewController: BaseViewController, LoginModalViewControllerDe
     }
     
     private func promptUserToLogIn() {
-        //Display modal login dialogue
-        loginModalViewController.modalPresentationStyle = .OverFullScreen
-        loginModalViewController.modalTransitionStyle = .CrossDissolve
-        loginModalViewController.delegate = self
-        
-        presentViewController(loginModalViewController, animated: true, completion: {})
+        createModalBackgroundView()
+    }
+    
+    func createModalBackgroundView() {
+        let modalBackground = ModalBackgroundViewController()
+        modalBackground.modalPresentationStyle = .OverFullScreen
+        modalBackground.modalTransitionStyle = .CrossDissolve
+        modalBackground.delegate = self
+        presentViewController(modalBackground, animated: true, completion: {})
     }
     
     private func updateViewForPendingVolunteer() {
