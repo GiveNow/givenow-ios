@@ -6,14 +6,25 @@
   Copyright © 2015 GiveNow. All rights reserved.
 */
 
-/* SMS Body */
-"SMS Body"  = "{code} is your code for GiveNow.";
+/* ONBOARDING */
+"onboarding_1_title" = "Willkommen bei GiveNow.";
+"onboarding_1_description" =  "GiveNow lässt dich von überall spenden.";
 
-/* Cancel */
-"Cancel" = "Cancel";
+"onboarding_2_title" = "Wir zeigen dir was in deiner Nähe am dringendsten gebraucht wird.";
+"onboarding_2_description" =  "Du muss nur noch auswählen, was du spenden möchtest.";
 
-/* Submit */
-"Submit" = "Submit";
+"onboarding_3_title" = "Markiere den Abholort.";
+"onboarding_3_description" =  "Wähle einfach einen Ort auf der Karte aus. Zusätzlich können weitere Informationen wie Wohnungsnummer oder Tür-Code angegeben werden.";
+
+"onboarding_4_title" = "Den Rest erledigen freiwillige Helfer.";
+"onboarding_4_description" =  "Ein Helfer wird nun deine Spende abholen.\nEr wird sich bei dir melden um einen Termin mit dir zu vereinbaren.";
+
+/* LOGIN */
+"SMS Body"  = "{code} ist dein Code für GiveNow.";
+"Cancel" = "Abbrechen";
+"Submit" = "Absenden";
+
+/* VOLUNTEERING */
 
 /* Volunteering - Title */
 "Volunteering - Title Label" = "Want to volunteer to pick up donations? The only thing you need is a car and some spare time!";

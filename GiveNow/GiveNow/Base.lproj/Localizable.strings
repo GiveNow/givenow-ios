@@ -6,14 +6,25 @@
   Copyright © 2015 GiveNow. All rights reserved.
 */
 
-/* SMS Body */
+
+/* ONBOARDING */
+"onboarding_1_title" = "Welcome to GiveNow.";
+"onboarding_1_description" =  "GiveNow lets you donate from anywhere.";
+
+"onboarding_2_title" = "We show you what's needed most in your area.";
+"onboarding_2_description" =  "You select what you want to donate.";
+
+"onboarding_3_title" = "Tell us where to pick it up.";
+"onboarding_3_description" =  "Simply pinpoint a spot on the map. You can even add special instructions like apartment numbers or gate codes.";
+
+"onboarding_4_title" = "We take care of the rest.";
+"onboarding_4_description" =  "A trusted volunteer driver will pick up your donation. We'll contact you to coordinate the pickup.";
+
+/* LOGIN */
 "SMS Body"  = "{code} is your code for GiveNow.";
-
-/* Cancel */
 "Cancel" = "Cancel";
-
-/* Submit */
 "Submit" = "Submit";
+
 
 /* Volunteering - Title */
 "Volunteering - Title Label" = "Want to volunteer to pick up donations? The only thing you need is a car and some spare time!";

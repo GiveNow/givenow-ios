@@ -8,10 +8,6 @@
 
 import UIKit
 
-// TODO: implement
-// See https://github.com/GiveNow/givenow-ios/issues/4
-// See https://github.com/GiveNow/givenow-ios/issues/5
-
 class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate, LoginModalViewControllerDelegate {
     
     @IBOutlet weak var pageControl : UIPageControl?
@@ -26,17 +22,14 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     
     //TODO: Localize
     static let onboardingTextArray : [OnboardingText]  = [
-        ("Welcome to GiveNow.",
-        "GiveNow lets you donate from anywhere."),
         
-        ("We show you what's needed most in your area.",
-        "You select what you want to donate."),
+        (NSLocalizedString("onboarding_1_title", comment: ""), NSLocalizedString("onboarding_1_description", comment: "")),
         
-        ("Tell us where to pick it up.",
-        "Simply pinpoint a spot on the map. You can even add special instructions like apartment numbers or gate codes."),
+        (NSLocalizedString("onboarding_2_title", comment: ""), NSLocalizedString("onboarding_2_description", comment: "")),
         
-        ("We take care of the rest.",
-        "A trusted volunteer driver will pick up your donation. We'll contact you to coordinate the pickup.")
+        (NSLocalizedString("onboarding_3_title", comment: ""), NSLocalizedString("onboarding_3_description", comment: "")),
+        
+        (NSLocalizedString("onboarding_4_title", comment: ""), NSLocalizedString("onboarding_4_description", comment: ""))
     ]
     
     let onboardingConfigs = [
@@ -54,6 +47,10 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return self.view.frame.size
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return onboardingConfigs.count + 1 //Sign In Cell
     }
     
     // MARK: UICollectionViewDataSource
@@ -78,12 +75,22 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
         }
     }
     
-    func addLoginControllerToCell(cell: UICollectionViewCell) {
+    // MARK: UICollectionViewDelegate
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        let pageWidth = self.view.frame.size.width
+        self.pageControl?.currentPage = Int(scrollView.contentOffset.x / pageWidth)
+    }
+    
+    // MARK: Login
+    
+    private func addLoginControllerToCell(cell: UICollectionViewCell) {
         let modalLoginView = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
         modalLoginView.delegate = self
         modalLoginView.isModal = false
-        addChildViewController(modalLoginView)
         
+        //To Do: Replace this with parent 'embed' method
+        addChildViewController(modalLoginView)
         let frame = CGRect(x: 20, y: 80, width: view.frame.width - 40, height: view.frame.height/2 - 80)
         modalLoginView.view.frame = frame
         cell.addSubview(modalLoginView.view)
@@ -91,12 +98,7 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     }
     
     func successfulLogin(controller: LoginModalViewController) {
-        print("This happened")
         dismissOnboardingView()
-    }
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return onboardingConfigs.count + 1 //Sign In Cell
     }
     
     @IBAction func addAPhoneNumberLater(sender: AnyObject) {
@@ -113,16 +115,7 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
             print("Not the parent")
         }
         
-        self.willMoveToParentViewController(nil)
-        self.view.removeFromSuperview()
-        self.removeFromParentViewController()
-    }
-    
-    // MARK: UICollectionViewDelegate
-    
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        let pageWidth = self.view.frame.size.width
-        self.pageControl?.currentPage = Int(scrollView.contentOffset.x / pageWidth)
+        removeEmbeddedViewController(self)
     }
 
 }
@@ -134,7 +127,6 @@ class OnboardingCollectionViewCell : UICollectionViewCell {
 }
 
 // MARK: Log in
-//Duplicating functionality from modal login - would be good to reuse more of this
 class SignUpCollectionViewCell : UICollectionViewCell {
     
     @IBOutlet weak var orLabel: UILabel!
