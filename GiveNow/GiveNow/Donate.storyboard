@@ -9,9 +9,14 @@
         <scene sceneID="RUl-ng-FTG">
             <objects>
                 <navigationController id="Ndd-yi-BrV" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7wp-vx-xGx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="7wp-vx-xGx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.7254902124" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="LdM-nb-XRS" kind="relationship" relationship="rootViewController" id="5aa-UG-HKN"/>
@@ -29,7 +34,7 @@
             </objects>
             <point key="canvasLocation" x="842.5" y="-164"/>
         </scene>
-        <!--Donating-->
+        <!--Select Address-->
         <scene sceneID="8uE-QJ-E4D">
             <objects>
                 <viewController id="LdM-nb-XRS" customClass="DonatingViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
@@ -52,7 +57,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="57W-Fl-xvG"/>
                                 </constraints>
-                                <state key="normal" title="Set Pickup Location"/>
+                                <state key="normal" title="Set Pickup Location">
+                                    <color key="titleShadowColor" red="0.40000000600000002" green="0.73333334920000004" blue="0.41568627949999998" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="setPickupLocationButtonTapped:" destination="LdM-nb-XRS" eventType="touchUpInside" id="Ssj-v0-65y"/>
                                 </connections>
@@ -64,13 +71,29 @@
                                     <constraint firstAttribute="height" constant="52" id="ZTW-EZ-fTV"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0U-KG-Zgd" customClass="MyLocationButton" customModule="GiveNow" customModuleProvider="target">
+                                <rect key="frame" x="536" y="486" width="44" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="jG4-E4-nX8"/>
+                                    <constraint firstAttribute="height" constant="44" id="kai-ld-I8G"/>
+                                </constraints>
+                                <state key="normal" image="my-location">
+                                    <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="myLocationTapped:" destination="LdM-nb-XRS" eventType="touchUpInside" id="QpS-Kg-FLI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="L0U-KG-Zgd" secondAttribute="trailing" constant="20" id="7wa-ZF-Rf9"/>
                             <constraint firstItem="VID-4N-S16" firstAttribute="trailing" secondItem="aCv-dI-Tpw" secondAttribute="trailing" id="AO1-rM-gCz"/>
                             <constraint firstItem="VID-4N-S16" firstAttribute="top" secondItem="CIT-Xb-fKC" secondAttribute="bottom" id="Dzg-Uj-IAW"/>
                             <constraint firstItem="aCv-dI-Tpw" firstAttribute="centerX" secondItem="HSQ-Wz-Aom" secondAttribute="centerX" id="EOI-Ct-cz6"/>
                             <constraint firstAttribute="trailing" secondItem="VID-4N-S16" secondAttribute="trailing" id="JRm-kQ-rje"/>
+                            <constraint firstItem="aCv-dI-Tpw" firstAttribute="top" secondItem="L0U-KG-Zgd" secondAttribute="bottom" constant="20" id="M6J-6A-qWm"/>
                             <constraint firstItem="VID-4N-S16" firstAttribute="leading" secondItem="aCv-dI-Tpw" secondAttribute="leading" id="YKy-wt-Sl0"/>
                             <constraint firstItem="VID-4N-S16" firstAttribute="centerY" secondItem="HSQ-Wz-Aom" secondAttribute="centerY" constant="26" id="aGU-GK-nc1"/>
                             <constraint firstItem="VID-4N-S16" firstAttribute="leading" secondItem="qGH-Dv-e79" secondAttribute="leading" id="dIw-Rd-D6K"/>
@@ -78,7 +101,7 @@
                             <constraint firstItem="Dqa-ec-ITD" firstAttribute="top" secondItem="VID-4N-S16" secondAttribute="bottom" constant="49" id="vaT-tV-Eet"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Donating" id="Tvw-Ie-FQz">
+                    <navigationItem key="navigationItem" title="Select Address" id="Tvw-Ie-FQz">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="jhn-mN-Qmk" userLabel="menuButton">
                             <color key="tintColor" red="0.043137254899999998" green="0.043137254899999998" blue="0.043137254899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
@@ -87,6 +110,7 @@
                     <connections>
                         <outlet property="mapView" destination="VID-4N-S16" id="UEQ-Nr-img"/>
                         <outlet property="menuButton" destination="jhn-mN-Qmk" id="Tx9-QT-hnI"/>
+                        <outlet property="myLocationButton" destination="L0U-KG-Zgd" id="Hrh-DE-3DB"/>
                         <outlet property="pickupLocationButton" destination="aCv-dI-Tpw" id="QjL-be-NBs"/>
                         <outlet property="searchDisplayController" destination="DiB-u8-tzc" id="2VU-Df-w1e"/>
                         <segue destination="xqe-tM-5xe" kind="show" identifier="selectCategories" id="vSF-G5-EV9"/>
@@ -300,28 +324,31 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofB-37-sWl">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="166"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3Q-88-9yq">
                                         <rect key="frame" x="20" y="89" width="68" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="addressLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXK-zM-pEn" userLabel="pickupRequesetAddress">
-                                        <rect key="frame" x="93" y="89" width="497" height="21"/>
+                                        <rect key="frame" x="98" y="89" width="492" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9d-3G-8Oc">
                                         <rect key="frame" x="20" y="120" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b3x-AK-RwX" userLabel="noteTextField">
-                                        <rect key="frame" x="93" y="116" width="487" height="30"/>
+                                        <rect key="frame" x="98" y="116" width="482" height="30"/>
+                                        <color key="backgroundColor" red="0.039215687659999998" green="0.53725492949999998" blue="0.6549019814" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -330,18 +357,24 @@
                                 <constraints>
                                     <constraint firstItem="fXK-zM-pEn" firstAttribute="centerY" secondItem="Z3Q-88-9yq" secondAttribute="centerY" id="14P-gG-gMk"/>
                                     <constraint firstItem="Z3Q-88-9yq" firstAttribute="leading" secondItem="ofB-37-sWl" secondAttribute="leading" constant="20" id="4xI-vq-5Rh"/>
-                                    <constraint firstItem="fXK-zM-pEn" firstAttribute="leading" secondItem="Z3Q-88-9yq" secondAttribute="trailing" constant="5" id="LcN-NB-6Ua"/>
+                                    <constraint firstItem="fXK-zM-pEn" firstAttribute="leading" secondItem="Z3Q-88-9yq" secondAttribute="trailing" constant="10" id="LcN-NB-6Ua"/>
                                     <constraint firstItem="b3x-AK-RwX" firstAttribute="centerY" secondItem="K9d-3G-8Oc" secondAttribute="centerY" id="MyI-6R-m28"/>
                                     <constraint firstAttribute="trailing" secondItem="fXK-zM-pEn" secondAttribute="trailing" constant="10" id="P54-78-VGm"/>
                                     <constraint firstItem="b3x-AK-RwX" firstAttribute="leading" secondItem="fXK-zM-pEn" secondAttribute="leading" id="SDU-tQ-acY"/>
                                     <constraint firstItem="K9d-3G-8Oc" firstAttribute="leading" secondItem="ofB-37-sWl" secondAttribute="leading" constant="20" id="WZW-NU-oY8"/>
                                     <constraint firstItem="K9d-3G-8Oc" firstAttribute="top" secondItem="Z3Q-88-9yq" secondAttribute="bottom" constant="10" id="YEe-LA-Swu"/>
+                                    <constraint firstAttribute="bottom" secondItem="b3x-AK-RwX" secondAttribute="bottom" constant="20" id="moc-pA-zG6"/>
                                     <constraint firstAttribute="height" constant="200" id="up0-vK-8LD"/>
                                     <constraint firstAttribute="trailing" secondItem="b3x-AK-RwX" secondAttribute="trailing" constant="20" id="vEE-as-KTs"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="up0-vK-8LD"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ohA-ph-S3Q">
-                                <rect key="frame" x="0.0" y="200" width="600" height="340"/>
+                                <rect key="frame" x="0.0" y="166" width="600" height="374"/>
                                 <color key="backgroundColor" red="0.88235294818878174" green="0.96078431606292725" blue="0.99607843160629272" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0I5-mA-ENC">
                                     <size key="itemSize" width="149" height="148"/>
@@ -434,6 +467,7 @@
     <resources>
         <image name="location_pin" width="30" height="55"/>
         <image name="menu" width="24" height="24"/>
+        <image name="my-location" width="24" height="24"/>
         <image name="store" width="24" height="24"/>
     </resources>
 </document>

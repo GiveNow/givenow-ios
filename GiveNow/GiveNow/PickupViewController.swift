@@ -21,6 +21,7 @@ import CoreLocation
 class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var myLocationButton: MyLocationButton!
     
     var locationManager: CLLocationManager? {
         didSet {
@@ -60,6 +61,15 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMap
             zoomIntoLocation(true)
         }
     }
+    
+    @IBAction func myLocationTapped(sender: AnyObject) {
+        if let location = locationManager?.location {
+            let coord = location.coordinate
+            let currentRegion = mapView!.region
+            let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
+            mapView!.setRegion(newRegion, animated: true)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -92,7 +102,7 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMap
                     let longitudeInMeters : CLLocationDistance = 30000
                     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
                     
-                    self.mapView?.setRegion(coordinateRegion, animated: animated)
+                    self.mapView?.setRegion(coordinateRegion, animated: false)
                 }
                 else {
                     print("Location is not valid")
@@ -156,14 +166,14 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMap
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is PickupRequestMapPoint {
             let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pickupRequest")
-            pinAnnotationView.pinColor = .Purple
+            pinAnnotationView.pinColor = .Green
             pinAnnotationView.canShowCallout = true
             
             let selectButton = UIButton()
             selectButton.frame.size.width = 80
             selectButton.frame.size.height = 44
             selectButton.setTitle("Accept", forState: .Normal)
-            selectButton.backgroundColor = UIColor.purpleColor()
+            selectButton.backgroundColor = UIColor.colorAccent()
 
             pinAnnotationView.leftCalloutAccessoryView = selectButton
             

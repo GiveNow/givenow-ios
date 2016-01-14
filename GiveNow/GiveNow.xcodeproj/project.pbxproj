@@ -55,6 +55,7 @@
 		C72296401C228F6D0097A662 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C722963F1C228F6D0097A662 /* libc++.tbd */; };
 		C72296421C228F740097A662 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296411C228F740097A662 /* libsqlite3.tbd */; };
 		C72296441C228F7C0097A662 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296431C228F7C0097A662 /* libz.tbd */; };
+		D2005BDB1C482A6B00B59A9A /* ModalBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2005BDA1C482A6B00B59A9A /* ModalBackgroundViewController.swift */; };
 		D207A3471C23B82400E93BEB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207A3461C23B82400E93BEB /* Extensions.swift */; };
 		D2186FB11C3CC3FC001551EF /* MyDashboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */; };
 		D2186FB51C3CC632001551EF /* PickupRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */; };
@@ -69,6 +70,9 @@
 		D23BBF591C45C4B900E68AF9 /* DropOff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */; };
 		D23BBF5D1C45C65700E68AF9 /* DropOffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */; };
 		D23BBF631C45D3CF00E68AF9 /* MyPendingDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF621C45D3CF00E68AF9 /* MyPendingDonationViewController.swift */; };
+		D23CF8161C47243F0070AEAA /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23CF8151C47243F0070AEAA /* Initial.storyboard */; };
+		D23CF8181C4724650070AEAA /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CF8171C4724650070AEAA /* InitialViewController.swift */; };
+		D23CF81A1C472F760070AEAA /* MyLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CF8191C472F760070AEAA /* MyLocationButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +230,7 @@
 		C722963F1C228F6D0097A662 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		C72296411C228F740097A662 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		C72296431C228F7C0097A662 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		D2005BDA1C482A6B00B59A9A /* ModalBackgroundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalBackgroundViewController.swift; sourceTree = "<group>"; };
 		D207A3461C23B82400E93BEB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDashboardTableViewController.swift; sourceTree = "<group>"; };
 		D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupRequestTableViewCell.swift; sourceTree = "<group>"; };
@@ -241,6 +246,9 @@
 		D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DropOff.storyboard; sourceTree = "<group>"; };
 		D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropOffViewController.swift; sourceTree = "<group>"; };
 		D23BBF621C45D3CF00E68AF9 /* MyPendingDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPendingDonationViewController.swift; sourceTree = "<group>"; };
+		D23CF8151C47243F0070AEAA /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
+		D23CF8171C4724650070AEAA /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		D23CF8191C472F760070AEAA /* MyLocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLocationButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +353,7 @@
 		2645C6681C21E7FF00D6C70D /* GiveNow */ = {
 			isa = PBXGroup;
 			children = (
+				D23CF8121C4724210070AEAA /* Initial */,
 				D23BBF551C45C49600E68AF9 /* DropOff */,
 				D23BBF4E1C457C5500E68AF9 /* Onboard */,
 				D23BBF4D1C457C1B00E68AF9 /* Apply */,
@@ -400,8 +409,10 @@
 			children = (
 				2645C6A11C21F38E00D6C70D /* BaseNavigationController.swift */,
 				2645C69F1C21F37A00D6C70D /* BaseViewController.swift */,
+				D23CF8191C472F760070AEAA /* MyLocationButton.swift */,
 				D23BBF4F1C457F1B00E68AF9 /* LoginModalViewController.swift */,
 				D23BBF501C457F1B00E68AF9 /* LoginModalViewController.xib */,
+				D2005BDA1C482A6B00B59A9A /* ModalBackgroundViewController.swift */,
 			);
 			name = "Shared View Controllers";
 			sourceTree = "<group>";
@@ -516,6 +527,15 @@
 				D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */,
 			);
 			name = DropOff;
+			sourceTree = "<group>";
+		};
+		D23CF8121C4724210070AEAA /* Initial */ = {
+			isa = PBXGroup;
+			children = (
+				D23CF8151C47243F0070AEAA /* Initial.storyboard */,
+				D23CF8171C4724650070AEAA /* InitialViewController.swift */,
+			);
+			name = Initial;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -690,6 +710,7 @@
 			files = (
 				2645C6741C21E7FF00D6C70D /* LaunchScreen.storyboard in Resources */,
 				2645C6711C21E7FF00D6C70D /* Assets.xcassets in Resources */,
+				D23CF8161C47243F0070AEAA /* Initial.storyboard in Resources */,
 				2645C69C1C21F34400D6C70D /* Apply.storyboard in Resources */,
 				260746761C265A710022E0ED /* Mapbox.bundle in Resources */,
 				2645C66F1C21E7FF00D6C70D /* Main.storyboard in Resources */,
@@ -756,6 +777,8 @@
 				2645C6A61C21F3BD00D6C70D /* OnboardingViewController.swift in Sources */,
 				C72296321C228E550097A662 /* ColorPalette.swift in Sources */,
 				260746261C23D87D0022E0ED /* DropOffAgency.swift in Sources */,
+				D23CF81A1C472F760070AEAA /* MyLocationButton.swift in Sources */,
+				D23CF8181C4724650070AEAA /* InitialViewController.swift in Sources */,
 				D2186FB71C3CE917001551EF /* PickupDonationViewController.swift in Sources */,
 				2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */,
 				26FE37231C23B80500BED9A0 /* Donation.swift in Sources */,
@@ -765,6 +788,7 @@
 				2645C6A21C21F38E00D6C70D /* BaseNavigationController.swift in Sources */,
 				267BF1F61C2801CA00A76425 /* PickupViewController.swift in Sources */,
 				2645C66A1C21E7FF00D6C70D /* AppDelegate.swift in Sources */,
+				D2005BDB1C482A6B00B59A9A /* ModalBackgroundViewController.swift in Sources */,
 				D23BBF631C45D3CF00E68AF9 /* MyPendingDonationViewController.swift in Sources */,
 				D207A3471C23B82400E93BEB /* Extensions.swift in Sources */,
 				2645C6A01C21F37A00D6C70D /* BaseViewController.swift in Sources */,

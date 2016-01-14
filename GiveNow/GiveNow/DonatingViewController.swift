@@ -20,10 +20,11 @@ public enum SystemPermissionStatus : Int {
     case Denied
 }
 
-class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate {
+class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet var pickupLocationButton: UIButton?
     @IBOutlet var mapView: MKMapView?
+    @IBOutlet weak var myLocationButton: MyLocationButton!
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
@@ -35,7 +36,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     var searchController:UISearchController!
     
     var searchResults = [MKMapItem]()
-    var searchResultsTableView = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0), style: .Grouped)
+    var searchResultsTableView: UITableView!
     
     var locationManager: CLLocationManager? {
         didSet {
@@ -56,33 +57,36 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        pickupLocationButton?.backgroundColor = ColorPalette().Confirmation
+        pickupLocationButton?.backgroundColor = UIColor.colorAccent()
         pickupLocationButton?.setTitleColor(.whiteColor(), forState: .Normal)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detectFirstLaunch()
         initializeSearchController()
         initializeSearchResultsTable()
         initializeMenuButton()
         awakeFromNib()
     }
     
-    
-    func detectFirstLaunch(){
-        let firstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
-        if !firstLaunch {
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
-            performSegueWithIdentifier("onboarding", sender: nil)
-        }
-    }
-    
     func initializeMenuButton() {
         if self.revealViewController() != nil {
+            if let menuImage = UIImage(named: "menu") {
+                self.menuButton.image = menuImage.imageWithRenderingMode(.AlwaysTemplate)
+                self.menuButton.tintColor = UIColor.whiteColor()
+            }
             self.menuButton.target = self.revealViewController()
             self.menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+    }
+    
+    @IBAction func myLocationTapped(sender: AnyObject) {
+        if let location = locationManager?.location {
+            let coord = location.coordinate
+            let currentRegion = mapView!.region
+            let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
+            mapView!.setRegion(newRegion, animated: true)
         }
     }
     
@@ -93,17 +97,38 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
         searchController.dimsBackgroundDuringPresentation = false
         searchController.delegate = self
         navigationItem.titleView = searchController.searchBar
-        
+        searchController.searchBar.tintColor = UIColor.colorPrimaryDark()
     }
     
     func initializeSearchResultsTable() {
+        let frame = CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: view.frame.height)
+        searchResultsTableView = UITableView(frame: frame, style: .Grouped)
+        searchResultsTableView.backgroundColor = UIColor.clearColor()
+        let backgroundView = UIView(frame: frame)
+        backgroundView.backgroundColor = UIColor.darkGrayColor()
+        backgroundView.alpha = 0.5
+        searchResultsTableView.backgroundView = backgroundView
         searchResultsTableView.delegate = self
         searchResultsTableView.dataSource = self
         view.addSubview(searchResultsTableView)
         searchResultsTableView.rowHeight = 60.0
-        searchResultsTableView.frame = CGRect(x: 0.0, y: 64.0, width: view.frame.width, height: view.frame.height - 64)
-        searchResultsTableView.tableHeaderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: 0.0))
+        searchResultsTableView.tableHeaderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: 1.0))
         searchResultsTableView.hidden = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: Selector("backgroundTapped:"))
+        tap.delegate = self
+        backgroundView.addGestureRecognizer(tap)
+    }
+    
+    func backgroundTapped(sender: UIGestureRecognizer? = nil) {
+        hideSearchResultsTable()
+        searchController.dismissViewControllerAnimated(true, completion: {})
+    }
+    
+    func hideSearchResultsTable() {
+        searchResultsTableView.hidden = true
+        searchResults = [MKMapItem]()
+        searchResultsTableView.reloadData()
     }
     
     func displayPendingDonationViewIfNeeded() {
@@ -129,7 +154,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
             let pendingDonationViewController = storyboard!.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
             pendingDonationViewController.pickupRequest = newPickupRequest
             addChildViewController(pendingDonationViewController)
-            pendingDonationViewController.view.frame = CGRect(x: 0, y: 64, width: view.frame.width, height: view.frame.height - 64)
+            pendingDonationViewController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
             view.addSubview(pendingDonationViewController.view)
             pendingDonationViewController.didMoveToParentViewController(self)
         }
@@ -157,7 +182,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                     let longitudeInMeters : CLLocationDistance = 30000
                     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
                     
-                    self.mapView?.setRegion(coordinateRegion, animated: true)
+                    self.mapView?.setRegion(coordinateRegion, animated: false)
                     self.shouldUpdateSearchBarWithMapCenter = true
                 }
                 else {
@@ -262,16 +287,16 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchResultsTableView.hidden = true
+        hideSearchResultsTable()
         setAddressFromCoordinates()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchResultsTableView.hidden = true
         if searchResults.count > 0 {
             let mapItem = searchResults[0]
             centerMapOnMapItem(mapItem)
         }
+        hideSearchResultsTable()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -302,10 +327,14 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let mapItem = searchResults[indexPath.row]
         searchController.searchBar.text = nameForMapItem(mapItem)
-        searchResultsTableView.hidden = true
+        hideSearchResultsTable()
         searchController.dismissViewControllerAnimated(true, completion: {() -> Void in
             self.centerMapOnMapItem(mapItem)
         })
+    }
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        searchController.searchBar.resignFirstResponder()
     }
     
     func centerMapOnMapItem(mapItem: MKMapItem) {

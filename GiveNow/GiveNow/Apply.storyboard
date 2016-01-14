@@ -9,9 +9,13 @@
         <scene sceneID="nr5-Ri-H4a">
             <objects>
                 <navigationController id="aJL-pq-pkV" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dnS-iW-aKb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="dnS-iW-aKb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.7254902124" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="Alj-h5-f0M" kind="relationship" relationship="rootViewController" id="4P8-yE-JGU"/>

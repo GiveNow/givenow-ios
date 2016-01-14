@@ -19,6 +19,7 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
     @IBOutlet weak var callButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var navigationButton: UIButton!
+    @IBOutlet weak var myLocationButton: MyLocationButton!
     
     var pickupRequest:PickupRequest!
     let backend = Backend.sharedInstance()
@@ -44,6 +45,29 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
         super.viewDidLoad()
         mapView.delegate = self
         addPickupRequestToMap()
+        formatButtons()
+    }
+    
+    func formatButtons() {
+        tintButton(callButton, imageName: "phone")
+        tintButton(messageButton, imageName: "textsms")
+        tintButton(navigationButton, imageName: "navigation")
+    }
+    
+    func tintButton(button: UIButton, imageName: String) {
+        if let image = UIImage(named: imageName) {
+            button.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            button.tintColor = UIColor.colorAccent()
+        }
+    }
+    
+    @IBAction func myLocationTapped(sender: AnyObject) {
+        if let location = locationManager?.location {
+            let coord = location.coordinate
+            let currentRegion = mapView!.region
+            let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
+            mapView!.setRegion(newRegion, animated: true)
+        }
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -85,7 +109,7 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
                     let longitudeInMeters : CLLocationDistance = 30000
                     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
                     
-                    self.mapView?.setRegion(coordinateRegion, animated: animated)
+                    self.mapView?.setRegion(coordinateRegion, animated: false)
                 }
                 else {
                     print("Location is not valid")
@@ -125,6 +149,16 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
                 self.performSegueWithIdentifier("donationCompleted", sender: nil)
             }
         })
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is PickupRequestMapPoint {
+            let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pickupRequest")
+            pinAnnotationView.pinColor = .Green
+            pinAnnotationView.canShowCallout = true
+            return pinAnnotationView
+        }
+        return nil
     }
     
     //MARK: Toolbar buttons

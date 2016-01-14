@@ -281,15 +281,16 @@ class Backend: NSObject {
         guard let completionHandler = completionHandler else {
             return
         }
-        pickupRequest.pendingVolunteer = User.currentUser()
-        pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
+        
+        let params = ["pickupRequestId": pickupRequest.objectId!]
+        PFCloud.callFunctionInBackground("claimPickupRequest", withParameters: params) { (results, error) -> Void in
             if let error = error {
                 completionHandler(nil, error)
             }
             else {
                 completionHandler(pickupRequest, nil)
             }
-        })
+        }
     }
     
     func cancelClaimedPickupRequest(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
@@ -543,6 +544,8 @@ class Backend: NSObject {
         }
     }
     
+    // MARK: Phone number validation
+    
     func phoneCountryCodeForPhoneNumberCurrentLocale() -> Int? {
         let locale = NSLocale.currentLocale()
         return phoneCountryCodeForLocale(locale)
@@ -593,6 +596,20 @@ class Backend: NSObject {
         }
         
         return phoneNumber
+    }
+    
+    func formatPhoneNumber(phoneNumberString: String) -> String {
+        let phoneUtil = NBPhoneNumberUtil()
+        do {
+            let phoneNumber = try phoneUtil.parse(phoneNumberString, defaultRegion: "US")
+            let formattedString = try phoneUtil.format(phoneNumber, numberFormat: .E164)
+            return formattedString
+        }
+        catch let error as NSError {
+            print(error.localizedDescription)
+            return phoneNumberString
+        }
+        
     }
 
 }

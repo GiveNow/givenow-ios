@@ -9,9 +9,14 @@
         <scene sceneID="atJ-ot-TNS">
             <objects>
                 <navigationController id="TDF-vo-PIt" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J4R-b3-BZe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="J4R-b3-BZe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.0" green="0.72549021244049072" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="TS0-yR-z4y" kind="relationship" relationship="rootViewController" id="khO-pv-355"/>
@@ -30,17 +35,31 @@
                         <viewControllerLayoutGuide type="bottom" id="cyR-ar-Is9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zwx-TM-9Cv">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fK1-PW-xYv">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ux4-aK-jQe" customClass="MyLocationButton" customModule="GiveNow" customModuleProvider="target">
+                                <rect key="frame" x="536" y="472" width="44" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="1es-B7-Ken"/>
+                                    <constraint firstAttribute="width" constant="44" id="96R-x6-edG"/>
+                                </constraints>
+                                <state key="normal" image="my-location"/>
+                                <connections>
+                                    <action selector="myLocationTapped:" destination="TS0-yR-z4y" eventType="touchUpInside" id="DOX-uT-rkD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="fK1-PW-xYv" firstAttribute="top" secondItem="Mqp-av-CpG" secondAttribute="bottom" id="4dl-9A-yZ0"/>
+                            <constraint firstAttribute="trailing" secondItem="ux4-aK-jQe" secondAttribute="trailing" constant="20" id="LTM-vM-Bdx"/>
                             <constraint firstItem="cyR-ar-Is9" firstAttribute="top" secondItem="fK1-PW-xYv" secondAttribute="bottom" id="cWz-1H-jLO"/>
+                            <constraint firstItem="cyR-ar-Is9" firstAttribute="top" secondItem="ux4-aK-jQe" secondAttribute="bottom" constant="20" id="fcP-Zf-GEo"/>
                             <constraint firstItem="fK1-PW-xYv" firstAttribute="leading" secondItem="zwx-TM-9Cv" secondAttribute="leading" id="kAb-Pq-rSH"/>
                             <constraint firstAttribute="trailing" secondItem="fK1-PW-xYv" secondAttribute="trailing" id="uVd-YG-vDY"/>
                         </constraints>
@@ -53,6 +72,7 @@
                     <connections>
                         <outlet property="mapView" destination="fK1-PW-xYv" id="o0s-O9-OJ3"/>
                         <outlet property="menuButton" destination="F10-s1-UjP" id="zqd-WP-dFx"/>
+                        <outlet property="myLocationButton" destination="ux4-aK-jQe" id="PTQ-at-pUS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yAC-as-3Ue" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -62,5 +82,6 @@
     </scenes>
     <resources>
         <image name="menu" width="24" height="24"/>
+        <image name="my-location" width="24" height="24"/>
     </resources>
 </document>

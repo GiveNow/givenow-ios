@@ -12,19 +12,19 @@ import UIKit
 extension UIColor {
     
     class func colorPrimary() -> UIColor {
-        return UIColor(hue: 192/255, saturation: 100/255, brightness: 90/255, alpha: 1.0)
+        return UIColor(red: 0/255, green: 185/255, blue: 230/255, alpha: 1.0)
     }
     
     class func colorPrimaryDark() -> UIColor {
-        return UIColor(hue: 191/255, saturation: 94/255, brightness: 65/255, alpha: 1.0)
+        return UIColor(red: 10/255, green: 137/255, blue: 167/255, alpha: 1.0)
     }
     
     class func colorPrimaryLight() -> UIColor {
-        return UIColor(hue: 199/255, saturation: 11/255, brightness: 100/255, alpha: 1.0)
+        return UIColor(red: 225/255, green: 245/255, blue: 254/255, alpha: 1.0)
     }
     
     class func colorAccent() -> UIColor {
-        return UIColor(hue: 123/255, saturation: 45/255, brightness: 73/255, alpha: 1.0)
+        return UIColor(red: 102/255, green: 187/255, blue: 106/255, alpha: 1.0)
     }
     
 }

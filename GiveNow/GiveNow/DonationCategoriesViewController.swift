@@ -13,7 +13,7 @@ import Parse
 private let reuseIdentifier = "donationCategory"
 private let backend = Backend.sharedInstance()
 
-class DonationCategoriesViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UITextFieldDelegate, LoginModalViewControllerDelegate {
+class DonationCategoriesViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UITextFieldDelegate, ModalBackgroundViewControllerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var donationCategories:[DonationCategory]!
@@ -144,7 +144,7 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     
     func unHighlightCell(cell: DonationCategoryCollectionViewCell) {
         cell.categoryLabel.backgroundColor = UIColor.lightGrayColor()
-        cell.categoryLabel.textColor = UIColor.colorPrimaryDark()
+        cell.categoryLabel.textColor = UIColor.whiteColor()
     }
     
     //MARK: Completing selection
@@ -154,12 +154,16 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
             savePickupRequest()
         }
         else {
-            loginModalViewController.modalPresentationStyle = .OverFullScreen
-            loginModalViewController.modalTransitionStyle = .CrossDissolve
-            loginModalViewController.delegate = self
-            
-            presentViewController(loginModalViewController, animated: true, completion: {})
+            createModalBackgroundView()
         }
+    }
+    
+    func createModalBackgroundView() {
+        let modalBackground = ModalBackgroundViewController()
+        modalBackground.modalPresentationStyle = .OverFullScreen
+        modalBackground.modalTransitionStyle = .CrossDissolve
+        modalBackground.delegate = self
+        presentViewController(modalBackground, animated: true, completion: {})
     }
     
     func savePickupRequest() {
@@ -178,7 +182,7 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         })
     }
     
-    func successfulLogin(controller: LoginModalViewController) {
+    func modalViewDismissedWithResult(controller: ModalBackgroundViewController) {
         savePickupRequest()
     }
 

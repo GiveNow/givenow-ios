@@ -12,7 +12,7 @@ import UIKit
 // See https://github.com/GiveNow/givenow-ios/issues/4
 // See https://github.com/GiveNow/givenow-ios/issues/5
 
-class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
+class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate, LoginModalViewControllerDelegate {
     
     @IBOutlet weak var pageControl : UIPageControl?
     
@@ -60,8 +60,6 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loginCompleted:", name: "loginCompleted", object: nil)
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
@@ -87,8 +85,26 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SignInCell", forIndexPath: indexPath) as! SignUpCollectionViewCell
             cell.backgroundColor = Colors.SignInColor
+            addLoginControllerToCell(cell)
             return cell
         }
+    }
+    
+    func addLoginControllerToCell(cell: UICollectionViewCell) {
+        let modalLoginView = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
+        modalLoginView.delegate = self
+        modalLoginView.isModal = false
+        addChildViewController(modalLoginView)
+        
+        let frame = CGRect(x: 20, y: 80, width: view.frame.width - 40, height: view.frame.height/2 - 80)
+        modalLoginView.view.frame = frame
+        cell.addSubview(modalLoginView.view)
+        modalLoginView.didMoveToParentViewController(self)
+    }
+    
+    func successfulLogin(controller: LoginModalViewController) {
+        print("This happened")
+        dismissOnboardingView()
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -96,11 +112,22 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     }
     
     @IBAction func addAPhoneNumberLater(sender: AnyObject) {
-        performSegueWithIdentifier("onboardingCompleted", sender: nil)
+        dismissOnboardingView()
     }
     
-    func loginCompleted(notification: NSNotification) {
-        performSegueWithIdentifier("onboardingCompleted", sender: nil)
+    func dismissOnboardingView() {
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
+        
+        if let parent = self.parentViewController as? InitialViewController {
+            parent.displayMainViewController()
+        }
+        else {
+            print("Not the parent")
+        }
+        
+        self.willMoveToParentViewController(nil)
+        self.view.removeFromSuperview()
+        self.removeFromParentViewController()
     }
     
     // MARK: UICollectionViewDelegate
@@ -122,124 +149,8 @@ class OnboardingCollectionViewCell : UICollectionViewCell {
 //Duplicating functionality from modal login - would be good to reuse more of this
 class SignUpCollectionViewCell : UICollectionViewCell {
     
-   
-    @IBOutlet weak var instructionsLabel: UILabel!
-    @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var orLabel: UILabel!
     @IBOutlet weak var addPhoneLaterButton: UIButton!
-    
-    var phoneNumber:String!
-    let backend = Backend.sharedInstance()
-    
-    private var _entryMode : EntryMode = .None
-    
-    var entryMode : EntryMode {
-        get {
-            return _entryMode
-        }
-        set {
-            if newValue != _entryMode {
-                _entryMode = newValue
-                self.updateViewForEntryMode(_entryMode)
-            }
-        }
-    }
-    
-    override func awakeFromNib() {
-        formatButton(backButton, imageName: "arrow-back")
-        formatButton(doneButton, imageName: "checkmark")
-        entryMode = .PhoneNumber
-        super.awakeFromNib()
-    }
-    
-    func formatButton(button: UIButton, imageName: String){
-        button.setImage(UIImage(named: imageName)!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        button.tintColor = UIColor.whiteColor()
-    }
-    
-    func updateViewForEntryMode(entryMode: EntryMode) {
-        guard let instructionsLabel = instructionsLabel,
-            let textField = textField,
-            let detailLabel = detailLabel,
-            let backButton = backButton
-            else {
-                assert(false, "Outlets are required")
-        }
-        
-        switch entryMode {
-        case .PhoneNumber:
-            if let countryCallingCode = backend.phoneCountryCodeForPhoneNumberCurrentLocale() {
-                textField.text = "+\(countryCallingCode)"
-            }
-            else {
-                textField.text = nil
-            }
-            instructionsLabel.text = NSLocalizedString("Volunteering - Phone Number Modal Title", comment: "")
-            detailLabel.text = NSLocalizedString("Volunteering - Phone Number Modal Details", comment: "")
-            backButton.hidden = true
-        case .ConfirmationCode:
-            textField.text = nil
-            instructionsLabel.text = NSLocalizedString("Volunteering - Confirmation Number Modal Title", comment: "")
-            detailLabel.text = NSLocalizedString("Volunteering - Confirmation Number Modal Details", comment: "")
-            backButton.hidden = false
-        default:
-            print("No action")
-        }
-    }
-    
-    @IBAction func doneButtonTapped(sender: AnyObject) {
-        guard let entryText = textField?.text else {
-            assert(false, "Entry text is required")
-            return
-        }
-        
-        if entryMode == .PhoneNumber {
-            sendPhoneNumber(entryText)
-        }
-        else if entryMode == .ConfirmationCode {
-            if let phoneNumber = self.phoneNumber {
-                logInWithPhoneNumber(phoneNumber, codeEntry: entryText)
-            }
-            else {
-                assert(false, "Phone number should always be defined")
-            }
-        }
-    }
-    
-    @IBAction func backButtonTapped(sender: AnyObject) {
-        entryMode = .PhoneNumber
-        textField.text = phoneNumber
-    }
-    
-    private func sendPhoneNumber(phoneNumber: String) {
-        backend.sendCodeToPhoneNumber(phoneNumber, completionHandler: { (success, error) -> Void in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            else {
-                // hold onto the phone number to use when logging in
-                self.phoneNumber = phoneNumber
-                self.textField.placeholder = "5555"
-                self.entryMode = .ConfirmationCode
-            }
-        })
-    }
-    
-    private func logInWithPhoneNumber(phoneNumber: String, codeEntry: String) {
-        backend.logInWithPhoneNumber(phoneNumber, codeEntry: codeEntry, completionHandler: { (success, error) -> Void in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            else {
-                print("Done!")
-                NSNotificationCenter.defaultCenter().postNotificationName("loginCompleted", object: nil)
-            }
-        })
-    }
-    
     
     
 }

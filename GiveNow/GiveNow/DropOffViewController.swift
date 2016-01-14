@@ -14,6 +14,7 @@ class DropOffViewController: BaseViewController, CLLocationManagerDelegate, MKMa
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var myLocationButton: MyLocationButton!
     
     var dropOffAgencies:[DropOffAgency]!
     
@@ -41,6 +42,15 @@ class DropOffViewController: BaseViewController, CLLocationManagerDelegate, MKMa
         initializeMenuButton()
         mapView.delegate = self
         fetchDropOffAgencies()
+    }
+    
+    @IBAction func myLocationTapped(sender: AnyObject) {
+        if let location = locationManager?.location {
+            let coord = location.coordinate
+            let currentRegion = mapView!.region
+            let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
+            mapView!.setRegion(newRegion, animated: true)
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -82,7 +92,7 @@ class DropOffViewController: BaseViewController, CLLocationManagerDelegate, MKMa
                     let longitudeInMeters : CLLocationDistance = 30000
                     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
                     
-                    self.mapView?.setRegion(coordinateRegion, animated: animated)
+                    self.mapView?.setRegion(coordinateRegion, animated: false)
                 }
                 else {
                     print("Location is not valid")
@@ -105,6 +115,10 @@ class DropOffViewController: BaseViewController, CLLocationManagerDelegate, MKMa
 
     func initializeMenuButton() {
         if self.revealViewController() != nil {
+            if let menuImage = UIImage(named: "menu") {
+                self.menuButton.image = menuImage.imageWithRenderingMode(.AlwaysTemplate)
+                self.menuButton.tintColor = UIColor.whiteColor()
+            }
             self.menuButton.target = self.revealViewController()
             self.menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -143,15 +157,15 @@ class DropOffViewController: BaseViewController, CLLocationManagerDelegate, MKMa
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is DropOffAgencyMapPoint {
             let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "dropOffAgency")
-            pinAnnotationView.pinColor = .Purple
+            pinAnnotationView.pinColor = .Green
             pinAnnotationView.canShowCallout = true
             
             let directionsButton = UIButton()
-            directionsButton.frame.size.width = 80
+            directionsButton.frame.size.width = 44
             directionsButton.frame.size.height = 44
             directionsButton.tintColor = UIColor.whiteColor()
-            directionsButton.setImage(UIImage(named: "car")!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-            directionsButton.backgroundColor = UIColor.purpleColor()
+            directionsButton.setImage(UIImage(named: "navigation")!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            directionsButton.backgroundColor = UIColor.colorAccent()
             
             pinAnnotationView.leftCalloutAccessoryView = directionsButton
             
