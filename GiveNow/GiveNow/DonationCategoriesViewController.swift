@@ -154,16 +154,8 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
             savePickupRequest()
         }
         else {
-            createModalBackgroundView()
+            createModalBackgroundView(self)
         }
-    }
-    
-    func createModalBackgroundView() {
-        let modalBackground = ModalBackgroundViewController()
-        modalBackground.modalPresentationStyle = .OverFullScreen
-        modalBackground.modalTransitionStyle = .CrossDissolve
-        modalBackground.delegate = self
-        presentViewController(modalBackground, animated: true, completion: {})
     }
     
     func savePickupRequest() {

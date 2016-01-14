@@ -29,46 +29,12 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
         configureHeaderView()
         configureProfileInfo()
     }
-    
-    func configureHeaderView() {
-        //Create a view and put it behind the status bar
-        let anotherHeaderView = UIView()
-        anotherHeaderView.frame = CGRect(x: 0, y: -20, width: view.frame.width, height: 20)
-        anotherHeaderView.backgroundColor = UIColor.colorPrimaryDark()
-        view.addSubview(anotherHeaderView)
-        
-        let headerView = UIView()
-        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 160)
-        headerView.backgroundColor = UIColor.colorPrimaryDark()
-        tableView.tableHeaderView = headerView
-        
-        profileImage.frame = CGRect(x: 20, y: 13, width: 80, height: 80)
-        headerView.addSubview(profileImage)
-        
-        nameLabel = UILabel()
-        nameLabel.frame = CGRect(x: 30, y: 93, width: view.frame.width - 50, height: 24)
-        nameLabel.font = UIFont.boldSystemFontOfSize(17.0)
-        nameLabel.textColor = UIColor.whiteColor()
-        headerView.addSubview(nameLabel)
-        
-        usernameLabel = UILabel()
-        usernameLabel.frame = CGRect(x: 30, y: 117, width: view.frame.width - 50, height: 17)
-        usernameLabel.font = UIFont.boldSystemFontOfSize(15.0)
-        usernameLabel.textColor = UIColor.whiteColor()
-        headerView.addSubview(usernameLabel)
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
+    // MARK: - Table view
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
-
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
@@ -79,7 +45,82 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
         }
     }
     
-    func configureProfileInfo() {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("menuCell") as! MenuTableViewCell
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                cell.menuImage.image = UIImage.templatedImageFromName("pin-drop")
+                cell.cellLabel.text = NSLocalizedString("navigation_item_1", comment: "")
+            case 1:
+                cell.menuImage.image = UIImage.templatedImageFromName("car")
+                cell.cellLabel.text = NSLocalizedString("navigation_item_2", comment: "")
+            default:
+                cell.menuImage.image = UIImage.templatedImageFromName("city")
+                cell.cellLabel.text = NSLocalizedString("navigation_item_3", comment: "")
+            }
+        }
+        else {
+            cell.menuImage.image = UIImage.templatedImageFromName("power")
+            cell.cellLabel.text = self.setLoginLabel()
+        }
+        if indexPath == selectedIndex {
+            highlightCell(cell)
+        }
+        else {
+            unhighlightCell(cell)
+        }
+        return cell
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                performSegueWithIdentifier("donate", sender: nil)
+            case 1:
+                volunteerTapped()
+            default:
+                performSegueWithIdentifier("dropOff", sender: nil)
+            }
+            self.selectedIndex = indexPath
+        }
+        else {
+            logInOutTapped()
+        }
+        tableView.reloadData()
+    }
+    
+    // MARK: Delegate
+    
+    func modalViewDismissedWithResult(controller: ModalBackgroundViewController) {
+        configureProfileInfo()
+        tableView.reloadData()
+    }
+    
+    // MARK: Private
+    
+    private func configureHeaderView() {
+        //Create a view and put it behind the status bar
+        let topHeaderFrame = CGRect(x: 0, y: -20, width: view.frame.width, height: 20)
+        view.addCustomUIView(topHeaderFrame, backgroundColor: UIColor.colorPrimaryDark())
+        
+        let headerView = UIView()
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 160)
+        headerView.backgroundColor = UIColor.colorPrimaryDark()
+        tableView.tableHeaderView = headerView
+        
+        profileImage.frame = CGRect(x: 20, y: 13, width: 80, height: 80)
+        headerView.addSubview(profileImage)
+        
+        let nameLabelFrame = CGRect(x: 30, y: 93, width: view.frame.width - 50, height: 24)
+        nameLabel = headerView.addCustomUILabel(nameLabelFrame, font: UIFont.boldSystemFontOfSize(17.0), textColor: UIColor.whiteColor())
+        
+        let usernameLabelFrame = CGRect(x: 30, y: 117, width: view.frame.width - 50, height: 17)
+        usernameLabel = headerView.addCustomUILabel(usernameLabelFrame, font: UIFont.boldSystemFontOfSize(15.0), textColor: UIColor.whiteColor())
+    }
+    
+    private func configureProfileInfo() {
         if AppState.sharedInstance().isUserRegistered {
             let user = User.currentUser()!
             if user.name != nil {
@@ -102,7 +143,7 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
         }
     }
     
-    func getLoginLabel() -> String {
+    private func setLoginLabel() -> String {
         if AppState.sharedInstance().isUserRegistered {
             return NSLocalizedString("title_sign_out", comment: "")
         }
@@ -111,93 +152,29 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("menuCell") as! MenuTableViewCell
-        if indexPath.section == 0 {
-            switch indexPath.row {
-            case 0:
-                cell.menuImage.image = self.templatedImageFromName("pin-drop")
-                cell.cellLabel.text = NSLocalizedString("navigation_item_1", comment: "")
-            case 1:
-                cell.menuImage.image = self.templatedImageFromName("car")
-                cell.cellLabel.text = NSLocalizedString("navigation_item_2", comment: "")
-            default:
-                cell.menuImage.image = templatedImageFromName("city")
-                cell.cellLabel.text = NSLocalizedString("navigation_item_3", comment: "")
-            }
-        }
-        else {
-            cell.menuImage.image = templatedImageFromName("power")
-            cell.cellLabel.text = self.getLoginLabel()
-        }
-        if indexPath == selectedIndex {
-            highlightCell(cell)
-        }
-        else {
-            unhighlightCell(cell)
-        }
-        return cell
-    }
-    
-    func templatedImageFromName(name: String) -> UIImage {
-        if let image = UIImage(named: name) {
-            return image.imageWithRenderingMode(.AlwaysTemplate)
-        }
-        else {
-            return UIImage()
-        }
-    }
-    
-    func highlightCell(cell: MenuTableViewCell) {
+    private func highlightCell(cell: MenuTableViewCell) {
         cell.backgroundColor = UIColor.colorAccent()
         cell.menuImage.tintColor = UIColor.whiteColor()
         cell.cellLabel.textColor = UIColor.whiteColor()
     }
     
-    func unhighlightCell(cell: MenuTableViewCell) {
+    private func unhighlightCell(cell: MenuTableViewCell) {
         cell.backgroundColor = UIColor.whiteColor()
         cell.menuImage.tintColor = UIColor.blackColor()
         cell.cellLabel.textColor = UIColor.blackColor()
     }
-
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 {
-            switch indexPath.row {
-            case 0:
-                performSegueWithIdentifier("donate", sender: nil)
-            case 1:
-                volunteerTapped()
-            default:
-                performSegueWithIdentifier("dropOff", sender: nil)
-            }
-            self.selectedIndex = indexPath
-        }
-        else {
-            logInOutTapped()
-        }
-        tableView.reloadData()
-    }
     
-    
-    func logInOutTapped() {
+    private func logInOutTapped() {
         if AppState.sharedInstance().isUserRegistered {
             User.logOut()
             sendUserToOnboardingFlow()
         }
         else {
-            createModalBackgroundView()
+            createModalBackgroundView(self)
         }
     }
-
-    func createModalBackgroundView() {
-        let modalBackground = ModalBackgroundViewController()
-        modalBackground.modalPresentationStyle = .OverFullScreen
-        modalBackground.modalTransitionStyle = .CrossDissolve
-        modalBackground.delegate = self
-        presentViewController(modalBackground, animated: true, completion: {})
-    }
     
-    func sendUserToOnboardingFlow() {
+    private func sendUserToOnboardingFlow() {
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "FirstLaunch")
         if let parent = parentViewController as? SWRevealViewController {
             if let initial = parent.parentViewController as? InitialViewController {
@@ -209,7 +186,7 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
         }
     }
     
-    func volunteerTapped() {
+    private func volunteerTapped() {
         if AppState.sharedInstance().isUserRegistered {
             let user = User.currentUser()!
             backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, error) -> Void in
@@ -224,16 +201,6 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
         else {
             performSegueWithIdentifier("apply", sender: nil)
         }
-    }
-    
-    func modalViewDismissedWithResult(controller: ModalBackgroundViewController) {
-        configureProfileInfo()
-        tableView.reloadData()
-    }
-    
-    @IBAction func loginCompleted(segue: UIStoryboardSegue) {
-        configureProfileInfo()
-        tableView.reloadData()
     }
 
 }

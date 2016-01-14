@@ -420,14 +420,6 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
 extension DonatingViewController: CLLocationManagerDelegate {
 
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        let lastLocation = locations.last
-//        let latitude = lastLocation?.coordinate.latitude ?? 0
-//        let longitude = lastLocation?.coordinate.longitude ?? 0
-//        let origin = MKMapPointMake(latitude, longitude)
-//        
-//        let size = MKMapSize(width: 200, height: 200)
-//        let mapRect = MKMapRect(origin: origin, size: size)
-//        mapView?.setVisibleMapRect(mapRect, animated: true)
         manager.stopUpdatingLocation()
     }
 }

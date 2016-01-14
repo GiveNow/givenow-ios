@@ -32,3 +32,47 @@ extension UIColor {
     }
     
 }
+
+extension UIView {
+    
+    func addCustomUIView(frame: CGRect, backgroundColor: UIColor) {
+        let view = UIView(frame: frame)
+        view.backgroundColor = backgroundColor
+        addSubview(view)
+    }
+    
+    func addCustomUILabel(frame: CGRect, font: UIFont, textColor: UIColor) -> UILabel {
+        let label = UILabel()
+        label.frame = frame
+        label.font = font
+        label.textColor = textColor
+        addSubview(label)
+        return label
+    }
+    
+}
+
+extension UIImage {
+    
+    class func templatedImageFromName(name: String) -> UIImage {
+        if let image = UIImage(named: name) {
+            return image.imageWithRenderingMode(.AlwaysTemplate)
+        }
+        else {
+            return UIImage()
+        }
+    }
+    
+}
+
+extension UIViewController {
+    
+    func createModalBackgroundView(delegate: ModalBackgroundViewControllerDelegate) {
+        let modalBackground = ModalBackgroundViewController()
+        modalBackground.modalPresentationStyle = .OverFullScreen
+        modalBackground.modalTransitionStyle = .CrossDissolve
+        modalBackground.delegate = delegate
+        presentViewController(modalBackground, animated: true, completion: {})
+    }
+    
+}

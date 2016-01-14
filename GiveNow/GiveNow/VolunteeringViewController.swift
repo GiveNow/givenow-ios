@@ -80,15 +80,7 @@ class VolunteeringViewController: BaseViewController, ModalBackgroundViewControl
     }
     
     private func promptUserToLogIn() {
-        createModalBackgroundView()
-    }
-    
-    func createModalBackgroundView() {
-        let modalBackground = ModalBackgroundViewController()
-        modalBackground.modalPresentationStyle = .OverFullScreen
-        modalBackground.modalTransitionStyle = .CrossDissolve
-        modalBackground.delegate = self
-        presentViewController(modalBackground, animated: true, completion: {})
+        createModalBackgroundView(self)
     }
     
     private func updateViewForPendingVolunteer() {
