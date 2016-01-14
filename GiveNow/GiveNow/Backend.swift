@@ -281,15 +281,16 @@ class Backend: NSObject {
         guard let completionHandler = completionHandler else {
             return
         }
-        pickupRequest.pendingVolunteer = User.currentUser()
-        pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
+        
+        let params = ["pickupRequestId": pickupRequest.objectId!]
+        PFCloud.callFunctionInBackground("claimPickupRequest", withParameters: params) { (results, error) -> Void in
             if let error = error {
                 completionHandler(nil, error)
             }
             else {
                 completionHandler(pickupRequest, nil)
             }
-        })
+        }
     }
     
     func cancelClaimedPickupRequest(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
