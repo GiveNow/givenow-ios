@@ -85,7 +85,6 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
             if user.name != nil {
                 nameLabel.text = user.name!
                 usernameLabel.text = user.username!
-                print(backend.formatPhoneNumber(user.username!))
             }
             else {
                 nameLabel.text = "Unknown User"

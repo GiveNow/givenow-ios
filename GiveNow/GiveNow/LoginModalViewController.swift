@@ -242,9 +242,5 @@ class LoginModalViewController: UIViewController {
         doneButton.titleLabel?.textColor = UIColor.whiteColor()
     }
     
-    @IBAction func textFieldValueChanged(sender: AnyObject) {
-        print(textField.text)
-    }
-    
 
 }
