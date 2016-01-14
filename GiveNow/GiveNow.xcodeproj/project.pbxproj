@@ -55,6 +55,7 @@
 		C72296401C228F6D0097A662 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C722963F1C228F6D0097A662 /* libc++.tbd */; };
 		C72296421C228F740097A662 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296411C228F740097A662 /* libsqlite3.tbd */; };
 		C72296441C228F7C0097A662 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296431C228F7C0097A662 /* libz.tbd */; };
+		D2005BDB1C482A6B00B59A9A /* ModalBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2005BDA1C482A6B00B59A9A /* ModalBackgroundViewController.swift */; };
 		D207A3471C23B82400E93BEB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207A3461C23B82400E93BEB /* Extensions.swift */; };
 		D2186FB11C3CC3FC001551EF /* MyDashboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */; };
 		D2186FB51C3CC632001551EF /* PickupRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */; };
@@ -229,6 +230,7 @@
 		C722963F1C228F6D0097A662 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		C72296411C228F740097A662 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		C72296431C228F7C0097A662 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		D2005BDA1C482A6B00B59A9A /* ModalBackgroundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalBackgroundViewController.swift; sourceTree = "<group>"; };
 		D207A3461C23B82400E93BEB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDashboardTableViewController.swift; sourceTree = "<group>"; };
 		D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupRequestTableViewCell.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				D23CF8191C472F760070AEAA /* MyLocationButton.swift */,
 				D23BBF4F1C457F1B00E68AF9 /* LoginModalViewController.swift */,
 				D23BBF501C457F1B00E68AF9 /* LoginModalViewController.xib */,
+				D2005BDA1C482A6B00B59A9A /* ModalBackgroundViewController.swift */,
 			);
 			name = "Shared View Controllers";
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				2645C6A21C21F38E00D6C70D /* BaseNavigationController.swift in Sources */,
 				267BF1F61C2801CA00A76425 /* PickupViewController.swift in Sources */,
 				2645C66A1C21E7FF00D6C70D /* AppDelegate.swift in Sources */,
+				D2005BDB1C482A6B00B59A9A /* ModalBackgroundViewController.swift in Sources */,
 				D23BBF631C45D3CF00E68AF9 /* MyPendingDonationViewController.swift in Sources */,
 				D207A3471C23B82400E93BEB /* Extensions.swift in Sources */,
 				2645C6A01C21F37A00D6C70D /* BaseViewController.swift in Sources */,
