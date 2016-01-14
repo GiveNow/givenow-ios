@@ -125,7 +125,7 @@ class LoginModalViewController: UIViewController {
             backButton.hidden = true
         case .InvalidPhoneNumber:
             instructionsLabel.text = "Please enter a valid phone number"
-            detailLabel.text = ""
+            detailLabel.text = "Example: +49 123 456 7890"
             backButton.hidden = true
         case .ConfirmationCode:
             textField.text = nil
