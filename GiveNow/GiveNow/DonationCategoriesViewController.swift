@@ -13,7 +13,7 @@ import Parse
 private let reuseIdentifier = "donationCategory"
 private let backend = Backend.sharedInstance()
 
-class DonationCategoriesViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UITextFieldDelegate, ModalBackgroundViewControllerDelegate {
+class DonationCategoriesViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UITextFieldDelegate, ModalLoginViewControllerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var donationCategories:[DonationCategory]!
@@ -23,9 +23,6 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var pickupRequestAddressLabel: UILabel!
     @IBOutlet weak var noteTextField: UITextField!
-    
-    // MARK: - Nib setup
-    let loginModalViewController = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,7 +151,7 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
             savePickupRequest()
         }
         else {
-            createModalBackgroundView(self)
+            createModalLoginView(self)
         }
     }
     
@@ -174,7 +171,7 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         })
     }
     
-    func modalViewDismissedWithResult(controller: ModalBackgroundViewController) {
+    func modalViewDismissedWithResult(controller: ModalLoginViewController) {
         savePickupRequest()
     }
 

@@ -13,16 +13,13 @@ import Parse
 // See https://github.com/GiveNow/givenow-ios/issues/7
 // See https://github.com/GiveNow/givenow-ios/issues/8
 
-class VolunteeringViewController: BaseViewController, ModalBackgroundViewControllerDelegate {
+class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDelegate {
     
     @IBOutlet weak var volunteeringTitleLabel: UILabel!
     @IBOutlet weak var volunteerButton: UIButton!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     let backend = Backend.sharedInstance()
-    
-    // MARK: - Nib setup
-    let loginModalViewController = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
     
     // MARK: - View Lifecycle
 
@@ -59,7 +56,7 @@ class VolunteeringViewController: BaseViewController, ModalBackgroundViewControl
         // do nothing
     }
     
-    func modalViewDismissedWithResult(controller: ModalBackgroundViewController) {
+    func modalViewDismissedWithResult(controller: ModalLoginViewController) {
         createVolunteer()
     }
 
@@ -80,7 +77,7 @@ class VolunteeringViewController: BaseViewController, ModalBackgroundViewControl
     }
     
     private func promptUserToLogIn() {
-        createModalBackgroundView(self)
+        createModalLoginView(self)
     }
     
     private func updateViewForPendingVolunteer() {

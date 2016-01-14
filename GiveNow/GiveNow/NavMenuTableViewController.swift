@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class NavMenuTableViewController: UITableViewController, ModalBackgroundViewControllerDelegate {
+class NavMenuTableViewController: UITableViewController, ModalLoginViewControllerDelegate {
 
     @IBOutlet weak var logInLabel: UILabel!
     
@@ -18,9 +18,6 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
     var profileImage = UIImageView()
     
     var selectedIndex = NSIndexPath(forItem: 0, inSection: 0)
-    
-    // MARK: - Nib setup
-    let loginModalViewController = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
     
     let backend = Backend.sharedInstance()
     
@@ -93,7 +90,7 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
     
     // MARK: Delegate
     
-    func modalViewDismissedWithResult(controller: ModalBackgroundViewController) {
+    func modalViewDismissedWithResult(controller: ModalLoginViewController) {
         configureProfileInfo()
         tableView.reloadData()
     }
@@ -170,7 +167,7 @@ class NavMenuTableViewController: UITableViewController, ModalBackgroundViewCont
             sendUserToOnboardingFlow()
         }
         else {
-            createModalBackgroundView(self)
+            createModalLoginView(self)
         }
     }
     

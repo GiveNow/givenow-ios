@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate, LoginModalViewControllerDelegate {
+class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate, LoginViewControllerDelegate {
     
     @IBOutlet weak var pageControl : UIPageControl?
     
@@ -85,19 +85,19 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
     // MARK: Login
     
     private func addLoginControllerToCell(cell: UICollectionViewCell) {
-        let modalLoginView = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
-        modalLoginView.delegate = self
-        modalLoginView.isModal = false
+        let loginView = LoginViewController(nibName: "LoginViewController", bundle: nil)
+        loginView.delegate = self
+        loginView.isModal = false
         
         //To Do: Replace this with parent 'embed' method
-        addChildViewController(modalLoginView)
+        addChildViewController(loginView)
         let frame = CGRect(x: 20, y: 80, width: view.frame.width - 40, height: view.frame.height/2 - 80)
-        modalLoginView.view.frame = frame
-        cell.addSubview(modalLoginView.view)
-        modalLoginView.didMoveToParentViewController(self)
+        loginView.view.frame = frame
+        cell.addSubview(loginView.view)
+        loginView.didMoveToParentViewController(self)
     }
     
-    func successfulLogin(controller: LoginModalViewController) {
+    func successfulLogin(controller: LoginViewController) {
         dismissOnboardingView()
     }
     

@@ -67,12 +67,12 @@ extension UIImage {
 
 extension UIViewController {
     
-    func createModalBackgroundView(delegate: ModalBackgroundViewControllerDelegate) {
-        let modalBackground = ModalBackgroundViewController()
-        modalBackground.modalPresentationStyle = .OverFullScreen
-        modalBackground.modalTransitionStyle = .CrossDissolve
-        modalBackground.delegate = delegate
-        presentViewController(modalBackground, animated: true, completion: {})
+    func createModalLoginView(delegate: ModalLoginViewControllerDelegate) {
+        let modalLogin = ModalLoginViewController()
+        modalLogin.modalPresentationStyle = .OverFullScreen
+        modalLogin.modalTransitionStyle = .CrossDissolve
+        modalLogin.delegate = delegate
+        presentViewController(modalLogin, animated: true, completion: {})
     }
     
 }

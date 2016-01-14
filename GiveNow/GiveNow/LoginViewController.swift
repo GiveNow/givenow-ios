@@ -14,13 +14,13 @@ public enum EntryMode : Int {
     case ConfirmationCode
 }
 
-protocol LoginModalViewControllerDelegate{
-    func successfulLogin(controller:LoginModalViewController)
+protocol LoginViewControllerDelegate{
+    func successfulLogin(controller:LoginViewController)
 }
 
-class LoginModalViewController: BaseViewController {
+class LoginViewController: BaseViewController {
     
-    var delegate:LoginModalViewControllerDelegate!
+    var delegate:LoginViewControllerDelegate!
     var isModal:Bool!
 
     @IBOutlet weak var instructionsLabel: UILabel!
