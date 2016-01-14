@@ -113,8 +113,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="cellImage" destination="rMO-9T-4gg" id="iRP-d5-KnP"/>
                                     <outlet property="cellLabel" destination="ewN-fH-SAj" id="M8O-eA-4Qc"/>
+                                    <outlet property="menuImage" destination="rMO-9T-4gg" id="Dtu-rn-la1"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

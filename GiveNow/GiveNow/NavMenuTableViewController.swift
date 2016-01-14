@@ -117,18 +117,18 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                cell.imageView!.image = self.templatedImageFromName("pin-drop")
+                cell.menuImage.image = self.templatedImageFromName("pin-drop")
                 cell.cellLabel.text = "Give Now"
             case 1:
-                cell.imageView!.image = self.templatedImageFromName("car")
+                cell.menuImage.image = self.templatedImageFromName("car")
                 cell.cellLabel.text = "Volunteer"
             default:
-                cell.imageView!.image = templatedImageFromName("city")
+                cell.menuImage.image = templatedImageFromName("city")
                 cell.cellLabel.text = "Drop Off"
             }
         }
         else {
-            cell.imageView!.image = templatedImageFromName("power")
+            cell.menuImage.image = templatedImageFromName("power")
             cell.cellLabel.text = "Log out"
         }
         if indexPath == selectedIndex {
@@ -151,13 +151,13 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
     
     func highlightCell(cell: MenuTableViewCell) {
         cell.backgroundColor = UIColor.colorAccent()
-        cell.cellImage.tintColor = UIColor.whiteColor()
+        cell.menuImage.tintColor = UIColor.whiteColor()
         cell.cellLabel.textColor = UIColor.whiteColor()
     }
     
     func unhighlightCell(cell: MenuTableViewCell) {
         cell.backgroundColor = UIColor.whiteColor()
-        cell.cellImage.tintColor = UIColor.blackColor()
+        cell.menuImage.tintColor = UIColor.blackColor()
         cell.cellLabel.textColor = UIColor.blackColor()
     }
 
@@ -227,7 +227,7 @@ class NavMenuTableViewController: UITableViewController, LoginModalViewControlle
 
 class MenuTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var cellImage: UIImageView!
+    @IBOutlet weak var menuImage: UIImageView!
     @IBOutlet weak var cellLabel: UILabel!
     
 }
