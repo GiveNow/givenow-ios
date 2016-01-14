@@ -544,6 +544,8 @@ class Backend: NSObject {
         }
     }
     
+    // MARK: Phone number validation
+    
     func phoneCountryCodeForPhoneNumberCurrentLocale() -> Int? {
         let locale = NSLocale.currentLocale()
         return phoneCountryCodeForLocale(locale)

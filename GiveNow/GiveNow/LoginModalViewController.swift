@@ -11,6 +11,7 @@ import UIKit
 public enum EntryMode : Int {
     case None = 0
     case PhoneNumber
+    case InvalidPhoneNumber
     case ConfirmationCode
 }
 
@@ -71,8 +72,8 @@ class LoginModalViewController: UIViewController {
             return
         }
         
-        if entryMode == .PhoneNumber {
-            sendPhoneNumber(entryText)
+        if entryMode == .PhoneNumber || entryMode == .InvalidPhoneNumber {
+            validatePhoneNumber(entryText)
         }
         else if entryMode == .ConfirmationCode {
             if let phoneNumber = self.phoneNumber {
@@ -91,6 +92,16 @@ class LoginModalViewController: UIViewController {
     
     
     // MARK: Private
+    
+    private func validatePhoneNumber(entryText: String) {
+        if backend.isValidPhoneNumber(entryText) {
+            sendPhoneNumber(entryText)
+        }
+        else {
+            entryMode = .InvalidPhoneNumber
+            updateViewForEntryMode(entryMode)
+        }
+    }
     
     private func updateViewForEntryMode(entryMode: EntryMode) {
         guard let instructionsLabel = instructionsLabel,
@@ -111,6 +122,10 @@ class LoginModalViewController: UIViewController {
             }
             instructionsLabel.text = NSLocalizedString("Volunteering - Phone Number Modal Title", comment: "")
             detailLabel.text = NSLocalizedString("Volunteering - Phone Number Modal Details", comment: "")
+            backButton.hidden = true
+        case .InvalidPhoneNumber:
+            instructionsLabel.text = "Please enter a valid phone number"
+            detailLabel.text = ""
             backButton.hidden = true
         case .ConfirmationCode:
             textField.text = nil
