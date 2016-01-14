@@ -182,7 +182,7 @@ class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBar
                     let longitudeInMeters : CLLocationDistance = 30000
                     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
                     
-                    self.mapView?.setRegion(coordinateRegion, animated: true)
+                    self.mapView?.setRegion(coordinateRegion, animated: false)
                     self.shouldUpdateSearchBarWithMapCenter = true
                 }
                 else {

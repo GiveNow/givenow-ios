@@ -82,7 +82,7 @@ class DropOffViewController: BaseViewController, CLLocationManagerDelegate, MKMa
                     let longitudeInMeters : CLLocationDistance = 30000
                     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
                     
-                    self.mapView?.setRegion(coordinateRegion, animated: animated)
+                    self.mapView?.setRegion(coordinateRegion, animated: false)
                 }
                 else {
                     print("Location is not valid")
