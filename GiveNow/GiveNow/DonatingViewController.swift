@@ -25,8 +25,8 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     @IBOutlet var pickupLocationButton: UIButton?
     @IBOutlet var mapView: MKMapView?
     @IBOutlet weak var myLocationButton: MyLocationButton!
-
     @IBOutlet weak var menuButton: UIBarButtonItem!
+    @IBOutlet weak var navItem: UINavigationItem!
     
     var shouldUpdateSearchBarWithMapCenter = false
     var newPickupRequest:PickupRequest!
@@ -47,7 +47,14 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         initializeSearchController()
         initializeSearchResultsTable()
         initializeMenuButton(menuButton)
+        localizeText()
         awakeFromNib()
+    }
+    
+    func localizeText() {
+        pickupLocationButton?.setTitle(NSLocalizedString("button_set_pickup_location_label", comment: ""), forState: .Normal)
+        navItem.title = NSLocalizedString("title_pickup_address", comment: "")
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -61,6 +68,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
             zoomIntoLocation(false, mapView: self.mapView!, completionHandler: {(zoomed) -> Void in
                 if zoomed == true {
                     self.shouldUpdateSearchBarWithMapCenter = true
+                    self.setAddressFromCoordinates()
                 }
             })
         }
@@ -75,17 +83,6 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
             let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
             mapView!.setRegion(newRegion, animated: true)
         }
-    }
-    
-    func backgroundTapped(sender: UIGestureRecognizer? = nil) {
-        hideSearchResultsTable()
-        searchController.dismissViewControllerAnimated(true, completion: {})
-    }
-    
-    func hideSearchResultsTable() {
-        searchResultsTableView.hidden = true
-        searchResults = [MKMapItem]()
-        searchResultsTableView.reloadData()
     }
     
     func displayPendingDonationViewIfNeeded() {
@@ -151,6 +148,17 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         searchController.delegate = self
         navigationItem.titleView = searchController.searchBar
         searchController.searchBar.tintColor = UIColor.colorPrimaryDark()
+    }
+    
+    func backgroundTapped(sender: UIGestureRecognizer? = nil) {
+        hideSearchResultsTable()
+        searchController.dismissViewControllerAnimated(true, completion: {})
+    }
+    
+    func hideSearchResultsTable() {
+        searchResultsTableView.hidden = true
+        searchResults = [MKMapItem]()
+        searchResultsTableView.reloadData()
     }
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
@@ -300,8 +308,5 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     
     @IBAction func newPickupRequestCreated(segue: UIStoryboardSegue) {
     }
-    
-    // MARK: Private
-
     
 }

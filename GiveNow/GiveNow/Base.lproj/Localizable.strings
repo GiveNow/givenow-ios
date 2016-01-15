@@ -45,7 +45,15 @@
 "navigation_item_2" = "Volunteer";
 "navigation_item_3" = "Dropoff Centers";
 
-
+/* Donating workflow */
+"button_set_pickup_location_label" = "Set Pickup Location";
+"title_pickup_address" = "Select Address";
+"address_helper_label" = "Address:";
+"note_helper_label" = "Note";
+"button_confirm_donation_label" = "Give Now";
+"request_status_waiting" = "Waiting for a volunteer to accept your request!";
+"your_donation_label" = "Your Donation";
+"cancel_donation_button" = "Cancel";
 
 /* Volunteering - Title */
 "Volunteering - Title Label" = "Want to volunteer to pick up donations? The only thing you need is a car and some spare time!";

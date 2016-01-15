@@ -44,6 +44,16 @@
 "navigation_item_2" = "Helfer";
 "navigation_item_3" = "Hilfsorganisationen";
 
+/* Donating workflow */
+"button_set_pickup_location_label" = "Abholort festlegen";
+"title_pickup_address" = "Adresse Auswählen";
+"address_helper_label" = "Adresse:";
+"note_helper_label" = "Notiz:";
+"button_confirm_donation_label" = "Jetzt spenden";
+"request_status_waiting" = "Es hat sich noch kein Helfer zur Abholung gefunden!";
+"your_donation_label" = "Deine Spende";
+"cancel_donation_button" = "Zurückziehen";
+
 /* VOLUNTEERING */
 
 /* Volunteering - Title */

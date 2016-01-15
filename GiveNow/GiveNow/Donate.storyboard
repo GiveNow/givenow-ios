@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="-408" y="242"/>
         </scene>
-        <!--Select Address-->
+        <!--addressNav-->
         <scene sceneID="8uE-QJ-E4D">
             <objects>
                 <viewController id="LdM-nb-XRS" customClass="DonatingViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
@@ -49,7 +49,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="57W-Fl-xvG"/>
                                 </constraints>
-                                <state key="normal" title="Set Pickup Location">
+                                <state key="normal" title="setPickupLocationButton">
                                     <color key="titleShadowColor" red="0.40000000600000002" green="0.73333334920000004" blue="0.41568627949999998" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -93,7 +93,7 @@
                             <constraint firstItem="Dqa-ec-ITD" firstAttribute="top" secondItem="VID-4N-S16" secondAttribute="bottom" constant="49" id="vaT-tV-Eet"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Select Address" id="Tvw-Ie-FQz">
+                    <navigationItem key="navigationItem" title="addressNav" id="Tvw-Ie-FQz">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="jhn-mN-Qmk" userLabel="menuButton">
                             <color key="tintColor" red="0.043137254899999998" green="0.043137254899999998" blue="0.043137254899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
@@ -103,6 +103,7 @@
                         <outlet property="mapView" destination="VID-4N-S16" id="UEQ-Nr-img"/>
                         <outlet property="menuButton" destination="jhn-mN-Qmk" id="Tx9-QT-hnI"/>
                         <outlet property="myLocationButton" destination="L0U-KG-Zgd" id="Hrh-DE-3DB"/>
+                        <outlet property="navItem" destination="Tvw-Ie-FQz" id="d1r-FA-dxl"/>
                         <outlet property="pickupLocationButton" destination="aCv-dI-Tpw" id="QjL-be-NBs"/>
                         <outlet property="searchDisplayController" destination="DiB-u8-tzc" id="2VU-Df-w1e"/>
                         <segue destination="xqe-tM-5xe" kind="show" identifier="selectCategories" id="vSF-G5-EV9"/>
@@ -143,7 +144,7 @@
                                     <constraint firstAttribute="height" constant="60" id="FnW-kV-xbZ"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting for volunteer to accept your request!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TnD-2f-K77">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="headerLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TnD-2f-K77">
                                 <rect key="frame" x="20" y="20" width="560" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="w58-Z1-BcD"/>
@@ -156,11 +157,11 @@
                                 <rect key="frame" x="0.0" y="400" width="600" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71a-1l-1Lj">
-                                        <rect key="frame" x="532" y="15" width="48" height="30"/>
+                                        <rect key="frame" x="489" y="15" width="91" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="CmN-Yy-074"/>
                                         </constraints>
-                                        <state key="normal" title="Cancel">
+                                        <state key="normal" title="cancelButton">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -175,8 +176,8 @@
                                             <constraint firstAttribute="width" constant="30" id="r6b-K2-fNT"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Donation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMS-eM-U7k">
-                                        <rect key="frame" x="60" y="20" width="108" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="yourDonationLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMS-eM-U7k">
+                                        <rect key="frame" x="60" y="20" width="145" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -307,7 +308,7 @@
                                     <constraint firstAttribute="height" constant="60" id="7jg-ar-X5s"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <state key="normal" title="Give Now">
+                                <state key="normal" title="giveNowButton">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -317,26 +318,26 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofB-37-sWl">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="166"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3Q-88-9yq">
-                                        <rect key="frame" x="20" y="89" width="68" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3Q-88-9yq">
+                                        <rect key="frame" x="20" y="89" width="62" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="addressLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXK-zM-pEn" userLabel="pickupRequesetAddress">
-                                        <rect key="frame" x="98" y="89" width="492" height="21"/>
+                                        <rect key="frame" x="92" y="89" width="498" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9d-3G-8Oc">
-                                        <rect key="frame" x="20" y="120" width="42" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9d-3G-8Oc">
+                                        <rect key="frame" x="20" y="120" width="35" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b3x-AK-RwX" userLabel="noteTextField">
-                                        <rect key="frame" x="98" y="116" width="482" height="30"/>
+                                        <rect key="frame" x="92" y="116" width="488" height="30"/>
                                         <color key="backgroundColor" red="0.039215687659999998" green="0.53725492949999998" blue="0.6549019814" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -442,8 +443,11 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="addressHelperLabel" destination="Z3Q-88-9yq" id="x8c-E2-4MX"/>
                         <outlet property="addressLabel" destination="Z3Q-88-9yq" id="pG6-z1-LoM"/>
                         <outlet property="collectionView" destination="ohA-ph-S3Q" id="wM4-J1-pC1"/>
+                        <outlet property="giveNowButton" destination="YF9-JT-GUc" id="9hF-9z-hOp"/>
+                        <outlet property="noteHelperLabel" destination="K9d-3G-8Oc" id="X4A-ch-nPl"/>
                         <outlet property="noteTextField" destination="b3x-AK-RwX" id="ktJ-GC-JXq"/>
                         <outlet property="pickupRequestAddressLabel" destination="fXK-zM-pEn" id="hwc-XN-ixS"/>
                         <segue destination="Kip-pf-66s" kind="unwind" identifier="newPickupRequestCreated" unwindAction="newPickupRequestCreated:" id="HDw-Rl-ZQ2"/>
