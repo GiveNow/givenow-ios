@@ -85,5 +85,19 @@ class BaseViewController: UIViewController {
         let vc = storyboard.instantiateViewControllerWithIdentifier(storyboardIdentifier)
         return vc
     }
+    
+    // MARK: Navigation for side menu
+    
+    func initializeMenuButton(menuButton: UIBarButtonItem) {
+        if self.revealViewController() != nil {
+            if let menuImage = UIImage(named: "menu") {
+                menuButton.image = menuImage.imageWithRenderingMode(.AlwaysTemplate)
+                menuButton.tintColor = UIColor.whiteColor()
+            }
+            menuButton.target = self.revealViewController()
+            menuButton.action = "revealToggle:"
+            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+    }
 
 }

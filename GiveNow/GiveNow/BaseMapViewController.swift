@@ -14,7 +14,6 @@ class BaseMapViewController: BaseViewController, MKMapViewDelegate, CLLocationMa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -54,7 +53,6 @@ class BaseMapViewController: BaseViewController, MKMapViewDelegate, CLLocationMa
                     
                     mapView.setRegion(coordinateRegion, animated: false)
                     completionHandler(true)
-//                    self.shouldUpdateSearchBarWithMapCenter = true
                 }
                 else {
                     completionHandler(false)

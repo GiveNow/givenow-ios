@@ -20,8 +20,6 @@ public enum SystemPermissionStatus : Int {
     case Denied
 }
 
-//class DonatingViewController: BaseViewController, MKMapViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
-
 class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet var pickupLocationButton: UIButton?
@@ -40,23 +38,6 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     var searchResults = [MKMapItem]()
     var searchResultsTableView: UITableView!
     
-//    var locationManager: CLLocationManager? {
-//        didSet {
-//            if let locationManager = locationManager {
-//                locationManager.delegate = self
-//                locationManager.requestWhenInUseAuthorization()
-//                locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-//                locationManager.activityType = .OtherNavigation
-//                locationManager.startUpdatingLocation()
-//            }
-//        }
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder) {
-//        locationManager = CLLocationManager()
-//        super.init(coder: aDecoder)
-//    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         pickupLocationButton?.backgroundColor = UIColor.colorAccent()
@@ -67,20 +48,8 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         super.viewDidLoad()
         initializeSearchController()
         initializeSearchResultsTable()
-        initializeMenuButton()
+        initializeMenuButton(menuButton)
         awakeFromNib()
-    }
-    
-    func initializeMenuButton() {
-        if self.revealViewController() != nil {
-            if let menuImage = UIImage(named: "menu") {
-                self.menuButton.image = menuImage.imageWithRenderingMode(.AlwaysTemplate)
-                self.menuButton.tintColor = UIColor.whiteColor()
-            }
-            self.menuButton.target = self.revealViewController()
-            self.menuButton.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
     }
     
     @IBAction func myLocationTapped(sender: AnyObject) {
@@ -149,50 +118,6 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         
         displayPendingDonationViewIfNeeded()
     }
-    
-//    func zoomIntoLocation(animated : Bool) {
-//        if let locationManager = self.locationManager,
-//            let location = locationManager.location {
-//                if CLLocationCoordinate2DIsValid(location.coordinate) {
-//                    let latitudeInMeters : CLLocationDistance = 30000
-//                    let longitudeInMeters : CLLocationDistance = 30000
-//                    let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
-//                    
-//                    self.mapView?.setRegion(coordinateRegion, animated: false)
-//                    self.shouldUpdateSearchBarWithMapCenter = true
-//                }
-//                else {
-//                    print("Location is not valid")
-//                }
-//        }
-//        else {
-//            if self.locationManager == nil {
-//                print("Location manager is nil")
-//            }
-//            if self.locationManager?.location == nil {
-//                print("Location is nil")
-//            }
-//        }
-//    }
-    
-//    func locationStatus() -> SystemPermissionStatus {
-//        let status = CLLocationManager.authorizationStatus()
-//        
-//        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
-//            return .Allowed
-//        }
-//        if status == .Restricted || status == .Denied {
-//            return .Denied
-//        }
-//        
-//        return .NotDetermined
-//    }
-//    
-//    func promptForLocationAuthorization() {
-//        if let locationManager = self.locationManager {
-//            locationManager.requestAlwaysAuthorization()
-//        }
-//    }
     
     @IBAction func setPickupLocationButtonTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("selectCategories", sender: nil)
@@ -382,10 +307,3 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
 
     
 }
-
-//extension DonatingViewController: CLLocationManagerDelegate {
-//
-//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        manager.stopUpdatingLocation()
-//    }
-//}
