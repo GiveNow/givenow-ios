@@ -21,6 +21,8 @@ class PickupDonationViewController: BaseMapViewController {
     @IBOutlet weak var navigationButton: UIButton!
     @IBOutlet weak var myLocationButton: MyLocationButton!
     
+    var donorPhoneNumber:String!
+    
     var pickupRequest:PickupRequest!
 
     override func viewDidLoad() {
@@ -28,18 +30,25 @@ class PickupDonationViewController: BaseMapViewController {
         mapView.delegate = self
         addPickupRequestToMap()
         formatButtons()
+        setDonorPhoneNumber()
+        validateButtons()
+        localizeStrings()
     }
     
-    func formatButtons() {
-        tintButton(callButton, imageName: "phone")
-        tintButton(messageButton, imageName: "textsms")
-        tintButton(navigationButton, imageName: "navigation")
+    private func localizeStrings() {
+        donationPickedUpButton.setTitle(NSLocalizedString("finish_pickup", comment: ""), forState: .Normal)
     }
     
-    func tintButton(button: UIButton, imageName: String) {
-        if let image = UIImage(named: imageName) {
-            button.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-            button.tintColor = UIColor.colorAccent()
+    private func formatButtons() {
+        callButton.setImage(UIImage.templatedImageFromName("phone"), forState: .Normal)
+        messageButton.setImage(UIImage.templatedImageFromName("textsms"), forState: .Normal)
+        navigationButton.setImage(UIImage.templatedImageFromName("navigation"), forState: .Normal)
+    }
+    
+    private func validateButtons() {
+        if donorPhoneNumber == nil {
+            callButton.enabled = false
+            messageButton.enabled = false
         }
     }
     
@@ -64,7 +73,7 @@ class PickupDonationViewController: BaseMapViewController {
         }
     }
     
-    func addPickupRequestToMap() {
+    private func addPickupRequestToMap() {
         let latitude = pickupRequest.location!.latitude
         let longitude = pickupRequest.location!.longitude
         var title:String!
@@ -72,7 +81,7 @@ class PickupDonationViewController: BaseMapViewController {
             title = pickupRequest.address!
         }
         else {
-            title = "Unknown address"
+            title = NSLocalizedString("dashboard_pickup_request_unknown_address", comment: "")
         }
         let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
         mapView.addAnnotation(donationPoint)
@@ -100,15 +109,19 @@ class PickupDonationViewController: BaseMapViewController {
         return nil
     }
     
+    private func setDonorPhoneNumber() {
+        if pickupRequest.donor != nil {
+            let phoneNumber = pickupRequest.donor!.phoneNumber()
+            if phoneNumber != nil {
+                self.donorPhoneNumber = phoneNumber!
+            }
+        }
+    }
+    
     //MARK: Toolbar buttons
 
     @IBAction func callButtonTapped(sender: AnyObject) {
-        let phoneNumber = "5555555555"
-        callNumber(phoneNumber)
-    }
-    
-    private func callNumber(phoneNumber:String) {
-        if let phoneCallURL:NSURL = NSURL(string:"tel://\(phoneNumber)") {
+        if let phoneCallURL:NSURL = NSURL(string:"tel://\(donorPhoneNumber)") {
             let application:UIApplication = UIApplication.sharedApplication()
             if (application.canOpenURL(phoneCallURL)) {
                 application.openURL(phoneCallURL);
@@ -117,12 +130,7 @@ class PickupDonationViewController: BaseMapViewController {
     }
     
     @IBAction func messageButtonTapped(sender: AnyObject) {
-        let phoneNumber = "5555555555"
-        sendMessage(phoneNumber)
-    }
-    
-    private func sendMessage(phoneNumber:String) {
-        if let messageURL:NSURL = NSURL(string:"sms://\(phoneNumber)") {
+        if let messageURL:NSURL = NSURL(string:"sms://\(donorPhoneNumber)") {
             let application:UIApplication = UIApplication.sharedApplication()
             if (application.canOpenURL(messageURL)) {
                 application.openURL(messageURL);
@@ -138,7 +146,7 @@ class PickupDonationViewController: BaseMapViewController {
         let placeMark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placeMark)
         
-        mapItem.name = "Donation Location"
+        mapItem.name = NSLocalizedString("navigation_instructions_donation_location", comment: "")
         let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
         
         mapItem.openInMapsWithLaunchOptions(launchOptions)

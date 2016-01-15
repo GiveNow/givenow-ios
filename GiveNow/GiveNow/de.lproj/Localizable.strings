@@ -61,3 +61,13 @@
 "volunteer_label_user_has_applied" = "Danke das du Spenden abholen willst!\n Wir werden dich bald unter {PhoneNumber} kontaktieren.";
 "volunteer_your_phone_number" = "deine Telefonnummer";
 "volunteer_button_user_has_applied" = "Du hast dich beworben freiwilliger Abholer zu sein.";
+
+/* DASHBOARD */
+"dashboard_pickup_requests_tabbaritem" = "Abholungen Anfragen";
+"dashboard_pickup_request_unknown_address" = "Unbekannt adresse";
+"accept" = "Annehmen";
+"dashboard_dashboard_tabbaritem" = "Armaturenbrett";
+"volunteer_dashboard_status_waiting" = "Auf Spender warten";
+"volunteer_dashboard_status_ready" = "Abholbereit";
+"finish_pickup" = "Ich habe diese Spende abgeholt";
+"navigation_instructions_donation_location" = "Spende Ort";

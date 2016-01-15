@@ -15,6 +15,7 @@ class PickupViewController: BaseMapViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var myLocationButton: MyLocationButton!
+    @IBOutlet weak var pickupRequests: UITabBarItem!
     
     var openPickupRequests:[PickupRequest]!
 
@@ -49,7 +50,9 @@ class PickupViewController: BaseMapViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func fetchOpenPickupRequests() {
+    // MARK: Fetching pickup requests
+    
+    private func fetchOpenPickupRequests() {
         let query = backend.queryOpenPickupRequests()
         backend.fetchPickupRequestsWithQuery(query, completionHandler: { (result, error) -> Void in
             if error != nil {
@@ -63,7 +66,7 @@ class PickupViewController: BaseMapViewController {
     
     }
     
-    func addOpenPickupRequestToMap() {
+    private func addOpenPickupRequestToMap() {
         for pickupRequest in openPickupRequests {
             let latitude = pickupRequest.location!.latitude
             let longitude = pickupRequest.location!.longitude
@@ -72,13 +75,15 @@ class PickupViewController: BaseMapViewController {
                 title = pickupRequest.address!
             }
             else {
-                title = "Unknown address"
+                title = NSLocalizedString("dashboard_pickup_request_unknown_address", comment: "")
             }
             let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
             mapView.addAnnotation(donationPoint)
             print(donationPoint)
         }
     }
+    
+    // MARK: Map view setup
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let pickupRequestMapPoint = view.annotation as? PickupRequestMapPoint {
@@ -103,7 +108,7 @@ class PickupViewController: BaseMapViewController {
             let selectButton = UIButton()
             selectButton.frame.size.width = 80
             selectButton.frame.size.height = 44
-            selectButton.setTitle("Accept", forState: .Normal)
+            selectButton.setTitle(NSLocalizedString("accept", comment: ""), forState: .Normal)
             selectButton.backgroundColor = UIColor.colorAccent()
 
             pinAnnotationView.leftCalloutAccessoryView = selectButton

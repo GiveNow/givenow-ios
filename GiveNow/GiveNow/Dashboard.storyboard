@@ -43,17 +43,18 @@
                             <constraint firstAttribute="trailing" secondItem="GtN-bE-Lsx" secondAttribute="trailing" constant="25" id="vWX-0Y-oBQ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Pickup Requests" image="person_pin" id="6hm-Oc-e1h" userLabel="Open Pickup Requests"/>
+                    <tabBarItem key="tabBarItem" title="pickupRequests" image="person_pin" id="6hm-Oc-e1h" userLabel="Open Pickup Requests"/>
                     <connections>
                         <outlet property="mapView" destination="MH5-YL-f4n" id="ltC-Jh-9A1"/>
                         <outlet property="myLocationButton" destination="GtN-bE-Lsx" id="rPt-4n-4KA"/>
+                        <outlet property="pickupRequests" destination="6hm-Oc-e1h" id="hZi-P7-DgJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zn1-3z-2OX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="685" y="145"/>
         </scene>
-        <!--Dashboard-->
+        <!--dashboardTabBar-->
         <scene sceneID="gjd-vs-0DQ">
             <objects>
                 <tableViewController id="gc7-Ui-MZc" customClass="MyDashboardTableViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
@@ -106,8 +107,9 @@
                             <outlet property="delegate" destination="gc7-Ui-MZc" id="A97-d4-tca"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Dashboard" image="dashboard" id="vwj-bp-JRU"/>
+                    <tabBarItem key="tabBarItem" title="dashboardTabBar" image="dashboard" id="vwj-bp-JRU"/>
                     <connections>
+                        <outlet property="dashboardTabBar" destination="vwj-bp-JRU" id="Yzf-G3-2J7"/>
                         <outlet property="dashboardTable" destination="m7X-vS-91J" id="xVm-f7-jPd"/>
                         <segue destination="x3u-qc-vy0" kind="show" identifier="viewConfirmedPickup" id="EXh-sN-752"/>
                     </connections>
@@ -135,7 +137,7 @@
                                     <constraint firstAttribute="height" constant="60" id="Ebu-5L-q2i"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <state key="normal" title="I picked up this donation">
+                                <state key="normal" title="donationPickedUp">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -261,11 +263,11 @@
             </objects>
             <point key="canvasLocation" x="-845" y="493"/>
         </scene>
-        <!--Volunteer-->
+        <!--navItem-->
         <scene sceneID="vpn-6D-xbG">
             <objects>
                 <tabBarController id="9Xv-gM-mHf" customClass="DashboardTabViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Volunteer" id="0eg-rX-hSM">
+                    <navigationItem key="navigationItem" title="navItem" id="0eg-rX-hSM">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="wLn-WX-NmH">
                             <color key="tintColor" red="0.043137254899999998" green="0.043137254899999998" blue="0.043137254899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
@@ -287,6 +289,7 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="menuButton" destination="wLn-WX-NmH" id="Czj-kR-5Pc"/>
+                        <outlet property="navItem" destination="0eg-rX-hSM" id="XnV-bB-5aT"/>
                         <segue destination="ehW-T2-K1f" kind="relationship" relationship="viewControllers" id="cOq-vM-pUb"/>
                         <segue destination="gc7-Ui-MZc" kind="relationship" relationship="viewControllers" id="atd-8a-pMt"/>
                     </connections>

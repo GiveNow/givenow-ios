@@ -15,6 +15,7 @@ class MyDashboardTableViewController: UITableViewController {
     let backend = Backend.sharedInstance()
     
     @IBOutlet var dashboardTable: UITableView!
+    @IBOutlet weak var dashboardTabBar: UITabBarItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,7 @@ class MyDashboardTableViewController: UITableViewController {
     
     // MARK: - Fetch data
     
-    func fetchMyDashboardPendingPickups() {
+    private func fetchMyDashboardPendingPickups() {
         let query = backend.queryMyDashboardPendingPickups()
         backend.fetchPickupRequestsWithQuery(query, completionHandler: { (result, error) -> Void in
             if error != nil {
@@ -43,7 +44,7 @@ class MyDashboardTableViewController: UITableViewController {
         
     }
     
-    func fetchMyDashboardConfirmedPickups() {
+    private func fetchMyDashboardConfirmedPickups() {
         let query = backend.queryMyDashboardConfirmedPickups()
         backend.fetchPickupRequestsWithQuery(query, completionHandler: { (result, error) -> Void in
             if error != nil {
@@ -99,7 +100,7 @@ class MyDashboardTableViewController: UITableViewController {
     }
     
     func configurePendingPickupCell(cell: PickupRequestTableViewCell) {
-        cell.statusLabel.text = "Waiting for Donor"
+        cell.statusLabel.text = NSLocalizedString("volunteer_dashboard_status_waiting", comment: "")
         if cell.pickupRequest.address != nil {
             cell.addressLabel.text = cell.pickupRequest.address!
         }
@@ -107,7 +108,7 @@ class MyDashboardTableViewController: UITableViewController {
     }
     
     func configureConfirmedPickupCell(cell: PickupRequestTableViewCell) {
-        cell.statusLabel.text = "Ready for Pickup"
+        cell.statusLabel.text = NSLocalizedString("volunteer_dashboard_status_ready", comment: "")
         if cell.pickupRequest.address != nil {
             cell.addressLabel.text = cell.pickupRequest.address!
         }
@@ -137,51 +138,4 @@ class MyDashboardTableViewController: UITableViewController {
         dashboardTable.reloadData()
     }
     
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

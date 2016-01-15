@@ -64,10 +64,7 @@ class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDe
                     // after successful submission
                     self.backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, user) -> Void in
                         if volunteer != nil && volunteer!.isApproved == true {
-                            print("Should show dashboard")
-                        }
-                        else {
-                            print("Should show pending volunteer")
+                            //To Do: Figure out how to seamlessly show the dashboard here.
                         }
                     })
                     self.updateViewForPendingVolunteer()
