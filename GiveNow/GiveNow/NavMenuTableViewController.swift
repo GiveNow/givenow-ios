@@ -26,6 +26,11 @@ class NavMenuTableViewController: UITableViewController, ModalLoginViewControlle
         configureHeaderView()
         configureProfileInfo()
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        configureProfileInfo()
+    }
 
     // MARK: - Table view
 

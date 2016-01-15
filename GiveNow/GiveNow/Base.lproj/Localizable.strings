@@ -36,7 +36,7 @@
 "validate_sms_code" = "We sent a 4-digit SMS code to your phone number. Enter it in below.";
 "confirmation_code_error" = "Confirmation code is invalid";
 
-/* Main Menu */
+/* MAIN MENU */
 "unknown_user" = "Unknown User";
 "not_logged_in" = "Not logged in";
 "title_sign_out" = "Sign Out";
@@ -45,7 +45,7 @@
 "navigation_item_2" = "Volunteer";
 "navigation_item_3" = "Dropoff Centers";
 
-/* Donating workflow */
+/* DONATING */
 "button_set_pickup_location_label" = "Set Pickup Location";
 "title_pickup_address" = "Select Address";
 "address_helper_label" = "Address:";
@@ -55,15 +55,10 @@
 "your_donation_label" = "Your Donation";
 "cancel_donation_button" = "Cancel";
 
-/* Volunteering - Title */
-"Volunteering - Title Label" = "Want to volunteer to pick up donations? The only thing you need is a car and some spare time!";
-"Volunteering - Title Button" = "I want to volunteer!";
-
-/* Volunteering - Thanks Label */
-"Volunteering - Thanks Label" = "Thanks for applying to volunteer! We'll contact you soon at {PhoneNumber}";
-
-/* Volunteering - Your Phone Number */
-"Volunteering - Your Phone Number" = "your phone number";
-
-/* Volunteering - Thanks Button */
-"Volunteering - Thanks Button" = "You applied to volunteer";
+/* VOLUNTEERING */
+"title_volunteer" = "Volunteer";
+"volunteer_label_user_has_not_applied" = "Want to volunteer to pickup donations?\nThe only thing you need is a car and some spare time!";
+"volunteer_button_user_has_not_applied" = "I want to volunteer!";
+"volunteer_label_user_has_applied" = "Thanks for applying to volunteer! We'll contact you soon at {PhoneNumber}";
+"volunteer_your_phone_number" = "your phone number";
+"volunteer_button_user_has_applied" = "You applied to volunteer";
