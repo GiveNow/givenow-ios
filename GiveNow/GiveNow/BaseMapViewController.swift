@@ -51,7 +51,7 @@ class BaseMapViewController: BaseViewController, MKMapViewDelegate, CLLocationMa
                     let longitudeInMeters : CLLocationDistance = 30000
                     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
                     
-                    mapView.setRegion(coordinateRegion, animated: false)
+                    mapView.setRegion(coordinateRegion, animated: animated)
                     completionHandler(true)
                 }
                 else {

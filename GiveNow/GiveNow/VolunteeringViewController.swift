@@ -19,8 +19,6 @@ class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDe
     @IBOutlet weak var volunteerButton: UIButton!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
-    let backend = Backend.sharedInstance()
-    
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {

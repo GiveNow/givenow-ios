@@ -9,6 +9,9 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    
+    // Quick reference to the backend
+    let backend = Backend.sharedInstance()
 
     // MARK: Base Overrides
 

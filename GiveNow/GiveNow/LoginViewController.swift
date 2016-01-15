@@ -34,8 +34,6 @@ class LoginViewController: BaseViewController {
     
     var phoneNumber:String!
     
-    let backend = Backend.sharedInstance()
-    
     var entryMode : EntryMode {
         get {
            return _entryMode

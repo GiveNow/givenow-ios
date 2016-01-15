@@ -31,8 +31,6 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     var shouldUpdateSearchBarWithMapCenter = false
     var newPickupRequest:PickupRequest!
     
-    let backend = Backend.sharedInstance()
-    
     var searchController:UISearchController!
     
     var searchResults = [MKMapItem]()
@@ -50,6 +48,24 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         initializeSearchResultsTable()
         initializeMenuButton(menuButton)
         awakeFromNib()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let status = locationStatus()
+        if status == .NotDetermined {
+            promptForLocationAuthorization()
+        }
+        else if status == .Allowed && mapView != nil {
+            zoomIntoLocation(false, mapView: self.mapView!, completionHandler: {(zoomed) -> Void in
+                if zoomed == true {
+                    self.shouldUpdateSearchBarWithMapCenter = true
+                }
+            })
+        }
+        
+        displayPendingDonationViewIfNeeded()
     }
     
     @IBAction func myLocationTapped(sender: AnyObject) {
@@ -99,24 +115,6 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
             view.addSubview(pendingDonationViewController.view)
             pendingDonationViewController.didMoveToParentViewController(self)
         }
-    }
-
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
-        let status = locationStatus()
-        if status == .NotDetermined {
-            promptForLocationAuthorization()
-        }
-        else if status == .Allowed && mapView != nil {
-            zoomIntoLocation(true, mapView: self.mapView!, completionHandler: {(zoomed) -> Void in
-                if zoomed == true {
-                    self.shouldUpdateSearchBarWithMapCenter = true
-                }
-            })
-        }
-        
-        displayPendingDonationViewIfNeeded()
     }
     
     @IBAction func setPickupLocationButtonTapped(sender: AnyObject) {
