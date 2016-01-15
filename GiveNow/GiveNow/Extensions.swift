@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 extension UIColor {
     
@@ -76,3 +77,53 @@ extension UIViewController {
     }
     
 }
+
+extension MKMapView {
+    
+    func centerMapOnMapItem(mapItem: MKMapItem) {
+        let currentRegion = region
+        let newCenter = coordinatesForMapItem(mapItem)
+        let newRegion = MKCoordinateRegion(center: newCenter, span: currentRegion.span)
+        setRegion(newRegion, animated: true)
+    }
+    
+    func coordinatesForMapItem(mapItem: MKMapItem) -> CLLocationCoordinate2D {
+        return mapItem.placemark.coordinate
+    }
+    
+}
+
+extension MKMapItem {
+    
+    func getName() -> String {
+        if name != nil {
+            return name!
+        }
+        else {
+            return ""
+        }
+    }
+    
+    func getAddress() -> String {
+        var address = ""
+        if placemark.addressDictionary != nil {
+            let addressDictionary = placemark.addressDictionary!
+            address = getAddressFromAddressDictionary(addressDictionary)
+        }
+        return address
+    }
+    
+    private func getAddressFromAddressDictionary(addressDictionary: [NSObject: AnyObject]) -> String {
+        var address = ""
+        if addressDictionary["FormattedAddressLines"] != nil {
+            if let formattedAddressLines = addressDictionary["FormattedAddressLines"] as? [String] {
+                for line in formattedAddressLines {
+                    address += line + " "
+                }
+            }
+        }
+        return address
+    }
+    
+}
+
