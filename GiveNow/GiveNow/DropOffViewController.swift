@@ -15,14 +15,20 @@ class DropOffViewController: BaseMapViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var myLocationButton: MyLocationButton!
+    @IBOutlet weak var navItem: UINavigationItem!
     
     var dropOffAgencies:[DropOffAgency]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeMenuButton()
+        initializeMenuButton(menuButton)
         mapView.delegate = self
         fetchDropOffAgencies()
+        localizeStrings()
+    }
+    
+    func localizeStrings() {
+        navItem.title = NSLocalizedString("dropoff_title", comment: "")
     }
     
     @IBAction func myLocationTapped(sender: AnyObject) {
@@ -50,18 +56,6 @@ class DropOffViewController: BaseMapViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    func initializeMenuButton() {
-        if self.revealViewController() != nil {
-            if let menuImage = UIImage(named: "menu") {
-                self.menuButton.image = menuImage.imageWithRenderingMode(.AlwaysTemplate)
-                self.menuButton.tintColor = UIColor.whiteColor()
-            }
-            self.menuButton.target = self.revealViewController()
-            self.menuButton.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
-    }
     
     func fetchDropOffAgencies() {
         backend.fetchDropOffAgencies({ (result, error) -> Void in
@@ -85,7 +79,7 @@ class DropOffViewController: BaseMapViewController {
                 title = dropOffAgency.agencyAddress!
             }
             else {
-                title = "Unknown address"
+                title = NSLocalizedString("unknown_address", comment: "")
             }
             let agencyPoint = DropOffAgencyMapPoint(latitude: latitude, longitude: longitude, title: title, dropOffAgency: dropOffAgency)
             mapView.addAnnotation(agencyPoint)
@@ -127,7 +121,7 @@ class DropOffViewController: BaseMapViewController {
         let placeMark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placeMark)
         
-        mapItem.name = "Drop Off Agency"
+        mapItem.name = NSLocalizedString("dropoff_center", comment: "")
         let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
         
         mapItem.openInMapsWithLaunchOptions(launchOptions)

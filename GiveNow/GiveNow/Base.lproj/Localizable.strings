@@ -65,11 +65,16 @@
 
 /* DASHBOARD */
 "dashboard_pickup_requests_tabbaritem" = "Pickup Requests";
-"dashboard_pickup_request_unknown_address" = "Unknown address";
+"unknown_address" = "Unknown address";
 "accept" = "Accept";
 "dashboard_dashboard_tabbaritem" = "Dashboard";
 "volunteer_dashboard_status_waiting" = "Waiting for Donor";
 "volunteer_dashboard_status_ready" = "Ready for Pickup";
 "finish_pickup" = "I picked up this donation";
 "navigation_instructions_donation_location" = "Donation Location";
+
+/* DROPOFF */
+"dropoff_title" = "Drop Off";
+"dropoff_center" = "Dropoff Center";
+
 

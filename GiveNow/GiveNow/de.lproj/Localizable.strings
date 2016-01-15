@@ -71,3 +71,7 @@
 "volunteer_dashboard_status_ready" = "Abholbereit";
 "finish_pickup" = "Ich habe diese Spende abgeholt";
 "navigation_instructions_donation_location" = "Spende Ort";
+
+/* DROPOFF */
+"dropoff_title" = "Hilfsorganisationen";
+"dropoff_center" = "Hilfsorganisationen";

@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="1" y="393"/>
         </scene>
-        <!--Drop Off-->
+        <!--navItem-->
         <scene sceneID="6ir-sj-FGv">
             <objects>
                 <viewController id="TS0-yR-z4y" customClass="DropOffViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
@@ -64,7 +64,7 @@
                             <constraint firstAttribute="trailing" secondItem="fK1-PW-xYv" secondAttribute="trailing" id="uVd-YG-vDY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Drop Off" id="2ml-ub-2M9">
+                    <navigationItem key="navigationItem" title="navItem" id="2ml-ub-2M9">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="F10-s1-UjP" userLabel="menuButton">
                             <color key="tintColor" red="0.043137254899999998" green="0.043137254899999998" blue="0.043137254899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
@@ -73,6 +73,7 @@
                         <outlet property="mapView" destination="fK1-PW-xYv" id="o0s-O9-OJ3"/>
                         <outlet property="menuButton" destination="F10-s1-UjP" id="zqd-WP-dFx"/>
                         <outlet property="myLocationButton" destination="ux4-aK-jQe" id="PTQ-at-pUS"/>
+                        <outlet property="navItem" destination="2ml-ub-2M9" id="oDp-H3-g70"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yAC-as-3Ue" userLabel="First Responder" sceneMemberID="firstResponder"/>

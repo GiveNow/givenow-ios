@@ -81,7 +81,7 @@ class PickupDonationViewController: BaseMapViewController {
             title = pickupRequest.address!
         }
         else {
-            title = NSLocalizedString("dashboard_pickup_request_unknown_address", comment: "")
+            title = NSLocalizedString("unknown_address", comment: "")
         }
         let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
         mapView.addAnnotation(donationPoint)
