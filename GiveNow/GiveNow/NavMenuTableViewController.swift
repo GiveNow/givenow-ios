@@ -30,6 +30,7 @@ class NavMenuTableViewController: UITableViewController, ModalLoginViewControlle
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         configureProfileInfo()
+        tableView.reloadData()
     }
 
     // MARK: - Table view
@@ -81,7 +82,7 @@ class NavMenuTableViewController: UITableViewController, ModalLoginViewControlle
             case 0:
                 performSegueWithIdentifier("donate", sender: nil)
             case 1:
-                volunteerTapped()
+                performSegueWithIdentifier("dashboard", sender: nil)
             default:
                 performSegueWithIdentifier("dropOff", sender: nil)
             }
@@ -185,23 +186,6 @@ class NavMenuTableViewController: UITableViewController, ModalLoginViewControlle
             parent.willMoveToParentViewController(nil)
             parent.view.removeFromSuperview()
             parent.removeFromParentViewController()
-        }
-    }
-    
-    private func volunteerTapped() {
-        if AppState.sharedInstance().isUserRegistered {
-            let user = User.currentUser()!
-            backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, error) -> Void in
-                if volunteer != nil && volunteer?.isApproved == true {
-                    self.performSegueWithIdentifier("dashboard", sender: nil)
-                }
-                else {
-                    self.performSegueWithIdentifier("apply", sender: nil)
-                }
-            })
-        }
-        else {
-            performSegueWithIdentifier("apply", sender: nil)
         }
     }
 
