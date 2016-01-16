@@ -49,16 +49,26 @@ class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControll
                 }
                 else {
                     // after successful submission
-                    print("Checking to see if they are already approved")
                     self.backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, user) -> Void in
                         if volunteer != nil && volunteer!.isApproved == true {
-                            print("They are!")
+                            self.removeFromTabBar()
                             self.removeEmbeddedViewController(self)
                         }
                     })
                     self.updateViewForPendingVolunteer()
                 }
             })
+        }
+    }
+    
+    private func removeFromTabBar() {
+        if let tabBarController = self.tabBarController {
+            let indexToRemove = 2
+            if indexToRemove < tabBarController.viewControllers?.count {
+                var viewControllers = tabBarController.viewControllers
+                viewControllers?.removeAtIndex(indexToRemove)
+                tabBarController.viewControllers = viewControllers
+            }
         }
     }
     

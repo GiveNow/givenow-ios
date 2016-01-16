@@ -52,6 +52,8 @@ class DashboardTabViewController: UITabBarController {
         }
     }
     
+    // MARK: Displaying tab bar if necessary
+    
     private func showVolunteerApplicationIfNecessary() {
         if AppState.sharedInstance().isUserRegistered {
             let user = User.currentUser()!
@@ -76,17 +78,5 @@ class DashboardTabViewController: UITabBarController {
         view.addSubview(volunteerApplicationController.view)
         volunteerApplicationController.didMoveToParentViewController(self)
     }
-    
-//    func addPendingDonationChildView() {
-//        if storyboard != nil {
-//            searchController.searchBar.hidden = true
-//            let pendingDonationViewController = storyboard!.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
-//            pendingDonationViewController.pickupRequest = newPickupRequest
-//            addChildViewController(pendingDonationViewController)
-//            pendingDonationViewController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-//            view.addSubview(pendingDonationViewController.view)
-//            pendingDonationViewController.didMoveToParentViewController(self)
-//        }
-//    }
 
 }
