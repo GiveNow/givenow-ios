@@ -25,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="-250" y="330"/>
         </scene>
-        <!--Volunteering-->
+        <!--navItem-->
         <scene sceneID="EdW-cF-7JP">
             <objects>
                 <viewController id="Alj-h5-f0M" customClass="VolunteeringViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
@@ -65,7 +65,7 @@
                             <constraint firstItem="BEI-Bz-9pS" firstAttribute="leading" secondItem="i5W-uJ-7Wh" secondAttribute="leading" constant="20" id="p5l-MQ-T8c"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Volunteering" id="9bd-sy-waa">
+                    <navigationItem key="navigationItem" title="navItem" id="9bd-sy-waa">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="c3I-bt-XmB">
                             <color key="tintColor" red="0.043137254899999998" green="0.043137254899999998" blue="0.043137254899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
@@ -73,6 +73,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="menuButton" destination="c3I-bt-XmB" id="Ouc-1m-qlC"/>
+                        <outlet property="navItem" destination="9bd-sy-waa" id="eqR-hf-TQn"/>
                         <outlet property="volunteerButton" destination="BEI-Bz-9pS" id="oof-cA-EfZ"/>
                         <outlet property="volunteeringTitleLabel" destination="Rj9-A3-xS7" id="n68-uF-Ybn"/>
                     </connections>

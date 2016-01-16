@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 extension UIColor {
     
@@ -27,12 +28,102 @@ extension UIColor {
         return UIColor(red: 102/255, green: 187/255, blue: 106/255, alpha: 1.0)
     }
     
+    class func colorAlternate() -> UIColor {
+        return UIColor(red: 3.0/255.0, green: 155.0/255.0, blue: 229.0/255.0, alpha: 1.0)
+    }
+    
 }
 
+extension UIView {
+    
+    func addCustomUIView(frame: CGRect, backgroundColor: UIColor) {
+        let view = UIView(frame: frame)
+        view.backgroundColor = backgroundColor
+        addSubview(view)
+    }
+    
+    func addCustomUILabel(frame: CGRect, font: UIFont, textColor: UIColor) -> UILabel {
+        let label = UILabel()
+        label.frame = frame
+        label.font = font
+        label.textColor = textColor
+        addSubview(label)
+        return label
+    }
+    
+}
 
+extension UIImage {
+    
+    class func templatedImageFromName(name: String) -> UIImage {
+        if let image = UIImage(named: name) {
+            return image.imageWithRenderingMode(.AlwaysTemplate)
+        }
+        else {
+            return UIImage()
+        }
+    }
+    
+}
 
+extension UIViewController {
+    
+    func createModalLoginView(delegate: ModalLoginViewControllerDelegate) {
+        let modalLogin = ModalLoginViewController()
+        modalLogin.modalPresentationStyle = .OverFullScreen
+        modalLogin.modalTransitionStyle = .CrossDissolve
+        modalLogin.delegate = delegate
+        presentViewController(modalLogin, animated: true, completion: {})
+    }
+    
+}
 
-//<color name="colorPrimary">#ff00b9e6</color>
-//<color name="colorPrimaryDark">#ff0a89a7</color>
-//<color name="colorPrimaryLight">#ffe1f5fe</color>
-//<color name="colorAccent">#ff66bb6a</color>
+extension MKMapView {
+    
+    func centerMapOnMapItem(mapItem: MKMapItem) {
+        let currentRegion = region
+        let newCenter = coordinatesForMapItem(mapItem)
+        let newRegion = MKCoordinateRegion(center: newCenter, span: currentRegion.span)
+        setRegion(newRegion, animated: true)
+    }
+    
+    func coordinatesForMapItem(mapItem: MKMapItem) -> CLLocationCoordinate2D {
+        return mapItem.placemark.coordinate
+    }
+    
+}
+
+extension MKMapItem {
+    
+    func getName() -> String {
+        if name != nil {
+            return name!
+        }
+        else {
+            return ""
+        }
+    }
+    
+    func getAddress() -> String {
+        var address = ""
+        if placemark.addressDictionary != nil {
+            let addressDictionary = placemark.addressDictionary!
+            address = getAddressFromAddressDictionary(addressDictionary)
+        }
+        return address
+    }
+    
+    private func getAddressFromAddressDictionary(addressDictionary: [NSObject: AnyObject]) -> String {
+        var address = ""
+        if addressDictionary["FormattedAddressLines"] != nil {
+            if let formattedAddressLines = addressDictionary["FormattedAddressLines"] as? [String] {
+                for line in formattedAddressLines {
+                    address += line + " "
+                }
+            }
+        }
+        return address
+    }
+    
+}
+

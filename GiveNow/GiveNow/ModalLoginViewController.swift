@@ -1,5 +1,5 @@
 //
-//  ModalBackgroundViewController.swift
+//  ModalLoginViewController.swift
 //  GiveNow
 //
 //  Created by Evan Waters on 1/14/16.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol ModalBackgroundViewControllerDelegate {
-    func modalViewDismissedWithResult(controller:ModalBackgroundViewController)
+protocol ModalLoginViewControllerDelegate {
+    func modalViewDismissedWithResult(controller:ModalLoginViewController)
 }
 
-class ModalBackgroundViewController: UIViewController, UIGestureRecognizerDelegate, LoginModalViewControllerDelegate {
+class ModalLoginViewController: BaseViewController, UIGestureRecognizerDelegate, LoginViewControllerDelegate {
     
-    var delegate:ModalBackgroundViewControllerDelegate!
+    var delegate:ModalLoginViewControllerDelegate!
     var backgroundView:UIView!
     
     override func viewDidLoad() {
@@ -43,20 +43,21 @@ class ModalBackgroundViewController: UIViewController, UIGestureRecognizerDelega
     }
     
     func displayModalLoginView() {
-        let modalLoginView = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
-        modalLoginView.delegate = self
-        modalLoginView.isModal = true
-        addChildViewController(modalLoginView)
+        let loginView = LoginViewController(nibName: "LoginViewController", bundle: nil)
+        loginView.delegate = self
+        loginView.isModal = true
+        addChildViewController(loginView)
         
         let frame = CGRect(x: 20, y: 80, width: view.frame.width - 40, height: view.frame.height/2 - 80)
-        modalLoginView.view.frame = frame
-        view.addSubview(modalLoginView.view)
-        modalLoginView.didMoveToParentViewController(self)
+        loginView.view.frame = frame
+        view.addSubview(loginView.view)
+        loginView.didMoveToParentViewController(self)
     }
     
-    func successfulLogin(controller: LoginModalViewController) {
+    func successfulLogin(controller: LoginViewController) {
         delegate.modalViewDismissedWithResult(self)
         dismissViewControllerAnimated(true, completion: {})
     }
+    
     
 }

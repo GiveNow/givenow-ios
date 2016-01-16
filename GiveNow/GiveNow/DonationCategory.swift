@@ -27,7 +27,7 @@ class DonationCategory : PFObject, PFSubclassing {
         if preferredLanguage == "en-US" {
             return self.name_en
         }
-        else if preferredLanguage == "de" {
+        else if preferredLanguage == "de" || preferredLanguage == "de-US" {
             return self.name_de
         }
         else {

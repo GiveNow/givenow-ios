@@ -14,13 +14,13 @@ public enum EntryMode : Int {
     case ConfirmationCode
 }
 
-protocol LoginModalViewControllerDelegate{
-    func successfulLogin(controller:LoginModalViewController)
+protocol LoginViewControllerDelegate{
+    func successfulLogin(controller:LoginViewController)
 }
 
-class LoginModalViewController: UIViewController {
+class LoginViewController: BaseViewController, UIGestureRecognizerDelegate {
     
-    var delegate:LoginModalViewControllerDelegate!
+    var delegate:LoginViewControllerDelegate!
     var isModal:Bool!
 
     @IBOutlet weak var instructionsLabel: UILabel!
@@ -33,8 +33,6 @@ class LoginModalViewController: UIViewController {
     private var _entryMode : EntryMode = .None
     
     var phoneNumber:String!
-    
-    let backend = Backend.sharedInstance()
     
     var entryMode : EntryMode {
         get {
@@ -58,9 +56,20 @@ class LoginModalViewController: UIViewController {
     
     func configure() {
         validateSubmitButton()
+        addTapGesture()
         updateViewForEntryMode(entryMode)
         hideActivityIndicator()
         textField?.becomeFirstResponder()
+    }
+    
+    private func addTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: Selector("viewTapped:"))
+        tap.delegate = self
+        view.addGestureRecognizer(tap)
+    }
+    
+    func viewTapped(sender: UIGestureRecognizer? = nil) {
+        view.endEditing(true)
     }
     
     @IBAction func phoneTextFieldEditingChanged(sender: AnyObject) {
@@ -128,13 +137,13 @@ class LoginModalViewController: UIViewController {
             else {
                 textField.text = nil
             }
-            instructionsLabel.text = NSLocalizedString("Volunteering - Phone Number Modal Title", comment: "")
-            detailLabel.text = NSLocalizedString("Volunteering - Phone Number Modal Details", comment: "")
+            instructionsLabel.text = NSLocalizedString("phone_number_verification_title", comment: "")
+            detailLabel.text = NSLocalizedString("phone_number_disclaimer", comment: "")
             backButton.hidden = true
         case .ConfirmationCode:
             textField.text = nil
-            instructionsLabel.text = NSLocalizedString("Volunteering - Confirmation Number Modal Title", comment: "")
-            detailLabel.text = NSLocalizedString("Volunteering - Confirmation Number Modal Details", comment: "")
+            instructionsLabel.text = NSLocalizedString("confirmation_code_title", comment: "")
+            detailLabel.text = NSLocalizedString("validate_sms_code", comment: "")
             backButton.hidden = false
         default:
             print("No action")
@@ -142,13 +151,12 @@ class LoginModalViewController: UIViewController {
     }
     
     private func updateViewForInvalidPhoneNumber() {
-        instructionsLabel.text = "Please enter a valid phone number"
-        detailLabel.text = "Example: +49 123 456 7890"
+        detailLabel.text = NSLocalizedString("phone_number_verification_error_number_invalid", comment: "")
         backButton.hidden = true
     }
     
     private func updateViewForInvalidConfirmationCode() {
-        instructionsLabel.text = "Confirmation code is invalid"
+        instructionsLabel.text = NSLocalizedString("confirmation_code_error", comment: "")
         detailLabel.text = ""
     }
     
@@ -191,7 +199,6 @@ class LoginModalViewController: UIViewController {
             else {
                 if self.isModal == true {
                     self.dismissViewControllerAnimated(true, completion: {() -> Void in
-                        print("Telling them")
                         self.delegate.successfulLogin(self)
                     })
                 }

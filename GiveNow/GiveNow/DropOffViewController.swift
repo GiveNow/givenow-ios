@@ -10,38 +10,25 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class DropOffViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class DropOffViewController: BaseMapViewController {
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var myLocationButton: MyLocationButton!
+    @IBOutlet weak var navItem: UINavigationItem!
     
     var dropOffAgencies:[DropOffAgency]!
     
-    let backend = Backend.sharedInstance()
-    
-    var locationManager: CLLocationManager? {
-        didSet {
-            if let locationManager = locationManager {
-                locationManager.delegate = self
-                locationManager.requestWhenInUseAuthorization()
-                locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-                locationManager.activityType = .OtherNavigation
-                locationManager.startUpdatingLocation()
-            }
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        locationManager = CLLocationManager()
-        super.init(coder: aDecoder)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeMenuButton()
+        initializeMenuButton(menuButton)
         mapView.delegate = self
         fetchDropOffAgencies()
+        localizeStrings()
+    }
+    
+    func localizeStrings() {
+        navItem.title = NSLocalizedString("dropoff_title", comment: "")
     }
     
     @IBAction func myLocationTapped(sender: AnyObject) {
@@ -61,68 +48,13 @@ class DropOffViewController: BaseViewController, CLLocationManagerDelegate, MKMa
             promptForLocationAuthorization()
         }
         else if status == .Allowed {
-            zoomIntoLocation(true)
-        }
-    }
-    
-    func locationStatus() -> SystemPermissionStatus {
-        let status = CLLocationManager.authorizationStatus()
-        
-        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
-            return .Allowed
-        }
-        if status == .Restricted || status == .Denied {
-            return .Denied
-        }
-        
-        return .NotDetermined
-    }
-    
-    func promptForLocationAuthorization() {
-        if let locationManager = self.locationManager {
-            locationManager.requestAlwaysAuthorization()
-        }
-    }
-    
-    func zoomIntoLocation(animated : Bool) {
-        if let locationManager = self.locationManager,
-            let location = locationManager.location {
-                if CLLocationCoordinate2DIsValid(location.coordinate) {
-                    let latitudeInMeters : CLLocationDistance = 30000
-                    let longitudeInMeters : CLLocationDistance = 30000
-                    let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
-                    
-                    self.mapView?.setRegion(coordinateRegion, animated: false)
-                }
-                else {
-                    print("Location is not valid")
-                }
-        }
-        else {
-            if self.locationManager == nil {
-                print("Location manager is nil")
-            }
-            if self.locationManager?.location == nil {
-                print("Location is nil")
-            }
+            zoomIntoLocation(false, mapView: mapView, completionHandler: {_ in})
         }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    func initializeMenuButton() {
-        if self.revealViewController() != nil {
-            if let menuImage = UIImage(named: "menu") {
-                self.menuButton.image = menuImage.imageWithRenderingMode(.AlwaysTemplate)
-                self.menuButton.tintColor = UIColor.whiteColor()
-            }
-            self.menuButton.target = self.revealViewController()
-            self.menuButton.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
     }
     
     func fetchDropOffAgencies() {
@@ -147,7 +79,7 @@ class DropOffViewController: BaseViewController, CLLocationManagerDelegate, MKMa
                 title = dropOffAgency.agencyAddress!
             }
             else {
-                title = "Unknown address"
+                title = NSLocalizedString("unknown_address", comment: "")
             }
             let agencyPoint = DropOffAgencyMapPoint(latitude: latitude, longitude: longitude, title: title, dropOffAgency: dropOffAgency)
             mapView.addAnnotation(agencyPoint)
@@ -189,7 +121,7 @@ class DropOffViewController: BaseViewController, CLLocationManagerDelegate, MKMa
         let placeMark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placeMark)
         
-        mapItem.name = "Drop Off Agency"
+        mapItem.name = NSLocalizedString("dropoff_center", comment: "")
         let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
         
         mapItem.openInMapsWithLaunchOptions(launchOptions)

@@ -13,25 +13,32 @@ import Parse
 private let reuseIdentifier = "donationCategory"
 private let backend = Backend.sharedInstance()
 
-class DonationCategoriesViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UITextFieldDelegate, ModalBackgroundViewControllerDelegate {
+class DonationCategoriesViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UITextFieldDelegate, ModalLoginViewControllerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var donationCategories:[DonationCategory]!
     var location:CLLocationCoordinate2D!
     var address:String!
     
+    @IBOutlet weak var addressHelperLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var pickupRequestAddressLabel: UILabel!
+    @IBOutlet weak var noteHelperLabel: UILabel!
     @IBOutlet weak var noteTextField: UITextField!
-    
-    // MARK: - Nib setup
-    let loginModalViewController = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
+    @IBOutlet weak var giveNowButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         noteTextField.delegate = self
         fetchDonationCategories()
         pickupRequestAddressLabel.text = address
+        localizeText()
+    }
+    
+    func localizeText() {
+        addressHelperLabel.text = NSLocalizedString("address_helper_label", comment: "")
+        noteHelperLabel.text = NSLocalizedString("note_helper_label", comment: "")
+        giveNowButton.setTitle(NSLocalizedString("button_confirm_donation_label", comment: ""), forState: .Normal)
     }
     
     override func didReceiveMemoryWarning() {
@@ -154,16 +161,8 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
             savePickupRequest()
         }
         else {
-            createModalBackgroundView()
+            createModalLoginView(self)
         }
-    }
-    
-    func createModalBackgroundView() {
-        let modalBackground = ModalBackgroundViewController()
-        modalBackground.modalPresentationStyle = .OverFullScreen
-        modalBackground.modalTransitionStyle = .CrossDissolve
-        modalBackground.delegate = self
-        presentViewController(modalBackground, animated: true, completion: {})
     }
     
     func savePickupRequest() {
@@ -182,7 +181,7 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         })
     }
     
-    func modalViewDismissedWithResult(controller: ModalBackgroundViewController) {
+    func modalViewDismissedWithResult(controller: ModalLoginViewController) {
         savePickupRequest()
     }
 

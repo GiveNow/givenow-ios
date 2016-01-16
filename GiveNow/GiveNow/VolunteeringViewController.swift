@@ -13,35 +13,24 @@ import Parse
 // See https://github.com/GiveNow/givenow-ios/issues/7
 // See https://github.com/GiveNow/givenow-ios/issues/8
 
-class VolunteeringViewController: BaseViewController, ModalBackgroundViewControllerDelegate {
+class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDelegate {
     
+    @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var volunteeringTitleLabel: UILabel!
     @IBOutlet weak var volunteerButton: UIButton!
     @IBOutlet weak var menuButton: UIBarButtonItem!
-    
-    let backend = Backend.sharedInstance()
-    
-    // MARK: - Nib setup
-    let loginModalViewController = LoginModalViewController(nibName: "LoginModalViewController", bundle: nil)
     
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeMenuButton()
+        initializeMenuButton(menuButton)
         checkPendingVolunteer()
+        localizeStrings()
     }
     
-    func initializeMenuButton() {
-        if self.revealViewController() != nil {
-            if let menuImage = UIImage(named: "menu") {
-                self.menuButton.image = menuImage.imageWithRenderingMode(.AlwaysTemplate)
-                self.menuButton.tintColor = UIColor.whiteColor()
-            }
-            self.menuButton.target = self.revealViewController()
-            self.menuButton.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
+    func localizeStrings() {
+        navItem.title = NSLocalizedString("title_volunteer", comment: "")
     }
     
     // MARK: - User Actions
@@ -59,7 +48,7 @@ class VolunteeringViewController: BaseViewController, ModalBackgroundViewControl
         // do nothing
     }
     
-    func modalViewDismissedWithResult(controller: ModalBackgroundViewController) {
+    func modalViewDismissedWithResult(controller: ModalLoginViewController) {
         createVolunteer()
     }
 
@@ -73,6 +62,11 @@ class VolunteeringViewController: BaseViewController, ModalBackgroundViewControl
                 }
                 else {
                     // after successful submission
+                    self.backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, user) -> Void in
+                        if volunteer != nil && volunteer!.isApproved == true {
+                            //To Do: Figure out how to seamlessly show the dashboard here.
+                        }
+                    })
                     self.updateViewForPendingVolunteer()
                 }
             })
@@ -80,20 +74,12 @@ class VolunteeringViewController: BaseViewController, ModalBackgroundViewControl
     }
     
     private func promptUserToLogIn() {
-        createModalBackgroundView()
-    }
-    
-    func createModalBackgroundView() {
-        let modalBackground = ModalBackgroundViewController()
-        modalBackground.modalPresentationStyle = .OverFullScreen
-        modalBackground.modalTransitionStyle = .CrossDissolve
-        modalBackground.delegate = self
-        presentViewController(modalBackground, animated: true, completion: {})
+        createModalLoginView(self)
     }
     
     private func updateViewForPendingVolunteer() {
         // replace {PhoneNumber} with actual number
-        var titleText = NSLocalizedString("Volunteering - Thanks Label", comment: "")
+        var titleText = NSLocalizedString("volunteer_label_user_has_applied", comment: "")
         
         let phoneNumber = AppState.sharedInstance().userPhoneNumber
         assert(phoneNumber != nil, "Phone number should be defined")
@@ -101,12 +87,12 @@ class VolunteeringViewController: BaseViewController, ModalBackgroundViewControl
             titleText = titleText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: phoneNumber)
         }
         else {
-            let defaultText = NSLocalizedString("Volunteering - Your Phone Number", comment: "")
+            let defaultText = NSLocalizedString("volunteer_your_phone_number", comment: "")
             titleText = titleText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: defaultText)
         }
         
         volunteeringTitleLabel.text = titleText
-        volunteerButton?.setTitle(NSLocalizedString("Volunteering - Thanks Button", comment: ""), forState: .Normal)
+        volunteerButton?.setTitle(NSLocalizedString("volunteer_button_user_has_applied", comment: ""), forState: .Normal)
         volunteerButton?.backgroundColor = UIColor.lightGrayColor()
         volunteerButton.hidden = false
     }
@@ -133,8 +119,8 @@ class VolunteeringViewController: BaseViewController, ModalBackgroundViewControl
     
     private func updateViewForApplicant() {
         
-        volunteeringTitleLabel.text = NSLocalizedString("Volunteering - Title Label", comment: "")
-        volunteerButton.setTitle(NSLocalizedString("Volunteering - Title Button", comment: ""), forState: .Normal)
+        volunteeringTitleLabel.text = NSLocalizedString("volunteer_label_user_has_not_applied", comment: "")
+        volunteerButton.setTitle(NSLocalizedString("volunteer_button_user_has_not_applied", comment: ""), forState: .Normal)
         volunteerButton.hidden = false
     }
 

@@ -27,11 +27,14 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
         setDonationIcon()
         collectionView.delegate = self
         collectionView.dataSource = self
+        localizeText()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func localizeText() {
+        headerLabel.text = NSLocalizedString("request_status_waiting", comment: "")
+        yourDonationLabel.text = NSLocalizedString("your_donation_label", comment: "")
+        cancelButton.setTitle(NSLocalizedString("cancel_donation_button", comment: ""), forState: .Normal)
+        
     }
     
     func setDonationIcon() {
