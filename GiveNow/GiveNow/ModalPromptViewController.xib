@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9531"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ModalPromptViewController" customModule="GiveNow" customModuleProvider="target">
+            <connections>
+                <outlet property="backgroundView" destination="ycC-4h-55k" id="q2M-gy-atP"/>
+                <outlet property="promptView" destination="thp-mS-N8V" id="IH8-os-92g"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycC-4h-55k">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thp-mS-N8V">
+                            <rect key="frame" x="20" y="80" width="560" height="180"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="thp-mS-N8V" firstAttribute="top" secondItem="ycC-4h-55k" secondAttribute="top" constant="80" id="7VU-W5-0HU"/>
+                        <constraint firstAttribute="trailing" secondItem="thp-mS-N8V" secondAttribute="trailing" constant="20" id="94Z-ig-3m0"/>
+                        <constraint firstItem="thp-mS-N8V" firstAttribute="leading" secondItem="ycC-4h-55k" secondAttribute="leading" constant="20" id="CKF-9k-Gmz"/>
+                        <constraint firstItem="thp-mS-N8V" firstAttribute="height" secondItem="ycC-4h-55k" secondAttribute="height" multiplier="0.3" id="hzW-ya-B13"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ycC-4h-55k" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9zg-qz-U8A"/>
+                <constraint firstItem="ycC-4h-55k" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="I4l-yv-WuW"/>
+                <constraint firstAttribute="trailing" secondItem="ycC-4h-55k" secondAttribute="trailing" id="Q7s-SL-GJR"/>
+                <constraint firstAttribute="bottom" secondItem="ycC-4h-55k" secondAttribute="bottom" id="w0R-Cs-h52"/>
+            </constraints>
+            <point key="canvasLocation" x="210" y="269"/>
+        </view>
+    </objects>
+</document>

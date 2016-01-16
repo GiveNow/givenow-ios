@@ -29,7 +29,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     @IBOutlet weak var navItem: UINavigationItem!
     
     var shouldUpdateSearchBarWithMapCenter = false
-    var newPickupRequest:PickupRequest!
+    var myPickupRequest:PickupRequest!
     
     var searchController:UISearchController!
     
@@ -86,7 +86,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func displayPendingDonationViewIfNeeded() {
-        let query = backend.queryMyNewRequests()
+        let query = backend.queryMyPickupRequests()
         backend.fetchPickupRequestsWithQuery(query, completionHandler: {(result, error) -> Void in
             if error != nil {
                 print(error)
@@ -94,7 +94,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
             else if result != nil {
                 if result!.count > 0 {
                     if let pickupRequest = result![0] as? PickupRequest {
-                        self.newPickupRequest = pickupRequest
+                        self.myPickupRequest = pickupRequest
                         self.addPendingDonationChildView()
                     }
                 }
@@ -106,7 +106,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         if storyboard != nil {
             searchController.searchBar.hidden = true
             let pendingDonationViewController = storyboard!.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
-            pendingDonationViewController.pickupRequest = newPickupRequest
+            pendingDonationViewController.pickupRequest = myPickupRequest
             addChildViewController(pendingDonationViewController)
             pendingDonationViewController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
             view.addSubview(pendingDonationViewController.view)
@@ -134,7 +134,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         }
         else if segue.identifier == "viewNewDonation" {
             let destinationController = segue.destinationViewController as! MyPendingDonationViewController
-            destinationController.pickupRequest = newPickupRequest
+            destinationController.pickupRequest = myPickupRequest
         }
     }
     

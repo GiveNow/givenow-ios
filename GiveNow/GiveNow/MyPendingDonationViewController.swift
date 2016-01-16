@@ -53,7 +53,7 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
             else {
                 if let parent = self.parentViewController as? DonatingViewController {
                     parent.searchController.searchBar.hidden = false
-                    parent.newPickupRequest = nil
+                    parent.myPickupRequest = nil
                 }
                 self.willMoveToParentViewController(nil)
                 self.view.removeFromSuperview()
