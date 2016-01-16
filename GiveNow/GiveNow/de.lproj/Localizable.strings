@@ -35,7 +35,7 @@
 "validate_sms_code" = "Du bekommst einen 4-stelligen Code per SMS.\nBitte gib ihn unten ein.";
 "confirmation_code_error" = "Bestätigungscode ist ungültig";
 
-/* Main Menu */
+/* MAIN MENU */
 "unknown_user" = "Unbekannter Benutzer";
 "not_logged_in" = "Nicht eingeloggt";
 "title_sign_out" = "Abmelden";
@@ -44,7 +44,7 @@
 "navigation_item_2" = "Helfer";
 "navigation_item_3" = "Hilfsorganisationen";
 
-/* Donating workflow */
+/* DONATING */
 "button_set_pickup_location_label" = "Abholort festlegen";
 "title_pickup_address" = "Adresse Auswählen";
 "address_helper_label" = "Adresse:";
@@ -53,6 +53,12 @@
 "request_status_waiting" = "Es hat sich noch kein Helfer zur Abholung gefunden!";
 "your_donation_label" = "Deine Spende";
 "cancel_donation_button" = "Zurückziehen";
+
+"push_notif_volunteer_is_ready_to_pickup"= "{Volunteer} ist bereit deine Spende abzuholen";
+"dialog_accept_pending_volunteer" = "Kann deine Spende heute abgeholt werden?";
+"yes"="Ja";
+"no"="Nein";
+"a_volunteer"="Ein helfer";
 
 /* VOLUNTEERING */
 "title_volunteer" = "Helfer";

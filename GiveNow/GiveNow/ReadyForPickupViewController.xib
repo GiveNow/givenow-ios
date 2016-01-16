@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReadyForPickupViewController" customModule="GiveNow" customModuleProvider="target">
+            <connections>
+                <outlet property="addressLabel" destination="gho-i2-FCG" id="EhB-TZ-Dq7"/>
+                <outlet property="messageBody" destination="YEy-KY-8cF" id="fPp-Qh-Xox"/>
+                <outlet property="messageHeader" destination="APM-uf-moA" id="Ghk-CE-5tq"/>
+                <outlet property="messageImage" destination="juF-Oh-LlG" id="AQ2-vd-5xe"/>
+                <outlet property="noButton" destination="ELx-gv-6UZ" id="T9q-dj-3k7"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yesButton" destination="S9t-ZV-Odz" id="xQc-Eb-vm1"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="round_icon" translatesAutoresizingMaskIntoConstraints="NO" id="juF-Oh-LlG">
+                    <rect key="frame" x="20" y="20" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="Jz3-jU-Crp"/>
+                        <constraint firstAttribute="height" constant="40" id="iBj-fd-g7J"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="messageHeader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APM-uf-moA">
+                    <rect key="frame" x="70" y="29" width="510" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="messageBody" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YEy-KY-8cF">
+                    <rect key="frame" x="20" y="80" width="560" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="addressLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gho-i2-FCG">
+                    <rect key="frame" x="20" y="118" width="560" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S9t-ZV-Odz">
+                    <rect key="frame" x="510" y="550" width="70" height="30"/>
+                    <state key="normal" title="yesButton"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELx-gv-6UZ">
+                    <rect key="frame" x="427" y="550" width="63" height="30"/>
+                    <state key="normal" title="noButton"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="gho-i2-FCG" secondAttribute="trailing" constant="20" id="2Ir-4a-kLD"/>
+                <constraint firstItem="gho-i2-FCG" firstAttribute="top" secondItem="YEy-KY-8cF" secondAttribute="bottom" constant="20" id="2Yb-ga-wtr"/>
+                <constraint firstAttribute="trailing" secondItem="S9t-ZV-Odz" secondAttribute="trailing" constant="20" id="6hy-s6-aBv"/>
+                <constraint firstItem="juF-Oh-LlG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="85d-3R-gwO"/>
+                <constraint firstAttribute="bottom" secondItem="S9t-ZV-Odz" secondAttribute="bottom" constant="20" id="9lr-OM-p3s"/>
+                <constraint firstItem="juF-Oh-LlG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="Lln-7A-vbZ"/>
+                <constraint firstItem="APM-uf-moA" firstAttribute="centerY" secondItem="juF-Oh-LlG" secondAttribute="centerY" id="V8A-BW-I4t"/>
+                <constraint firstAttribute="trailing" secondItem="APM-uf-moA" secondAttribute="trailing" constant="20" id="Wy5-m8-txB"/>
+                <constraint firstItem="S9t-ZV-Odz" firstAttribute="leading" secondItem="ELx-gv-6UZ" secondAttribute="trailing" constant="20" id="cVc-sY-Rbw"/>
+                <constraint firstItem="gho-i2-FCG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="cf8-XP-w85"/>
+                <constraint firstItem="YEy-KY-8cF" firstAttribute="top" secondItem="juF-Oh-LlG" secondAttribute="bottom" constant="20" id="hh2-Rj-V71"/>
+                <constraint firstItem="APM-uf-moA" firstAttribute="leading" secondItem="juF-Oh-LlG" secondAttribute="trailing" constant="10" id="htQ-Gk-mk1"/>
+                <constraint firstItem="YEy-KY-8cF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="lNB-3m-9Z3"/>
+                <constraint firstAttribute="trailing" secondItem="YEy-KY-8cF" secondAttribute="trailing" constant="20" id="qXN-qA-Mgn"/>
+                <constraint firstAttribute="bottom" secondItem="ELx-gv-6UZ" secondAttribute="bottom" constant="20" id="z1V-1d-i1q"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="round_icon" width="512" height="512"/>
+    </resources>
+</document>

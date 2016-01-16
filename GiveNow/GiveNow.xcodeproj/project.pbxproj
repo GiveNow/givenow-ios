@@ -73,6 +73,8 @@
 		D23CF8161C47243F0070AEAA /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23CF8151C47243F0070AEAA /* Initial.storyboard */; };
 		D23CF8181C4724650070AEAA /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CF8171C4724650070AEAA /* InitialViewController.swift */; };
 		D23CF81A1C472F760070AEAA /* MyLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CF8191C472F760070AEAA /* MyLocationButton.swift */; };
+		D29F72B91C4B031300A7D07A /* ReadyForPickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F72B71C4B031300A7D07A /* ReadyForPickupViewController.swift */; };
+		D29F72BA1C4B031300A7D07A /* ReadyForPickupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29F72B81C4B031300A7D07A /* ReadyForPickupViewController.xib */; };
 		D2CEB8D31C48703D003F4CC0 /* BaseMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CEB8D21C48703D003F4CC0 /* BaseMapViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -250,6 +252,8 @@
 		D23CF8151C47243F0070AEAA /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
 		D23CF8171C4724650070AEAA /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D23CF8191C472F760070AEAA /* MyLocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLocationButton.swift; sourceTree = "<group>"; };
+		D29F72B71C4B031300A7D07A /* ReadyForPickupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadyForPickupViewController.swift; sourceTree = "<group>"; };
+		D29F72B81C4B031300A7D07A /* ReadyForPickupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadyForPickupViewController.xib; sourceTree = "<group>"; };
 		D2CEB8D21C48703D003F4CC0 /* BaseMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -474,6 +478,8 @@
 				D2186FBE1C3F2965001551EF /* DonationCategoriesViewController.swift */,
 				D2186FC01C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift */,
 				D23BBF621C45D3CF00E68AF9 /* MyPendingDonationViewController.swift */,
+				D29F72B71C4B031300A7D07A /* ReadyForPickupViewController.swift */,
+				D29F72B81C4B031300A7D07A /* ReadyForPickupViewController.xib */,
 			);
 			name = Donate;
 			sourceTree = "<group>";
@@ -721,6 +727,7 @@
 				26FE37171C22A58900BED9A0 /* Localizable.strings in Resources */,
 				2645C69A1C21F33900D6C70D /* Donate.storyboard in Resources */,
 				267BF1F21C28019900A76425 /* Dashboard.storyboard in Resources */,
+				D29F72BA1C4B031300A7D07A /* ReadyForPickupViewController.xib in Resources */,
 				D23BBF591C45C4B900E68AF9 /* DropOff.storyboard in Resources */,
 				D23BBF521C457F1B00E68AF9 /* LoginViewController.xib in Resources */,
 				2645C6981C21F32300D6C70D /* Onboard.storyboard in Resources */,
@@ -783,6 +790,7 @@
 				D2CEB8D31C48703D003F4CC0 /* BaseMapViewController.swift in Sources */,
 				D23CF81A1C472F760070AEAA /* MyLocationButton.swift in Sources */,
 				D23CF8181C4724650070AEAA /* InitialViewController.swift in Sources */,
+				D29F72B91C4B031300A7D07A /* ReadyForPickupViewController.swift in Sources */,
 				D2186FB71C3CE917001551EF /* PickupDonationViewController.swift in Sources */,
 				2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */,
 				26FE37231C23B80500BED9A0 /* Donation.swift in Sources */,
