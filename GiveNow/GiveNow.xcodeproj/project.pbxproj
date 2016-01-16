@@ -144,14 +144,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 708E01B006A9F88B3C13711562282B5E;
+			remoteGlobalIDString = BCA053B6430690326435042FEB61B458;
 			remoteInfo = Bolts;
 		};
 		26F35DE61C228A080012C83C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 511B536F0DE06D9C3BD65397A91990C0;
+			remoteGlobalIDString = B0214E86E9E229E292863BC821997C4D;
 			remoteInfo = Parse;
 		};
 		26F35DEA1C228A080012C83C /* PBXContainerItemProxy */ = {
@@ -615,11 +615,15 @@
 				TargetAttributes = {
 					2645C6651C21E7FF00D6C70D = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = M3FCT79SM9;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
