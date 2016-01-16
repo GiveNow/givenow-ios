@@ -32,6 +32,10 @@ extension UIColor {
         return UIColor(red: 3.0/255.0, green: 155.0/255.0, blue: 229.0/255.0, alpha: 1.0)
     }
     
+    class func colorAccentDisabled() -> UIColor {
+        return UIColor(red: 141/255, green: 174/255, blue: 142/255, alpha: 1.0)
+    }
+    
 }
 
 extension UIView {
