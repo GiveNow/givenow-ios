@@ -53,7 +53,7 @@ class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControll
                     self.backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, user) -> Void in
                         if volunteer != nil && volunteer!.isApproved == true {
                             print("They are!")
-                            self.dismissViewControllerAnimated(true, completion: {})
+                            self.removeEmbeddedViewController(self)
                         }
                     })
                     self.updateViewForPendingVolunteer()
