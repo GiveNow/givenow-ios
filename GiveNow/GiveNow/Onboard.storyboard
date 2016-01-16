@@ -35,7 +35,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VaS-25-JHi">
-                                                    <rect key="frame" x="292" y="310" width="16" height="21"/>
+                                                    <rect key="frame" x="293" y="310" width="14" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="16" id="ZO6-77-vB9"/>
                                                         <constraint firstAttribute="height" constant="21" id="o9p-GL-ksx"/>
@@ -43,6 +43,11 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="ZO6-77-vB9"/>
+                                                        </mask>
+                                                    </variation>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5C-ws-Kyf">
                                                     <rect key="frame" x="40" y="338" width="520" height="40"/>
