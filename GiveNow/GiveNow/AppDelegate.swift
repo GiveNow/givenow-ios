@@ -92,6 +92,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func handleNotification(dictionary : [ NSObject : AnyObject ], isRemote : Bool) {
         // TODO: implement
+        
+        if isRemote {
+            // use the given keys to get the localized strings and
+            // schedule an immediate local user notification with that text
+        }
+        else {
+            // show the related context to the notification
+        }
     }
 
 }
