@@ -298,6 +298,56 @@
             </objects>
             <point key="canvasLocation" x="-132" y="493"/>
         </scene>
+        <!--Apply To Volunteer View Controller-->
+        <scene sceneID="0K3-lz-IvX">
+            <objects>
+                <viewController storyboardIdentifier="volunteerApplication" id="wVA-yY-4sn" customClass="ApplyToVolunteerViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7C0-9z-KWs"/>
+                        <viewControllerLayoutGuide type="bottom" id="Prx-Zr-qM8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qSu-Gd-G7c">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Qz-Dj-WJ6">
+                                <rect key="frame" x="20" y="350" width="560" height="36"/>
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.73333334920000004" blue="0.41568627949999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="I want to volunteer!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="volunteerButtonTapped:" destination="wVA-yY-4sn" eventType="touchUpInside" id="wzH-Rg-pv9"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to volunteer to pick up donations? The only thing you need is a ar and some spare time!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5LA-81-YvJ">
+                                <rect key="frame" x="20" y="279" width="560" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.7254902124" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="5LA-81-YvJ" secondAttribute="trailing" constant="20" id="EG0-bK-8R1"/>
+                            <constraint firstItem="1Qz-Dj-WJ6" firstAttribute="leading" secondItem="qSu-Gd-G7c" secondAttribute="leading" constant="20" id="bng-Av-g12"/>
+                            <constraint firstItem="5LA-81-YvJ" firstAttribute="centerY" secondItem="qSu-Gd-G7c" secondAttribute="centerY" id="e9f-Ki-WhX"/>
+                            <constraint firstAttribute="trailing" secondItem="1Qz-Dj-WJ6" secondAttribute="trailing" constant="20" id="k4k-KL-1p0"/>
+                            <constraint firstItem="5LA-81-YvJ" firstAttribute="leading" secondItem="qSu-Gd-G7c" secondAttribute="leading" constant="20" id="pIQ-5Q-Lqv"/>
+                            <constraint firstItem="1Qz-Dj-WJ6" firstAttribute="top" secondItem="5LA-81-YvJ" secondAttribute="bottom" constant="30" id="wFr-zQ-ASU"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="volunteerButton" destination="1Qz-Dj-WJ6" id="d8e-bt-eXe"/>
+                        <outlet property="volunteeringTitleLabel" destination="5LA-81-YvJ" id="0ng-3e-iSo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NfT-Ln-6K1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-132" y="-226"/>
+        </scene>
     </scenes>
     <resources>
         <image name="dashboard" width="48" height="48"/>

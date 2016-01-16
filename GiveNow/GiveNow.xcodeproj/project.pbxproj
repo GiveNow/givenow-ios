@@ -20,12 +20,10 @@
 		2645C68A1C21E7FF00D6C70D /* GiveNowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6891C21E7FF00D6C70D /* GiveNowUITests.swift */; };
 		2645C6981C21F32300D6C70D /* Onboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2645C6971C21F32300D6C70D /* Onboard.storyboard */; };
 		2645C69A1C21F33900D6C70D /* Donate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2645C6991C21F33900D6C70D /* Donate.storyboard */; };
-		2645C69C1C21F34400D6C70D /* Apply.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2645C69B1C21F34400D6C70D /* Apply.storyboard */; };
 		2645C6A01C21F37A00D6C70D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C69F1C21F37A00D6C70D /* BaseViewController.swift */; };
 		2645C6A21C21F38E00D6C70D /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A11C21F38E00D6C70D /* BaseNavigationController.swift */; };
 		2645C6A61C21F3BD00D6C70D /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A51C21F3BD00D6C70D /* OnboardingViewController.swift */; };
 		2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */; };
-		2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */; };
 		2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6AC1C21F40600D6C70D /* Backend.swift */; };
 		2645C6AF1C21F80000D6C70D /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6AE1C21F80000D6C70D /* AppState.swift */; };
 		267BF1E31C27F68800A76425 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267BF1E21C27F68800A76425 /* IntegrationTests.swift */; };
@@ -73,6 +71,7 @@
 		D23CF8161C47243F0070AEAA /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23CF8151C47243F0070AEAA /* Initial.storyboard */; };
 		D23CF8181C4724650070AEAA /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CF8171C4724650070AEAA /* InitialViewController.swift */; };
 		D23CF81A1C472F760070AEAA /* MyLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CF8191C472F760070AEAA /* MyLocationButton.swift */; };
+		D29F72B31C4AED9900A7D07A /* ApplyToVolunteerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F72B21C4AED9900A7D07A /* ApplyToVolunteerViewController.swift */; };
 		D2CEB8D31C48703D003F4CC0 /* BaseMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CEB8D21C48703D003F4CC0 /* BaseMapViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -201,12 +200,10 @@
 		2645C68B1C21E7FF00D6C70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2645C6971C21F32300D6C70D /* Onboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboard.storyboard; sourceTree = "<group>"; };
 		2645C6991C21F33900D6C70D /* Donate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Donate.storyboard; sourceTree = "<group>"; };
-		2645C69B1C21F34400D6C70D /* Apply.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Apply.storyboard; sourceTree = "<group>"; };
 		2645C69F1C21F37A00D6C70D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2645C6A11C21F38E00D6C70D /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		2645C6A51C21F3BD00D6C70D /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonatingViewController.swift; sourceTree = "<group>"; };
-		2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringViewController.swift; sourceTree = "<group>"; };
 		2645C6AC1C21F40600D6C70D /* Backend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		2645C6AE1C21F80000D6C70D /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		267BF1E21C27F68800A76425 /* IntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
@@ -250,6 +247,7 @@
 		D23CF8151C47243F0070AEAA /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
 		D23CF8171C4724650070AEAA /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D23CF8191C472F760070AEAA /* MyLocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLocationButton.swift; sourceTree = "<group>"; };
+		D29F72B21C4AED9900A7D07A /* ApplyToVolunteerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyToVolunteerViewController.swift; sourceTree = "<group>"; };
 		D2CEB8D21C48703D003F4CC0 /* BaseMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -487,17 +485,9 @@
 				D2186FB61C3CE917001551EF /* PickupDonationViewController.swift */,
 				D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */,
 				D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */,
+				D29F72B21C4AED9900A7D07A /* ApplyToVolunteerViewController.swift */,
 			);
 			name = Dashboard;
-			sourceTree = "<group>";
-		};
-		D23BBF4D1C457C1B00E68AF9 /* Apply */ = {
-			isa = PBXGroup;
-			children = (
-				2645C69B1C21F34400D6C70D /* Apply.storyboard */,
-				2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */,
-			);
-			name = Apply;
 			sourceTree = "<group>";
 		};
 		D23BBF4E1C457C5500E68AF9 /* Onboard */ = {
@@ -534,7 +524,6 @@
 				D23BBF4E1C457C5500E68AF9 /* Onboard */,
 				D23BBF481C457B0E00E68AF9 /* Main */,
 				D23BBF4B1C457B5C00E68AF9 /* Donate */,
-				D23BBF4D1C457C1B00E68AF9 /* Apply */,
 				D23BBF4C1C457BCF00E68AF9 /* Dashboard */,
 				D23BBF551C45C49600E68AF9 /* DropOff */,
 			);
@@ -714,7 +703,6 @@
 				2645C6741C21E7FF00D6C70D /* LaunchScreen.storyboard in Resources */,
 				2645C6711C21E7FF00D6C70D /* Assets.xcassets in Resources */,
 				D23CF8161C47243F0070AEAA /* Initial.storyboard in Resources */,
-				2645C69C1C21F34400D6C70D /* Apply.storyboard in Resources */,
 				260746761C265A710022E0ED /* Mapbox.bundle in Resources */,
 				2645C66F1C21E7FF00D6C70D /* Main.storyboard in Resources */,
 				26FE37131C229B9C00BED9A0 /* Keys.plist in Resources */,
@@ -768,8 +756,8 @@
 				D2186FBF1C3F2965001551EF /* DonationCategoriesViewController.swift in Sources */,
 				D2186FB11C3CC3FC001551EF /* MyDashboardTableViewController.swift in Sources */,
 				D2186FB51C3CC632001551EF /* PickupRequestTableViewCell.swift in Sources */,
+				D29F72B31C4AED9900A7D07A /* ApplyToVolunteerViewController.swift in Sources */,
 				D2186FD11C431EA9001551EF /* DashboardTabViewController.swift in Sources */,
-				2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */,
 				D23BBF5D1C45C65700E68AF9 /* DropOffViewController.swift in Sources */,
 				D2186FCD1C41F4C8001551EF /* SWRevealViewController.m in Sources */,
 				2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */,

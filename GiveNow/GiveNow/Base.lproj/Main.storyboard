@@ -22,21 +22,13 @@
             </objects>
             <point key="canvasLocation" x="773" y="423"/>
         </scene>
-        <!--Apply-->
-        <scene sceneID="3WX-2e-Hfe">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Apply" id="NyQ-uJ-cMG" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XPj-Vq-pNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1552" y="-147"/>
-        </scene>
         <!--Dashboard-->
         <scene sceneID="AlK-rx-7Qq">
             <objects>
                 <viewControllerPlaceholder storyboardName="Dashboard" id="YrF-Q7-mZi" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SwN-kY-LDK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1540" y="-55"/>
+            <point key="canvasLocation" x="1560" y="-156"/>
         </scene>
         <!--DropOff-->
         <scene sceneID="62t-3e-Gh0">
@@ -44,7 +36,7 @@
                 <viewControllerPlaceholder storyboardName="DropOff" id="SIk-3K-epa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="guv-wa-N0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1498.5" y="20"/>
+            <point key="canvasLocation" x="1540.5" y="-66"/>
         </scene>
         <!--Donate-->
         <scene sceneID="5GY-L9-P3T">
@@ -129,7 +121,6 @@
                     <connections>
                         <segue destination="40P-58-ULY" kind="custom" identifier="donate" customClass="SWRevealViewControllerSeguePushController" id="wVK-vk-thp"/>
                         <segue destination="ecX-Pv-I9H" kind="custom" identifier="onboard" customClass="SWRevealViewControllerSeguePushController" id="TQL-rY-YQ3"/>
-                        <segue destination="NyQ-uJ-cMG" kind="custom" identifier="apply" customClass="SWRevealViewControllerSeguePushController" id="dPu-u8-4XA"/>
                         <segue destination="YrF-Q7-mZi" kind="custom" identifier="dashboard" customClass="SWRevealViewControllerSeguePushController" id="Ng0-Bl-Ktj"/>
                         <segue destination="SIk-3K-epa" kind="custom" identifier="dropOff" customClass="SWRevealViewControllerSeguePushController" id="Lhm-GQ-SAZ"/>
                     </connections>
