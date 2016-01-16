@@ -13,10 +13,13 @@ class DashboardTabViewController: UITabBarController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var navItem: UINavigationItem!
     
+    let backend = Backend.sharedInstance()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeMenuButton()
         localizeStrings()
+        showVolunteerApplicationIfNecessary()
     }
     
     private func localizeStrings() {
@@ -48,5 +51,42 @@ class DashboardTabViewController: UITabBarController {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
     }
+    
+    private func showVolunteerApplicationIfNecessary() {
+        if AppState.sharedInstance().isUserRegistered {
+            let user = User.currentUser()!
+            backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, error) -> Void in
+                if volunteer == nil || volunteer?.isApproved != true {
+                    self.showVolunteerApplication()
+                }
+            })
+        }
+        else {
+            self.showVolunteerApplication()
+        }
+    }
+    
+    private func showVolunteerApplication() {
+        guard let volunteerApplicationController = storyboard?.instantiateViewControllerWithIdentifier("volunteerApplication") as? ApplyToVolunteerViewController else {
+            print("Could not find storyboard")
+            return
+        }
+        addChildViewController(volunteerApplicationController)
+        volunteerApplicationController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        view.addSubview(volunteerApplicationController.view)
+        volunteerApplicationController.didMoveToParentViewController(self)
+    }
+    
+//    func addPendingDonationChildView() {
+//        if storyboard != nil {
+//            searchController.searchBar.hidden = true
+//            let pendingDonationViewController = storyboard!.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
+//            pendingDonationViewController.pickupRequest = newPickupRequest
+//            addChildViewController(pendingDonationViewController)
+//            pendingDonationViewController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+//            view.addSubview(pendingDonationViewController.view)
+//            pendingDonationViewController.didMoveToParentViewController(self)
+//        }
+//    }
 
 }
