@@ -1,5 +1,5 @@
 //
-//  LoginModalViewController.swift
+//  LoginViewController.swift
 //  GiveNow
 //
 //  Created by Evan Waters on 1/12/16.
@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import libPhoneNumber_iOS
 
 public enum EntryMode : Int {
     case None = 0
@@ -72,7 +73,17 @@ class LoginViewController: BaseViewController, UIGestureRecognizerDelegate {
         view.endEditing(true)
     }
     
+    let phoneFormatter = NBAsYouTypeFormatter(regionCode: "US")
     @IBAction func phoneTextFieldEditingChanged(sender: AnyObject) {
+        if entryMode == .PhoneNumber {
+            if let inputField = sender as? UITextField,
+                inputText = inputField.text
+            {
+                let strippedInputText = strippedPhoneNumber(inputText)
+                inputField.text  = phoneFormatter.inputString(strippedInputText)
+            }
+        }
+        
         validateSubmitButton()
     }
     
@@ -91,7 +102,8 @@ class LoginViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
         
         if entryMode == .PhoneNumber {
-            validatePhoneNumber(entryText)
+            let phoneNumberDigits = self.strippedPhoneNumber(entryText)
+            validatePhoneNumber(phoneNumberDigits)
         }
         else if entryMode == .ConfirmationCode {
             if let phoneNumber = self.phoneNumber {
@@ -215,12 +227,15 @@ class LoginViewController: BaseViewController, UIGestureRecognizerDelegate {
             return
         }
         
+        
+        let phoneNumberDigitsText = self.strippedPhoneNumber(phoneNumberText)
+        
         // A phone number should include the country code which is 1 for the United States.
         // Typically the country code is assumed so perhaps it can be added automatically.
         
         if entryMode == .PhoneNumber &&
-            (phoneNumberText.characters.count >= 10 &&
-                phoneNumberText.characters.count <= 12) {
+            (phoneNumberDigitsText.characters.count >= 10 &&
+                phoneNumberDigitsText.characters.count <= 12) {
                     enableDoneButton()
         }
         else if entryMode == .ConfirmationCode && phoneNumberText.characters.count == 4 {
@@ -249,5 +264,9 @@ class LoginViewController: BaseViewController, UIGestureRecognizerDelegate {
         doneButton.titleLabel?.textColor = UIColor.whiteColor()
     }
     
-
+    private func strippedPhoneNumber(phoneNumberString: String) -> String {
+        let digitsPlusCharacterSet = NSCharacterSet(charactersInString: "+0123456789").invertedSet
+        let phoneNumberDigitsString = phoneNumberString.componentsSeparatedByCharactersInSet(digitsPlusCharacterSet).joinWithSeparator("")
+        return phoneNumberDigitsString
+    }
 }
