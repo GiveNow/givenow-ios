@@ -33,6 +33,7 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         fetchDonationCategories()
         pickupRequestAddressLabel.text = address
         localizeText()
+        validateGiveNowButton()
     }
     
     func localizeText() {
@@ -62,6 +63,7 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
             else {
                 self.donationCategories = result as! [DonationCategory]
                 self.collectionView.reloadData()
+                self.validateGiveNowButton()
             }
         })
     }
@@ -142,6 +144,7 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
             donationCategory.selected = false
         }
         collectionView.reloadItemsAtIndexPaths([indexPath])
+        validateGiveNowButton()
     }
     
     func highlightCell(cell: DonationCategoryCollectionViewCell) {
@@ -155,6 +158,24 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     }
     
     //MARK: Completing selection
+    
+    private func validateGiveNowButton() {
+        if donationCategories != nil {
+            let selectedDonationCategories = donationCategories.filter() {$0.selected == true}
+            if selectedDonationCategories.count > 0 {
+                giveNowButton.enabled = true
+                giveNowButton.backgroundColor = UIColor.colorAccent()
+            }
+            else {
+                giveNowButton.enabled = false
+                giveNowButton.backgroundColor = UIColor.colorAccentDisabled()
+            }
+        }
+        else {
+            giveNowButton.enabled = false
+            giveNowButton.backgroundColor = UIColor.colorAccentDisabled()
+        }
+    }
     
     @IBAction func giveNowButtonTapped(sender: AnyObject) {
         if AppState.sharedInstance().isUserRegistered {
