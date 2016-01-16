@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate, LoginViewControllerDelegate {
+class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate, LoginViewControllerDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var pageControl : UIPageControl?
     
@@ -71,6 +71,7 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SignInCell", forIndexPath: indexPath) as! SignUpCollectionViewCell
             cell.backgroundColor = UIColor.colorAccent()
             addLoginControllerToCell(cell)
+            addTapGesture(cell)
             return cell
         }
     }
@@ -95,6 +96,16 @@ class OnboardingViewController: BaseViewController, UICollectionViewDelegateFlow
         loginView.view.frame = frame
         cell.addSubview(loginView.view)
         loginView.didMoveToParentViewController(self)
+    }
+    
+    private func addTapGesture(cell: UICollectionViewCell) {
+        let tap = UITapGestureRecognizer(target: self, action: Selector("viewTapped:"))
+        tap.delegate = self
+        cell.contentView.addGestureRecognizer(tap)
+    }
+    
+    func viewTapped(sender: UIGestureRecognizer? = nil) {
+        view.endEditing(true)
     }
     
     func successfulLogin(controller: LoginViewController) {

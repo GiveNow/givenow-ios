@@ -18,7 +18,7 @@ protocol LoginViewControllerDelegate{
     func successfulLogin(controller:LoginViewController)
 }
 
-class LoginViewController: BaseViewController {
+class LoginViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     var delegate:LoginViewControllerDelegate!
     var isModal:Bool!
@@ -56,9 +56,20 @@ class LoginViewController: BaseViewController {
     
     func configure() {
         validateSubmitButton()
+        addTapGesture()
         updateViewForEntryMode(entryMode)
         hideActivityIndicator()
         textField?.becomeFirstResponder()
+    }
+    
+    private func addTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: Selector("viewTapped:"))
+        tap.delegate = self
+        view.addGestureRecognizer(tap)
+    }
+    
+    func viewTapped(sender: UIGestureRecognizer? = nil) {
+        view.endEditing(true)
     }
     
     @IBAction func phoneTextFieldEditingChanged(sender: AnyObject) {
