@@ -31,6 +31,7 @@
 		267BF1F61C2801CA00A76425 /* PickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267BF1F51C2801CA00A76425 /* PickupViewController.swift */; };
 		26A62ACE1C27E2D900D49311 /* libPhoneNumber_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A62AC21C27CF2800D49311 /* libPhoneNumber_iOS.framework */; };
 		26A62ACF1C27E2D900D49311 /* libPhoneNumber_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26A62AC21C27CF2800D49311 /* libPhoneNumber_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26F304941C4B0C6700A7971C /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F304931C4B0C6700A7971C /* Permissions.swift */; };
 		26F35DE01C228A080012C83C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DD71C228A080012C83C /* Bolts.framework */; };
 		26F35DE11C228A080012C83C /* Bolts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DD71C228A080012C83C /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26F35DE41C228A080012C83C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DDB1C228A080012C83C /* Parse.framework */; };
@@ -143,14 +144,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 708E01B006A9F88B3C13711562282B5E;
+			remoteGlobalIDString = BCA053B6430690326435042FEB61B458;
 			remoteInfo = Bolts;
 		};
 		26F35DE61C228A080012C83C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 511B536F0DE06D9C3BD65397A91990C0;
+			remoteGlobalIDString = B0214E86E9E229E292863BC821997C4D;
 			remoteInfo = Parse;
 		};
 		26F35DEA1C228A080012C83C /* PBXContainerItemProxy */ = {
@@ -211,6 +212,7 @@
 		267BF1F51C2801CA00A76425 /* PickupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupViewController.swift; sourceTree = "<group>"; };
 		26A2F4E61C2285E40081165D /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = ../Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		26A62AB71C26BA9000D49311 /* Germany.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Germany.gpx; sourceTree = "<group>"; };
+		26F304931C4B0C6700A7971C /* Permissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		26FE37121C229B9C00BED9A0 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		26FE37181C22A58900BED9A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		26FE371A1C22A59500BED9A0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -358,15 +360,16 @@
 				2645C69E1C21F36500D6C70D /* Shared View Controllers */,
 				2645C6AB1C21F3E100D6C70D /* Integrations */,
 				2607467A1C265B130022E0ED /* Mapbox */,
+				C72296451C228F8F0097A662 /* Support */,
+				2645C6701C21E7FF00D6C70D /* Assets.xcassets */,
 				D207A3461C23B82400E93BEB /* Extensions.swift */,
 				260746201C23C8920022E0ED /* GiveNow-Bridging-Header.h */,
 				2645C6721C21E7FF00D6C70D /* LaunchScreen.storyboard */,
 				2645C6691C21E7FF00D6C70D /* AppDelegate.swift */,
-				2645C6701C21E7FF00D6C70D /* Assets.xcassets */,
-				C72296451C228F8F0097A662 /* Support */,
 				2645C6751C21E7FF00D6C70D /* Info.plist */,
 				26FE37121C229B9C00BED9A0 /* Keys.plist */,
 				2607466B1C2622B30022E0ED /* Keys.swift */,
+				26F304931C4B0C6700A7971C /* Permissions.swift */,
 			);
 			path = GiveNow;
 			sourceTree = "<group>";
@@ -604,11 +607,15 @@
 				TargetAttributes = {
 					2645C6651C21E7FF00D6C70D = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = M3FCT79SM9;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -767,6 +774,7 @@
 				D23BBF511C457F1B00E68AF9 /* LoginViewController.swift in Sources */,
 				2645C6A61C21F3BD00D6C70D /* OnboardingViewController.swift in Sources */,
 				C72296321C228E550097A662 /* ColorPalette.swift in Sources */,
+				26F304941C4B0C6700A7971C /* Permissions.swift in Sources */,
 				260746261C23D87D0022E0ED /* DropOffAgency.swift in Sources */,
 				D2CEB8D31C48703D003F4CC0 /* BaseMapViewController.swift in Sources */,
 				D23CF81A1C472F760070AEAA /* MyLocationButton.swift in Sources */,
