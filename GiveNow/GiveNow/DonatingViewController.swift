@@ -14,12 +14,6 @@ import CoreLocation
 // TODO: implement
 // See https://github.com/GiveNow/givenow-ios/issues/6
 
-public enum SystemPermissionStatus : Int {
-    case NotDetermined = 0
-    case Allowed
-    case Denied
-}
-
 class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet var pickupLocationButton: UIButton?

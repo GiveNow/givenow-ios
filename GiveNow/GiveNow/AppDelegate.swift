@@ -33,6 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Making status bar white
         application.statusBarStyle = UIStatusBarStyle.LightContent
         
+        let status = Permissions.systemStatusForNotifications()
+        if status == .Allowed {
+            Permissions.registerForNotificationsPermission()
+        }
+        
         return true
     }
 
@@ -93,13 +98,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func handleNotification(dictionary : [ NSObject : AnyObject ], isRemote : Bool) {
         // TODO: implement
         
+        print(dictionary)
+        
         if isRemote {
             // use the given keys to get the localized strings and
             // schedule an immediate local user notification with that text
+            scheduleLocalUserNotification("Test Notification for GiveNow")
         }
         else {
             // show the related context to the notification
         }
+    }
+    
+    func scheduleLocalUserNotification(text : String) {
+        let localNotification = UILocalNotification()
+        localNotification.alertBody = text
+        localNotification.fireDate = NSDate()
+        localNotification.category = "Alerts"
+        localNotification.userInfo = ["data" : "TBD"]
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
 
 }
