@@ -20,7 +20,7 @@ public enum SystemPermissionStatus : Int {
     case Denied
 }
 
-class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
+class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, ModalPromptViewControllerDelegate {
 
     @IBOutlet var pickupLocationButton: UIButton?
     @IBOutlet var mapView: MKMapView?
@@ -96,6 +96,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                     if let pickupRequest = result![0] as? PickupRequest {
                         self.myPickupRequest = pickupRequest
                         self.addPendingDonationChildView()
+                        self.displayPromptIfNeeded()
                     }
                 }
             }
@@ -112,6 +113,23 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
             view.addSubview(pendingDonationViewController.view)
             pendingDonationViewController.didMoveToParentViewController(self)
         }
+    }
+    
+    func displayPromptIfNeeded() {
+        if myPickupRequest.pendingVolunteer != nil {
+            print("Trying to show prompt")
+            let modalViewController = ModalPromptViewController(nibName: "ModalPromptViewController", bundle: nil)
+            modalViewController.delegate = self
+            
+            addChildViewController(modalViewController)
+            modalViewController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+            view.addSubview(modalViewController.view)
+            modalViewController.didMoveToParentViewController(self)
+        }
+    }
+    
+    func modalPromptDismissed(controller: ModalPromptViewController) {
+        
     }
     
     @IBAction func setPickupLocationButtonTapped(sender: AnyObject) {

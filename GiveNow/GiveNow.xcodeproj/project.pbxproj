@@ -77,6 +77,7 @@
 		D29F72BA1C4B031300A7D07A /* ReadyForPickupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29F72B81C4B031300A7D07A /* ReadyForPickupViewController.xib */; };
 		D29F72BF1C4B0CF600A7D07A /* ModalPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F72BD1C4B0CF600A7D07A /* ModalPromptViewController.swift */; };
 		D29F72C01C4B0CF600A7D07A /* ModalPromptViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D29F72BE1C4B0CF600A7D07A /* ModalPromptViewController.xib */; };
+		D29F72C21C4B105700A7D07A /* PromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F72C11C4B105700A7D07A /* PromptViewController.swift */; };
 		D2CEB8D31C48703D003F4CC0 /* BaseMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CEB8D21C48703D003F4CC0 /* BaseMapViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -258,6 +259,7 @@
 		D29F72B81C4B031300A7D07A /* ReadyForPickupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadyForPickupViewController.xib; sourceTree = "<group>"; };
 		D29F72BD1C4B0CF600A7D07A /* ModalPromptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalPromptViewController.swift; sourceTree = "<group>"; };
 		D29F72BE1C4B0CF600A7D07A /* ModalPromptViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModalPromptViewController.xib; sourceTree = "<group>"; };
+		D29F72C11C4B105700A7D07A /* PromptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptViewController.swift; sourceTree = "<group>"; };
 		D2CEB8D21C48703D003F4CC0 /* BaseMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -486,6 +488,7 @@
 				D29F72B81C4B031300A7D07A /* ReadyForPickupViewController.xib */,
 				D29F72BD1C4B0CF600A7D07A /* ModalPromptViewController.swift */,
 				D29F72BE1C4B0CF600A7D07A /* ModalPromptViewController.xib */,
+				D29F72C11C4B105700A7D07A /* PromptViewController.swift */,
 			);
 			name = Donate;
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 				267BF1F61C2801CA00A76425 /* PickupViewController.swift in Sources */,
 				2645C66A1C21E7FF00D6C70D /* AppDelegate.swift in Sources */,
 				D2005BDB1C482A6B00B59A9A /* ModalLoginViewController.swift in Sources */,
+				D29F72C21C4B105700A7D07A /* PromptViewController.swift in Sources */,
 				D23BBF631C45D3CF00E68AF9 /* MyPendingDonationViewController.swift in Sources */,
 				D207A3471C23B82400E93BEB /* Extensions.swift in Sources */,
 				2645C6A01C21F37A00D6C70D /* BaseViewController.swift in Sources */,

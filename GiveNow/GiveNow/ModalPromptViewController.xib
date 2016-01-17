@@ -20,19 +20,11 @@
             <subviews>
                 <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycC-4h-55k">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thp-mS-N8V">
-                            <rect key="frame" x="20" y="80" width="560" height="180"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                    </subviews>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="thp-mS-N8V" firstAttribute="top" secondItem="ycC-4h-55k" secondAttribute="top" constant="80" id="7VU-W5-0HU"/>
-                        <constraint firstAttribute="trailing" secondItem="thp-mS-N8V" secondAttribute="trailing" constant="20" id="94Z-ig-3m0"/>
-                        <constraint firstItem="thp-mS-N8V" firstAttribute="leading" secondItem="ycC-4h-55k" secondAttribute="leading" constant="20" id="CKF-9k-Gmz"/>
-                        <constraint firstItem="thp-mS-N8V" firstAttribute="height" secondItem="ycC-4h-55k" secondAttribute="height" multiplier="0.3" id="hzW-ya-B13"/>
-                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thp-mS-N8V">
+                    <rect key="frame" x="20" y="80" width="560" height="210"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -40,7 +32,11 @@
                 <constraint firstItem="ycC-4h-55k" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9zg-qz-U8A"/>
                 <constraint firstItem="ycC-4h-55k" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="I4l-yv-WuW"/>
                 <constraint firstAttribute="trailing" secondItem="ycC-4h-55k" secondAttribute="trailing" id="Q7s-SL-GJR"/>
+                <constraint firstAttribute="trailing" secondItem="thp-mS-N8V" secondAttribute="trailing" constant="20" id="Zik-B9-gNE"/>
+                <constraint firstItem="thp-mS-N8V" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="eNl-Ca-XpW"/>
+                <constraint firstItem="thp-mS-N8V" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.35" id="jad-F8-xUV"/>
                 <constraint firstAttribute="bottom" secondItem="ycC-4h-55k" secondAttribute="bottom" id="w0R-Cs-h52"/>
+                <constraint firstItem="thp-mS-N8V" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="y2H-0P-TZ8"/>
             </constraints>
             <point key="canvasLocation" x="210" y="269"/>
         </view>

@@ -16,6 +16,8 @@ class ModalPromptViewController: BaseViewController {
     
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var promptView: UIView!
+    
+    var delegate:ModalPromptViewControllerDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
