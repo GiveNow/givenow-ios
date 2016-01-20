@@ -42,14 +42,14 @@ class ReadyForPickupViewController: BaseViewController {
     }
     
     func addVolunteerNameIfAvailable(inputString: String) -> String {
-        var outputString:String = inputString.stringByReplacingOccurrencesOfString("{Volunteer}", withString: NSLocalizedString("a_volunteer", comment: ""))
-        do {
-            let user = try pickupRequest.donor?.fetchIfNeeded()
-            if let name = user!.name {
+        var outputString:String!
+        if let user = pickupRequest.donor?.fetchIfNeededInBackground().result as? User {
+            if let name = user.name {
                 outputString = inputString.stringByReplacingOccurrencesOfString("{Volunteer}", withString: name)
             }
-        } catch _ {
-            print("Error getting name")
+        }
+        else {
+            outputString = inputString.stringByReplacingOccurrencesOfString("{Volunteer}", withString: NSLocalizedString("a_volunteer", comment: ""))
         }
         return outputString
     }
