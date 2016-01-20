@@ -117,6 +117,11 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         }
     }
     
+    func removePendingDonationChildView() {
+        removeEmbeddedViewController(pendingDonationViewController)
+        searchController.searchBar.hidden = false
+    }
+    
     func displayPromptIfNeeded() {
         if myPickupRequest.pendingVolunteer != nil && myPickupRequest.confirmedVolunteer == nil {
             if let modalViewController = storyboard!.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {

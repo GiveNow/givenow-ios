@@ -89,7 +89,7 @@ class PickupDonationViewController: BaseMapViewController {
     }
     
     @IBAction func donationPickedUp(sender: AnyObject) {
-        backend.saveDonationForPickupRequest(pickupRequest, completionHandler: {(donation, error) -> Void in
+        backend.pickUpDonation(pickupRequest, completionHandler: {(donation, error) -> Void in
             if let error = error {
                 print(error)
             }

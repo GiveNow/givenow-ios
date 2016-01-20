@@ -59,17 +59,29 @@ class ThankYouPromptViewController: BaseViewController {
     }
     
     @IBAction func rateApp() {
-        
+        closeDonation()
+        //To Do: Open app store to rate app
     }
     
     @IBAction func donePressed() {
-        
+        closeDonation()
+    }
+    
+    func closeDonation() {
+        backend.markComplete(pickupRequest, completionHandler: {(resut, error) -> Void in
+            if error != nil {
+                print(error)
+            }
+            else {
+                self.dismissPrompt()
+            }
+        })
     }
     
     func dismissPrompt() {
         if let parent = parentViewController as? ModalPromptViewController {
             if let grandParent = parent.parentViewController as? DonatingViewController {
-                grandParent.updatePendingDonationChildView()
+                grandParent.removePendingDonationChildView()
                 grandParent.removeEmbeddedViewController(parent)
             }
         }
