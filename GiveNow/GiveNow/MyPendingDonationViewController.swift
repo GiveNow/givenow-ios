@@ -38,7 +38,6 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     }
     
     func setHeaderBasedOnRequestStatus() {
-        print("So is this")
         print(pickupRequest)
         if pickupRequest.pendingVolunteer == nil && pickupRequest.confirmedVolunteer == nil {
             self.headerLabel.text = NSLocalizedString("request_status_waiting", comment: "")

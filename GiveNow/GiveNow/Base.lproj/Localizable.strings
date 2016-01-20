@@ -63,6 +63,13 @@
 
 "request_status_volunteer_confirmed" = "Your volunteer will contact you soon at {PhoneNumber}";
 
+"donation_complete_title" = "Thank you for your donation";
+"donation_complete_message_head" = "Your generous donation of";
+"and" = "and";
+"donation_complete_message_tail" = "is complete.";
+"done" = "Done";
+"rate_app" = "Rate app";
+
 /* VOLUNTEERING */
 "title_volunteer" = "Volunteer";
 "volunteer_label_user_has_not_applied" = "Want to volunteer to pickup donations?\nThe only thing you need is a car and some spare time!";

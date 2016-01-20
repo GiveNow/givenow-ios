@@ -128,6 +128,16 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                 }
             }
         }
+        else if myPickupRequest.donation != nil {
+            if let modalViewController = storyboard!.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
+                embedViewController(modalViewController, intoView: view)
+                
+                if let thankYouPrompt = storyboard!.instantiateViewControllerWithIdentifier("donationPickedUp") as? ThankYouPromptViewController {
+                    thankYouPrompt.pickupRequest = myPickupRequest
+                    modalViewController.embedViewController(thankYouPrompt, intoView: modalViewController.promptView)
+                }
+            }
+        }
     }
     
     func updatePendingDonationChildView() {
@@ -136,6 +146,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                 print(error)
             }
             else {
+                print(result)
                 self.pendingDonationViewController.pickupRequest = self.myPickupRequest
                 self.pendingDonationViewController.setHeaderBasedOnRequestStatus()
             }

@@ -73,6 +73,7 @@
 		D23CF8161C47243F0070AEAA /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23CF8151C47243F0070AEAA /* Initial.storyboard */; };
 		D23CF8181C4724650070AEAA /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CF8171C4724650070AEAA /* InitialViewController.swift */; };
 		D23CF81A1C472F760070AEAA /* MyLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CF8191C472F760070AEAA /* MyLocationButton.swift */; };
+		D269DA191C4F388F00249214 /* ThankYouPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D269DA181C4F388F00249214 /* ThankYouPromptViewController.swift */; };
 		D29F72B91C4B031300A7D07A /* ReadyForPickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F72B71C4B031300A7D07A /* ReadyForPickupViewController.swift */; };
 		D29F72BF1C4B0CF600A7D07A /* ModalPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F72BD1C4B0CF600A7D07A /* ModalPromptViewController.swift */; };
 		D2CEB8D31C48703D003F4CC0 /* BaseMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CEB8D21C48703D003F4CC0 /* BaseMapViewController.swift */; };
@@ -252,6 +253,7 @@
 		D23CF8151C47243F0070AEAA /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
 		D23CF8171C4724650070AEAA /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D23CF8191C472F760070AEAA /* MyLocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLocationButton.swift; sourceTree = "<group>"; };
+		D269DA181C4F388F00249214 /* ThankYouPromptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThankYouPromptViewController.swift; sourceTree = "<group>"; };
 		D29F72B71C4B031300A7D07A /* ReadyForPickupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadyForPickupViewController.swift; sourceTree = "<group>"; };
 		D29F72BD1C4B0CF600A7D07A /* ModalPromptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalPromptViewController.swift; sourceTree = "<group>"; };
 		D2CEB8D21C48703D003F4CC0 /* BaseMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMapViewController.swift; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				D23BBF621C45D3CF00E68AF9 /* MyPendingDonationViewController.swift */,
 				D29F72BD1C4B0CF600A7D07A /* ModalPromptViewController.swift */,
 				D29F72B71C4B031300A7D07A /* ReadyForPickupViewController.swift */,
+				D269DA181C4F388F00249214 /* ThankYouPromptViewController.swift */,
 			);
 			name = Donate;
 			sourceTree = "<group>";
@@ -776,6 +779,7 @@
 				D2186FB51C3CC632001551EF /* PickupRequestTableViewCell.swift in Sources */,
 				D2186FD11C431EA9001551EF /* DashboardTabViewController.swift in Sources */,
 				2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */,
+				D269DA191C4F388F00249214 /* ThankYouPromptViewController.swift in Sources */,
 				D23BBF5D1C45C65700E68AF9 /* DropOffViewController.swift in Sources */,
 				D29F72BF1C4B0CF600A7D07A /* ModalPromptViewController.swift in Sources */,
 				D2186FCD1C41F4C8001551EF /* SWRevealViewController.m in Sources */,

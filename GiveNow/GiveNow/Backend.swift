@@ -477,7 +477,6 @@ class Backend: NSObject {
             return
         }
         pickupRequest.donation = donation
-        pickupRequest.isActive = false
         pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
             if let error = error {
                 completionHandler(nil, error)
