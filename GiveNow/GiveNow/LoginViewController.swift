@@ -76,26 +76,28 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
     let phoneFormatter = NBAsYouTypeFormatter(regionCode: "US")
     @IBAction func phoneTextFieldEditingChanged(sender: AnyObject) {
         
-        
         if entryMode == .PhoneNumber {
             if let inputField = sender as? UITextField,
                 inputText = inputField.text
             {
+                //Strip the phone number of previous formatting and invalid chars
                 let strippedInputText = strippedPhoneNumber(inputText)
                 
+                //Save the cursor state to restore after
                 let previousSelectedRange = inputField.selectedTextRange
                 
+                //Format the phone number
                 let formattedText = phoneFormatter.inputString(strippedInputText)
                 inputField.text = formattedText
                 
                 if let selectedRange = previousSelectedRange {
 
-                    // get current cursor position
-    
+                    // get previous cursor position
                     let start = inputField.beginningOfDocument
                     let cursorOffset = inputField.offsetFromPosition(start, toPosition:selectedRange.start)
                     let currentLength = inputText.characters.count
                     
+                    // if cursor was not at the end of the text restore its position
                     if cursorOffset != currentLength {
                         let lengthDelta = formattedText.characters.count - currentLength
                         let newCursorOffset = max(0, min(formattedText.characters.count, cursorOffset + lengthDelta))
@@ -104,26 +106,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
                             inputField.selectedTextRange = newRange
                         }
                     }
-                    
-//                    let adjustedRange = self.rangeWithDigitsOffset(formattedText, offset: digitsOffsetBeforeFormatting)
-//                    
-//                    self.setSelectedText(inputField, range: adjustedRange)
-//                    
-//                    //Add back to index after text has been adjusted
-//                    print("Numeric characters in range: \(self.numericCharactersInRange(inputText, index: idx)) ")
-//                    //print("Current cursor position \(idx)")
-//                    //print("Current digit offset \(digitsOffset)")
-//                    //print("Current adjusted index \(adjustedIndex)")
-//                    //how to adjust index
-//                    //get digits offset ignoring additional characters
-//                    //find offset
-//                    //
-//
-//                   //
-                    
-
                 }
-                
             }
         }
         
@@ -136,7 +119,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
     }
     
     // MARK: User Actions
-    
     
     @IBAction func doneButtonTapped(sender: AnyObject) {
         guard let entryText = textField?.text else {
@@ -311,44 +293,5 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
         let digitsPlusCharacterSet = NSCharacterSet(charactersInString: "+0123456789").invertedSet
         let strippedPhoneNumberString = phoneNumberString.componentsSeparatedByCharactersInSet(digitsPlusCharacterSet).joinWithSeparator("")
         return strippedPhoneNumberString
-    }
-    
-    private func numericCharactersInRange(phoneNumberString: String, index: Int) -> Int {
-        if phoneNumberString.characters.count > 0 && phoneNumberString.startIndex != phoneNumberString.endIndex {
-            let phoneNumberTrimmedString = phoneNumberString.substringToIndex(phoneNumberString.startIndex.advancedBy(index))
-            //print("Phone number trimmed : \(phoneNumberTrimmedString)")
-            let digitsCharacterSet = NSCharacterSet(charactersInString: "0123456789")
-            let digitsPhoneNumberString = phoneNumberTrimmedString.componentsSeparatedByCharactersInSet(digitsCharacterSet.invertedSet).joinWithSeparator("")
-            //print(digitsPhoneNumberString)
-            return digitsPhoneNumberString.characters.count
-        }
-        return 0
-    }
-    
-    private func rangeWithDigitsOffset(phoneNumberString: String, offset: Int) -> NSRange {
-        var currentDigitsOffset = 0
-        var currentAdjustedOffset = 0
-        
-        for char in phoneNumberString.characters {
-            if currentDigitsOffset >= offset {
-                break
-            } else {
-                if char >= "0" && char <= "9" {
-                    currentDigitsOffset++
-                }
-                currentAdjustedOffset++
-            }
-        }
-        print("Current digitsOffset: \(currentDigitsOffset), adjustOffset: \(currentAdjustedOffset)")
-        return NSMakeRange(currentAdjustedOffset, currentAdjustedOffset)
-    }
-    
-    private func setSelectedText(input: UITextField, range: NSRange) {
-        if let
-            startPosition = input.positionFromPosition(input.beginningOfDocument,  offset: range.location),
-            endPosition = input.positionFromPosition(startPosition, offset: range.length)
-        {
-           input.selectedTextRange = input.textRangeFromPosition(startPosition, toPosition: endPosition)
-        }
     }
 }
