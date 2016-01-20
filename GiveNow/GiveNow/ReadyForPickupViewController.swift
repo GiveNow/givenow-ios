@@ -60,7 +60,7 @@ class ReadyForPickupViewController: BaseViewController {
                 print(error)
             }
             else {
-                print("Yeah!")
+                self.dismissPrompt()
             }
         })
     }
@@ -71,9 +71,18 @@ class ReadyForPickupViewController: BaseViewController {
                 print(error)
             }
             else {
-                print("Yay!")
+                self.dismissPrompt()
             }
         })
+    }
+    
+    func dismissPrompt() {
+        print("Trying to dismiss this...")
+        if let parent = parentViewController as? ModalPromptViewController {
+            if let grandParent = parent.parentViewController as? BaseViewController {
+                grandParent.removeEmbeddedViewController(parent)
+            }
+        }
     }
 
 }
