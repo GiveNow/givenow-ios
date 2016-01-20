@@ -20,7 +20,7 @@ public enum SystemPermissionStatus : Int {
     case Denied
 }
 
-class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, ModalPromptViewControllerDelegate {
+class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet var pickupLocationButton: UIButton?
     @IBOutlet var mapView: MKMapView?
@@ -117,19 +117,17 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     
     func displayPromptIfNeeded() {
         if myPickupRequest.pendingVolunteer != nil {
-            print("Trying to show prompt")
-            let modalViewController = ModalPromptViewController(nibName: "ModalPromptViewController", bundle: nil)
-            modalViewController.delegate = self
-            
-            addChildViewController(modalViewController)
-            modalViewController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-            view.addSubview(modalViewController.view)
-            modalViewController.didMoveToParentViewController(self)
+            if let modalViewController = storyboard!.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
+                embedViewController(modalViewController, intoView: view)
+                
+                if let readyForPickupPrompt = storyboard!.instantiateViewControllerWithIdentifier("readyForPickup") as? ReadyForPickupViewController {
+                    print("This is really happening")
+                    readyForPickupPrompt.pickupRequest = myPickupRequest
+                    modalViewController.embedViewController(readyForPickupPrompt, intoView: modalViewController.promptView)
+                    print(readyForPickupPrompt.view.frame)
+                }
+            }
         }
-    }
-    
-    func modalPromptDismissed(controller: ModalPromptViewController) {
-        
     }
     
     @IBAction func setPickupLocationButtonTapped(sender: AnyObject) {
