@@ -73,7 +73,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
         view.endEditing(true)
     }
     
-    let phoneFormatter = NBAsYouTypeFormatter(regionCode: "US")
+    let phoneFormatter = NBAsYouTypeFormatter(regionCode: Backend.sharedInstance().regionCodeForCurrentLocale())
     @IBAction func phoneTextFieldEditingChanged(sender: AnyObject) {
         
         if entryMode == .PhoneNumber {
