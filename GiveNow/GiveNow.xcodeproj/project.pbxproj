@@ -44,6 +44,8 @@
 		26FE37271C23B81400BED9A0 /* DonationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FE37261C23B81400BED9A0 /* DonationCategory.swift */; };
 		26FE37291C23B95100BED9A0 /* PickupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FE37281C23B95100BED9A0 /* PickupRequest.swift */; };
 		26FE372B1C23B97400BED9A0 /* Volunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FE372A1C23B97400BED9A0 /* Volunteer.swift */; };
+		8EE443B31C5050EC00B432BB /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE443B11C5050EC00B432BB /* Fabric.framework */; };
+		8EE443B41C5050EC00B432BB /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE443B21C5050EC00B432BB /* Crashlytics.framework */; };
 		C72296321C228E550097A662 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72296311C228E550097A662 /* ColorPalette.swift */; };
 		C72296341C228F150097A662 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296331C228F150097A662 /* Mapbox.framework */; };
 		C72296361C228F2E0097A662 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296351C228F2E0097A662 /* GLKit.framework */; };
@@ -220,6 +222,8 @@
 		26FE37261C23B81400BED9A0 /* DonationCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationCategory.swift; sourceTree = "<group>"; };
 		26FE37281C23B95100BED9A0 /* PickupRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupRequest.swift; sourceTree = "<group>"; };
 		26FE372A1C23B97400BED9A0 /* Volunteer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Volunteer.swift; sourceTree = "<group>"; };
+		8EE443B11C5050EC00B432BB /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		8EE443B21C5050EC00B432BB /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		C72296311C228E550097A662 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		C72296331C228F150097A662 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = "../Pods/Mapbox-iOS-SDK/Mapbox.framework"; sourceTree = "<group>"; };
 		C72296351C228F2E0097A662 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
@@ -268,7 +272,9 @@
 				260746781C265AC70022E0ED /* MapKit.framework in Frameworks */,
 				C72296361C228F2E0097A662 /* GLKit.framework in Frameworks */,
 				C72296341C228F150097A662 /* Mapbox.framework in Frameworks */,
+				8EE443B41C5050EC00B432BB /* Crashlytics.framework in Frameworks */,
 				26F35DE41C228A080012C83C /* Parse.framework in Frameworks */,
+				8EE443B31C5050EC00B432BB /* Fabric.framework in Frameworks */,
 				26F35DE01C228A080012C83C /* Bolts.framework in Frameworks */,
 				26A62ACE1C27E2D900D49311 /* libPhoneNumber_iOS.framework in Frameworks */,
 				26F35DE81C228A080012C83C /* SwiftyJSON.framework in Frameworks */,
@@ -339,6 +345,8 @@
 				2645C6881C21E7FF00D6C70D /* GiveNowUITests */,
 				260746791C265AD80022E0ED /* Frameworks */,
 				2645C6671C21E7FF00D6C70D /* Products */,
+				8EE443B11C5050EC00B432BB /* Fabric.framework */,
+				8EE443B21C5050EC00B432BB /* Crashlytics.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -545,6 +553,7 @@
 				2645C6641C21E7FF00D6C70D /* Resources */,
 				26F35DEC1C228A080012C83C /* Embed Frameworks */,
 				2607466D1C2629150022E0ED /* Update Keys */,
+				8EE443AE1C50508700B432BB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -752,6 +761,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "UPDATE_SCRIPT=${PROJECT_DIR}/update_keys.sh\n\nif [ -f \"${UPDATE_SCRIPT}\" ]; then\n    sh ${UPDATE_SCRIPT}\nelse\n    echo \"### Script not found! ###\"\nfi\n";
+		};
+		8EE443AE1C50508700B432BB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run dc8da7fae26300fd9d1d6bf00f400fc442acc4a7 9fe6d6b25b045fda0e9b667f7118b61939c39c42dec6500d14f289a4a9ae247f";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -966,7 +988,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Pods/Mapbox-iOS-SDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../Pods/Mapbox-iOS-SDK",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = GiveNow/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -982,7 +1007,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Pods/Mapbox-iOS-SDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../Pods/Mapbox-iOS-SDK",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = GiveNow/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

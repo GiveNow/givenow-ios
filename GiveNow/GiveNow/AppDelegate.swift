@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 import Mapbox
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,9 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFUser.enableAutomaticUser()
         }
         
+        // MapBox
         if let mapboxToken = Keys.sharedInstance().mapboxToken {
             MGLAccountManager.setAccessToken(mapboxToken)
         }
+        
+        // Crashlytics
+        Fabric.with([MGLAccountManager.self, Crashlytics.self])
         
         // Making status bar white
         application.statusBarStyle = UIStatusBarStyle.LightContent
