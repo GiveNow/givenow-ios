@@ -61,6 +61,8 @@
 "no"="No";
 "a_volunteer"="A volunteer";
 
+"request_status_volunteer_confirmed" = "Your volunteer will contact you soon at {PhoneNumber}";
+
 /* VOLUNTEERING */
 "title_volunteer" = "Volunteer";
 "volunteer_label_user_has_not_applied" = "Want to volunteer to pickup donations?\nThe only thing you need is a car and some spare time!";

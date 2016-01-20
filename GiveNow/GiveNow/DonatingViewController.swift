@@ -31,6 +31,8 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     var shouldUpdateSearchBarWithMapCenter = false
     var myPickupRequest:PickupRequest!
     
+    var pendingDonationViewController:MyPendingDonationViewController!
+    
     var searchController:UISearchController!
     
     var searchResults = [MKMapItem]()
@@ -106,7 +108,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     func addPendingDonationChildView() {
         if storyboard != nil {
             searchController.searchBar.hidden = true
-            let pendingDonationViewController = storyboard!.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
+            pendingDonationViewController = storyboard!.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
             pendingDonationViewController.pickupRequest = myPickupRequest
             addChildViewController(pendingDonationViewController)
             pendingDonationViewController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
@@ -116,7 +118,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func displayPromptIfNeeded() {
-        if myPickupRequest.pendingVolunteer != nil {
+        if myPickupRequest.pendingVolunteer != nil && myPickupRequest.confirmedVolunteer == nil {
             if let modalViewController = storyboard!.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
                 embedViewController(modalViewController, intoView: view)
                 
@@ -126,6 +128,18 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                 }
             }
         }
+    }
+    
+    func updatePendingDonationChildView() {
+        myPickupRequest.fetchIfNeededInBackgroundWithBlock({(result, error) -> Void in
+            if error != nil {
+                print(error)
+            }
+            else {
+                self.pendingDonationViewController.pickupRequest = self.myPickupRequest
+                self.pendingDonationViewController.setHeaderBasedOnRequestStatus()
+            }
+        })
     }
     
     @IBAction func setPickupLocationButtonTapped(sender: AnyObject) {

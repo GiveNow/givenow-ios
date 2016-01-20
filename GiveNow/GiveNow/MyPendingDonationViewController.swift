@@ -28,13 +28,54 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
         collectionView.delegate = self
         collectionView.dataSource = self
         localizeText()
+        setHeaderBasedOnRequestStatus()
     }
 
     func localizeText() {
-        headerLabel.text = NSLocalizedString("request_status_waiting", comment: "")
         yourDonationLabel.text = NSLocalizedString("your_donation_label", comment: "")
         cancelButton.setTitle(NSLocalizedString("cancel_donation_button", comment: ""), forState: .Normal)
         
+    }
+    
+    func setHeaderBasedOnRequestStatus() {
+        print("So is this")
+        print(pickupRequest)
+        if pickupRequest.pendingVolunteer == nil && pickupRequest.confirmedVolunteer == nil {
+            self.headerLabel.text = NSLocalizedString("request_status_waiting", comment: "")
+        }
+        else if pickupRequest.pendingVolunteer != nil && pickupRequest.confirmedVolunteer == nil {
+            displayPendingHeader()
+        }
+        else if pickupRequest.confirmedVolunteer != nil {
+            displayConfirmedHeader()
+        }
+        else {
+            self.headerLabel.text = ""
+        }
+    }
+    
+    // This function is more or less duplicated on the menu prompt
+    func displayPendingHeader() {
+        let headerText = NSLocalizedString("push_notif_volunteer_is_ready_to_pickup", comment: "")
+        if let user = pickupRequest.donor?.fetchIfNeededInBackground().result as? User {
+            if let name = user.name {
+                self.headerLabel.text = headerText.stringByReplacingOccurrencesOfString("{Volunteer}", withString: name)
+            }
+        }
+        else {
+            self.headerLabel.text = headerText.stringByReplacingOccurrencesOfString("{Volunteer}", withString: NSLocalizedString("a_volunteer", comment: ""))
+        }
+    }
+    
+    func displayConfirmedHeader() {
+        let headerText = NSLocalizedString("request_status_volunteer_confirmed", comment: "")
+        if let phoneNumber = User.currentUser()?.username {
+            let formattedNumber = backend.formatPhoneNumber(phoneNumber)
+            self.headerLabel.text = headerText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: "\(formattedNumber)")
+        }
+        else {
+            self.headerLabel.text = headerText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: "")
+        }
     }
     
     func setDonationIcon() {
