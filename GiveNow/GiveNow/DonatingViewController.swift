@@ -38,19 +38,12 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     var searchResults = [MKMapItem]()
     var searchResultsTableView: UITableView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        pickupLocationButton?.backgroundColor = UIColor.colorAccent()
-        pickupLocationButton?.setTitleColor(.whiteColor(), forState: .Normal)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeSearchController()
         initializeSearchResultsTable()
         initializeMenuButton(menuButton)
         localizeText()
-        awakeFromNib()
     }
     
     func localizeText() {
@@ -182,6 +175,28 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         }
     }
     
+    private func validateSetPickupLocationButton() {
+        print("Trying to validate")
+        if searchController.searchBar.text == nil || searchController.searchBar.text == "" {
+            self.disablePickupLocationButton()
+        }
+        else {
+            self.enablePickupLocationButton()
+        }
+    }
+    
+    private func disablePickupLocationButton() {
+        print("Not enabeled")
+        self.pickupLocationButton!.enabled = false
+        self.pickupLocationButton!.backgroundColor = UIColor.colorAccentDisabled()
+    }
+    
+    private func enablePickupLocationButton() {
+        print("Enabled")
+        self.pickupLocationButton!.enabled = true
+        self.pickupLocationButton!.backgroundColor = UIColor.colorAccent()
+    }
+    
     // MARK: - Search
     
     func initializeSearchController() {
@@ -192,6 +207,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         searchController.delegate = self
         navigationItem.titleView = searchController.searchBar
         searchController.searchBar.tintColor = UIColor.colorPrimaryDark()
+        validateSetPickupLocationButton()
     }
     
     func backgroundTapped(sender: UIGestureRecognizer? = nil) {
@@ -312,6 +328,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         hideSearchResultsTable()
         searchController.dismissViewControllerAnimated(true, completion: {() -> Void in
             self.mapView!.centerMapOnMapItem(mapItem)
+            self.validateSetPickupLocationButton()
         })
     }
     
@@ -342,6 +359,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                     let placemark = placemarks![0]
                     if placemark.name != nil {
                         self.searchController.searchBar.text = placemark.name!
+                        self.validateSetPickupLocationButton()
                     }
                 }
             }
