@@ -121,10 +121,8 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                 embedViewController(modalViewController, intoView: view)
                 
                 if let readyForPickupPrompt = storyboard!.instantiateViewControllerWithIdentifier("readyForPickup") as? ReadyForPickupViewController {
-                    print("This is really happening")
                     readyForPickupPrompt.pickupRequest = myPickupRequest
                     modalViewController.embedViewController(readyForPickupPrompt, intoView: modalViewController.promptView)
-                    print(readyForPickupPrompt.view.frame)
                 }
             }
         }

@@ -22,6 +22,11 @@ class ReadyForPickupViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         localizeStrings()
+        
+        if let address = pickupRequest.address {
+            addressLabel.text = address
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,21 +42,16 @@ class ReadyForPickupViewController: BaseViewController {
     }
     
     func addVolunteerNameIfAvailable(inputString: String) -> String {
-        let outputString = inputString.stringByReplacingOccurrencesOfString("{Volunteer}", withString: NSLocalizedString("a_volunteer", comment: ""))
+        var outputString:String = inputString.stringByReplacingOccurrencesOfString("{Volunteer}", withString: NSLocalizedString("a_volunteer", comment: ""))
+        do {
+            let user = try pickupRequest.donor?.fetchIfNeeded()
+            if let name = user!.name {
+                outputString = inputString.stringByReplacingOccurrencesOfString("{Volunteer}", withString: name)
+            }
+        } catch _ {
+            print("Error getting name")
+        }
         return outputString
-        //            return outputString
-//        print(pickupRequest)
-//        print(pickupRequest.pendingVolunteer)
-//        print(pickupRequest.pendingVolunteer?.name)
-//        if pickupRequest.pendingVolunteer != nil && pickupRequest.pendingVolunteer?.name != nil {
-//            let name = pickupRequest.pendingVolunteer!.name!
-//            let outputString = inputString.stringByReplacingOccurrencesOfString("{Volunteer}", withString: name)
-//            return outputString
-//        }
-//        else {
-//            let outputString = inputString.stringByReplacingOccurrencesOfString("{Volunteer}", withString: NSLocalizedString("a_volunteer", comment: ""))
-//            return outputString
-//        }
     }
 
 }
