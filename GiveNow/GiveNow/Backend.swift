@@ -307,6 +307,37 @@ class Backend: NSObject {
             }
         })
     }
+    
+    func confirmVolunteerForPickupRequest(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        
+        let params = ["pickupRequestId": pickupRequest.objectId!]
+        PFCloud.callFunctionInBackground("confirmVolunteer", withParameters: params) { (results, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                completionHandler(pickupRequest, nil)
+            }
+        }
+    }
+    
+    func indicatePickupRequestIsNotReady(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        pickupRequest.pendingVolunteer = nil
+        pickupRequest.saveInBackgroundWithBlock({(success, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                completionHandler(pickupRequest, nil)
+            }
+        })
+    }
 
     // MARK: Pickup Request Queries for volunteer
     

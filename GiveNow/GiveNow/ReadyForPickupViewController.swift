@@ -53,5 +53,27 @@ class ReadyForPickupViewController: BaseViewController {
         }
         return outputString
     }
+    
+    @IBAction func donationIsNotReady() {
+        backend.indicatePickupRequestIsNotReady(pickupRequest, completionHandler: {(result, error) -> Void in
+            if error != nil {
+                print(error)
+            }
+            else {
+                print("Yeah!")
+            }
+        })
+    }
+    
+    @IBAction func donationIsReady() {
+        backend.confirmVolunteerForPickupRequest(pickupRequest, completionHandler: {(result, error) -> Void in
+            if error != nil {
+                print(error)
+            }
+            else {
+                print("Yay!")
+            }
+        })
+    }
 
 }

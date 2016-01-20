@@ -373,10 +373,16 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NH6-hn-Yn2">
                                 <rect key="frame" x="510" y="550" width="70" height="30"/>
                                 <state key="normal" title="yesButton"/>
+                                <connections>
+                                    <action selector="donationIsReady" destination="JKv-I1-iYZ" eventType="touchUpInside" id="8EK-5o-PQL"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="keb-xp-CWf">
                                 <rect key="frame" x="427" y="550" width="63" height="30"/>
                                 <state key="normal" title="noButton"/>
+                                <connections>
+                                    <action selector="donationIsNotReady" destination="JKv-I1-iYZ" eventType="touchUpInside" id="NcV-Zg-NeH"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>

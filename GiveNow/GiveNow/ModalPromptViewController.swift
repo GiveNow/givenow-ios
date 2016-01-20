@@ -15,6 +15,6 @@ class ModalPromptViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }    
+    }
 
 }
