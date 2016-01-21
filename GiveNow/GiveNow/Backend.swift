@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import Parse
 import libPhoneNumber_iOS
+import Crashlytics
 
 // TODO: implement
 // See https://github.com/GiveNow/givenow-ios/issues/3
@@ -83,6 +84,7 @@ class Backend: NSObject {
                         }
                         else {
                             NSNotificationCenter.defaultCenter().postNotificationName(LoginStatusDidChangeNotification, object: nil)
+                            self.logUserForCrashlytics()
                             completionHandler(true, nil)
                         }
                     })
@@ -96,6 +98,17 @@ class Backend: NSObject {
         }
     }
     
+    func logUserForCrashlytics() {
+        // Provide user info
+        // If you log user identifiers with the Crashlytics SDK while your app is running, 
+        // we will show them in crash reports on your dashboard to help you debug.
+        // You can call any combination of these three methods
+        if let user = PFUser.currentUser() {
+            Crashlytics.sharedInstance().setUserIdentifier(user.objectId)
+            Crashlytics.sharedInstance().setUserName(user.username)
+        }
+    }
+
     // MARK: Donation Categories
 
     
