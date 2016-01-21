@@ -75,7 +75,7 @@ class DropOffViewController: BaseMapViewController {
             let latitude = dropOffAgency.agencyGeoLocation!.latitude
             let longitude = dropOffAgency.agencyGeoLocation!.longitude
             var title:String!
-            if dropOffAgency.agencyAddress != nil {
+            if dropOffAgency.agencyAddress != nil && dropOffAgency.agencyAddress != "" {
                 title = dropOffAgency.agencyAddress!
             }
             else {

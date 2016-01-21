@@ -71,8 +71,8 @@ class PickupViewController: BaseMapViewController {
             let latitude = pickupRequest.location!.latitude
             let longitude = pickupRequest.location!.longitude
             var title:String!
-            if pickupRequest.address != nil {
-                title = pickupRequest.address!
+            if pickupRequest.address != nil && pickupRequest.address != "" {
+                title = pickupRequest.address
             }
             else {
                 title = NSLocalizedString("unknown_address", comment: "")

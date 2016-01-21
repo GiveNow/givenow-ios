@@ -23,18 +23,14 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     @IBOutlet weak var navItem: UINavigationItem!
     
     var shouldUpdateSearchBarWithMapCenter = false
-    var newPickupRequest:PickupRequest!
+    var myPickupRequest:PickupRequest!
+    
+    var pendingDonationViewController:MyPendingDonationViewController!
     
     var searchController:UISearchController!
     
     var searchResults = [MKMapItem]()
     var searchResultsTableView: UITableView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        pickupLocationButton?.backgroundColor = UIColor.colorAccent()
-        pickupLocationButton?.setTitleColor(.whiteColor(), forState: .Normal)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +38,6 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         initializeSearchResultsTable()
         initializeMenuButton(menuButton)
         localizeText()
-        awakeFromNib()
     }
     
     func localizeText() {
@@ -80,7 +75,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func displayPendingDonationViewIfNeeded() {
-        let query = backend.queryMyNewRequests()
+        let query = backend.queryMyPickupRequests()
         backend.fetchPickupRequestsWithQuery(query, completionHandler: {(result, error) -> Void in
             if error != nil {
                 print(error)
@@ -88,8 +83,9 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
             else if result != nil {
                 if result!.count > 0 {
                     if let pickupRequest = result![0] as? PickupRequest {
-                        self.newPickupRequest = pickupRequest
+                        self.myPickupRequest = pickupRequest
                         self.addPendingDonationChildView()
+                        self.displayPromptIfNeeded()
                     }
                 }
             }
@@ -99,13 +95,54 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     func addPendingDonationChildView() {
         if storyboard != nil {
             searchController.searchBar.hidden = true
-            let pendingDonationViewController = storyboard!.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
-            pendingDonationViewController.pickupRequest = newPickupRequest
+            pendingDonationViewController = storyboard!.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
+            pendingDonationViewController.pickupRequest = myPickupRequest
             addChildViewController(pendingDonationViewController)
             pendingDonationViewController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
             view.addSubview(pendingDonationViewController.view)
             pendingDonationViewController.didMoveToParentViewController(self)
         }
+    }
+    
+    func removePendingDonationChildView() {
+        removeEmbeddedViewController(pendingDonationViewController)
+        searchController.searchBar.hidden = false
+    }
+    
+    func displayPromptIfNeeded() {
+        if myPickupRequest.pendingVolunteer != nil && myPickupRequest.confirmedVolunteer == nil {
+            if let modalViewController = storyboard!.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
+                embedViewController(modalViewController, intoView: view)
+                
+                if let readyForPickupPrompt = storyboard!.instantiateViewControllerWithIdentifier("readyForPickup") as? ReadyForPickupViewController {
+                    readyForPickupPrompt.pickupRequest = myPickupRequest
+                    modalViewController.embedViewController(readyForPickupPrompt, intoView: modalViewController.promptView)
+                }
+            }
+        }
+        else if myPickupRequest.donation != nil {
+            if let modalViewController = storyboard!.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
+                embedViewController(modalViewController, intoView: view)
+                
+                if let thankYouPrompt = storyboard!.instantiateViewControllerWithIdentifier("donationPickedUp") as? ThankYouPromptViewController {
+                    thankYouPrompt.pickupRequest = myPickupRequest
+                    modalViewController.embedViewController(thankYouPrompt, intoView: modalViewController.promptView)
+                }
+            }
+        }
+    }
+    
+    func updatePendingDonationChildView() {
+        myPickupRequest.fetchIfNeededInBackgroundWithBlock({(result, error) -> Void in
+            if error != nil {
+                print(error)
+            }
+            else {
+                print(result)
+                self.pendingDonationViewController.pickupRequest = self.myPickupRequest
+                self.pendingDonationViewController.setHeaderBasedOnRequestStatus()
+            }
+        })
     }
     
     @IBAction func setPickupLocationButtonTapped(sender: AnyObject) {
@@ -128,8 +165,30 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         }
         else if segue.identifier == "viewNewDonation" {
             let destinationController = segue.destinationViewController as! MyPendingDonationViewController
-            destinationController.pickupRequest = newPickupRequest
+            destinationController.pickupRequest = myPickupRequest
         }
+    }
+    
+    private func validateSetPickupLocationButton() {
+        print("Trying to validate")
+        if searchController.searchBar.text == nil || searchController.searchBar.text == "" {
+            self.disablePickupLocationButton()
+        }
+        else {
+            self.enablePickupLocationButton()
+        }
+    }
+    
+    private func disablePickupLocationButton() {
+        print("Not enabeled")
+        self.pickupLocationButton!.enabled = false
+        self.pickupLocationButton!.backgroundColor = UIColor.colorAccentDisabled()
+    }
+    
+    private func enablePickupLocationButton() {
+        print("Enabled")
+        self.pickupLocationButton!.enabled = true
+        self.pickupLocationButton!.backgroundColor = UIColor.colorAccent()
     }
     
     // MARK: - Search
@@ -142,6 +201,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         searchController.delegate = self
         navigationItem.titleView = searchController.searchBar
         searchController.searchBar.tintColor = UIColor.colorPrimaryDark()
+        validateSetPickupLocationButton()
     }
     
     func backgroundTapped(sender: UIGestureRecognizer? = nil) {
@@ -262,6 +322,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         hideSearchResultsTable()
         searchController.dismissViewControllerAnimated(true, completion: {() -> Void in
             self.mapView!.centerMapOnMapItem(mapItem)
+            self.validateSetPickupLocationButton()
         })
     }
     
@@ -292,6 +353,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                     let placemark = placemarks![0]
                     if placemark.name != nil {
                         self.searchController.searchBar.text = placemark.name!
+                        self.validateSetPickupLocationButton()
                     }
                 }
             }

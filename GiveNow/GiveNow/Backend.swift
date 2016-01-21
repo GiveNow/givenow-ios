@@ -307,6 +307,37 @@ class Backend: NSObject {
             }
         })
     }
+    
+    func confirmVolunteerForPickupRequest(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        
+        let params = ["pickupRequestId": pickupRequest.objectId!]
+        PFCloud.callFunctionInBackground("confirmVolunteer", withParameters: params) { (results, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                completionHandler(pickupRequest, nil)
+            }
+        }
+    }
+    
+    func indicatePickupRequestIsNotReady(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        pickupRequest.pendingVolunteer = nil
+        pickupRequest.saveInBackgroundWithBlock({(success, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                completionHandler(pickupRequest, nil)
+            }
+        })
+    }
 
     // MARK: Pickup Request Queries for volunteer
     
@@ -360,6 +391,7 @@ class Backend: NSObject {
     func queryMyDashboardPendingPickups() -> PFQuery {
         let query = queryActivePickupRequests()
         query.whereKey("pendingVolunteer", equalTo: User.currentUser()!)
+        query.whereKeyDoesNotExist("confirmedVolunteer")
         query.whereKeyDoesNotExist("donation")
         return query
     }
@@ -414,48 +446,39 @@ class Backend: NSObject {
     
     // MARK: Donated pickup requests
     
-    func saveDonationForPickupRequest(pickupRequest: PickupRequest, completionHandler: ((Donation?, NSError?) -> Void)?) {
+    func pickUpDonation(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
         guard let completionHandler = completionHandler else {
             return
         }
         
-        let donation = Donation()
-        donation.donor = pickupRequest.donor
-        donation.donationCategories = pickupRequest.donationCategories
-        
-        donation.saveInBackgroundWithBlock({ (success, error) -> Void in
-            if let error = error {
-                completionHandler(nil, error)
-            }
-            else {
-                self.addDonationToPickupRequest(donation, pickupRequest: pickupRequest, completionHandler: {(pickupRequest, error) -> Void in
-                    if let error = error {
-                        completionHandler(nil, error)
-                    }
-                    else {
-                        completionHandler(donation, nil)
-                    }
-                })
-            }
-        })
-        
-    }
-    
-    func addDonationToPickupRequest(donation: Donation, pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
-        guard let completionHandler = completionHandler else {
-            return
-        }
-        pickupRequest.donation = donation
-        pickupRequest.isActive = false
-        pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
+        let params = ["pickupRequestId": pickupRequest.objectId!]
+        PFCloud.callFunctionInBackground("pickupDonation", withParameters: params) { (results, error) -> Void in
             if let error = error {
                 completionHandler(nil, error)
             }
             else {
                 completionHandler(pickupRequest, nil)
             }
-        })
+        }
     }
+    
+    func markComplete(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        
+        let params = ["pickupRequestId": pickupRequest.objectId!]
+        PFCloud.callFunctionInBackground("markComplete", withParameters: params) { (results, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                completionHandler(pickupRequest, nil)
+            }
+        }
+    }
+    
+    
     
     func markPickupRequestAsInactive(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
         guard let completionHandler = completionHandler else {

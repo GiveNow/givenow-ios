@@ -77,7 +77,7 @@ class PickupDonationViewController: BaseMapViewController {
         let latitude = pickupRequest.location!.latitude
         let longitude = pickupRequest.location!.longitude
         var title:String!
-        if pickupRequest.address != nil {
+        if pickupRequest.address != nil && pickupRequest.address != "" {
             title = pickupRequest.address!
         }
         else {
@@ -89,7 +89,7 @@ class PickupDonationViewController: BaseMapViewController {
     }
     
     @IBAction func donationPickedUp(sender: AnyObject) {
-        backend.saveDonationForPickupRequest(pickupRequest, completionHandler: {(donation, error) -> Void in
+        backend.pickUpDonation(pickupRequest, completionHandler: {(donation, error) -> Void in
             if let error = error {
                 print(error)
             }
