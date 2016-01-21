@@ -33,6 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Making status bar white
         application.statusBarStyle = UIStatusBarStyle.LightContent
         
+        let status = Permissions.systemStatusForNotifications()
+        if status == .Allowed {
+            Permissions.registerForNotificationsPermission()
+        }
+        
         return true
     }
 
@@ -58,6 +63,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    // MARK: Notifications -
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        
+        // Store the deviceToken in the current Installation and save it to Parse
+        let installation = PFInstallation.currentInstallation()
+        installation.setDeviceTokenFromData(deviceToken)
+        installation.saveEventually()
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        // TODO: log it?
+        print(error.localizedDescription)
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+        handleNotification(userInfo, isRemote: true)
+    }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+        guard let userInfo = notification.userInfo else {
+            // do nothing
+            assert(false)
+            return
+        }
+        
+        handleNotification(userInfo, isRemote: false)
+    }
+    
+    // MARK: Private -
+    
+    func handleNotification(dictionary : [ NSObject : AnyObject ], isRemote : Bool) {
+        // TODO: implement
+        
+        print(dictionary)
+        
+        if isRemote {
+            // use the given keys to get the localized strings and
+            // schedule an immediate local user notification with that text
+            scheduleLocalUserNotification("Test Notification for GiveNow")
+        }
+        else {
+            // show the related context to the notification
+        }
+    }
+    
+    func scheduleLocalUserNotification(text : String) {
+        let localNotification = UILocalNotification()
+        localNotification.alertBody = text
+        localNotification.fireDate = NSDate()
+        localNotification.category = "Alerts"
+        localNotification.userInfo = ["data" : "TBD"]
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+    }
 
 }
-

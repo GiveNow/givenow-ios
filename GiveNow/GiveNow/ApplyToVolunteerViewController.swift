@@ -1,36 +1,23 @@
 //
-//  VolunteeringViewController.swift
+//  ApplyToVolunteerViewController.swift
 //  GiveNow
 //
-//  Created by Brennan Stehling on 12/16/15.
-//  Copyright © 2015 GiveNow. All rights reserved.
+//  Created by Evan Waters on 1/16/16.
+//  Copyright © 2016 GiveNow. All rights reserved.
 //
 
 import UIKit
-import Parse
 
-// TODO: implement
-// See https://github.com/GiveNow/givenow-ios/issues/7
-// See https://github.com/GiveNow/givenow-ios/issues/8
-
-class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDelegate {
+class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControllerDelegate {
     
-    @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var volunteeringTitleLabel: UILabel!
     @IBOutlet weak var volunteerButton: UIButton!
-    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     // MARK: - View Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeMenuButton(menuButton)
         checkPendingVolunteer()
-        localizeStrings()
-    }
-    
-    func localizeStrings() {
-        navItem.title = NSLocalizedString("title_volunteer", comment: "")
     }
     
     // MARK: - User Actions
@@ -51,7 +38,7 @@ class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDe
     func modalViewDismissedWithResult(controller: ModalLoginViewController) {
         createVolunteer()
     }
-
+    
     // MARK: - Private
     
     private func createVolunteer() {
@@ -64,12 +51,24 @@ class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDe
                     // after successful submission
                     self.backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, user) -> Void in
                         if volunteer != nil && volunteer!.isApproved == true {
-                            //To Do: Figure out how to seamlessly show the dashboard here.
+                            self.removeFromTabBar()
+                            self.removeEmbeddedViewController(self)
                         }
                     })
                     self.updateViewForPendingVolunteer()
                 }
             })
+        }
+    }
+    
+    private func removeFromTabBar() {
+        if let tabBarController = self.tabBarController {
+            let indexToRemove = 2
+            if indexToRemove < tabBarController.viewControllers?.count {
+                var viewControllers = tabBarController.viewControllers
+                viewControllers?.removeAtIndex(indexToRemove)
+                tabBarController.viewControllers = viewControllers
+            }
         }
     }
     
@@ -118,10 +117,9 @@ class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDe
     }
     
     private func updateViewForApplicant() {
-        
         volunteeringTitleLabel.text = NSLocalizedString("volunteer_label_user_has_not_applied", comment: "")
         volunteerButton.setTitle(NSLocalizedString("volunteer_button_user_has_not_applied", comment: ""), forState: .Normal)
         volunteerButton.hidden = false
     }
-
+        
 }
