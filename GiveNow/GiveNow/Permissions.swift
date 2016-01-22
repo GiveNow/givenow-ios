@@ -92,5 +92,12 @@ class Permissions: NSObject {
             application.unregisterForRemoteNotifications()
         }
     }
+    
+    static func registerForNotificationsIfNeeded() {
+        let status = Permissions.systemStatusForNotifications()
+        if status == .NotDetermined {
+            Permissions.registerForNotificationsPermission()
+        }
+    }
 
 }

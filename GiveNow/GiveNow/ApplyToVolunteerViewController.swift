@@ -51,6 +51,7 @@ class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControll
                     // after successful submission
                     self.backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, user) -> Void in
                         if volunteer != nil && volunteer!.isApproved == true {
+                            Permissions.registerForNotificationsIfNeeded()
                             self.removeFromTabBar()
                             self.removeEmbeddedViewController(self)
                         }
