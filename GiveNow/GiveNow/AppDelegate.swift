@@ -86,9 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Received a remote notification")
 
         if application.applicationState == .Active {
-            handleNotification(userInfo, isRemote: true)
-// To Do: Figure out how to handle notifications when the app is open
-//            handleNotificationWhenActive(userInfo)
+//            handleNotification(userInfo, isRemote: true)
+            handleNotificationWhenActive(userInfo)
         }
         else {
             handleNotification(userInfo, isRemote: true)
@@ -117,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Notification is remote")
             // use the given keys to get the localized strings and
             // schedule an immediate local user notification with that text
-            let notification = localizeNotificationMessage(dictionary)
+            let notification = NotificationHelper.localizeNotificationMessage(dictionary)
             scheduleLocalUserNotification(notification)
         }
         else {
@@ -126,28 +125,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func localizeNotificationMessage(dictionary: [ NSObject : AnyObject ]) -> String {
-        let json = JSON(dictionary)
-        let locKey = json["data"]["alert"]["loc-key"].string
-        let name = json["data"]["alert"]["loc-args"][0].string
-        
-        var notification = ""
-        if locKey != nil {
-            notification = NSLocalizedString(locKey!, comment: "")
-            print(notification)
-        }
-        if name != nil {
-            notification = notification.stringByReplacingOccurrencesOfString("{Person}", withString: name!)
-            print(notification)
-        }
-
-        return notification
-    }
-    
-    
     func handleNotificationWhenActive(dictionary: [ NSObject : AnyObject ]) {
-        //To Do
-        print("What should we call me?")
+        let localNotification = NSNotification(name: "pushNotificationReceived", object: nil, userInfo: dictionary)
+        NSNotificationCenter.defaultCenter().postNotification(localNotification)
     }
     
     func scheduleLocalUserNotification(text: String) {

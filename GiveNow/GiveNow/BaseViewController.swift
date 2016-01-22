@@ -7,11 +7,33 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class BaseViewController: UIViewController {
     
     // Quick reference to the backend
     let backend = Backend.sharedInstance()
+    
+    // MARK: Loading view
+    
+    override func viewDidLoad(){
+        super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "pushNotificationReceived:", name: "pushNotificationReceived", object: nil)
+    }
+    
+    // MARK: Handling push notifications
+    
+    func pushNotificationReceived(notification: NSNotification){
+        if let dictionary = notification.userInfo {
+            let title = ""
+            let message = NotificationHelper.localizeNotificationMessage(dictionary)
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: {})
+        }
+        
+    }
 
     // MARK: Base Overrides
 
