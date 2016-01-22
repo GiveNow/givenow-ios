@@ -92,4 +92,8 @@
 "dropoff_title" = "Drop Off";
 "dropoff_center" = "Dropoff Center";
 
+/* NOTIFICATIONS */
+"notif_volunteer_confirmed_msg" = "{Person}'s donation is ready to be picked up.";
+"notif_pickup_request_claimed_msg" = "{Person} is ready to pick up your donation!";
+"notif_pickup_complete_msg" = "{Person} just picked up your donation. Thanks!";
 

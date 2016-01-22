@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import Mapbox
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -82,9 +83,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        print("I think we received a notification!")
+        print("Received a remote notification")
+
+        if application.applicationState == .Active {
+            handleNotification(userInfo, isRemote: true)
+// To Do: Figure out how to handle notifications when the app is open
+//            handleNotificationWhenActive(userInfo)
+        }
+        else {
+            handleNotification(userInfo, isRemote: true)
+        }
         
-        handleNotification(userInfo, isRemote: true)
+        // Calling the completion handler to dismiss the associated warning - not sure if we need to do more than this.
+        completionHandler(UIBackgroundFetchResult.NewData)
     }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
@@ -93,9 +104,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             assert(false)
             return
         }
-        
-        print("We are handling the action")
-        
         handleNotification(userInfo, isRemote: false)
     }
     
@@ -103,24 +111,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func handleNotification(dictionary : [ NSObject : AnyObject ], isRemote : Bool) {
         // TODO: implement
-        print("We received a notification!")
-        
         print(dictionary)
         
         if isRemote {
+            print("Notification is remote")
             // use the given keys to get the localized strings and
             // schedule an immediate local user notification with that text
-            scheduleLocalUserNotification("Test Notification for GiveNow")
+            let notification = localizeNotificationMessage(dictionary)
+            scheduleLocalUserNotification(notification)
         }
         else {
+            print("Notification is local")
             // show the related context to the notification
         }
     }
     
-    func scheduleLocalUserNotification(text : String) {
+    func localizeNotificationMessage(dictionary: [ NSObject : AnyObject ]) -> String {
+        let json = JSON(dictionary)
+        let locKey = json["data"]["alert"]["loc-key"].string
+        let name = json["data"]["alert"]["loc-args"][0].string
+        
+        var notification = ""
+        if locKey != nil {
+            notification = NSLocalizedString(locKey!, comment: "")
+            print(notification)
+        }
+        if name != nil {
+            notification = notification.stringByReplacingOccurrencesOfString("{Person}", withString: name!)
+            print(notification)
+        }
+
+        return notification
+    }
+    
+    
+    func handleNotificationWhenActive(dictionary: [ NSObject : AnyObject ]) {
+        //To Do
+        print("What should we call me?")
+    }
+    
+    func scheduleLocalUserNotification(text: String) {
+        print("Scheduling a notification")
         let localNotification = UILocalNotification()
         localNotification.alertBody = text
-        localNotification.fireDate = NSDate()
+        
+        //Adding 10 seconds right now to enable testing
+        let calendar = NSCalendar.currentCalendar()
+        let date = calendar.dateByAddingUnit(.Second, value: 10, toDate: NSDate(), options: [])
+        
+        localNotification.fireDate = date
         localNotification.category = "Alerts"
         localNotification.userInfo = ["data" : "TBD"]
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)

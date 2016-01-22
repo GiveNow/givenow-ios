@@ -83,3 +83,10 @@
 /* DROPOFF */
 "dropoff_title" = "Hilfsorganisationen";
 "dropoff_center" = "Hilfsorganisationen";
+
+
+/* NOTIFICATIONS */
+"notif_volunteer_confirmed_msg" = "{Die Spende von {Person} ist abholbereit.";
+"notif_pickup_request_claimed_msg" = "{Person} ist bereit deine Spende abzuholen!";
+"notif_pickup_complete_msg" = "{Person} hat gerade deine Spende abgeholt. Vielen Dank!";
+
