@@ -197,9 +197,17 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
                 print(error)
             }
             else {
+                self.registerForNotificationsIfNeeded()
                 self.performSegueWithIdentifier("newPickupRequestCreated", sender: nil)
             }
         })
+    }
+    
+    func registerForNotificationsIfNeeded() {
+        let status = Permissions.systemStatusForNotifications()
+        if status == .NotDetermined {
+            Permissions.registerForNotificationsPermission()
+        }
     }
     
     func modalViewDismissedWithResult(controller: ModalLoginViewController) {
