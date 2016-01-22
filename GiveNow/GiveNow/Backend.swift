@@ -53,7 +53,6 @@ class Backend: NSObject {
         
         let smsBody = NSLocalizedString("SMS Body", comment: "SMS Body")
         let params = ["phoneNumber" : completePhoneNumber(phoneNumber), "body" : smsBody]
-        print(params)
         PFCloud.callFunctionInBackground("sendCode", withParameters: params) { (result, error) -> Void in
             if let error = error {
                 completionHandler(false, error)
@@ -70,7 +69,6 @@ class Backend: NSObject {
         }
         
         let params = ["phoneNumber" : completePhoneNumber(phoneNumber), "codeEntry" : codeEntry]
-        print(params)
         PFCloud.callFunctionInBackground("logIn", withParameters: params) { (result, error) -> Void in
             if let error = error {
                 completionHandler(false, error)
@@ -120,7 +118,6 @@ class Backend: NSObject {
                 }
                 else {
                     print("Could not cast as donation category")
-                    print(results)
                 }
             }
             else {
@@ -172,7 +169,6 @@ class Backend: NSObject {
                 }
                 else {
                     print("Could not cast as dropoff agency")
-                    print(results)
                 }
             }
             else {
@@ -355,7 +351,6 @@ class Backend: NSObject {
                 }
                 else {
                     print("Could not cast as pickup request")
-                    print(results)
                 }
             }
             else {
@@ -578,9 +573,6 @@ class Backend: NSObject {
         if let countryCode = locale.objectForKey(NSLocaleCountryCode) as? String {
             let phoneUtil = NBPhoneNumberUtil()
             let value = Int(phoneUtil.getCountryCodeForRegion(countryCode))
-            
-            print(value)
-            
             return value
         }
         

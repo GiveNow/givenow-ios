@@ -77,7 +77,6 @@ class ReadyForPickupViewController: BaseViewController {
     }
     
     func dismissPrompt() {
-        print("Trying to dismiss this...")
         if let parent = parentViewController as? ModalPromptViewController {
             if let grandParent = parent.parentViewController as? DonatingViewController {
                 grandParent.updatePendingDonationChildView()

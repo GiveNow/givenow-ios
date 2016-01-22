@@ -135,7 +135,6 @@ class NavMenuTableViewController: UITableViewController, ModalLoginViewControlle
                 usernameLabel.text = ""
             }
             if let image = UIImage(named: "round_icon") {
-                print("set image")
                 profileImage.image = image
             }
         }

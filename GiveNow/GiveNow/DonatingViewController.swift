@@ -138,7 +138,6 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                 print(error)
             }
             else {
-                print(result)
                 self.pendingDonationViewController.pickupRequest = self.myPickupRequest
                 self.pendingDonationViewController.setHeaderBasedOnRequestStatus()
             }
@@ -170,7 +169,6 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     private func validateSetPickupLocationButton() {
-        print("Trying to validate")
         if searchController.searchBar.text == nil || searchController.searchBar.text == "" {
             self.disablePickupLocationButton()
         }
@@ -180,13 +178,11 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     private func disablePickupLocationButton() {
-        print("Not enabeled")
         self.pickupLocationButton!.enabled = false
         self.pickupLocationButton!.backgroundColor = UIColor.colorAccentDisabled()
     }
     
     private func enablePickupLocationButton() {
-        print("Enabled")
         self.pickupLocationButton!.enabled = true
         self.pickupLocationButton!.backgroundColor = UIColor.colorAccent()
     }

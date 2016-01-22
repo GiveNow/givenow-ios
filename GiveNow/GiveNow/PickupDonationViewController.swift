@@ -85,7 +85,6 @@ class PickupDonationViewController: BaseMapViewController {
         }
         let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
         mapView.addAnnotation(donationPoint)
-        print(donationPoint)
     }
     
     @IBAction func donationPickedUp(sender: AnyObject) {
@@ -139,7 +138,6 @@ class PickupDonationViewController: BaseMapViewController {
     }
     
     @IBAction func navigationButtonTapped(sender: AnyObject) {
-        print("Navigate!")
         let latitude = pickupRequest.location!.latitude
         let longitude = pickupRequest.location!.longitude
         let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

@@ -97,6 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func handleNotification(dictionary : [ NSObject : AnyObject ], isRemote : Bool) {
         // TODO: implement
+        print("We received a notification!")
         
         print(dictionary)
         
