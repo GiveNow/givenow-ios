@@ -79,7 +79,6 @@ class PickupViewController: BaseMapViewController {
             }
             let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
             mapView.addAnnotation(donationPoint)
-            print(donationPoint)
         }
     }
     

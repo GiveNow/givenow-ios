@@ -70,6 +70,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Store the deviceToken in the current Installation and save it to Parse
         let installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
+        if let user = User.currentUser() {
+            installation.setValue(user, forKey: "user")
+        }
         installation.saveEventually()
     }
     
@@ -79,6 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        print("I think we received a notification!")
         
         handleNotification(userInfo, isRemote: true)
     }
@@ -89,6 +93,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             assert(false)
             return
         }
+        
+        print("We are handling the action")
         
         handleNotification(userInfo, isRemote: false)
     }
