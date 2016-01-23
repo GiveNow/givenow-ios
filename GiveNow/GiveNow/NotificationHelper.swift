@@ -25,8 +25,15 @@ class NotificationHelper: NSObject {
     
     static func localizeNotificationTitle(dictionary: [NSObject : AnyObject]) -> String {
         let json = JSON(dictionary)
-        let titleKey = json["data"]["title"]["loc-key"].string
-        let title = String.localizedString(titleKey!)
+        
+        var title:String!
+        if let titleKey = json["data"]["title"]["loc-key"].string {
+            title = String.localizedString(titleKey)
+        }
+        else {
+            title = String.localizedString("notification_received")
+        }
+        
         return title
     }
 

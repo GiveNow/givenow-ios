@@ -24,7 +24,7 @@
 "onboarding_add_phone_number_later_button" = "Add a phone number later";
 
 /* LOGIN */
-"SMS Body"  = "{Code} is your code for GiveNow.";
+"SMS Body"  = "{code} is your code for GiveNow.";
 "Cancel" = "Cancel";
 "Submit" = "Submit";
 
@@ -103,4 +103,5 @@
 "dismiss" = "Dismiss";
 
 "phone_number_replacement_text" = "your phone number";
+"notification_received" = "Notification Received";
 

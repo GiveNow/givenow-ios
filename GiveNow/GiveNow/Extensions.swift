@@ -146,7 +146,7 @@ extension String {
             string = string.stringByReplacingOccurrencesOfString("{Name}", withString: name!)
         }
         if code != nil {
-            string = string.stringByReplacingOccurrencesOfString("{ode}", withString: code!)
+            string = string.stringByReplacingOccurrencesOfString("{code}", withString: code!)
         }
         return string
     }
