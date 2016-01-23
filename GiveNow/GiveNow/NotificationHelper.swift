@@ -14,28 +14,19 @@ class NotificationHelper: NSObject {
     static func localizeNotificationMessage(dictionary: [ NSObject : AnyObject ]) -> String {
         let json = JSON(dictionary)
         let locKey = json["data"]["alert"]["loc-key"].string
-        let name = json["data"]["alert"]["loc-args"][0].string
         
-        var notification = ""
-        if locKey != nil {
-            notification = NSLocalizedString(locKey!, comment: "")
-            print(notification)
+        var name:String?
+        if let nameValue = json["data"]["alert"]["loc-args"][0].string {
+            name = nameValue
         }
-        if name != nil {
-            notification = notification.stringByReplacingOccurrencesOfString("{Person}", withString: name!)
-            print(notification)
-        }
-        
+        let notification = String.localizedStringWithParameters(locKey!, phoneNumber: nil, name: name!, code: nil)
         return notification
     }
     
     static func localizeNotificationTitle(dictionary: [NSObject : AnyObject]) -> String {
         let json = JSON(dictionary)
         let titleKey = json["data"]["title"]["loc-key"].string
-        var title = ""
-        if titleKey != nil {
-            title = NSLocalizedString(titleKey!, comment: "")
-        }
+        let title = String.localizedString(titleKey!)
         return title
     }
 

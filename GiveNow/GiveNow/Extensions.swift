@@ -131,3 +131,25 @@ extension MKMapItem {
     
 }
 
+extension String {
+    
+    static func localizedString(key: String) -> String {
+        return NSLocalizedString(key, comment: "")
+    }
+    
+    static func localizedStringWithParameters(key: String, phoneNumber: String?, name: String?, code: String?) -> String {
+        var string = NSLocalizedString(key, comment: "")
+        if phoneNumber != nil {
+            string = string.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: phoneNumber!)
+        }
+        if name != nil {
+            string = string.stringByReplacingOccurrencesOfString("{Name}", withString: name!)
+        }
+        if code != nil {
+            string = string.stringByReplacingOccurrencesOfString("{ode}", withString: code!)
+        }
+        return string
+    }
+    
+}
+

@@ -24,7 +24,7 @@
 "onboarding_add_phone_number_later_button" = "Add a phone number later";
 
 /* LOGIN */
-"SMS Body"  = "{code} is your code for GiveNow.";
+"SMS Body"  = "{Code} is your code for GiveNow.";
 "Cancel" = "Cancel";
 "Submit" = "Submit";
 
@@ -55,7 +55,7 @@
 "your_donation_label" = "Your Donation";
 "cancel_donation_button" = "Cancel";
 
-"push_notif_volunteer_is_ready_to_pickup"= "{Volunteer} is ready to pick up your donation!";
+"push_notif_volunteer_is_ready_to_pickup"= "{Name} is ready to pick up your donation!";
 "dialog_accept_pending_volunteer" = "Is your donation available for pickup today?";
 "yes"="Yes";
 "no"="No";
@@ -93,9 +93,9 @@
 "dropoff_center" = "Dropoff Center";
 
 /* NOTIFICATIONS */
-"notif_volunteer_confirmed_msg" = "{Person}'s donation is ready to be picked up.";
-"notif_pickup_request_claimed_msg" = "{Person} is ready to pick up your donation!";
-"notif_pickup_complete_msg" = "{Person} just picked up your donation. Thanks!";
+"notif_volunteer_confirmed_msg" = "{Name}'s donation is ready to be picked up.";
+"notif_pickup_request_claimed_msg" = "{Name} is ready to pick up your donation!";
+"notif_pickup_complete_msg" = "{Name} just picked up your donation. Thanks!";
 
 "notif_pickup_request_claimed_title" = "Pickup accepted";
 "notif_volunteer_confirmed_title" = "Ready for Pickup";

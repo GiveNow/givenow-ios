@@ -23,7 +23,7 @@
 "onboarding_add_phone_number_later_button" = "Telefonnummer später hinzufügen";
 
 /* LOGIN */
-"SMS Body"  = "{code} ist dein Code für GiveNow.";
+"SMS Body"  = "{Code} ist dein Code für GiveNow.";
 "Cancel" = "Abbrechen";
 "Submit" = "Absenden";
 
@@ -54,7 +54,7 @@
 "your_donation_label" = "Deine Spende";
 "cancel_donation_button" = "Zurückziehen";
 
-"push_notif_volunteer_is_ready_to_pickup"= "{Volunteer} ist bereit deine Spende abzuholen";
+"push_notif_volunteer_is_ready_to_pickup"= "{Name} ist bereit deine Spende abzuholen";
 "dialog_accept_pending_volunteer" = "Kann deine Spende heute abgeholt werden?";
 "yes"="Ja";
 "no"="Nein";
@@ -86,7 +86,7 @@
 
 
 /* NOTIFICATIONS */
-"notif_volunteer_confirmed_msg" = "{Die Spende von {Person} ist abholbereit.";
-"notif_pickup_request_claimed_msg" = "{Person} ist bereit deine Spende abzuholen!";
-"notif_pickup_complete_msg" = "{Person} hat gerade deine Spende abgeholt. Vielen Dank!";
+"notif_volunteer_confirmed_msg" = "Die Spende von {Name} ist abholbereit.";
+"notif_pickup_request_claimed_msg" = "{Name} ist bereit deine Spende abzuholen!";
+"notif_pickup_complete_msg" = "{Name} hat gerade deine Spende abgeholt. Vielen Dank!";
 
