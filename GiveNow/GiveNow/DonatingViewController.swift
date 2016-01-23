@@ -61,6 +61,9 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                 }
             })
         }
+        else {
+            print("I'm not gonna zoom")
+        }
         
         displayPendingDonationViewIfNeeded()
     }
