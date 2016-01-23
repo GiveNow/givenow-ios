@@ -34,24 +34,11 @@ class ReadyForPickupViewController: BaseViewController {
     }
     
     func localizeStrings() {
-        let headerText = NSLocalizedString("push_notif_volunteer_is_ready_to_pickup", comment: "")
-        promptHeader.text = addVolunteerNameIfAvailable(headerText)
+        let nameText = LocalizationHelper.nameForDonor(pickupRequest)
+        promptHeader.text = String.localizedStringWithParameters("push_notif_volunteer_is_ready_to_pickup", phoneNumber: nil, name: nameText, code: nil)
         messageBody.text = NSLocalizedString("dialog_accept_pending_volunteer", comment: "")
         yesButton.setTitle(NSLocalizedString("yes", comment: ""), forState: .Normal)
         noButton.setTitle(NSLocalizedString("no", comment: ""), forState: .Normal)
-    }
-    
-    func addVolunteerNameIfAvailable(inputString: String) -> String {
-        var outputString:String!
-        if let user = pickupRequest.donor?.fetchIfNeededInBackground().result as? User {
-            if let name = user.name {
-                outputString = inputString.stringByReplacingOccurrencesOfString("{Volunteer}", withString: name)
-            }
-        }
-        else {
-            outputString = inputString.stringByReplacingOccurrencesOfString("{Volunteer}", withString: NSLocalizedString("a_volunteer", comment: ""))
-        }
-        return outputString
     }
     
     @IBAction func donationIsNotReady() {

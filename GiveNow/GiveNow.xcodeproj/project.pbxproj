@@ -65,6 +65,7 @@
 		D2186FCF1C431A78001551EF /* NavMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FCE1C431A78001551EF /* NavMenuTableViewController.swift */; };
 		D2186FD11C431EA9001551EF /* DashboardTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FD01C431EA9001551EF /* DashboardTabViewController.swift */; };
 		D224452F1C52F51400E04A73 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D224452E1C52F51400E04A73 /* NotificationHelper.swift */; };
+		D22445311C530F8400E04A73 /* LocalizationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22445301C530F8400E04A73 /* LocalizationHelper.swift */; };
 		D23BBF511C457F1B00E68AF9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF4F1C457F1B00E68AF9 /* LoginViewController.swift */; };
 		D23BBF521C457F1B00E68AF9 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF501C457F1B00E68AF9 /* LoginViewController.xib */; };
 		D23BBF591C45C4B900E68AF9 /* DropOff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */; };
@@ -246,6 +247,7 @@
 		D2186FCE1C431A78001551EF /* NavMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavMenuTableViewController.swift; sourceTree = "<group>"; };
 		D2186FD01C431EA9001551EF /* DashboardTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTabViewController.swift; sourceTree = "<group>"; };
 		D224452E1C52F51400E04A73 /* NotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
+		D22445301C530F8400E04A73 /* LocalizationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizationHelper.swift; sourceTree = "<group>"; };
 		D23BBF4F1C457F1B00E68AF9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D23BBF501C457F1B00E68AF9 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DropOff.storyboard; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				2607466B1C2622B30022E0ED /* Keys.swift */,
 				26F304931C4B0C6700A7971C /* Permissions.swift */,
 				D224452E1C52F51400E04A73 /* NotificationHelper.swift */,
+				D22445301C530F8400E04A73 /* LocalizationHelper.swift */,
 			);
 			path = GiveNow;
 			sourceTree = "<group>";
@@ -798,6 +801,7 @@
 				D2186FB71C3CE917001551EF /* PickupDonationViewController.swift in Sources */,
 				2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */,
 				26FE37231C23B80500BED9A0 /* Donation.swift in Sources */,
+				D22445311C530F8400E04A73 /* LocalizationHelper.swift in Sources */,
 				26FE372B1C23B97400BED9A0 /* Volunteer.swift in Sources */,
 				D2186FC11C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift in Sources */,
 				D2186FCF1C431A78001551EF /* NavMenuTableViewController.swift in Sources */,

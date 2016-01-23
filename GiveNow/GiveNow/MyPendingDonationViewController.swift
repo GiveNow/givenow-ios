@@ -54,26 +54,13 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     
     // This function is more or less duplicated on the menu prompt
     func displayPendingHeader() {
-        let headerText = NSLocalizedString("push_notif_volunteer_is_ready_to_pickup", comment: "")
-        if let user = pickupRequest.donor?.fetchIfNeededInBackground().result as? User {
-            if let name = user.name {
-                self.headerLabel.text = headerText.stringByReplacingOccurrencesOfString("{Volunteer}", withString: name)
-            }
-        }
-        else {
-            self.headerLabel.text = headerText.stringByReplacingOccurrencesOfString("{Volunteer}", withString: NSLocalizedString("a_volunteer", comment: ""))
-        }
+        let nameText = LocalizationHelper.nameForDonor(pickupRequest)
+        headerLabel.text = String.localizedStringWithParameters("push_notif_volunteer_is_ready_to_pickup", phoneNumber: nil, name: nameText, code: nil)
     }
     
     func displayConfirmedHeader() {
-        let headerText = NSLocalizedString("request_status_volunteer_confirmed", comment: "")
-        if let phoneNumber = User.currentUser()?.username {
-            let formattedNumber = backend.formatPhoneNumber(phoneNumber)
-            self.headerLabel.text = headerText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: "\(formattedNumber)")
-        }
-        else {
-            self.headerLabel.text = headerText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: "")
-        }
+        let phoneNumberText = AppState.sharedInstance().userPhoneNumberOrReplacementText
+        headerLabel.text = String.localizedStringWithParameters("request_status_volunteer_confirmed", phoneNumber: phoneNumberText, name: nil, code: nil)
     }
     
     func setDonationIcon() {
