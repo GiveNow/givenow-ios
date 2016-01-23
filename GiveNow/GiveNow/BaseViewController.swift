@@ -26,10 +26,11 @@ class BaseViewController: UIViewController {
     
     func pushNotificationReceived(notification: NSNotification){
         if let dictionary = notification.userInfo {
-            let title = ""
+            print(dictionary)
+            let title = NotificationHelper.localizeNotificationTitle(dictionary)
             let message = NotificationHelper.localizeNotificationMessage(dictionary)
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("dismiss", comment: ""), style: .Default, handler: nil))
             self.presentViewController(alertController, animated: true, completion: {})
         }
         

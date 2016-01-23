@@ -97,3 +97,8 @@
 "notif_pickup_request_claimed_msg" = "{Person} is ready to pick up your donation!";
 "notif_pickup_complete_msg" = "{Person} just picked up your donation. Thanks!";
 
+"notif_pickup_request_claimed_title" = "Pickup accepted";
+"notif_volunteer_confirmed_title" = "Ready for Pickup";
+"notif_pickup_complete_title" = "Donation Picked Up";
+"dismiss" = "Dismiss";
+
