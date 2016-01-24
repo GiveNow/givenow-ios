@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Crashlytics
         Fabric.with([MGLAccountManager.self, Crashlytics.self])
+        Backend.sharedInstance().logUserForCrashlytics()
         
         // Making status bar white
         application.statusBarStyle = UIStatusBarStyle.LightContent
