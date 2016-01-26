@@ -28,7 +28,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     
     var pendingDonationViewController:MyPendingDonationViewController!
     
-    var searchController:UISearchController!
+    var searchController:UISearchController?
     
     var searchResults = [MKMapItem]()
     var searchResultsTableView: UITableView!
@@ -72,6 +72,10 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     @IBAction func myLocationTapped(sender: AnyObject) {
+        centerMapOnUserLocation()
+    }
+    
+    func centerMapOnUserLocation() {
         if let location = locationManager?.location {
             let coord = location.coordinate
             let currentRegion = mapView!.region
@@ -100,8 +104,8 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     
     func addPendingDonationChildView() {
         centerMapOnDonation()
+        setNavTitle()
         if let storyboard = storyboard {
-            searchController.searchBar.hidden = true
             pendingDonationViewController = storyboard.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
             pendingDonationViewController.pickupRequest = myPickupRequest
             addChildViewController(pendingDonationViewController)
@@ -120,9 +124,14 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         mapView.centerMapOnMapItem(mapItem)
     }
     
-    func removePendingDonationChildView() {
-        removeEmbeddedViewController(pendingDonationViewController)
-        searchController.searchBar.hidden = false
+    func setNavTitle() {
+        guard let pickupLocationName = myPickupRequest.address else {
+            return
+        }
+        print("Setting the nav title")
+        navigationItem.titleView = nil
+        searchController = nil
+        navigationItem.title = pickupLocationName
     }
     
     func displayPromptIfNeeded() {
@@ -168,6 +177,9 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard let searchController = searchController else {
+            return
+        }
         if segue.identifier == "selectCategories" {
             let location = mapView?.centerCoordinate
             var address:String!
@@ -188,6 +200,9 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     private func validateSetPickupLocationButton() {
+        guard let searchController = searchController else {
+            return
+        }
         if searchController.searchBar.text == nil || searchController.searchBar.text == "" {
             self.disablePickupLocationButton()
         }
@@ -209,18 +224,24 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     // MARK: - Search
     
     func initializeSearchController() {
+        print("Creating the search controller")
         searchController = UISearchController(searchResultsController: nil)
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.delegate = self
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.delegate = self
-        navigationItem.titleView = searchController.searchBar
-        searchController.searchBar.tintColor = UIColor.colorPrimaryDark()
-        validateSetPickupLocationButton()
+        if let searchController = searchController {
+            searchController.hidesNavigationBarDuringPresentation = false
+            searchController.searchBar.delegate = self
+            searchController.dimsBackgroundDuringPresentation = false
+            searchController.delegate = self
+            navigationItem.titleView = searchController.searchBar
+            searchController.searchBar.tintColor = UIColor.colorPrimaryDark()
+            validateSetPickupLocationButton()
+        }
     }
     
     func backgroundTapped(sender: UIGestureRecognizer? = nil) {
         hideSearchResultsTable()
+        guard let searchController = searchController else {
+            return
+        }
         searchController.dismissViewControllerAnimated(true, completion: {})
     }
     
@@ -231,6 +252,9 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        guard let searchController = searchController else {
+            return false
+        }
         guard let searchText = searchController.searchBar.text else {
             return false
         }
@@ -321,24 +345,28 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let mapItem = searchResults[indexPath.row]
-        
-        let nameFrame = CGRect(x: 10.0, y: 5.0, width: view.frame.width - 20.0, height: 22.0)
-        let mapItemNameLabel = cell.addCustomUILabel(nameFrame, font: UIFont.boldSystemFontOfSize(15.0), textColor: UIColor.blackColor())
-        mapItemNameLabel.text = mapItem.getName()
-        
-        let addressFrame = CGRect(x: 10.0, y: 27.0, width: view.frame.width - 20.0, height: 22.0)
-        let mapItemAddressLabel = cell.addCustomUILabel(addressFrame, font: UIFont.italicSystemFontOfSize(13.0), textColor: UIColor.lightGrayColor())
-        mapItemAddressLabel.text = mapItem.getAddress()
-        
+        // Asking for searchResults[indexPath.row] directly is occassionally crashing the app
+        if indexPath.row < searchResults.count {
+            let mapItem = searchResults[indexPath.row]
+            
+            let nameFrame = CGRect(x: 10.0, y: 5.0, width: view.frame.width - 20.0, height: 22.0)
+            let mapItemNameLabel = cell.addCustomUILabel(nameFrame, font: UIFont.boldSystemFontOfSize(15.0), textColor: UIColor.blackColor())
+            mapItemNameLabel.text = mapItem.getName()
+            
+            let addressFrame = CGRect(x: 10.0, y: 27.0, width: view.frame.width - 20.0, height: 22.0)
+            let mapItemAddressLabel = cell.addCustomUILabel(addressFrame, font: UIFont.italicSystemFontOfSize(13.0), textColor: UIColor.lightGrayColor())
+            mapItemAddressLabel.text = mapItem.getAddress()
+        }
         return cell
     }
 
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let searchController = searchController else {
+            return
+        }
         let mapItem = searchResults[indexPath.row]
         selectedAddress = mapItem.getName()
-//        searchController.searchBar.text = mapItem.getName()
         hideSearchResultsTable()
         searchController.dismissViewControllerAnimated(true, completion: {() -> Void in
             self.mapView!.centerMapOnMapItem(mapItem)
@@ -347,6 +375,9 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        guard let searchController = searchController else {
+            return
+        }
         searchController.searchBar.resignFirstResponder()
     }
     
@@ -359,8 +390,11 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     private func setAddressFromCoordinates() {
+        guard let searchController = searchController else {
+            return
+        }
         if let selectedAddress = selectedAddress {
-            self.searchController.searchBar.text = selectedAddress
+            searchController.searchBar.text = selectedAddress
             self.selectedAddress = nil
         }
         else {
@@ -378,7 +412,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                     if let placemarks = placemarks {
                         let placemark = placemarks[0]
                         if let name = placemark.name {
-                            self.searchController.searchBar.text = name
+                            searchController.searchBar.text = name
                             self.validateSetPickupLocationButton()
                         }
                     }

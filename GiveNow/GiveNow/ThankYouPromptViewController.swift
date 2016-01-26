@@ -81,7 +81,7 @@ class ThankYouPromptViewController: BaseViewController {
     func dismissPrompt() {
         if let parent = parentViewController as? ModalPromptViewController {
             if let grandParent = parent.parentViewController as? DonatingViewController {
-                grandParent.removePendingDonationChildView()
+//                grandParent.removePendingDonationChildView()
                 grandParent.removeEmbeddedViewController(parent)
             }
         }
