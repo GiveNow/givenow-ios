@@ -38,5 +38,15 @@ class AppState: NSObject {
             return nil
         }
     }
+    
+    var userPhoneNumberOrReplacementText : String {
+        if let phoneNumber = userPhoneNumber {
+            let formattedNumber = Backend.sharedInstance().formatPhoneNumber(phoneNumber)
+            return formattedNumber
+        }
+        else {
+            return String.localizedString("phone_number_replacement_text")
+        }
+    }
 
 }

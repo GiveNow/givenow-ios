@@ -53,7 +53,6 @@ class Backend: NSObject {
         
         let smsBody = NSLocalizedString("SMS Body", comment: "SMS Body")
         let params = ["phoneNumber" : completePhoneNumber(phoneNumber), "body" : smsBody]
-        print(params)
         PFCloud.callFunctionInBackground("sendCode", withParameters: params) { (result, error) -> Void in
             if let error = error {
                 completionHandler(false, error)
@@ -70,7 +69,6 @@ class Backend: NSObject {
         }
         
         let params = ["phoneNumber" : completePhoneNumber(phoneNumber), "codeEntry" : codeEntry]
-        print(params)
         PFCloud.callFunctionInBackground("logIn", withParameters: params) { (result, error) -> Void in
             if let error = error {
                 completionHandler(false, error)
@@ -114,13 +112,12 @@ class Backend: NSObject {
             if let error = error {
                 completionHandler(nil, error)
             }
-            else if results != nil {
+            else if let results = results {
                 if let donationCategories = results as? [DonationCategory] {
                     completionHandler(donationCategories, nil)
                 }
                 else {
                     print("Could not cast as donation category")
-                    print(results)
                 }
             }
             else {
@@ -133,13 +130,13 @@ class Backend: NSObject {
         guard let completionHandler = completionHandler else {
             return
         }
-        if donationCategory.image != nil {
-            donationCategory.image?.getDataInBackgroundWithBlock({(data, error) -> Void in
-                if error != nil {
+        if let image = donationCategory.image {
+            image.getDataInBackgroundWithBlock({(data, error) -> Void in
+                if let error = error {
                     completionHandler(nil, error)
                 }
-                else if data != nil {
-                    let image = UIImage(data: data!)
+                else if let data = data {
+                    let image = UIImage(data: data)
                     completionHandler(image, nil)
                 }
                 else {
@@ -166,13 +163,12 @@ class Backend: NSObject {
             if let error = error {
                 completionHandler(nil, error)
             }
-            else if results != nil {
+            else if let results = results {
                 if let dropOffAgencies = results as? [DropOffAgency] {
                     completionHandler(dropOffAgencies, nil)
                 }
                 else {
                     print("Could not cast as dropoff agency")
-                    print(results)
                 }
             }
             else {
@@ -262,8 +258,8 @@ class Backend: NSObject {
         pickupRequest.isActive = true
         pickupRequest.donor = User.currentUser()
         
-        if note != nil {
-        pickupRequest.note = note!
+        if let note = note {
+            pickupRequest.note = note
         }
         
         pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
@@ -349,14 +345,8 @@ class Backend: NSObject {
             if let error = error {
                 completionHandler(nil, error)
             }
-            else if results != nil {
-                if let pickupRequests = results as? [PickupRequest] {
-                    completionHandler(pickupRequests, nil)
-                }
-                else {
-                    print("Could not cast as pickup request")
-                    print(results)
-                }
+            else if let pickupRequests = results as? [PickupRequest] {
+                completionHandler(pickupRequests, nil)
             }
             else {
                 print("Did not get any results")
@@ -578,9 +568,6 @@ class Backend: NSObject {
         if let countryCode = locale.objectForKey(NSLocaleCountryCode) as? String {
             let phoneUtil = NBPhoneNumberUtil()
             let value = Int(phoneUtil.getCountryCodeForRegion(countryCode))
-            
-            print(value)
-            
             return value
         }
         

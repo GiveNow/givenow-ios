@@ -59,7 +59,7 @@ class DropOffViewController: BaseMapViewController {
     
     func fetchDropOffAgencies() {
         backend.fetchDropOffAgencies({ (result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else if let dropOffAgencies = result as? [DropOffAgency] {
@@ -75,8 +75,10 @@ class DropOffViewController: BaseMapViewController {
             let latitude = dropOffAgency.agencyGeoLocation!.latitude
             let longitude = dropOffAgency.agencyGeoLocation!.longitude
             var title:String!
-            if dropOffAgency.agencyAddress != nil && dropOffAgency.agencyAddress != "" {
-                title = dropOffAgency.agencyAddress!
+            if let agencyAddress = dropOffAgency.agencyAddress {
+                if agencyAddress != "" {
+                    title = agencyAddress
+                }
             }
             else {
                 title = NSLocalizedString("unknown_address", comment: "")

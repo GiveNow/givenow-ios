@@ -55,7 +55,7 @@ class PickupViewController: BaseMapViewController {
     private func fetchOpenPickupRequests() {
         let query = backend.queryOpenPickupRequests()
         backend.fetchPickupRequestsWithQuery(query, completionHandler: { (result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else if let pickupRequests = result as? [PickupRequest] {
@@ -70,16 +70,14 @@ class PickupViewController: BaseMapViewController {
         for pickupRequest in openPickupRequests {
             let latitude = pickupRequest.location!.latitude
             let longitude = pickupRequest.location!.longitude
-            var title:String!
-            if pickupRequest.address != nil && pickupRequest.address != "" {
-                title = pickupRequest.address
-            }
-            else {
-                title = NSLocalizedString("unknown_address", comment: "")
+            var title = NSLocalizedString("unknown_address", comment: "")
+            if let address = pickupRequest.address {
+                if address != "" {
+                    title = address
+                }
             }
             let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
             mapView.addAnnotation(donationPoint)
-            print(donationPoint)
         }
     }
     
@@ -89,7 +87,7 @@ class PickupViewController: BaseMapViewController {
         if let pickupRequestMapPoint = view.annotation as? PickupRequestMapPoint {
             let pickupRequest = pickupRequestMapPoint.pickupRequest
             backend.claimOpenPickupRequest(pickupRequest, completionHandler: { (result, error) -> Void in
-                if error != nil {
+                if let error = error {
                     print(error)
                 }
                 else {

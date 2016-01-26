@@ -38,8 +38,6 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     }
     
     func setHeaderBasedOnRequestStatus() {
-        print("Setting those headers")
-        print(pickupRequest)
         if pickupRequest.pendingVolunteer == nil && pickupRequest.confirmedVolunteer == nil {
             self.headerLabel.text = NSLocalizedString("request_status_waiting", comment: "")
         }
@@ -56,26 +54,13 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     
     // This function is more or less duplicated on the menu prompt
     func displayPendingHeader() {
-        let headerText = NSLocalizedString("push_notif_volunteer_is_ready_to_pickup", comment: "")
-        if let user = pickupRequest.donor?.fetchIfNeededInBackground().result as? User {
-            if let name = user.name {
-                self.headerLabel.text = headerText.stringByReplacingOccurrencesOfString("{Volunteer}", withString: name)
-            }
-        }
-        else {
-            self.headerLabel.text = headerText.stringByReplacingOccurrencesOfString("{Volunteer}", withString: NSLocalizedString("a_volunteer", comment: ""))
-        }
+        let nameText = LocalizationHelper.nameForDonor(pickupRequest)
+        headerLabel.text = String.localizedStringWithParameters("push_notif_volunteer_is_ready_to_pickup", phoneNumber: nil, name: nameText, code: nil)
     }
     
     func displayConfirmedHeader() {
-        let headerText = NSLocalizedString("request_status_volunteer_confirmed", comment: "")
-        if let phoneNumber = User.currentUser()?.username {
-            let formattedNumber = backend.formatPhoneNumber(phoneNumber)
-            self.headerLabel.text = headerText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: "\(formattedNumber)")
-        }
-        else {
-            self.headerLabel.text = headerText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: "")
-        }
+        let phoneNumberText = AppState.sharedInstance().userPhoneNumberOrReplacementText
+        headerLabel.text = String.localizedStringWithParameters("request_status_volunteer_confirmed", phoneNumber: phoneNumberText, name: nil, code: nil)
     }
     
     func setDonationIcon() {
@@ -88,7 +73,7 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         backend.markPickupRequestAsInactive(pickupRequest, completionHandler: {(result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else {
@@ -110,12 +95,10 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if pickupRequest != nil && pickupRequest.donationCategories != nil {
-            return pickupRequest.donationCategories!.count
-        }
-        else {
+        guard let donationCategories = pickupRequest.donationCategories else {
             return 0
         }
+        return donationCategories.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -140,10 +123,10 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     
     func addImageToCell(cell: DonationCategoryCollectionViewCell, donationCategory: DonationCategory) {
         backend.getImageForDonationCategory(donationCategory, completionHandler: {(image, error) -> Void in
-            if image != nil {
+            if let image = image {
                 cell.categoryImage.image = image
             }
-            else if error != nil {
+            else if let error = error {
                 print(error)
             }
         })

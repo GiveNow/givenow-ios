@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import Mapbox
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -70,6 +71,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Store the deviceToken in the current Installation and save it to Parse
         let installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
+        if let user = User.currentUser() {
+            installation.setValue(user, forKey: "user")
+        }
         installation.saveEventually()
     }
     
@@ -79,8 +83,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        print("Received a remote notification")
+
+        if application.applicationState == .Active {
+//            handleNotification(userInfo, isRemote: true)
+            handleNotificationWhenActive(userInfo)
+        }
+        else {
+            handleNotification(userInfo, isRemote: true)
+        }
         
-        handleNotification(userInfo, isRemote: true)
+        // Calling the completion handler to dismiss the associated warning - not sure if we need to do more than this.
+        completionHandler(UIBackgroundFetchResult.NewData)
     }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
@@ -89,7 +103,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             assert(false)
             return
         }
-        
         handleNotification(userInfo, isRemote: false)
     }
     
@@ -97,23 +110,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func handleNotification(dictionary : [ NSObject : AnyObject ], isRemote : Bool) {
         // TODO: implement
-        
         print(dictionary)
         
         if isRemote {
+            print("Notification is remote")
             // use the given keys to get the localized strings and
             // schedule an immediate local user notification with that text
-            scheduleLocalUserNotification("Test Notification for GiveNow")
+            let notification = NotificationHelper.localizeNotificationMessage(dictionary)
+            scheduleLocalUserNotification(notification)
         }
         else {
+            print("Notification is local")
             // show the related context to the notification
         }
     }
     
-    func scheduleLocalUserNotification(text : String) {
+    func handleNotificationWhenActive(dictionary: [ NSObject : AnyObject ]) {
+        let localNotification = NSNotification(name: "pushNotificationReceived", object: nil, userInfo: dictionary)
+        NSNotificationCenter.defaultCenter().postNotification(localNotification)
+    }
+    
+    func scheduleLocalUserNotification(text: String) {
+        print("Scheduling a notification")
         let localNotification = UILocalNotification()
         localNotification.alertBody = text
-        localNotification.fireDate = NSDate()
+        
+        //Adding 10 seconds right now to enable testing
+        let calendar = NSCalendar.currentCalendar()
+        let date = calendar.dateByAddingUnit(.Second, value: 10, toDate: NSDate(), options: [])
+        
+        localNotification.fireDate = date
         localNotification.category = "Alerts"
         localNotification.userInfo = ["data" : "TBD"]
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)

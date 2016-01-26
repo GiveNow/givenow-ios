@@ -57,13 +57,15 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     func fetchDonationCategories(){
         let query = backend.queryTopNineDonationCategories()
         backend.fetchDonationCategoriesWithQuery(query, completionHandler: {(result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else {
-                self.donationCategories = result as! [DonationCategory]
-                self.collectionView.reloadData()
-                self.validateGiveNowButton()
+                if let donationCategories = result as? [DonationCategory] {
+                    self.donationCategories = donationCategories
+                    self.collectionView.reloadData()
+                    self.validateGiveNowButton()
+                }
             }
         })
     }
@@ -114,10 +116,10 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     
     func addImageToCell(cell: DonationCategoryCollectionViewCell, donationCategory: DonationCategory) {
         backend.getImageForDonationCategory(donationCategory, completionHandler: {(image, error) -> Void in
-            if image != nil {
+            if let image = image {
                 cell.categoryImage.image = image
             }
-            else if error != nil {
+            else if let error = error {
                 print(error)
             }
         })
@@ -160,7 +162,7 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     //MARK: Completing selection
     
     private func validateGiveNowButton() {
-        if donationCategories != nil {
+        if let donationCategories = donationCategories {
             let selectedDonationCategories = donationCategories.filter() {$0.selected == true}
             if selectedDonationCategories.count > 0 {
                 giveNowButton.enabled = true
@@ -193,10 +195,11 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         let pfLocation = PFGeoPoint(latitude: latitude, longitude: longitude)
         let note = noteTextField.text
         backend.savePickupRequest(selectedDonationCategories, address: address, location: pfLocation, note: note, completionHandler: { (result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else {
+                Permissions.registerForNotificationsIfNeeded()
                 self.performSegueWithIdentifier("newPickupRequestCreated", sender: nil)
             }
         })

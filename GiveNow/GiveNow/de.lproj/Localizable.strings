@@ -54,7 +54,7 @@
 "your_donation_label" = "Deine Spende";
 "cancel_donation_button" = "Zurückziehen";
 
-"push_notif_volunteer_is_ready_to_pickup"= "{Volunteer} ist bereit deine Spende abzuholen";
+"push_notif_volunteer_is_ready_to_pickup"= "{Name} ist bereit deine Spende abzuholen";
 "dialog_accept_pending_volunteer" = "Kann deine Spende heute abgeholt werden?";
 "yes"="Ja";
 "no"="Nein";
@@ -83,3 +83,18 @@
 /* DROPOFF */
 "dropoff_title" = "Hilfsorganisationen";
 "dropoff_center" = "Hilfsorganisationen";
+
+
+/* NOTIFICATIONS */
+"notif_volunteer_confirmed_msg" = "Die Spende von {Name} ist abholbereit.";
+"notif_pickup_request_claimed_msg" = "{Name} ist bereit deine Spende abzuholen!";
+"notif_pickup_complete_msg" = "{Name} hat gerade deine Spende abgeholt. Vielen Dank!";
+
+"notif_pickup_request_claimed_title" = "Spende akzeptiert";
+"notif_volunteer_confirmed_title" = "Spende abholbereit";
+"notif_pickup_complete_title" = "Spende abgeholt";
+"dismiss" = "Entlassen";
+
+"phone_number_replacement_text" = "deine Telefonnummer";
+"notification_received" = "Benachrichtigung erhalten";
+

@@ -74,18 +74,25 @@ class PickupDonationViewController: BaseMapViewController {
     }
     
     private func addPickupRequestToMap() {
-        let latitude = pickupRequest.location!.latitude
-        let longitude = pickupRequest.location!.longitude
+        guard let location = pickupRequest.location else {
+            return
+        }
+        let latitude = location.latitude
+        let longitude = location.longitude
         var title:String!
-        if pickupRequest.address != nil && pickupRequest.address != "" {
-            title = pickupRequest.address!
+        if let address = pickupRequest.address {
+            if address != "" {
+                title = address
+            }
+            else {
+                title = NSLocalizedString("unknown_address", comment: "")
+            }
         }
         else {
             title = NSLocalizedString("unknown_address", comment: "")
         }
         let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
         mapView.addAnnotation(donationPoint)
-        print(donationPoint)
     }
     
     @IBAction func donationPickedUp(sender: AnyObject) {
@@ -110,11 +117,11 @@ class PickupDonationViewController: BaseMapViewController {
     }
     
     private func setDonorPhoneNumber() {
-        if pickupRequest.donor != nil {
-            let phoneNumber = pickupRequest.donor!.phoneNumber()
-            if phoneNumber != nil {
-                self.donorPhoneNumber = phoneNumber!
-            }
+        guard let donor = pickupRequest.donor else {
+            return
+        }
+        if let phoneNumber = donor.phoneNumber() {
+            self.donorPhoneNumber = phoneNumber
         }
     }
     
@@ -139,7 +146,6 @@ class PickupDonationViewController: BaseMapViewController {
     }
     
     @IBAction func navigationButtonTapped(sender: AnyObject) {
-        print("Navigate!")
         let latitude = pickupRequest.location!.latitude
         let longitude = pickupRequest.location!.longitude
         let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

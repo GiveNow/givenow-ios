@@ -50,11 +50,14 @@ class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControll
                 else {
                     // after successful submission
                     self.backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, user) -> Void in
-                        if volunteer != nil && volunteer!.isApproved == true {
-                            self.removeFromTabBar()
-                            self.removeEmbeddedViewController(self)
+                        if let volunteer = volunteer {
+                            if volunteer.isApproved == true {
+                                self.removeFromTabBar()
+                                self.removeEmbeddedViewController(self)
+                            }
                         }
                     })
+                    Permissions.registerForNotificationsIfNeeded()
                     self.updateViewForPendingVolunteer()
                 }
             })
@@ -77,19 +80,8 @@ class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControll
     }
     
     private func updateViewForPendingVolunteer() {
-        // replace {PhoneNumber} with actual number
-        var titleText = NSLocalizedString("volunteer_label_user_has_applied", comment: "")
-        
-        let phoneNumber = AppState.sharedInstance().userPhoneNumber
-        assert(phoneNumber != nil, "Phone number should be defined")
-        if let phoneNumber = phoneNumber {
-            titleText = titleText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: phoneNumber)
-        }
-        else {
-            let defaultText = NSLocalizedString("volunteer_your_phone_number", comment: "")
-            titleText = titleText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: defaultText)
-        }
-        
+        let phoneNumberText = AppState.sharedInstance().userPhoneNumberOrReplacementText
+        let titleText = String.localizedStringWithParameters("phone_number_replacement_text", phoneNumber: phoneNumberText, name: nil, code: nil)
         volunteeringTitleLabel.text = titleText
         volunteerButton?.setTitle(NSLocalizedString("volunteer_button_user_has_applied", comment: ""), forState: .Normal)
         volunteerButton?.backgroundColor = UIColor.lightGrayColor()
@@ -103,8 +95,10 @@ class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControll
         if AppState.sharedInstance().isUserRegistered {
             let user = User.currentUser()!
             backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, user) -> Void in
-                if volunteer != nil && volunteer!.isApproved == false {
-                    self.updateViewForPendingVolunteer()
+                if let volunteer = volunteer {
+                    if volunteer.isApproved == false {
+                        self.updateViewForPendingVolunteer()
+                    }
                 }
                 else {
                     self.updateViewForApplicant()
