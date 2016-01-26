@@ -99,6 +99,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func addPendingDonationChildView() {
+        centerMapOnDonation()
         if let storyboard = storyboard {
             searchController.searchBar.hidden = true
             pendingDonationViewController = storyboard.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
@@ -108,6 +109,15 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
             view.addSubview(pendingDonationViewController.view)
             pendingDonationViewController.didMoveToParentViewController(self)
         }
+    }
+    
+    func centerMapOnDonation() {
+        guard let coordinates = myPickupRequest.pickupLocationCoordinates(), mapView = mapView else {
+            return
+        }
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapView.centerMapOnMapItem(mapItem)
     }
     
     func removePendingDonationChildView() {
@@ -269,9 +279,12 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        guard let mapView = self.mapView else {
+            return
+        }
         if searchResults.count > 0 {
             let mapItem = searchResults[0]
-            self.mapView!.centerMapOnMapItem(mapItem)
+            mapView.centerMapOnMapItem(mapItem)
         }
         hideSearchResultsTable()
     }
