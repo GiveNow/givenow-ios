@@ -36,7 +36,7 @@ class Keys: NSObject {
     
     private var keys : [String : AnyObject]? {
         get {
-            if _keys != nil {
+            if let _keys = _keys {
                 return _keys
             }
             if let path = NSBundle.mainBundle().pathForResource("Keys", ofType: "plist"),

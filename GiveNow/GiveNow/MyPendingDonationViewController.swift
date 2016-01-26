@@ -73,7 +73,7 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         backend.markPickupRequestAsInactive(pickupRequest, completionHandler: {(result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else {
@@ -95,12 +95,10 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if pickupRequest != nil && pickupRequest.donationCategories != nil {
-            return pickupRequest.donationCategories!.count
-        }
-        else {
+        guard let donationCategories = pickupRequest.donationCategories else {
             return 0
         }
+        return donationCategories.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -125,10 +123,10 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     
     func addImageToCell(cell: DonationCategoryCollectionViewCell, donationCategory: DonationCategory) {
         backend.getImageForDonationCategory(donationCategory, completionHandler: {(image, error) -> Void in
-            if image != nil {
+            if let image = image {
                 cell.categoryImage.image = image
             }
-            else if error != nil {
+            else if let error = error {
                 print(error)
             }
         })

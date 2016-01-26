@@ -53,13 +53,15 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         if status == .NotDetermined {
             promptForLocationAuthorization()
         }
-        else if status == .Allowed && mapView != nil {
-            zoomIntoLocation(false, mapView: self.mapView!, completionHandler: {(zoomed) -> Void in
-                if zoomed == true {
-                    self.shouldUpdateSearchBarWithMapCenter = true
-                    self.setAddressFromCoordinates()
-                }
-            })
+        else if status == .Allowed {
+            if let mapView = self.mapView {
+                zoomIntoLocation(false, mapView: mapView, completionHandler: {(zoomed) -> Void in
+                    if zoomed == true {
+                        self.shouldUpdateSearchBarWithMapCenter = true
+                        self.setAddressFromCoordinates()
+                    }
+                })
+            }
         }
         else {
             print("I'm not gonna zoom")
@@ -80,12 +82,12 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     func displayPendingDonationViewIfNeeded() {
         let query = backend.queryMyPickupRequests()
         backend.fetchPickupRequestsWithQuery(query, completionHandler: {(result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
-            else if result != nil {
-                if result!.count > 0 {
-                    if let pickupRequest = result![0] as? PickupRequest {
+            else if let result = result {
+                if result.count > 0 {
+                    if let pickupRequest = result[0] as? PickupRequest {
                         self.myPickupRequest = pickupRequest
                         self.addPendingDonationChildView()
                         self.displayPromptIfNeeded()
@@ -96,9 +98,9 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func addPendingDonationChildView() {
-        if storyboard != nil {
+        if let storyboard = storyboard {
             searchController.searchBar.hidden = true
-            pendingDonationViewController = storyboard!.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
+            pendingDonationViewController = storyboard.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
             pendingDonationViewController.pickupRequest = myPickupRequest
             addChildViewController(pendingDonationViewController)
             pendingDonationViewController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
@@ -113,21 +115,24 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func displayPromptIfNeeded() {
+        guard let storyboard = storyboard else {
+            return
+        }
         if myPickupRequest.pendingVolunteer != nil && myPickupRequest.confirmedVolunteer == nil {
-            if let modalViewController = storyboard!.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
+            if let modalViewController = storyboard.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
                 embedViewController(modalViewController, intoView: view)
                 
-                if let readyForPickupPrompt = storyboard!.instantiateViewControllerWithIdentifier("readyForPickup") as? ReadyForPickupViewController {
+                if let readyForPickupPrompt = storyboard.instantiateViewControllerWithIdentifier("readyForPickup") as? ReadyForPickupViewController {
                     readyForPickupPrompt.pickupRequest = myPickupRequest
                     modalViewController.embedViewController(readyForPickupPrompt, intoView: modalViewController.promptView)
                 }
             }
         }
         else if myPickupRequest.donation != nil {
-            if let modalViewController = storyboard!.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
+            if let modalViewController = storyboard.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
                 embedViewController(modalViewController, intoView: view)
                 
-                if let thankYouPrompt = storyboard!.instantiateViewControllerWithIdentifier("donationPickedUp") as? ThankYouPromptViewController {
+                if let thankYouPrompt = storyboard.instantiateViewControllerWithIdentifier("donationPickedUp") as? ThankYouPromptViewController {
                     thankYouPrompt.pickupRequest = myPickupRequest
                     modalViewController.embedViewController(thankYouPrompt, intoView: modalViewController.promptView)
                 }
@@ -137,7 +142,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     
     func updatePendingDonationChildView() {
         myPickupRequest.fetchIfNeededInBackgroundWithBlock({(result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else {
@@ -155,8 +160,8 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         if segue.identifier == "selectCategories" {
             let location = mapView?.centerCoordinate
             var address:String!
-            if searchController.searchBar.text != nil {
-                address = searchController.searchBar.text!
+            if let searchText = searchController.searchBar.text {
+                address = searchText
             }
             else {
                 address = ""
@@ -215,10 +220,11 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        searchResultsTableView.hidden = false
-        if searchController.searchBar.text != nil {
-            searchMapView(searchController.searchBar.text!)
+        guard let searchText = searchController.searchBar.text else {
+            return false
         }
+        searchResultsTableView.hidden = false
+        searchMapView(searchText)
         return true
     }
     
@@ -240,7 +246,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         let localSearch = MKLocalSearch(request: localSearchRequest)
         localSearch.startWithCompletionHandler{(localSearchResponse, error) -> Void in
             
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else if localSearchResponse == nil {
@@ -344,14 +350,14 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         let longitude = coordinates!.longitude
         let location = CLLocation(latitude: latitude, longitude: longitude)
         geocoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else {
-                if placemarks != nil {
-                    let placemark = placemarks![0]
-                    if placemark.name != nil {
-                        self.searchController.searchBar.text = placemark.name!
+                if let placemarks = placemarks {
+                    let placemark = placemarks[0]
+                    if let name = placemark.name {
+                        self.searchController.searchBar.text = name
                         self.validateSetPickupLocationButton()
                     }
                 }

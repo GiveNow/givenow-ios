@@ -125,17 +125,22 @@ class NavMenuTableViewController: UITableViewController, ModalLoginViewControlle
     
     private func configureProfileInfo() {
         if AppState.sharedInstance().isUserRegistered {
-            let user = User.currentUser()!
-            if user.name != nil {
-                nameLabel.text = user.name!
-                usernameLabel.text = user.username!
-            }
-            else {
-                nameLabel.text = NSLocalizedString("unknown_user", comment: "")
-                usernameLabel.text = ""
-            }
-            if let image = UIImage(named: "round_icon") {
-                profileImage.image = image
+            if let user = User.currentUser() {
+                if let name = user.name {
+                    nameLabel.text = name
+                }
+                else {
+                    nameLabel.text = NSLocalizedString("unknown_user", comment: "")
+                }
+                if let username = user.username {
+                    usernameLabel.text = username
+                }
+                else {
+                    usernameLabel.text = ""
+                }
+                if let image = UIImage(named: "round_icon") {
+                    profileImage.image = image
+                }
             }
         }
         else {

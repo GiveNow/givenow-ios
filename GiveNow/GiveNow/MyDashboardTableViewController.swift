@@ -33,7 +33,7 @@ class MyDashboardTableViewController: UITableViewController {
     private func fetchMyDashboardPendingPickups() {
         let query = backend.queryMyDashboardPendingPickups()
         backend.fetchPickupRequestsWithQuery(query, completionHandler: { (result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else if let pickupRequests = result as? [PickupRequest] {
@@ -47,7 +47,7 @@ class MyDashboardTableViewController: UITableViewController {
     private func fetchMyDashboardConfirmedPickups() {
         let query = backend.queryMyDashboardConfirmedPickups()
         backend.fetchPickupRequestsWithQuery(query, completionHandler: { (result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else if let pickupRequests = result as? [PickupRequest] {
@@ -67,15 +67,15 @@ class MyDashboardTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            if myDashboardPendingPickups != nil {
-                return self.myDashboardPendingPickups.count
+            if let pendingPickups = myDashboardPendingPickups {
+                return pendingPickups.count
             }
             else {
                 return 0
             }
         default:
-            if myDashboardConfirmedPickups != nil {
-                return self.myDashboardConfirmedPickups.count
+            if let confirmedPickups = myDashboardConfirmedPickups {
+                return confirmedPickups.count
             }
             else {
                 return 0
@@ -101,16 +101,16 @@ class MyDashboardTableViewController: UITableViewController {
     
     func configurePendingPickupCell(cell: PickupRequestTableViewCell) {
         cell.statusLabel.text = NSLocalizedString("volunteer_dashboard_status_waiting", comment: "")
-        if cell.pickupRequest.address != nil {
-            cell.addressLabel.text = cell.pickupRequest.address!
+        if let address = cell.pickupRequest.address{
+            cell.addressLabel.text = address
         }
         cell.accessoryType = .None
     }
     
     func configureConfirmedPickupCell(cell: PickupRequestTableViewCell) {
         cell.statusLabel.text = NSLocalizedString("volunteer_dashboard_status_ready", comment: "")
-        if cell.pickupRequest.address != nil {
-            cell.addressLabel.text = cell.pickupRequest.address!
+        if let address = cell.pickupRequest.address {
+            cell.addressLabel.text = address
         }
     }
     

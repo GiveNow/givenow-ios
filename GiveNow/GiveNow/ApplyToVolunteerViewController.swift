@@ -50,12 +50,14 @@ class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControll
                 else {
                     // after successful submission
                     self.backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, user) -> Void in
-                        if volunteer != nil && volunteer!.isApproved == true {
-                            Permissions.registerForNotificationsIfNeeded()
-                            self.removeFromTabBar()
-                            self.removeEmbeddedViewController(self)
+                        if let volunteer = volunteer {
+                            if volunteer.isApproved == true {
+                                self.removeFromTabBar()
+                                self.removeEmbeddedViewController(self)
+                            }
                         }
                     })
+                    Permissions.registerForNotificationsIfNeeded()
                     self.updateViewForPendingVolunteer()
                 }
             })
@@ -93,8 +95,10 @@ class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControll
         if AppState.sharedInstance().isUserRegistered {
             let user = User.currentUser()!
             backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, user) -> Void in
-                if volunteer != nil && volunteer!.isApproved == false {
-                    self.updateViewForPendingVolunteer()
+                if let volunteer = volunteer {
+                    if volunteer.isApproved == false {
+                        self.updateViewForPendingVolunteer()
+                    }
                 }
                 else {
                     self.updateViewForApplicant()

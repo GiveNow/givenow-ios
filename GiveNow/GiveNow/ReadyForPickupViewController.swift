@@ -43,7 +43,7 @@ class ReadyForPickupViewController: BaseViewController {
     
     @IBAction func donationIsNotReady() {
         backend.indicatePickupRequestIsNotReady(pickupRequest, completionHandler: {(result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else {
@@ -54,7 +54,7 @@ class ReadyForPickupViewController: BaseViewController {
     
     @IBAction func donationIsReady() {
         backend.confirmVolunteerForPickupRequest(pickupRequest, completionHandler: {(result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else {

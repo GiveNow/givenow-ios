@@ -100,8 +100,8 @@ extension MKMapView {
 extension MKMapItem {
     
     func getName() -> String {
-        if name != nil {
-            return name!
+        if let name = name {
+            return name
         }
         else {
             return ""
@@ -110,8 +110,7 @@ extension MKMapItem {
     
     func getAddress() -> String {
         var address = ""
-        if placemark.addressDictionary != nil {
-            let addressDictionary = placemark.addressDictionary!
+        if let addressDictionary = placemark.addressDictionary {
             address = getAddressFromAddressDictionary(addressDictionary)
         }
         return address
@@ -119,11 +118,9 @@ extension MKMapItem {
     
     private func getAddressFromAddressDictionary(addressDictionary: [NSObject: AnyObject]) -> String {
         var address = ""
-        if addressDictionary["FormattedAddressLines"] != nil {
-            if let formattedAddressLines = addressDictionary["FormattedAddressLines"] as? [String] {
-                for line in formattedAddressLines {
-                    address += line + " "
-                }
+        if let formattedAddressLines = addressDictionary["FormattedAddressLines"] as? [String] {
+            for line in formattedAddressLines {
+                address += line + " "
             }
         }
         return address
@@ -139,14 +136,14 @@ extension String {
     
     static func localizedStringWithParameters(key: String, phoneNumber: String?, name: String?, code: String?) -> String {
         var string = NSLocalizedString(key, comment: "")
-        if phoneNumber != nil {
-            string = string.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: phoneNumber!)
+        if let phoneNumber = phoneNumber {
+            string = string.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: phoneNumber)
         }
-        if name != nil {
-            string = string.stringByReplacingOccurrencesOfString("{Name}", withString: name!)
+        if let name = name {
+            string = string.stringByReplacingOccurrencesOfString("{Name}", withString: name)
         }
-        if code != nil {
-            string = string.stringByReplacingOccurrencesOfString("{code}", withString: code!)
+        if let code = code {
+            string = string.stringByReplacingOccurrencesOfString("{code}", withString: code)
         }
         return string
     }

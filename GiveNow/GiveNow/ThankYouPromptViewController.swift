@@ -69,7 +69,7 @@ class ThankYouPromptViewController: BaseViewController {
     
     func closeDonation() {
         backend.markComplete(pickupRequest, completionHandler: {(resut, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else {

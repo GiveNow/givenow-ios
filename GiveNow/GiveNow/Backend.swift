@@ -112,7 +112,7 @@ class Backend: NSObject {
             if let error = error {
                 completionHandler(nil, error)
             }
-            else if results != nil {
+            else if let results = results {
                 if let donationCategories = results as? [DonationCategory] {
                     completionHandler(donationCategories, nil)
                 }
@@ -130,13 +130,13 @@ class Backend: NSObject {
         guard let completionHandler = completionHandler else {
             return
         }
-        if donationCategory.image != nil {
-            donationCategory.image?.getDataInBackgroundWithBlock({(data, error) -> Void in
-                if error != nil {
+        if let image = donationCategory.image {
+            image.getDataInBackgroundWithBlock({(data, error) -> Void in
+                if let error = error {
                     completionHandler(nil, error)
                 }
-                else if data != nil {
-                    let image = UIImage(data: data!)
+                else if let data = data {
+                    let image = UIImage(data: data)
                     completionHandler(image, nil)
                 }
                 else {
@@ -163,7 +163,7 @@ class Backend: NSObject {
             if let error = error {
                 completionHandler(nil, error)
             }
-            else if results != nil {
+            else if let results = results {
                 if let dropOffAgencies = results as? [DropOffAgency] {
                     completionHandler(dropOffAgencies, nil)
                 }
@@ -258,8 +258,8 @@ class Backend: NSObject {
         pickupRequest.isActive = true
         pickupRequest.donor = User.currentUser()
         
-        if note != nil {
-        pickupRequest.note = note!
+        if let note = note {
+            pickupRequest.note = note
         }
         
         pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
@@ -345,13 +345,8 @@ class Backend: NSObject {
             if let error = error {
                 completionHandler(nil, error)
             }
-            else if results != nil {
-                if let pickupRequests = results as? [PickupRequest] {
-                    completionHandler(pickupRequests, nil)
-                }
-                else {
-                    print("Could not cast as pickup request")
-                }
+            else if let pickupRequests = results as? [PickupRequest] {
+                completionHandler(pickupRequests, nil)
             }
             else {
                 print("Did not get any results")
