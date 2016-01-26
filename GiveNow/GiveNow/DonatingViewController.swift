@@ -39,6 +39,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         initializeSearchResultsTable()
         initializeMenuButton(menuButton)
         localizeText()
+        zoomToUserLocation()
     }
     
     func localizeText() {
@@ -49,7 +50,10 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+        displayPendingDonationViewIfNeeded()
+    }
+    
+    func zoomToUserLocation() {
         let status = locationStatus()
         if status == .NotDetermined {
             promptForLocationAuthorization()
@@ -67,8 +71,6 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         else {
             print("I'm not gonna zoom")
         }
-        
-        displayPendingDonationViewIfNeeded()
     }
     
     @IBAction func myLocationTapped(sender: AnyObject) {
@@ -390,7 +392,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     private func setAddressFromCoordinates() {
-        guard let searchController = searchController else {
+        guard let searchController = searchController, mapView = mapView else {
             return
         }
         if let selectedAddress = selectedAddress {
@@ -399,9 +401,9 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         }
         else {
             let geocoder = CLGeocoder()
-            let coordinates = mapView?.centerCoordinate
-            let latitude = coordinates!.latitude
-            let longitude = coordinates!.longitude
+            let coordinates = mapView.centerCoordinate
+            let latitude = coordinates.latitude
+            let longitude = coordinates.longitude
             let location = CLLocation(latitude: latitude, longitude: longitude)
             geocoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
                 if let error = error {
