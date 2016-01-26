@@ -24,6 +24,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     
     var shouldUpdateSearchBarWithMapCenter = false
     var myPickupRequest:PickupRequest!
+    var selectedAddress:String?
     
     var pendingDonationViewController:MyPendingDonationViewController!
     
@@ -323,7 +324,8 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let mapItem = searchResults[indexPath.row]
-        searchController.searchBar.text = mapItem.getName()
+        selectedAddress = mapItem.getName()
+//        searchController.searchBar.text = mapItem.getName()
         hideSearchResultsTable()
         searchController.dismissViewControllerAnimated(true, completion: {() -> Void in
             self.mapView!.centerMapOnMapItem(mapItem)
@@ -344,25 +346,32 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     private func setAddressFromCoordinates() {
-        let geocoder = CLGeocoder()
-        let coordinates = mapView?.centerCoordinate
-        let latitude = coordinates!.latitude
-        let longitude = coordinates!.longitude
-        let location = CLLocation(latitude: latitude, longitude: longitude)
-        geocoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
-            if let error = error {
-                print(error)
-            }
-            else {
-                if let placemarks = placemarks {
-                    let placemark = placemarks[0]
-                    if let name = placemark.name {
-                        self.searchController.searchBar.text = name
-                        self.validateSetPickupLocationButton()
+        if let selectedAddress = selectedAddress {
+            self.searchController.searchBar.text = selectedAddress
+            self.selectedAddress = nil
+        }
+        else {
+            let geocoder = CLGeocoder()
+            let coordinates = mapView?.centerCoordinate
+            let latitude = coordinates!.latitude
+            let longitude = coordinates!.longitude
+            let location = CLLocation(latitude: latitude, longitude: longitude)
+            geocoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
+                if let error = error {
+                    print("Got an error doing reverse geocoding")
+                    print(error)
+                }
+                else {
+                    if let placemarks = placemarks {
+                        let placemark = placemarks[0]
+                        if let name = placemark.name {
+                            self.searchController.searchBar.text = name
+                            self.validateSetPickupLocationButton()
+                        }
                     }
                 }
-            }
-        })
+            })
+        }
     }
     
     // MARK: Segues
