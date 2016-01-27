@@ -74,6 +74,11 @@
 "request_pickup_info_select_categories" = "What are you donating?";
 "note_add_label" = "Add a note...";
 
+"dialog_cancelDonation_title" = "Confirm";
+"dialog_cancelDonation_message" = "Are you sure you want to cancel your donation?";
+"dialog_cancelDonation_positiveButton" = "Cancel donation";
+"dialog_cancelDonation_negativeButton" = "Keep donation";
+
 /* VOLUNTEERING */
 "title_volunteer" = "Volunteer";
 "volunteer_label_user_has_not_applied" = "Want to volunteer to pickup donations?\nThe only thing you need is a car and some spare time!";

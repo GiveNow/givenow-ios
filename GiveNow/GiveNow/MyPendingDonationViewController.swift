@@ -92,14 +92,16 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
-        let title = "Are you sure?"
-        let message = "Are you sure you want to cancel?"
+        let title = NSLocalizedString("dialog_cancelDonation_title", comment: "")
+        let message = NSLocalizedString("dialog_cancelDonation_message", comment: "")
+        let yes = NSLocalizedString("dialog_cancelDonation_positiveButton", comment: "")
+        let no = NSLocalizedString("dialog_cancelDonation_negativeButton", comment: "")
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { alert in
+        alertController.addAction(UIAlertAction(title: yes, style: .Default, handler: { alert in
             self.cancelPickupRequest()
         }))
-        alertController.addAction(UIAlertAction(title: "No", style: .Default, handler: nil))
+        alertController.addAction(UIAlertAction(title: no, style: .Default, handler: nil))
         self.presentViewController(alertController, animated: true, completion: {})
     }
     
