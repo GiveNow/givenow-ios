@@ -28,7 +28,7 @@
 "Submit" = "Absenden";
 
 "phone_number_verification_title" = "Telefonnummer hinzufügen";
-"phone_number_disclaimer" = "Diese wird nur benötigt, damit der Helfer dich zur Terminvereinbarung erreichen kann.\nDeine Telefonnummer wird nicht mit weiteren Personen oder Organisationen geteilt.";
+"phone_number_disclaimer" = "Diese wird nur von Helfern verwendet, um dich zur Terminvereinbarung erreichen zu können.\nDeine Telefonnummer wird nicht mit weiteren Personen oder Organisationen geteilt.";
 "phone_number_verification_error_number_invalid" = "Bitte eine gültige Telefonnummer angeben.\nBeispiel: +49 123 456 7890";
 
 "confirmation_code_title" = "Geben Sie den Bestätigungscode ein";
@@ -36,7 +36,7 @@
 "confirmation_code_error" = "Bestätigungscode ist ungültig";
 
 /* MAIN MENU */
-"unknown_user" = "Unbekannter Benutzer";
+"unknown_user" = "Unbekannter Nutzer";
 "not_logged_in" = "Nicht eingeloggt";
 "title_sign_out" = "Abmelden";
 "add_phone_number" = "Telefonnummer hinzufügen";
@@ -60,7 +60,7 @@
 "no"="Nein";
 "a_volunteer"="Ein Helfer";
 
-"request_status_volunteer_confirmed" = "Der Helfer wird dich bald unter {PhoneNumber} bei dir melden";
+"request_status_volunteer_confirmed" = "Der Helfer wird sich bald unter {PhoneNumber} bei dir melden";
 
 /* VOLUNTEERING */
 "title_volunteer" = "Helfer";
