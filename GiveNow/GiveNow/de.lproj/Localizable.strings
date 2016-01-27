@@ -64,7 +64,7 @@
 
 "request_pickup_choose_location" = "Wo kann die Spende abgeholt werden?";
 "request_pickup_info_select_categories" = "Was möchtest du spenden?";
-"note_add_label" = "Notiz hinzufügen...";
+"note_add_label" = "Notiz hinzufügen ...";
 
 /* VOLUNTEERING */
 "title_volunteer" = "Helfer";
