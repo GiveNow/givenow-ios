@@ -8,16 +8,16 @@
 
 /* ONBOARDING */
 "onboarding_1_title" = "Willkommen bei GiveNow.";
-"onboarding_1_description" =  "GiveNow lässt dich von überall spenden.";
+"onboarding_1_description" =  "GiveNow lässt dich von überall aus spenden.";
 
-"onboarding_2_title" = "Wir zeigen dir was in deiner Nähe am dringendsten gebraucht wird.";
-"onboarding_2_description" =  "Du muss nur noch auswählen, was du spenden möchtest.";
+"onboarding_2_title" = "Wir zeigen dir, was in deiner Nähe am dringendsten benötigt wird.";
+"onboarding_2_description" =  "Du musst nur noch auswählen, was du spenden möchtest.";
 
 "onboarding_3_title" = "Markiere den Abholort.";
 "onboarding_3_description" =  "Wähle einfach einen Ort auf der Karte aus. Zusätzlich können weitere Informationen wie Wohnungsnummer oder Tür-Code angegeben werden.";
 
 "onboarding_4_title" = "Den Rest erledigen freiwillige Helfer.";
-"onboarding_4_description" =  "Ein Helfer wird nun deine Spende abholen.\nEr wird sich bei dir melden um einen Termin mit dir zu vereinbaren.";
+"onboarding_4_description" =  "Ein Helfer wird nun deine Spende abholen.\nEr wird sich bei dir melden, um einen Termin mit dir zu vereinbaren.";
 
 "onboarding_or" = "oder";
 "onboarding_add_phone_number_later_button" = "Telefonnummer später hinzufügen";
@@ -32,7 +32,7 @@
 "phone_number_verification_error_number_invalid" = "Bitte eine gültige Telefonnummer angeben.\nBeispiel: +49 123 456 7890";
 
 "confirmation_code_title" = "Geben Sie den Bestätigungscode ein";
-"validate_sms_code" = "Du bekommst einen 4-stelligen Code per SMS.\nBitte gib ihn unten ein.";
+"validate_sms_code" = "Du wirst einen 4-stelligen Code per SMS bekommen.\nBitte gib ihn unten ein.";
 "confirmation_code_error" = "Bestätigungscode ist ungültig";
 
 /* MAIN MENU */
@@ -58,9 +58,9 @@
 "dialog_accept_pending_volunteer" = "Kann deine Spende heute abgeholt werden?";
 "yes"="Ja";
 "no"="Nein";
-"a_volunteer"="Ein helfer";
+"a_volunteer"="Ein Helfer";
 
-"request_status_volunteer_confirmed" = "Dein Helfer Abholer wird dich bald unter {PhoneNumber}";
+"request_status_volunteer_confirmed" = "Der Helfer wird dich bald unter {PhoneNumber} bei dir melden";
 
 /* VOLUNTEERING */
 "title_volunteer" = "Helfer";
@@ -68,17 +68,17 @@
 "volunteer_button_user_has_not_applied" = "Ich möchte Spenden transportieren!";
 "volunteer_label_user_has_applied" = "Danke das du Spenden abholen willst!\n Wir werden dich bald unter {PhoneNumber} kontaktieren.";
 "volunteer_your_phone_number" = "deine Telefonnummer";
-"volunteer_button_user_has_applied" = "Du hast dich beworben freiwilliger Abholer zu sein.";
+"volunteer_button_user_has_applied" = "Du hast dich beworben, ein Helfer zu werden.";
 
 /* DASHBOARD */
-"dashboard_pickup_requests_tabbaritem" = "Abholungen Anfragen";
-"dashboard_pickup_request_unknown_address" = "Unbekannt adresse";
+"dashboard_pickup_requests_tabbaritem" = "Abholungen anfragen";
+"dashboard_pickup_request_unknown_address" = "Unbekannte Adresse";
 "accept" = "Annehmen";
-"dashboard_dashboard_tabbaritem" = "Armaturenbrett";
+"dashboard_dashboard_tabbaritem" = "Dashboard";
 "volunteer_dashboard_status_waiting" = "Auf Spender warten";
 "volunteer_dashboard_status_ready" = "Abholbereit";
 "finish_pickup" = "Ich habe diese Spende abgeholt";
-"navigation_instructions_donation_location" = "Spende Ort";
+"navigation_instructions_donation_location" = "Ort der Spende";
 
 /* DROPOFF */
 "dropoff_title" = "Hilfsorganisationen";
@@ -87,13 +87,13 @@
 
 /* NOTIFICATIONS */
 "notif_volunteer_confirmed_msg" = "Die Spende von {Name} ist abholbereit.";
-"notif_pickup_request_claimed_msg" = "{Name} ist bereit deine Spende abzuholen!";
+"notif_pickup_request_claimed_msg" = "{Name} ist bereit, deine Spende abzuholen!";
 "notif_pickup_complete_msg" = "{Name} hat gerade deine Spende abgeholt. Vielen Dank!";
 
-"notif_pickup_request_claimed_title" = "Spende akzeptiert";
+"notif_pickup_request_claimed_title" = "Spende zugeordnet";
 "notif_volunteer_confirmed_title" = "Spende abholbereit";
 "notif_pickup_complete_title" = "Spende abgeholt";
-"dismiss" = "Entlassen";
+"dismiss" = "Schließen";
 
 "phone_number_replacement_text" = "deine Telefonnummer";
 "notification_received" = "Benachrichtigung erhalten";
