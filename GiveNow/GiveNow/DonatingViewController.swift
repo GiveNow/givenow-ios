@@ -62,17 +62,17 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         displayPendingDonationViewIfNeeded()
-        updateSMSSettingsIfNeeded()
+//        updateSMSSettingsIfNeeded()
     }
     
-    func updateSMSSettingsIfNeeded() {
-        let status = Permissions.systemStatusForNotifications()
-        if status == .Denied {
-            let installation = PFInstallation.currentInstallation()
-            installation.setValue(true, forKey: "sendSMS")
-            installation.saveEventually()
-        }
-    }
+//    func updateSMSSettingsIfNeeded() {
+//        let status = Permissions.systemStatusForNotifications()
+//        if status == .Denied {
+//            let installation = PFInstallation.currentInstallation()
+//            installation.setValue(true, forKey: "sendSMS")
+//            installation.saveEventually()
+//        }
+//    }
     
     func zoomToUserLocation() {
         let status = locationStatus()

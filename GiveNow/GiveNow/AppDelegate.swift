@@ -50,6 +50,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+
+        
+        //Check if user has denied notifications; save 'sendSMS' if so
+        let status = Permissions.systemStatusForNotifications()
+        if status == .Denied {
+            let installation = PFInstallation.currentInstallation()
+            installation.setValue(true, forKey: "sendSMS")
+            installation.saveEventually()
+        }
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
@@ -78,6 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         installation.setDeviceTokenFromData(deviceToken)
         if let user = User.currentUser() {
             installation.setValue(user, forKey: "user")
+            installation.setValue(false, forKey: "sendSMS")
         }
         installation.saveEventually()
     }
