@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class InitialViewController: BaseViewController, CLLocationManagerDelegate  {
+class InitialViewController: BaseViewController, CLLocationManagerDelegate {
     
     var manager:CLLocationManager!
 
@@ -26,11 +26,17 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate  {
         }
     }
     
+//    func displayMainViewController() {
+//        if let vc = fetchViewControllerFromStoryboard("Main", storyboardIdentifier: "reveal") as? SWRevealViewController {
+//            embedViewController(vc, intoView: view)
+//        }
+//    }
+    
     func displayMainViewController() {
         manager = CLLocationManager()
         manager.delegate = self
         if CLLocationManager.authorizationStatus() == .NotDetermined {
-            manager.requestAlwaysAuthorization()
+            manager.requestWhenInUseAuthorization()
         }
         else if let vc = fetchViewControllerFromStoryboard("Main", storyboardIdentifier: "reveal") as? SWRevealViewController {
             embedViewController(vc, intoView: view)
