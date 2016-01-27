@@ -40,11 +40,12 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         initializeMenuButton(menuButton)
         localizeText()
         zoomToUserLocation()
+        navigationItem.title = ""
     }
     
     func localizeText() {
         pickupLocationButton?.setTitle(NSLocalizedString("button_set_pickup_location_label", comment: ""), forState: .Normal)
-        navItem.title = NSLocalizedString("title_pickup_address", comment: "")
+//        navItem.title = NSLocalizedString("title_pickup_address", comment: "")
         
     }
     
@@ -53,12 +54,13 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         displayPendingDonationViewIfNeeded()
     }
     
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        print("User changed location authorization")
-        if locationStatus() == .Allowed {
-            zoomToUserLocation()
-        }
-    }
+    //Note: Can't get the app to call this function...
+//    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+//        print("User changed location authorization")
+//        if locationStatus() == .Allowed {
+//            zoomToUserLocation()
+//        }
+//    }
     
     func zoomToUserLocation() {
         let status = locationStatus()
@@ -140,7 +142,6 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         guard let pickupLocationName = myPickupRequest.address else {
             return
         }
-        print("Setting the nav title")
         navigationItem.titleView = nil
         searchController = nil
         navigationItem.title = pickupLocationName
@@ -193,15 +194,16 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
             return
         }
         if segue.identifier == "selectCategories" {
+            let destinationController = segue.destinationViewController as! DonationCategoriesViewController
             let location = mapView?.centerCoordinate
             var address:String!
             if let searchText = searchController.searchBar.text {
                 address = searchText
+                destinationController.navigationItem.title = searchText
             }
             else {
                 address = ""
             }
-            let destinationController = segue.destinationViewController as! DonationCategoriesViewController
             destinationController.location = location
             destinationController.address = address
         }
