@@ -26,7 +26,10 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     @IBOutlet weak var addNoteButton: UIButton!
     @IBOutlet weak var infoImage: UIImageView!
     @IBOutlet weak var infoLabel: UILabel!
-
+    @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var removeNoteButton: UIButton!
+    @IBOutlet weak var helpButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         noteTextField.delegate = self
@@ -43,14 +46,28 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         }
         if let image = UIImage(named: "add_note") {
             self.addNoteButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-            self.infoImage.tintColor = UIColor.whiteColor()
+            self.addNoteButton.tintColor = UIColor.whiteColor()
         }
+        addNoteButton.setTitle(NSLocalizedString("note_add_label", comment: ""), forState: .Normal)
+        if let image = UIImage(named: "cancel") {
+            self.removeNoteButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            self.removeNoteButton.tintColor = UIColor.whiteColor()
+        }
+        if let image = UIImage(named: "help") {
+            self.helpButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            self.helpButton.tintColor = UIColor.whiteColor()
+        }
+        noteHelperLabel.alpha = 0.0
+        noteTextField.alpha = 0.0
+        removeNoteButton.alpha = 0.0
+        removeNoteButton.enabled = false
     }
     
     func localizeText() {
         noteHelperLabel.text = NSLocalizedString("note_helper_label", comment: "")
         giveNowButton.setTitle(NSLocalizedString("button_confirm_donation_label", comment: ""), forState: .Normal)
         infoLabel.text = NSLocalizedString("request_pickup_info_select_categories", comment: "")
+//        addNoteLabel.text = NSLocalizedString("note_add_label", comment: "")
     }
     
     override func didReceiveMemoryWarning() {
@@ -219,5 +236,38 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     func modalViewDismissedWithResult(controller: ModalLoginViewController) {
         savePickupRequest()
     }
+    
+    
+    @IBAction func addNoteButtonTapped(sender: AnyObject) {
+        UIView.animateWithDuration(0.5, animations: {() -> Void in
+            self.addNoteButton.alpha = 0.0
+//            self.addNoteLabel.alpha = 0.0
+            self.addNoteButton.enabled = false
+            self.noteHelperLabel.alpha = 1.0
+            self.noteTextField.alpha = 1.0
+            self.removeNoteButton.alpha = 1.0
+            self.removeNoteButton.enabled = true
+            }, completion: { finished in
+            self.noteTextField.becomeFirstResponder()
+        })
+    }
+    
+    
+    @IBAction func removeNoteTapped(sender: AnyObject) {
+        noteTextField.resignFirstResponder()
+        UIView.animateWithDuration(0.5, animations: {() -> Void in
+            self.noteTextField.text = nil
+            self.addNoteButton.alpha = 1.0
+//            self.addNoteLabel.alpha = 1.0
+            self.addNoteButton.enabled = true
+            self.noteHelperLabel.alpha = 0.0
+            self.noteTextField.alpha = 0.0
+            self.removeNoteButton.alpha = 0.0
+            self.removeNoteButton.enabled = false
+            })
+    }
 
+    @IBAction func helpButtonTapped(sender: AnyObject) {
+        
+    }
 }

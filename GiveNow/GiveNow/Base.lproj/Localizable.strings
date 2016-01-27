@@ -72,6 +72,7 @@
 
 "request_pickup_choose_location" = "Where is your donation located?";
 "request_pickup_info_select_categories" = "What are you donating?";
+"note_add_label" = "Add a note...";
 
 /* VOLUNTEERING */
 "title_volunteer" = "Volunteer";
