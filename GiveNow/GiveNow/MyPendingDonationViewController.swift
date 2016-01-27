@@ -92,22 +92,15 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
-        backend.markPickupRequestAsInactive(pickupRequest, completionHandler: {(result, error) -> Void in
-            if let error = error {
-                print(error)
-            }
-            else {
-                if let parent = self.parentViewController as? DonatingViewController {
-                    parent.initializeSearchController()
-                    parent.centerMapOnUserLocation()
-                    parent.myPickupRequest = nil
-                    parent.navigationItem.title = ""
-                }
-                self.willMoveToParentViewController(nil)
-                self.view.removeFromSuperview()
-                self.removeFromParentViewController()
-            }
-        })
+        let title = "Are you sure?"
+        let message = "Are you sure you want to cancel?"
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { alert in
+            self.cancelPickupRequest()
+        }))
+        alertController.addAction(UIAlertAction(title: "No", style: .Default, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: {})
     }
     
     // MARK: Collection View configuration
@@ -150,6 +143,25 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
             }
             else if let error = error {
                 print(error)
+            }
+        })
+    }
+    
+    func cancelPickupRequest() {
+        backend.markPickupRequestAsInactive(pickupRequest, completionHandler: {(result, error) -> Void in
+            if let error = error {
+                print(error)
+            }
+            else {
+                if let parent = self.parentViewController as? DonatingViewController {
+                    parent.initializeSearchController()
+                    parent.centerMapOnUserLocation()
+                    parent.myPickupRequest = nil
+                    parent.navigationItem.title = ""
+                }
+                self.willMoveToParentViewController(nil)
+                self.view.removeFromSuperview()
+                self.removeFromParentViewController()
             }
         })
     }
