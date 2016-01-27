@@ -62,6 +62,8 @@
 
 "request_status_volunteer_confirmed" = "Dein Helfer Abholer wird dich bald unter {PhoneNumber}";
 
+"request_pickup_choose_location" = "Wo kann die Spende abgeholt werden?";
+
 /* VOLUNTEERING */
 "title_volunteer" = "Helfer";
 "volunteer_label_user_has_not_applied" = "Möchtest du Spenden transportieren?\n Du brauchst nur Zeit und ein Auto!";

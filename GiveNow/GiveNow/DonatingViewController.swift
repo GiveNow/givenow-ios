@@ -21,6 +21,8 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     @IBOutlet weak var myLocationButton: MyLocationButton!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var infoImage: UIImageView!
+    @IBOutlet weak var infoLabel: UILabel!
     
     var shouldUpdateSearchBarWithMapCenter = false
     var myPickupRequest:PickupRequest!
@@ -39,28 +41,28 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         initializeSearchResultsTable()
         initializeMenuButton(menuButton)
         localizeText()
+        setInfoImage()
         zoomToUserLocation()
         navigationItem.title = ""
     }
     
     func localizeText() {
         pickupLocationButton?.setTitle(NSLocalizedString("button_set_pickup_location_label", comment: ""), forState: .Normal)
-//        navItem.title = NSLocalizedString("title_pickup_address", comment: "")
+        infoLabel.text = NSLocalizedString("request_pickup_choose_location", comment: "")
         
+    }
+    
+    func setInfoImage() {
+        if let image = UIImage(named: "info") {
+            self.infoImage.image = image.imageWithRenderingMode(.AlwaysTemplate)
+            self.infoImage.tintColor = UIColor.whiteColor()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         displayPendingDonationViewIfNeeded()
     }
-    
-    //Note: Can't get the app to call this function...
-//    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-//        print("User changed location authorization")
-//        if locationStatus() == .Allowed {
-//            zoomToUserLocation()
-//        }
-//    }
     
     func zoomToUserLocation() {
         let status = locationStatus()
