@@ -19,12 +19,16 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var noteLabel: UILabel!
+    @IBOutlet weak var infoImage: UIImageView!
     
     var pickupRequest:PickupRequest!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setDonationIcon()
+        setInfoImage()
+        addNote()
         collectionView.delegate = self
         collectionView.dataSource = self
         localizeText()
@@ -35,6 +39,22 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
         yourDonationLabel.text = NSLocalizedString("your_donation_label", comment: "")
         cancelButton.setTitle(NSLocalizedString("cancel_donation_button", comment: ""), forState: .Normal)
         
+    }
+    
+    func setInfoImage() {
+        if let image = UIImage(named: "info") {
+            self.infoImage.image = image.imageWithRenderingMode(.AlwaysTemplate)
+            self.infoImage.tintColor = UIColor.whiteColor()
+        }
+    }
+    
+    func addNote() {
+        if let note = pickupRequest.note {
+            self.noteLabel.text = note
+        }
+        else {
+            self.noteLabel.text = nil
+        }
     }
     
     func setHeaderBasedOnRequestStatus() {
