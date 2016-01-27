@@ -39,7 +39,7 @@ class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControll
         createVolunteer()
     }
     
-    // MARK: - Private
+    // MARK: - Private  
     
     private func createVolunteer() {
         if let user = User.currentUser() {

@@ -38,6 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if status == .Allowed {
             Permissions.registerForNotificationsPermission()
         }
+        else {
+            let installation = PFInstallation.currentInstallation()
+            installation.setValue(true, forKey: "sendSMS")
+            installation.saveEventually()
+        }
         
         return true
     }
