@@ -81,7 +81,7 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
                     parent.initializeSearchController()
                     parent.centerMapOnUserLocation()
                     parent.myPickupRequest = nil
-                    parent.navigationItem.title = nil
+                    parent.navigationItem.title = ""
                 }
                 self.willMoveToParentViewController(nil)
                 self.view.removeFromSuperview()

@@ -20,9 +20,6 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     var location:CLLocationCoordinate2D!
     var address:String!
     
-    @IBOutlet weak var addressHelperLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var pickupRequestAddressLabel: UILabel!
     @IBOutlet weak var noteHelperLabel: UILabel!
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var giveNowButton: UIButton!
@@ -31,13 +28,11 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         super.viewDidLoad()
         noteTextField.delegate = self
         fetchDonationCategories()
-        pickupRequestAddressLabel.text = address
         localizeText()
         validateGiveNowButton()
     }
     
     func localizeText() {
-        addressHelperLabel.text = NSLocalizedString("address_helper_label", comment: "")
         noteHelperLabel.text = NSLocalizedString("note_helper_label", comment: "")
         giveNowButton.setTitle(NSLocalizedString("button_confirm_donation_label", comment: ""), forState: .Normal)
     }
