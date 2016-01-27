@@ -197,7 +197,6 @@
 		2645C66E1C21E7FF00D6C70D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2645C6701C21E7FF00D6C70D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2645C6731C21E7FF00D6C70D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		2645C6751C21E7FF00D6C70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2645C67A1C21E7FF00D6C70D /* GiveNowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiveNowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2645C67E1C21E7FF00D6C70D /* GiveNowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveNowTests.swift; sourceTree = "<group>"; };
 		2645C6801C21E7FF00D6C70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -256,6 +255,8 @@
 		D23CF8151C47243F0070AEAA /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
 		D23CF8171C4724650070AEAA /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D23CF8191C472F760070AEAA /* MyLocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLocationButton.swift; sourceTree = "<group>"; };
+		D2572DC01C584E8800D4BBB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
+		D2572DC51C584E9100D4BBB6 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/Info.plist; sourceTree = "<group>"; };
 		D269DA181C4F388F00249214 /* ThankYouPromptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThankYouPromptViewController.swift; sourceTree = "<group>"; };
 		D29F72B21C4AED9900A7D07A /* ApplyToVolunteerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyToVolunteerViewController.swift; sourceTree = "<group>"; };
 		D29F72B71C4B031300A7D07A /* ReadyForPickupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadyForPickupViewController.swift; sourceTree = "<group>"; };
@@ -376,7 +377,7 @@
 				260746201C23C8920022E0ED /* GiveNow-Bridging-Header.h */,
 				2645C6721C21E7FF00D6C70D /* LaunchScreen.storyboard */,
 				2645C6691C21E7FF00D6C70D /* AppDelegate.swift */,
-				2645C6751C21E7FF00D6C70D /* Info.plist */,
+				D2572DC11C584E8800D4BBB6 /* Info.plist */,
 				26FE37121C229B9C00BED9A0 /* Keys.plist */,
 				2607466B1C2622B30022E0ED /* Keys.swift */,
 				26F304931C4B0C6700A7971C /* Permissions.swift */,
@@ -895,6 +896,15 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
+		D2572DC11C584E8800D4BBB6 /* Info.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2572DC01C584E8800D4BBB6 /* Base */,
+				D2572DC51C584E9100D4BBB6 /* de */,
+			);
+			name = Info.plist;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -987,7 +997,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Pods/Mapbox-iOS-SDK";
-				INFOPLIST_FILE = GiveNow/Info.plist;
+				INFOPLIST_FILE = GiveNow/Base.lproj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
@@ -1003,7 +1013,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Pods/Mapbox-iOS-SDK";
-				INFOPLIST_FILE = GiveNow/Info.plist;
+				INFOPLIST_FILE = GiveNow/Base.lproj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
