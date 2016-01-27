@@ -71,6 +71,7 @@
 "rate_app" = "Rate app";
 
 "request_pickup_choose_location" = "Where is your donation located?";
+"request_pickup_info_select_categories" = "What are you donating?";
 
 /* VOLUNTEERING */
 "title_volunteer" = "Volunteer";

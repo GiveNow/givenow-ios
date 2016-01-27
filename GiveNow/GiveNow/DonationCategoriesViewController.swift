@@ -23,18 +23,34 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     @IBOutlet weak var noteHelperLabel: UILabel!
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var giveNowButton: UIButton!
+    @IBOutlet weak var addNoteButton: UIButton!
+    @IBOutlet weak var infoImage: UIImageView!
+    @IBOutlet weak var infoLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         noteTextField.delegate = self
         fetchDonationCategories()
+        layoutView()
         localizeText()
         validateGiveNowButton()
+    }
+    
+    func layoutView() {
+        if let image = UIImage(named: "info") {
+            self.infoImage.image = image.imageWithRenderingMode(.AlwaysTemplate)
+            self.infoImage.tintColor = UIColor.whiteColor()
+        }
+        if let image = UIImage(named: "add_note") {
+            self.addNoteButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            self.infoImage.tintColor = UIColor.whiteColor()
+        }
     }
     
     func localizeText() {
         noteHelperLabel.text = NSLocalizedString("note_helper_label", comment: "")
         giveNowButton.setTitle(NSLocalizedString("button_confirm_donation_label", comment: ""), forState: .Normal)
+        infoLabel.text = NSLocalizedString("request_pickup_info_select_categories", comment: "")
     }
     
     override func didReceiveMemoryWarning() {
