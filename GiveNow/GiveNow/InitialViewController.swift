@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreLocation
 
-class InitialViewController: BaseViewController {
+class InitialViewController: BaseViewController, CLLocationManagerDelegate  {
+    
+    var manager:CLLocationManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +27,23 @@ class InitialViewController: BaseViewController {
     }
     
     func displayMainViewController() {
-        if let vc = fetchViewControllerFromStoryboard("Main", storyboardIdentifier: "reveal") as? SWRevealViewController {
+        manager = CLLocationManager()
+        manager.delegate = self
+        if CLLocationManager.authorizationStatus() == .NotDetermined {
+            manager.requestAlwaysAuthorization()
+        }
+        else if let vc = fetchViewControllerFromStoryboard("Main", storyboardIdentifier: "reveal") as? SWRevealViewController {
             embedViewController(vc, intoView: view)
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        print("Authorization changed")
+        print(CLLocationManager.authorizationStatus())
+        if CLLocationManager.authorizationStatus() != .NotDetermined {
+            if let vc = fetchViewControllerFromStoryboard("Main", storyboardIdentifier: "reveal") as? SWRevealViewController {
+                embedViewController(vc, intoView: view)
+            }
         }
     }
     

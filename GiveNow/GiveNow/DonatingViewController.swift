@@ -53,6 +53,13 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         displayPendingDonationViewIfNeeded()
     }
     
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        print("User changed location authorization")
+        if locationStatus() == .Allowed {
+            zoomToUserLocation()
+        }
+    }
+    
     func zoomToUserLocation() {
         let status = locationStatus()
         if status == .NotDetermined {
@@ -67,6 +74,9 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                     }
                 })
             }
+        }
+        else if status == .Denied {
+            self.shouldUpdateSearchBarWithMapCenter = true
         }
         else {
             print("I'm not gonna zoom")
