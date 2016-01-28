@@ -71,6 +71,7 @@
 "dialog_cancelDonation_positiveButton" = "Spende zurückziehen";
 "dialog_cancelDonation_negativeButton" = "Doch nicht";
 "search_hint" = "Spende adresse";
+"address_field_note_hint" = ">Wohnungsnummer, Tür-Code, Name ...";
 
 /* VOLUNTEERING */
 "title_volunteer" = "Helfer";

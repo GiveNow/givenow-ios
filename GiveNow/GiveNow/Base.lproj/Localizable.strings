@@ -79,6 +79,7 @@
 "dialog_cancelDonation_positiveButton" = "Cancel donation";
 "dialog_cancelDonation_negativeButton" = "Keep donation";
 "search_hint" = "Donation address";
+"address_field_note_hint" = "Apartment, gate code, name…";
 
 /* VOLUNTEERING */
 "title_volunteer" = "Volunteer";

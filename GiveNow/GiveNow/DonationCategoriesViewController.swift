@@ -64,6 +64,10 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     func localizeText() {
         giveNowButton.setTitle(NSLocalizedString("button_confirm_donation_label", comment: ""), forState: .Normal)
         infoLabel.text = NSLocalizedString("request_pickup_info_select_categories", comment: "")
+        if noteTextField.respondsToSelector("attributedPlaceholder") {
+            let attributedDict = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+            noteTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("address_field_note_hint", comment: ""), attributes: attributedDict)
+        }
     }
     
     override func didReceiveMemoryWarning() {
