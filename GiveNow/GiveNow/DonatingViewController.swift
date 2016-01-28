@@ -278,7 +278,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                     textField.textColor = UIColor.whiteColor()
                     if textField.respondsToSelector("attributedPlaceholder") {
                         let attributedDict = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-                        textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("search", comment: ""), attributes: attributedDict)
+                        textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("search_hint", comment: ""), attributes: attributedDict)
                     }
                 }
             }
