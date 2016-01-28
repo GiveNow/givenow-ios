@@ -39,9 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Permissions.registerForNotificationsPermission()
         }
         else {
-            let installation = PFInstallation.currentInstallation()
-            installation.setValue(true, forKey: "sendSMS")
-            installation.saveEventually()
+            if let user = User.currentUser() {
+                user.setValue(false, forKey: "pushEnabled")
+                user.saveEventually()
+            }
         }
         
         return true
@@ -52,12 +53,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 
         
-        //Check if user has denied notifications; save 'sendSMS' if so
+        //Check if user has denied notifications; save 'pushEnabled' to false if so
         let status = Permissions.systemStatusForNotifications()
         if status == .Denied {
-            let installation = PFInstallation.currentInstallation()
-            installation.setValue(true, forKey: "sendSMS")
-            installation.saveEventually()
+            if let user = User.currentUser() {
+                user.setValue(false, forKey: "pushEnabled")
+                user.saveEventually()
+            }
         }
     }
 
@@ -87,7 +89,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         installation.setDeviceTokenFromData(deviceToken)
         if let user = User.currentUser() {
             installation.setValue(user, forKey: "user")
-            installation.setValue(false, forKey: "sendSMS")
+            user.setValue(true, forKey: "pushEnabled")
+            user.saveEventually()
         }
         installation.saveEventually()
     }
@@ -101,7 +104,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Received a remote notification")
 
         if application.applicationState == .Active {
-//            handleNotification(userInfo, isRemote: true)
             handleNotificationWhenActive(userInfo)
         }
         else {
@@ -124,9 +126,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Private -
     
     func handleNotification(dictionary : [ NSObject : AnyObject ], isRemote : Bool) {
-        // TODO: implement
-        print(dictionary)
-        
         if isRemote {
             print("Notification is remote")
             // use the given keys to get the localized strings and
@@ -149,12 +148,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Scheduling a notification")
         let localNotification = UILocalNotification()
         localNotification.alertBody = text
-        
-        //Adding 10 seconds right now to enable testing
-        let calendar = NSCalendar.currentCalendar()
-        let date = calendar.dateByAddingUnit(.Second, value: 10, toDate: NSDate(), options: [])
-        
-        localNotification.fireDate = date
+        localNotification.fireDate = NSDate()
         localNotification.category = "Alerts"
         localNotification.userInfo = ["data" : "TBD"]
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
