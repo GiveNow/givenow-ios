@@ -78,6 +78,7 @@
 "dialog_cancelDonation_message" = "Are you sure you want to cancel your donation?";
 "dialog_cancelDonation_positiveButton" = "Cancel donation";
 "dialog_cancelDonation_negativeButton" = "Keep donation";
+"search" = "Search";
 
 /* VOLUNTEERING */
 "title_volunteer" = "Volunteer";

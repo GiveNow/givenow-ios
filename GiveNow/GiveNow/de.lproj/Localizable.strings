@@ -70,6 +70,7 @@
 "dialog_cancelDonation_message" = "Diese Spende zurückziehen?";
 "dialog_cancelDonation_positiveButton" = "Spende zurückziehen";
 "dialog_cancelDonation_negativeButton" = "Doch nicht";
+"search" = "Suche";
 
 /* VOLUNTEERING */
 "title_volunteer" = "Helfer";
