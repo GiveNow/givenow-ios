@@ -59,6 +59,14 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         noteTextField.alpha = 0.0
         removeNoteButton.alpha = 0.0
         removeNoteButton.enabled = false
+        formatButton()
+    }
+    
+    func formatButton() {
+        guard let button = giveNowButton else {
+            return
+        }
+        button.layer.cornerRadius = 5.0
     }
     
     func localizeText() {
@@ -117,6 +125,7 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DonationCategoryCollectionViewCell
         let donationCategory = donationCategories[indexPath.row]
         configureDonationCategoryCell(cell, donationCategory: donationCategory)
+        cell.layer.cornerRadius = 5.0
         
         return cell
     }

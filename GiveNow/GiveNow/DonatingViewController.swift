@@ -49,6 +49,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     func layoutView() {
         localizeText()
         templateImages()
+        formatButton()
     }
     
     func localizeText() {
@@ -66,6 +67,13 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
             helpButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
             helpButton.tintColor = UIColor.whiteColor()
         }
+    }
+    
+    func formatButton() {
+        guard let button = pickupLocationButton else {
+            return
+        }
+        button.layer.cornerRadius = 5.0
     }
     
     override func viewDidAppear(animated: Bool) {

@@ -40,18 +40,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VID-4N-S16">
-                                <rect key="frame" x="0.0" y="124" width="600" height="427"/>
+                                <rect key="frame" x="0.0" y="124" width="600" height="476"/>
                                 <connections>
                                     <outlet property="delegate" destination="LdM-nb-XRS" id="syK-zq-Ub7"/>
                                 </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCv-dI-Tpw">
-                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <rect key="frame" x="10" y="540" width="580" height="50"/>
                                 <color key="backgroundColor" red="0.40000000596046448" green="0.73333334922790527" blue="0.41568627953529358" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="57W-Fl-xvG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <size key="titleShadowOffset" width="5" height="5"/>
                                 <state key="normal" title="setPickupLocationButton">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -60,14 +61,14 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location_pin" translatesAutoresizingMaskIntoConstraints="NO" id="HSQ-Wz-Aom">
-                                <rect key="frame" x="271" y="286" width="59" height="52"/>
+                                <rect key="frame" x="271" y="310" width="59" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="59" id="Hia-d4-b45"/>
                                     <constraint firstAttribute="height" constant="52" id="ZTW-EZ-fTV"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0U-KG-Zgd" customClass="MyLocationButton" customModule="GiveNow" customModuleProvider="target">
-                                <rect key="frame" x="536" y="486" width="44" height="44"/>
+                                <rect key="frame" x="536" y="476" width="44" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="jG4-E4-nX8"/>
@@ -132,17 +133,17 @@
                             <constraint firstItem="VID-4N-S16" firstAttribute="top" secondItem="LN4-Vf-NQQ" secondAttribute="bottom" id="3Cy-Gu-6jn"/>
                             <constraint firstAttribute="trailing" secondItem="L0U-KG-Zgd" secondAttribute="trailing" constant="20" id="7wa-ZF-Rf9"/>
                             <constraint firstItem="LN4-Vf-NQQ" firstAttribute="top" secondItem="CIT-Xb-fKC" secondAttribute="bottom" id="A2s-Mv-3rv"/>
-                            <constraint firstItem="VID-4N-S16" firstAttribute="trailing" secondItem="aCv-dI-Tpw" secondAttribute="trailing" id="AO1-rM-gCz"/>
+                            <constraint firstItem="VID-4N-S16" firstAttribute="trailing" secondItem="aCv-dI-Tpw" secondAttribute="trailing" constant="10" id="AO1-rM-gCz"/>
                             <constraint firstItem="VID-4N-S16" firstAttribute="top" secondItem="CIT-Xb-fKC" secondAttribute="bottom" id="Dzg-Uj-IAW"/>
                             <constraint firstItem="aCv-dI-Tpw" firstAttribute="centerX" secondItem="HSQ-Wz-Aom" secondAttribute="centerX" id="EOI-Ct-cz6"/>
                             <constraint firstAttribute="trailing" secondItem="VID-4N-S16" secondAttribute="trailing" id="JRm-kQ-rje"/>
                             <constraint firstItem="aCv-dI-Tpw" firstAttribute="top" secondItem="L0U-KG-Zgd" secondAttribute="bottom" constant="20" id="M6J-6A-qWm"/>
-                            <constraint firstItem="VID-4N-S16" firstAttribute="leading" secondItem="aCv-dI-Tpw" secondAttribute="leading" id="YKy-wt-Sl0"/>
+                            <constraint firstItem="VID-4N-S16" firstAttribute="leading" secondItem="aCv-dI-Tpw" secondAttribute="leading" constant="-10" id="YKy-wt-Sl0"/>
                             <constraint firstItem="VID-4N-S16" firstAttribute="centerY" secondItem="HSQ-Wz-Aom" secondAttribute="centerY" constant="26" id="aGU-GK-nc1"/>
                             <constraint firstItem="VID-4N-S16" firstAttribute="leading" secondItem="qGH-Dv-e79" secondAttribute="leading" id="dIw-Rd-D6K"/>
-                            <constraint firstItem="aCv-dI-Tpw" firstAttribute="bottom" secondItem="Dqa-ec-ITD" secondAttribute="top" id="h33-gO-Ntn"/>
+                            <constraint firstItem="aCv-dI-Tpw" firstAttribute="bottom" secondItem="Dqa-ec-ITD" secondAttribute="top" constant="-10" id="h33-gO-Ntn"/>
                             <constraint firstItem="LN4-Vf-NQQ" firstAttribute="leading" secondItem="qGH-Dv-e79" secondAttribute="leading" id="jbL-dC-Uaz"/>
-                            <constraint firstItem="Dqa-ec-ITD" firstAttribute="top" secondItem="VID-4N-S16" secondAttribute="bottom" constant="49" id="vaT-tV-Eet"/>
+                            <constraint firstItem="Dqa-ec-ITD" firstAttribute="top" secondItem="VID-4N-S16" secondAttribute="bottom" id="vaT-tV-Eet"/>
                             <constraint firstAttribute="trailing" secondItem="LN4-Vf-NQQ" secondAttribute="trailing" id="wwY-yD-tdA"/>
                         </constraints>
                         <variation key="default">
@@ -540,20 +541,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YF9-JT-GUc">
-                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
-                                <color key="backgroundColor" red="0.40000000596046448" green="0.73333334922790527" blue="0.41568627953529358" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="7jg-ar-X5s"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <state key="normal" title="giveNowButton">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="giveNowButtonTapped:" destination="xqe-tM-5xe" eventType="touchUpInside" id="5RK-fA-YED"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofB-37-sWl">
                                 <rect key="frame" x="0.0" y="64" width="600" height="100"/>
                                 <subviews>
@@ -656,7 +643,7 @@
                                 </variation>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ohA-ph-S3Q">
-                                <rect key="frame" x="0.0" y="164" width="600" height="386"/>
+                                <rect key="frame" x="0.0" y="164" width="600" height="436"/>
                                 <color key="backgroundColor" red="0.88235294818878174" green="0.96078431606292725" blue="0.99607843160629272" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0I5-mA-ENC">
                                     <size key="itemSize" width="149" height="148"/>
@@ -710,17 +697,32 @@
                                     <outlet property="delegate" destination="xqe-tM-5xe" id="fn8-0C-S6T"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YF9-JT-GUc">
+                                <rect key="frame" x="10" y="540" width="580" height="50"/>
+                                <color key="backgroundColor" red="0.40000000596046448" green="0.73333334922790527" blue="0.41568627953529358" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="7jg-ar-X5s"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="giveNowButton">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="giveNowButtonTapped:" destination="xqe-tM-5xe" eventType="touchUpInside" id="5RK-fA-YED"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mbW-vW-bdu" firstAttribute="top" secondItem="YF9-JT-GUc" secondAttribute="bottom" id="9Y0-k8-XJv"/>
+                            <constraint firstItem="mbW-vW-bdu" firstAttribute="top" secondItem="YF9-JT-GUc" secondAttribute="bottom" constant="10" id="9Y0-k8-XJv"/>
                             <constraint firstItem="ofB-37-sWl" firstAttribute="top" secondItem="AGG-Pq-Zd4" secondAttribute="bottom" id="9gA-OZ-5Tb"/>
+                            <constraint firstItem="mbW-vW-bdu" firstAttribute="top" secondItem="ohA-ph-S3Q" secondAttribute="bottom" id="C82-GX-h2W"/>
                             <constraint firstAttribute="trailing" secondItem="ofB-37-sWl" secondAttribute="trailing" id="EzM-eu-59V"/>
                             <constraint firstItem="ohA-ph-S3Q" firstAttribute="leading" secondItem="HK5-X3-v6z" secondAttribute="leading" id="NPT-5o-vJf"/>
                             <constraint firstItem="ofB-37-sWl" firstAttribute="top" secondItem="AGG-Pq-Zd4" secondAttribute="bottom" constant="-20" id="YYB-xM-fLB"/>
-                            <constraint firstItem="YF9-JT-GUc" firstAttribute="leading" secondItem="HK5-X3-v6z" secondAttribute="leading" id="c5q-gA-1UT"/>
+                            <constraint firstItem="YF9-JT-GUc" firstAttribute="leading" secondItem="HK5-X3-v6z" secondAttribute="leading" constant="10" id="c5q-gA-1UT"/>
                             <constraint firstItem="ofB-37-sWl" firstAttribute="leading" secondItem="HK5-X3-v6z" secondAttribute="leading" id="lJn-8o-hGm"/>
-                            <constraint firstAttribute="trailing" secondItem="YF9-JT-GUc" secondAttribute="trailing" id="orH-GI-QsX"/>
+                            <constraint firstAttribute="trailing" secondItem="YF9-JT-GUc" secondAttribute="trailing" constant="10" id="orH-GI-QsX"/>
                             <constraint firstAttribute="trailing" secondItem="ohA-ph-S3Q" secondAttribute="trailing" id="qlj-CK-DYd"/>
                             <constraint firstItem="YF9-JT-GUc" firstAttribute="top" secondItem="ohA-ph-S3Q" secondAttribute="bottom" id="spC-lx-c6f"/>
                             <constraint firstItem="ohA-ph-S3Q" firstAttribute="top" secondItem="ofB-37-sWl" secondAttribute="bottom" id="unE-Im-IRQ"/>
@@ -730,6 +732,7 @@
                             <mask key="constraints">
                                 <exclude reference="YYB-xM-fLB"/>
                                 <exclude reference="vsz-cY-nhG"/>
+                                <exclude reference="spC-lx-c6f"/>
                             </mask>
                         </variation>
                     </view>

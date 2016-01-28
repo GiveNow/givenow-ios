@@ -127,6 +127,7 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DonationCategoryCollectionViewCell
         let donationCategory = pickupRequest.donationCategories![indexPath.row]
         configureDonationCategoryCell(cell, donationCategory: donationCategory)
+        cell.layer.cornerRadius = 5.0
         
         return cell
     }
