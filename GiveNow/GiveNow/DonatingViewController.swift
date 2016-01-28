@@ -286,7 +286,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         if let searchImage = UIImage(named: "search") {
             searchController.searchBar.setImage(searchImage.imageWithRenderingMode(.AlwaysTemplate), forSearchBarIcon: .Search, state: .Normal)
         }
-        if let cancelImage = UIImage(named: "cancel") {
+        if let cancelImage = UIImage(named: "clear-search") {
             searchController.searchBar.setImage(cancelImage.imageWithRenderingMode(.AlwaysTemplate), forSearchBarIcon: .Clear, state: .Normal)
         }
         searchController.searchBar.tintColor = UIColor.whiteColor()
