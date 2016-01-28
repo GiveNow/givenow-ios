@@ -23,6 +23,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var infoImage: UIImageView!
     @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var helpButton: UIButton!
     
     var shouldUpdateSearchBarWithMapCenter = false
     var myPickupRequest:PickupRequest!
@@ -40,10 +41,14 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         initializeSearchController()
         initializeSearchResultsTable()
         initializeMenuButton(menuButton)
-        localizeText()
-        setInfoImage()
+        layoutView()
         zoomToUserLocation()
         navigationItem.title = ""
+    }
+    
+    func layoutView() {
+        localizeText()
+        templateImages()
     }
     
     func localizeText() {
@@ -52,27 +57,26 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         
     }
     
-    func setInfoImage() {
+    func templateImages() {
         if let image = UIImage(named: "info") {
             self.infoImage.image = image.imageWithRenderingMode(.AlwaysTemplate)
             self.infoImage.tintColor = UIColor.whiteColor()
+        }
+        if let image = UIImage(named: "help") {
+            helpButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            helpButton.tintColor = UIColor.whiteColor()
         }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         displayPendingDonationViewIfNeeded()
-//        updateSMSSettingsIfNeeded()
     }
     
-//    func updateSMSSettingsIfNeeded() {
-//        let status = Permissions.systemStatusForNotifications()
-//        if status == .Denied {
-//            let installation = PFInstallation.currentInstallation()
-//            installation.setValue(true, forKey: "sendSMS")
-//            installation.saveEventually()
-//        }
-//    }
+    @IBAction func helpButtonTapped(sender: AnyObject) {
+        
+    }
+    
     
     func zoomToUserLocation() {
         let status = locationStatus()

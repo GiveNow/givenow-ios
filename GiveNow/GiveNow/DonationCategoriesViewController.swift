@@ -20,7 +20,6 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     var location:CLLocationCoordinate2D!
     var address:String!
     
-    @IBOutlet weak var noteHelperLabel: UILabel!
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var giveNowButton: UIButton!
     @IBOutlet weak var addNoteButton: UIButton!
@@ -57,17 +56,14 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
             self.helpButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
             self.helpButton.tintColor = UIColor.whiteColor()
         }
-        noteHelperLabel.alpha = 0.0
         noteTextField.alpha = 0.0
         removeNoteButton.alpha = 0.0
         removeNoteButton.enabled = false
     }
     
     func localizeText() {
-        noteHelperLabel.text = NSLocalizedString("note_helper_label", comment: "")
         giveNowButton.setTitle(NSLocalizedString("button_confirm_donation_label", comment: ""), forState: .Normal)
         infoLabel.text = NSLocalizedString("request_pickup_info_select_categories", comment: "")
-//        addNoteLabel.text = NSLocalizedString("note_add_label", comment: "")
     }
     
     override func didReceiveMemoryWarning() {
@@ -240,10 +236,13 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     
     @IBAction func addNoteButtonTapped(sender: AnyObject) {
         UIView.animateWithDuration(0.5, animations: {() -> Void in
-            self.addNoteButton.alpha = 0.0
-//            self.addNoteLabel.alpha = 0.0
+            
+            self.addNoteButton.setTitle("", forState: .Normal)
+            if let image = UIImage(named: "note_added") {
+                self.addNoteButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            }
+            
             self.addNoteButton.enabled = false
-            self.noteHelperLabel.alpha = 1.0
             self.noteTextField.alpha = 1.0
             self.removeNoteButton.alpha = 1.0
             self.removeNoteButton.enabled = true
@@ -256,11 +255,15 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     @IBAction func removeNoteTapped(sender: AnyObject) {
         noteTextField.resignFirstResponder()
         UIView.animateWithDuration(0.5, animations: {() -> Void in
+            
+            self.addNoteButton.setTitle(NSLocalizedString("note_add_label", comment: ""), forState: .Normal)
+            if let image = UIImage(named: "add_note") {
+                self.addNoteButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            }
+            
+            
             self.noteTextField.text = nil
-            self.addNoteButton.alpha = 1.0
-//            self.addNoteLabel.alpha = 1.0
             self.addNoteButton.enabled = true
-            self.noteHelperLabel.alpha = 0.0
             self.noteTextField.alpha = 0.0
             self.removeNoteButton.alpha = 0.0
             self.removeNoteButton.enabled = false

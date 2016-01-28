@@ -21,18 +21,22 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var infoImage: UIImageView!
+    @IBOutlet weak var helpButton: UIButton!
     
     var pickupRequest:PickupRequest!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDonationIcon()
-        setInfoImage()
         addNote()
         collectionView.delegate = self
         collectionView.dataSource = self
-        localizeText()
+        layoutView()
         setHeaderBasedOnRequestStatus()
+    }
+    
+    func layoutView() {
+        localizeText()
+        templateImages()
     }
 
     func localizeText() {
@@ -41,10 +45,18 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
         
     }
     
-    func setInfoImage() {
+    func templateImages() {
         if let image = UIImage(named: "info") {
             self.infoImage.image = image.imageWithRenderingMode(.AlwaysTemplate)
             self.infoImage.tintColor = UIColor.whiteColor()
+        }
+        if let image = UIImage(named: "store") {
+            donationIcon.image = image.imageWithRenderingMode(.AlwaysTemplate)
+            donationIcon.tintColor = UIColor.whiteColor()
+        }
+        if let image = UIImage(named: "help") {
+            helpButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            helpButton.tintColor = UIColor.whiteColor()
         }
     }
     
@@ -81,13 +93,6 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     func displayConfirmedHeader() {
         let phoneNumberText = AppState.sharedInstance().userPhoneNumberOrReplacementText
         headerLabel.text = String.localizedStringWithParameters("request_status_volunteer_confirmed", phoneNumber: phoneNumberText, name: nil, code: nil)
-    }
-    
-    func setDonationIcon() {
-        if let image = UIImage(named: "store") {
-            donationIcon.image = image.imageWithRenderingMode(.AlwaysTemplate)
-            donationIcon.tintColor = UIColor.whiteColor()
-        }
     }
     
 
@@ -168,5 +173,8 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
         })
     }
 
+    @IBAction func helpButtonTapped(sender: AnyObject) {
+        
+    }
 
 }
