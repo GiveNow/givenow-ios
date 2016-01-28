@@ -260,11 +260,32 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
             searchController.hidesNavigationBarDuringPresentation = false
             searchController.searchBar.delegate = self
             searchController.dimsBackgroundDuringPresentation = false
+            formatSearchField()
             searchController.delegate = self
             navigationItem.titleView = searchController.searchBar
-            searchController.searchBar.tintColor = UIColor.colorPrimaryDark()
             validateSetPickupLocationButton()
         }
+    }
+    
+    func formatSearchField() {
+        guard let searchController = searchController else {
+            return
+        }
+        for subView in searchController.searchBar.subviews {
+            for subView in subView.subviews {
+                if let textField = subView as? UITextField {
+                    textField.backgroundColor = UIColor.colorPrimaryDark()
+                    textField.textColor = UIColor.whiteColor()
+                }
+            }
+        }
+        if let searchImage = UIImage(named: "search") {
+            searchController.searchBar.setImage(searchImage.imageWithRenderingMode(.AlwaysTemplate), forSearchBarIcon: .Search, state: .Normal)
+        }
+        if let cancelImage = UIImage(named: "cancel") {
+            searchController.searchBar.setImage(cancelImage.imageWithRenderingMode(.AlwaysTemplate), forSearchBarIcon: .Clear, state: .Normal)
+        }
+        searchController.searchBar.tintColor = UIColor.whiteColor()
     }
     
     func backgroundTapped(sender: UIGestureRecognizer? = nil) {
