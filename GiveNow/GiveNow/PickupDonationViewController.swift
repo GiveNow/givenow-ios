@@ -43,6 +43,10 @@ class PickupDonationViewController: BaseMapViewController {
         callButton.setImage(UIImage.templatedImageFromName("phone"), forState: .Normal)
         messageButton.setImage(UIImage.templatedImageFromName("textsms"), forState: .Normal)
         navigationButton.setImage(UIImage.templatedImageFromName("navigation"), forState: .Normal)
+        
+        if let button = donationPickedUpButton {
+            button.layer.cornerRadius = 5.0
+        }
     }
     
     private func validateButtons() {

@@ -130,8 +130,11 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Vi-30-sFu">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="439"/>
+                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgo-ly-EC1">
-                                <rect key="frame" x="0.0" y="427" width="600" height="60"/>
+                                <rect key="frame" x="10" y="369" width="580" height="60"/>
                                 <color key="backgroundColor" red="0.40000000600000002" green="0.73333334920000004" blue="0.41568627949999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Ebu-5L-q2i"/>
@@ -145,7 +148,7 @@
                                 </connections>
                             </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOI-dO-QV2">
-                                <rect key="frame" x="0.0" y="379" width="600" height="48"/>
+                                <rect key="frame" x="0.0" y="439" width="600" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="BDB-Y5-lW4"/>
                                 </constraints>
@@ -187,11 +190,8 @@
                                 </items>
                                 <color key="tintColor" red="0.40000000600000002" green="0.73333334920000004" blue="0.41568627949999998" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Vi-30-sFu">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="379"/>
-                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fxb-pq-5fJ" customClass="MyLocationButton" customModule="GiveNow" customModuleProvider="target">
-                                <rect key="frame" x="536" y="315" width="44" height="44"/>
+                                <rect key="frame" x="536" y="305" width="44" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="S7N-EP-jRL"/>
@@ -205,24 +205,38 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="IOI-dO-QV2" firstAttribute="top" secondItem="qgo-ly-EC1" secondAttribute="bottom" constant="10" id="3Jp-Zg-4a9"/>
+                            <constraint firstItem="IOI-dO-QV2" firstAttribute="top" secondItem="6Vi-30-sFu" secondAttribute="bottom" id="3pN-DK-G8V"/>
                             <constraint firstItem="IOI-dO-QV2" firstAttribute="leading" secondItem="BPZ-mE-nkj" secondAttribute="leading" id="5fm-qn-y2n"/>
                             <constraint firstItem="6Vi-30-sFu" firstAttribute="top" secondItem="La5-zJ-nzv" secondAttribute="bottom" id="5op-ae-2Ma"/>
                             <constraint firstItem="n5o-cV-GmE" firstAttribute="top" secondItem="qgo-ly-EC1" secondAttribute="bottom" id="6Ln-8v-fTX"/>
                             <constraint firstAttribute="trailing" secondItem="Fxb-pq-5fJ" secondAttribute="trailing" constant="20" id="7ll-c3-D6d"/>
-                            <constraint firstItem="qgo-ly-EC1" firstAttribute="leading" secondItem="BPZ-mE-nkj" secondAttribute="leading" id="9lV-4b-yks"/>
+                            <constraint firstItem="qgo-ly-EC1" firstAttribute="leading" secondItem="BPZ-mE-nkj" secondAttribute="leading" constant="10" id="9lV-4b-yks"/>
                             <constraint firstAttribute="trailing" secondItem="IOI-dO-QV2" secondAttribute="trailing" id="FJT-ey-tA2"/>
+                            <constraint firstItem="qgo-ly-EC1" firstAttribute="top" secondItem="Fxb-pq-5fJ" secondAttribute="bottom" constant="20" id="Kva-fW-5YK"/>
                             <constraint firstItem="qgo-ly-EC1" firstAttribute="top" secondItem="IOI-dO-QV2" secondAttribute="bottom" id="NDy-jh-j0O"/>
                             <constraint firstItem="IOI-dO-QV2" firstAttribute="top" secondItem="6Vi-30-sFu" secondAttribute="bottom" id="Sr8-F5-1vD"/>
                             <constraint firstItem="IOI-dO-QV2" firstAttribute="top" secondItem="Fxb-pq-5fJ" secondAttribute="bottom" constant="20" id="T2i-hU-1Cr"/>
+                            <constraint firstItem="n5o-cV-GmE" firstAttribute="top" secondItem="IOI-dO-QV2" secondAttribute="bottom" id="TcB-tR-2Lp"/>
+                            <constraint firstItem="n5o-cV-GmE" firstAttribute="top" secondItem="IOI-dO-QV2" secondAttribute="bottom" id="cTm-qA-hmb"/>
                             <constraint firstItem="6Vi-30-sFu" firstAttribute="leading" secondItem="BPZ-mE-nkj" secondAttribute="leading" id="drz-3A-Xoz"/>
                             <constraint firstAttribute="trailing" secondItem="6Vi-30-sFu" secondAttribute="trailing" id="fZo-zA-VJt"/>
-                            <constraint firstAttribute="trailing" secondItem="qgo-ly-EC1" secondAttribute="trailing" id="qAp-zp-ugH"/>
+                            <constraint firstItem="IOI-dO-QV2" firstAttribute="top" secondItem="6Vi-30-sFu" secondAttribute="bottom" id="g4P-8W-Try"/>
+                            <constraint firstAttribute="trailing" secondItem="qgo-ly-EC1" secondAttribute="trailing" constant="10" id="qAp-zp-ugH"/>
                             <constraint firstItem="n5o-cV-GmE" firstAttribute="top" secondItem="6Vi-30-sFu" secondAttribute="bottom" constant="60" id="tjF-pT-5eu"/>
+                            <constraint firstItem="IOI-dO-QV2" firstAttribute="top" secondItem="qgo-ly-EC1" secondAttribute="bottom" constant="10" id="uQo-gh-PIv"/>
                             <constraint firstItem="qgo-ly-EC1" firstAttribute="top" secondItem="6Vi-30-sFu" secondAttribute="bottom" constant="50" id="vvT-m7-Wv6"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="NDy-jh-j0O"/>
                                 <exclude reference="vvT-m7-Wv6"/>
+                                <exclude reference="Sr8-F5-1vD"/>
+                                <exclude reference="T2i-hU-1Cr"/>
+                                <exclude reference="g4P-8W-Try"/>
+                                <exclude reference="uQo-gh-PIv"/>
+                                <exclude reference="6Ln-8v-fTX"/>
+                                <exclude reference="cTm-qA-hmb"/>
                                 <exclude reference="tjF-pT-5eu"/>
                             </mask>
                         </variation>
@@ -311,8 +325,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Qz-Dj-WJ6">
-                                <rect key="frame" x="20" y="350" width="560" height="36"/>
+                                <rect key="frame" x="20" y="350" width="560" height="50"/>
                                 <color key="backgroundColor" red="0.40000000600000002" green="0.73333334920000004" blue="0.41568627949999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="KIn-pr-dY8"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="I want to volunteer!">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -17,7 +17,12 @@ class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        layoutView()
         checkPendingVolunteer()
+    }
+    
+    func layoutView() {
+        volunteerButton.layer.cornerRadius = 5.0
     }
     
     // MARK: - User Actions
