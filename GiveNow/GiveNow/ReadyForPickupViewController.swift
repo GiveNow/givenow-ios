@@ -18,24 +18,26 @@ class ReadyForPickupViewController: BaseViewController {
     @IBOutlet weak var noButton: UIButton!
     
     var pickupRequest:PickupRequest!
+    var name:String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        localizeStrings()
-        
-        if let address = pickupRequest.address {
-            addressLabel.text = address
-        }
-        
+        layoutView()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    func layoutView() {
+        localizeStrings()
+        if let address = pickupRequest.address {
+            addressLabel.text = address
+        }
+    }
+    
     func localizeStrings() {
-        let nameText = LocalizationHelper.nameForDonor(pickupRequest)
-        promptHeader.text = String.localizedStringWithParameters("push_notif_volunteer_is_ready_to_pickup", phoneNumber: nil, name: nameText, code: nil)
+        promptHeader.text = String.localizedStringWithParameters("push_notif_volunteer_is_ready_to_pickup", phoneNumber: nil, name: name, code: nil)
         messageBody.text = NSLocalizedString("dialog_accept_pending_volunteer", comment: "")
         yesButton.setTitle(NSLocalizedString("yes", comment: ""), forState: .Normal)
         noButton.setTitle(NSLocalizedString("no", comment: ""), forState: .Normal)

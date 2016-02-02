@@ -74,7 +74,7 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
             self.headerLabel.text = NSLocalizedString("request_status_waiting", comment: "")
         }
         else if pickupRequest.pendingVolunteer != nil && pickupRequest.confirmedVolunteer == nil {
-            displayPendingHeader()
+            getNameForPendingHeader()
         }
         else if pickupRequest.confirmedVolunteer != nil {
             displayConfirmedHeader()
@@ -85,9 +85,29 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     }
     
     // This function is more or less duplicated on the menu prompt
-    func displayPendingHeader() {
-        let nameText = LocalizationHelper.nameForDonor(pickupRequest)
-        headerLabel.text = String.localizedStringWithParameters("push_notif_volunteer_is_ready_to_pickup", phoneNumber: nil, name: nameText, code: nil)
+    func getNameForPendingHeader() {
+        if let user = pickupRequest.pendingVolunteer {
+            user.fetchIfNeededInBackgroundWithBlock({(result, error) -> Void in
+                if let volunteer = result as? User {
+                    if let name = volunteer.name {
+                        self.displayPendingHeader(name)
+                    }
+                    else {
+                        let name = String.localizedString("a_volunteer")
+                        self.displayPendingHeader(name)
+                    }
+                }
+                else {
+                    let name = String.localizedString("a_volunteer")
+                    self.displayPendingHeader(name)
+                }
+            })
+        }
+    }
+    
+    
+    func displayPendingHeader(name: String) {
+        headerLabel.text = String.localizedStringWithParameters("push_notif_volunteer_is_ready_to_pickup", phoneNumber: nil, name: name, code: nil)
     }
     
     func displayConfirmedHeader() {

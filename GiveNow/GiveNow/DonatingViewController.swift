@@ -176,14 +176,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
             return
         }
         if myPickupRequest.pendingVolunteer != nil && myPickupRequest.confirmedVolunteer == nil {
-            if let modalViewController = storyboard.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
-                embedViewController(modalViewController, intoView: view)
-                
-                if let readyForPickupPrompt = storyboard.instantiateViewControllerWithIdentifier("readyForPickup") as? ReadyForPickupViewController {
-                    readyForPickupPrompt.pickupRequest = myPickupRequest
-                    modalViewController.embedViewController(readyForPickupPrompt, intoView: modalViewController.promptView)
-                }
-            }
+            getPendingVolunteerNameAndDisplayPrompt()
         }
         else if myPickupRequest.donation != nil {
             if let modalViewController = storyboard.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
@@ -193,6 +186,42 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                     thankYouPrompt.pickupRequest = myPickupRequest
                     modalViewController.embedViewController(thankYouPrompt, intoView: modalViewController.promptView)
                 }
+            }
+        }
+    }
+    
+    func getPendingVolunteerNameAndDisplayPrompt() {
+        if let user = myPickupRequest.pendingVolunteer {
+            user.fetchIfNeededInBackgroundWithBlock({(result, error) -> Void in
+                if let volunteer = result as? User {
+                    if let name = volunteer.name {
+                        self.displayReadyForPickupPrompt(name)
+                    }
+                    else {
+                        let name = String.localizedString("a_volunteer")
+                        self.displayReadyForPickupPrompt(name)
+                    }
+                }
+                else {
+                    let name = String.localizedString("a_volunteer")
+                    self.displayReadyForPickupPrompt(name)
+                }
+            })
+        }
+    }
+    
+    func displayReadyForPickupPrompt(name: String) {
+        guard let storyboard = storyboard else {
+            return
+        }
+        if let modalViewController = storyboard.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
+            embedViewController(modalViewController, intoView: view)
+            
+            if let readyForPickupPrompt = storyboard.instantiateViewControllerWithIdentifier("readyForPickup") as? ReadyForPickupViewController {
+                
+                readyForPickupPrompt.pickupRequest = myPickupRequest
+                readyForPickupPrompt.name = name
+                modalViewController.embedViewController(readyForPickupPrompt, intoView: modalViewController.promptView)
             }
         }
     }
