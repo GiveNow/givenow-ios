@@ -20,6 +20,7 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         detectFirstLaunch()
                 NSNotificationCenter.defaultCenter().addObserver(self, selector: "pushNotificationReceived:", name: "pushNotificationReceived", object: nil)
+        showPendingAlertsIfPushDisabled()
     }
     
     // MARK: Public functions used to display appropriate workflow
@@ -196,6 +197,101 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
         let localNotification = NSNotification(name: "alertActionCompleted", object: nil, userInfo: nil)
         NSNotificationCenter.defaultCenter().postNotification(localNotification)
     }
+    
+    // MARK: Dealing with case where push notifications have been disabled or are not determined
+    
+    
+    func showPendingAlertsIfPushDisabled() {
+        let permissionStatus = Permissions.systemStatusForNotifications()
+        if permissionStatus != .Allowed {
+            self.showPendingAlerts()
+        }
+    }
+    
+    func showPendingAlerts() {
+        queryMyPickupRequest({(error, result) -> Void in
+            if let pickupRequest = result {
+                self.pickupRequest = pickupRequest
+                if pickupRequest.pendingVolunteer != nil && pickupRequest.confirmedVolunteer == nil {
+                    self.getNameForPendingPickupRequestAlert()
+                }
+                else if pickupRequest.donation != nil {
+                    self.getCategoriesForDonation()
+                }
+            }
+        })
+    }
+    
+    func getNameForPendingPickupRequestAlert() {
+        if let user = pickupRequest.pendingVolunteer {
+            user.fetchInBackgroundWithBlock({(result, error) -> Void in
+                if let volunteer = result as? User {
+                    if let name = volunteer.name {
+                        self.showPendingPickupRequestAlert(name)
+                    }
+                    else {
+                        let name = String.localizedString("a_volunteer")
+                        self.showPendingPickupRequestAlert(name)
+                    }
+                }
+                else {
+                    let name = String.localizedString("a_volunteer")
+                    self.showPendingPickupRequestAlert(name)
+                }
+            })
+        }
+    }
+    
+    func showPendingPickupRequestAlert(name: String) {
+        let title = String.localizedStringWithParameters("push_notif_volunteer_is_ready_to_pickup", phoneNumber: nil, name: name, code: nil)
+        let message = NSLocalizedString("dialog_accept_pending_volunteer", comment: "")
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .Default, handler: {(action) in
+            self.donationIsReady()
+        }))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("no", comment: ""), style: .Default, handler: {(action) in
+            self.donationIsNotReady()
+        }))
+        self.presentViewController(alertController, animated: true, completion: {})
+    }
+    
+    func getCategoriesForDonation() {
+        guard let categories = pickupRequest.donationCategories else {
+            return
+        }
+        var message = NSLocalizedString("donation_complete_message_head", comment: "")
+        
+        for var i = 0; i < categories.count; i++ {
+            categories[i].fetchIfNeededInBackgroundWithBlock({(result, error) -> Void in
+                let category = result as! DonationCategory
+                let categoryName = category.getName()!
+                if i == 0 {
+                    message += " \(categoryName)"
+                }
+                else if i < categories.count - 1 {
+                    message += ", \(categoryName)"
+                }
+                else {
+                    message += " \(NSLocalizedString("and", comment: "")) \(categoryName) \(NSLocalizedString("donation_complete_message_tail", comment: ""))"
+                    self.showDonationPickedUpAlert(message)
+                }
+            })
+        }
+    }
+    
+    func showDonationPickedUpAlert(message: String) {
+        let title = NSLocalizedString("donation_complete_title", comment: "")
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("done", comment: ""), style: .Default, handler: {(action) in
+            self.donePressed()
+        }))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("rate_app", comment: ""), style: .Default, handler: {(action) in
+            self.rateApp()
+        }))
+        self.presentViewController(alertController, animated: true, completion: {})
+    }
+    
+    
     
     // MARK: Private
     

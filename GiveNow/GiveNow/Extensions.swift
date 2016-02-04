@@ -78,19 +78,6 @@ extension UIView {
             })
     }
     
-//// Can't get this to work - the second animation happens right away, so it looks like nothing happens.s
-//    func toggleShadow() {
-//        UIView.animateWithDuration(0.5, animations: {
-//            self.layer.shadowOpacity = 0.0
-//            print("Doing this")
-//            }, completion: nil)
-//        
-//        UIView.animateWithDuration(0.5, delay: 1.0, options: [], animations: {
-//            self.layer.shadowOpacity = 0.8
-//            print("Doing that")
-//            }, completion: nil)
-//    }
-    
 }
 
 extension UIImage {
