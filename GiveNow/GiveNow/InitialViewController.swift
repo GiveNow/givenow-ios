@@ -16,6 +16,7 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         detectFirstLaunch()
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: "pushNotificationReceived:", name: "pushNotificationReceived", object: nil)
     }
     
     // MARK: Public functions used to display appropriate workflow
@@ -25,12 +26,6 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
             embedViewController(vc, intoView: view)
         }
     }
-    
-//    func displayMainViewController() {
-//        if let vc = fetchViewControllerFromStoryboard("Main", storyboardIdentifier: "reveal") as? SWRevealViewController {
-//            embedViewController(vc, intoView: view)
-//        }
-//    }
     
     func displayMainViewController() {
         manager = CLLocationManager()
@@ -51,6 +46,21 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
                 embedViewController(vc, intoView: view)
             }
         }
+    }
+    
+    // MARK: Handling push notifications
+    
+    func pushNotificationReceived(notification: NSNotification){
+        print(self)
+        if let dictionary = notification.userInfo {
+            print(dictionary)
+            let title = NotificationHelper.localizeNotificationTitle(dictionary)
+            let message = NotificationHelper.localizeNotificationMessage(dictionary)
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("dismiss", comment: ""), style: .Default, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: {})
+        }
+        
     }
     
     // MARK: Private
