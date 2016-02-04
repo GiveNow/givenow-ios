@@ -24,6 +24,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     @IBOutlet weak var infoImage: UIImageView!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var helpButton: UIButton!
+    @IBOutlet weak var infoView: UIView!
     
     var shouldUpdateSearchBarWithMapCenter = false
     var myPickupRequest:PickupRequest!
@@ -47,9 +48,10 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func layoutView() {
+        infoView.addShadow()
         localizeText()
         templateImages()
-        formatButton()
+        formatButtons()
     }
     
     func localizeText() {
@@ -69,11 +71,14 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         }
     }
     
-    func formatButton() {
-        guard let button = pickupLocationButton else {
+    func formatButtons() {
+        guard let pickupButton = pickupLocationButton else {
             return
         }
-        button.layer.cornerRadius = 5.0
+        pickupButton.addShadow()
+        pickupButton.layer.cornerRadius = 5.0
+        
+        myLocationButton.addShadow()
     }
     
     override func viewDidAppear(animated: Bool) {

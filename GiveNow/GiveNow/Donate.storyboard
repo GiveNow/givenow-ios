@@ -162,6 +162,7 @@
                         <outlet property="helpButton" destination="Upm-EZ-o4n" id="rvY-kb-D5s"/>
                         <outlet property="infoImage" destination="BsA-2B-5FY" id="RHK-K5-Kml"/>
                         <outlet property="infoLabel" destination="m7x-ou-hZh" id="041-3y-SKG"/>
+                        <outlet property="infoView" destination="LN4-Vf-NQQ" id="Vuy-sG-q0M"/>
                         <outlet property="mapView" destination="VID-4N-S16" id="UEQ-Nr-img"/>
                         <outlet property="menuButton" destination="jhn-mN-Qmk" id="Tx9-QT-hnI"/>
                         <outlet property="myLocationButton" destination="L0U-KG-Zgd" id="Hrh-DE-3DB"/>
