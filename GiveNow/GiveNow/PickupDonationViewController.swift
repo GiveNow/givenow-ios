@@ -20,6 +20,7 @@ class PickupDonationViewController: BaseMapViewController {
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var navigationButton: UIButton!
     @IBOutlet weak var myLocationButton: MyLocationButton!
+    @IBOutlet weak var shadowView: UIView!
     
     var donorPhoneNumber:String!
     
@@ -29,24 +30,33 @@ class PickupDonationViewController: BaseMapViewController {
         super.viewDidLoad()
         mapView.delegate = self
         addPickupRequestToMap()
-        formatButtons()
-        setDonorPhoneNumber()
-        validateButtons()
-        localizeStrings()
+        layoutView()
     }
     
     private func localizeStrings() {
         donationPickedUpButton.setTitle(NSLocalizedString("finish_pickup", comment: ""), forState: .Normal)
     }
     
+    private func layoutView() {
+        shadowView.addShadow()
+        formatButtons()
+        setDonorPhoneNumber()
+        validateButtons()
+        localizeStrings()
+    }
+    
     private func formatButtons() {
+        guard let donationPickedUpButton = donationPickedUpButton else {
+            return
+        }
         callButton.setImage(UIImage.templatedImageFromName("phone"), forState: .Normal)
         messageButton.setImage(UIImage.templatedImageFromName("textsms"), forState: .Normal)
         navigationButton.setImage(UIImage.templatedImageFromName("navigation"), forState: .Normal)
         
-        if let button = donationPickedUpButton {
-            button.layer.cornerRadius = 5.0
-        }
+        donationPickedUpButton.layer.cornerRadius = 5.0
+        donationPickedUpButton.addShadow()
+        
+        myLocationButton.addShadow()
     }
     
     private func validateButtons() {
@@ -63,6 +73,12 @@ class PickupDonationViewController: BaseMapViewController {
             let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
             mapView!.setRegion(newRegion, animated: true)
         }
+        myLocationButton.toggleShadowOff()
+    }
+    
+    //Turning shadow back on after map moves
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        myLocationButton.toggleShadowOn()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -115,6 +131,7 @@ class PickupDonationViewController: BaseMapViewController {
             let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pickupRequest")
             pinAnnotationView.pinColor = .Green
             pinAnnotationView.canShowCallout = true
+            pinAnnotationView.addShadow()
             return pinAnnotationView
         }
         return nil

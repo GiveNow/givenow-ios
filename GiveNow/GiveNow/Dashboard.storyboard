@@ -144,11 +144,18 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Vi-30-sFu">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="439"/>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vWr-C1-8kF" userLabel="shadowView">
+                                <rect key="frame" x="0.0" y="-10" width="600" height="10"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="4kO-pP-8hF"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgo-ly-EC1">
-                                <rect key="frame" x="10" y="369" width="580" height="60"/>
+                                <rect key="frame" x="10" y="379" width="580" height="50"/>
                                 <color key="backgroundColor" red="0.40000000600000002" green="0.73333334920000004" blue="0.41568627949999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Ebu-5L-q2i"/>
+                                    <constraint firstAttribute="height" constant="50" id="Ebu-5L-q2i"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="donationPickedUp">
@@ -202,7 +209,7 @@
                                 <color key="tintColor" red="0.40000000600000002" green="0.73333334920000004" blue="0.41568627949999998" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fxb-pq-5fJ" customClass="MyLocationButton" customModule="GiveNow" customModuleProvider="target">
-                                <rect key="frame" x="536" y="305" width="44" height="44"/>
+                                <rect key="frame" x="536" y="315" width="44" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="S7N-EP-jRL"/>
@@ -216,6 +223,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vWr-C1-8kF" firstAttribute="leading" secondItem="BPZ-mE-nkj" secondAttribute="leading" id="1zc-qo-jVr"/>
                             <constraint firstItem="IOI-dO-QV2" firstAttribute="top" secondItem="qgo-ly-EC1" secondAttribute="bottom" constant="10" id="3Jp-Zg-4a9"/>
                             <constraint firstItem="IOI-dO-QV2" firstAttribute="top" secondItem="6Vi-30-sFu" secondAttribute="bottom" id="3pN-DK-G8V"/>
                             <constraint firstItem="IOI-dO-QV2" firstAttribute="leading" secondItem="BPZ-mE-nkj" secondAttribute="leading" id="5fm-qn-y2n"/>
@@ -229,6 +237,7 @@
                             <constraint firstItem="IOI-dO-QV2" firstAttribute="top" secondItem="6Vi-30-sFu" secondAttribute="bottom" id="Sr8-F5-1vD"/>
                             <constraint firstItem="IOI-dO-QV2" firstAttribute="top" secondItem="Fxb-pq-5fJ" secondAttribute="bottom" constant="20" id="T2i-hU-1Cr"/>
                             <constraint firstItem="n5o-cV-GmE" firstAttribute="top" secondItem="IOI-dO-QV2" secondAttribute="bottom" id="TcB-tR-2Lp"/>
+                            <constraint firstAttribute="trailing" secondItem="vWr-C1-8kF" secondAttribute="trailing" id="U4n-MP-O5p"/>
                             <constraint firstItem="n5o-cV-GmE" firstAttribute="top" secondItem="IOI-dO-QV2" secondAttribute="bottom" id="cTm-qA-hmb"/>
                             <constraint firstItem="6Vi-30-sFu" firstAttribute="leading" secondItem="BPZ-mE-nkj" secondAttribute="leading" id="drz-3A-Xoz"/>
                             <constraint firstAttribute="trailing" secondItem="6Vi-30-sFu" secondAttribute="trailing" id="fZo-zA-VJt"/>
@@ -237,6 +246,7 @@
                             <constraint firstItem="n5o-cV-GmE" firstAttribute="top" secondItem="6Vi-30-sFu" secondAttribute="bottom" constant="60" id="tjF-pT-5eu"/>
                             <constraint firstItem="IOI-dO-QV2" firstAttribute="top" secondItem="qgo-ly-EC1" secondAttribute="bottom" constant="10" id="uQo-gh-PIv"/>
                             <constraint firstItem="qgo-ly-EC1" firstAttribute="top" secondItem="6Vi-30-sFu" secondAttribute="bottom" constant="50" id="vvT-m7-Wv6"/>
+                            <constraint firstItem="vWr-C1-8kF" firstAttribute="top" secondItem="La5-zJ-nzv" secondAttribute="bottom" constant="-10" id="wxx-EN-XWL"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -259,6 +269,7 @@
                         <outlet property="messageButton" destination="7Q9-KS-ZqA" id="lp3-X6-IpU"/>
                         <outlet property="myLocationButton" destination="Fxb-pq-5fJ" id="fQN-Tm-VF8"/>
                         <outlet property="navigationButton" destination="Bv9-Tz-TSl" id="juW-vq-ShU"/>
+                        <outlet property="shadowView" destination="vWr-C1-8kF" id="rPr-1m-0QM"/>
                         <segue destination="JIT-jV-7Nb" kind="unwind" identifier="donationCompleted" unwindAction="donationCompleted:" id="mOE-wL-QMZ"/>
                     </connections>
                 </viewController>
