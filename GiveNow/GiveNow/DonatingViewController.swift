@@ -45,6 +45,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         layoutView()
         zoomToUserLocation()
         navigationItem.title = ""
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "alertActionCompleted:", name: "alertActionCompleted", object: nil)
     }
     
     func layoutView() {
@@ -128,6 +129,42 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
             let currentRegion = mapView.region
             let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
             mapView.setRegion(newRegion, animated: true)
+        }
+    }
+    
+    func alertActionCompleted(notification: NSNotification) {
+        print("Time to reload the views!")
+        let query = backend.queryMyPickupRequests()
+        backend.fetchPickupRequestsWithQuery(query, completionHandler: {(result, error) -> Void in
+            if let error = error {
+                print(error)
+            }
+            else if let result = result {
+                if result.count > 0 {
+                    if let pickupRequest = result[0] as? PickupRequest {
+                        self.myPickupRequest = pickupRequest
+                        self.updatePendingDonationViewController()
+                    }
+                }
+                else {
+                    self.dismissPendingDonationViewController()
+                }
+            }
+        })
+    }
+    
+    func updatePendingDonationViewController() {
+        if let vc = pendingDonationViewController {
+            vc.pickupRequest = self.myPickupRequest
+            vc.setHeaderBasedOnRequestStatus()
+        }
+    }
+    
+    func dismissPendingDonationViewController() {
+        if let vc = pendingDonationViewController {
+            vc.willMoveToParentViewController(nil)
+            vc.view.removeFromSuperview()
+            vc.removeFromParentViewController()
         }
     }
     

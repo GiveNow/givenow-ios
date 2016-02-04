@@ -116,6 +116,9 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
             if let error = error {
                 print(error)
             }
+            else {
+                self.alertActionCompleted()
+            }
         })
     }
     
@@ -123,6 +126,9 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
         backend.confirmVolunteerForPickupRequest(pickupRequest, completionHandler: {(result, error) -> Void in
             if let error = error {
                 print(error)
+            }
+            else {
+                self.alertActionCompleted()
             }
         })
     }
@@ -165,15 +171,30 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
             if let error = error {
                 print(error)
             }
+            else {
+                self.alertActionCompleted()
+            }
         })
     }
+    
+    // MARK: Handling other notifications
     
     func handleNotification(json: JSON) {
         let title = NotificationHelper.localizeNotificationTitle(json)
         let message = NotificationHelper.localizeNotificationMessage(json)
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("dismiss", comment: ""), style: .Default, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("dismiss", comment: ""), style: .Default, handler: {(action) in
+            self.alertActionCompleted()
+        }))
         self.presentViewController(alertController, animated: true, completion: {})
+    }
+    
+    // MARK: Informing app that alert has been dismissed - views may need to be reloaded
+    
+    func alertActionCompleted() {
+        print("Doing this")
+        let localNotification = NSNotification(name: "alertActionCompleted", object: nil, userInfo: nil)
+        NSNotificationCenter.defaultCenter().postNotification(localNotification)
     }
     
     // MARK: Private
