@@ -130,7 +130,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Notification is remote")
             // use the given keys to get the localized strings and
             // schedule an immediate local user notification with that text
-            let notification = NotificationHelper.localizeNotificationMessage(dictionary)
+            let json = JSON(dictionary)
+            let notification = NotificationHelper.localizeNotificationMessage(json)
             scheduleLocalUserNotification(notification)
         }
         else {
