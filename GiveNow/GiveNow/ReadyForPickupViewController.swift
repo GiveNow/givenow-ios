@@ -20,58 +20,58 @@ class ReadyForPickupViewController: BaseViewController {
     var pickupRequest:PickupRequest!
     var name:String!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        layoutView()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    func layoutView() {
-        localizeStrings()
-        if let address = pickupRequest.address {
-            addressLabel.text = address
-        }
-    }
-    
-    func localizeStrings() {
-        promptHeader.text = String.localizedStringWithParameters("push_notif_volunteer_is_ready_to_pickup", phoneNumber: nil, name: name, code: nil)
-        messageBody.text = NSLocalizedString("dialog_accept_pending_volunteer", comment: "")
-        yesButton.setTitle(NSLocalizedString("yes", comment: ""), forState: .Normal)
-        noButton.setTitle(NSLocalizedString("no", comment: ""), forState: .Normal)
-    }
-    
-    @IBAction func donationIsNotReady() {
-        backend.indicatePickupRequestIsNotReady(pickupRequest, completionHandler: {(result, error) -> Void in
-            if let error = error {
-                print(error)
-            }
-            else {
-                self.dismissPrompt()
-            }
-        })
-    }
-    
-    @IBAction func donationIsReady() {
-        backend.confirmVolunteerForPickupRequest(pickupRequest, completionHandler: {(result, error) -> Void in
-            if let error = error {
-                print(error)
-            }
-            else {
-                self.dismissPrompt()
-            }
-        })
-    }
-    
-    func dismissPrompt() {
-        if let parent = parentViewController as? ModalPromptViewController {
-            if let grandParent = parent.parentViewController as? DonatingViewController {
-                grandParent.updatePendingDonationChildView()
-                grandParent.removeEmbeddedViewController(parent)
-            }
-        }
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        layoutView()
+//    }
+//
+//    override func didReceiveMemoryWarning() {
+//        super.didReceiveMemoryWarning()
+//    }
+//    
+//    func layoutView() {
+//        localizeStrings()
+//        if let address = pickupRequest.address {
+//            addressLabel.text = address
+//        }
+//    }
+//    
+//    func localizeStrings() {
+//        promptHeader.text = String.localizedStringWithParameters("push_notif_volunteer_is_ready_to_pickup", phoneNumber: nil, name: name, code: nil)
+//        messageBody.text = NSLocalizedString("dialog_accept_pending_volunteer", comment: "")
+//        yesButton.setTitle(NSLocalizedString("yes", comment: ""), forState: .Normal)
+//        noButton.setTitle(NSLocalizedString("no", comment: ""), forState: .Normal)
+//    }
+//    
+//    @IBAction func donationIsNotReady() {
+//        backend.indicatePickupRequestIsNotReady(pickupRequest, completionHandler: {(result, error) -> Void in
+//            if let error = error {
+//                print(error)
+//            }
+//            else {
+//                self.dismissPrompt()
+//            }
+//        })
+//    }
+//    
+//    @IBAction func donationIsReady() {
+//        backend.confirmVolunteerForPickupRequest(pickupRequest, completionHandler: {(result, error) -> Void in
+//            if let error = error {
+//                print(error)
+//            }
+//            else {
+//                self.dismissPrompt()
+//            }
+//        })
+//    }
+//    
+//    func dismissPrompt() {
+//        if let parent = parentViewController as? ModalPromptViewController {
+//            if let grandParent = parent.parentViewController as? DonatingViewController {
+//                grandParent.updatePendingDonationChildView()
+//                grandParent.removeEmbeddedViewController(parent)
+//            }
+//        }
+//    }
 
 }

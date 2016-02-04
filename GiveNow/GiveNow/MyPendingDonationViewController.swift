@@ -27,16 +27,16 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addNote()
         collectionView.delegate = self
         collectionView.dataSource = self
         layoutView()
-        setHeaderBasedOnRequestStatus()
     }
     
     func layoutView() {
+        addNote()
         localizeText()
         templateImages()
+        setHeaderBasedOnRequestStatus()
     }
 
     func localizeText() {
@@ -70,6 +70,7 @@ class MyPendingDonationViewController: BaseViewController, UICollectionViewDeleg
     }
     
     func setHeaderBasedOnRequestStatus() {
+        headerLabel.text = ""
         if pickupRequest.pendingVolunteer == nil && pickupRequest.confirmedVolunteer == nil {
             self.headerLabel.text = NSLocalizedString("request_status_waiting", comment: "")
         }

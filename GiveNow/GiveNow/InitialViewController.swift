@@ -20,6 +20,7 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         detectFirstLaunch()
                 NSNotificationCenter.defaultCenter().addObserver(self, selector: "pushNotificationReceived:", name: "pushNotificationReceived", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showPendingAlertsIfNeeded:", name: "showPendingAlertsIfNeeded", object: nil)
         showPendingAlertsIfPushDisabled()
     }
     
@@ -206,6 +207,10 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
         if permissionStatus != .Allowed {
             self.showPendingAlerts()
         }
+    }
+    
+    func showPendingAlertsIfNeeded(notification: NSNotification){
+        showPendingAlerts()
     }
     
     func showPendingAlerts() {

@@ -48,6 +48,18 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "alertActionCompleted:", name: "alertActionCompleted", object: nil)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        displayPendingDonationViewIfNeeded()
+        showPendingAlertsIfNeeded()
+    }
+    
+    func showPendingAlertsIfNeeded() {
+        let localNotification = NSNotification(name: "showPendingAlertsIfNeeded", object: nil, userInfo: nil)
+        NSNotificationCenter.defaultCenter().postNotification(localNotification)
+    }
+    
+
     func layoutView() {
         infoView.addShadow()
         localizeText()
@@ -82,15 +94,8 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         myLocationButton.addShadow()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        displayPendingDonationViewIfNeeded()
-    }
-    
     @IBAction func helpButtonTapped(sender: AnyObject) {
-        
     }
-    
     
     func zoomToUserLocation() {
         let status = locationStatus()
@@ -179,7 +184,9 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
                     if let pickupRequest = result[0] as? PickupRequest {
                         self.myPickupRequest = pickupRequest
                         self.addPendingDonationChildView()
-                        self.displayPromptIfNeeded()
+                        
+                        //// Disabling this for now - hoping that the alerts served by the initial view controller will handle this.
+//                        self.displayPromptIfNeeded()
                     }
                 }
             }
@@ -217,72 +224,72 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         navigationItem.title = pickupLocationName
     }
     
-    func displayPromptIfNeeded() {
-        guard let storyboard = storyboard else {
-            return
-        }
-        if myPickupRequest.pendingVolunteer != nil && myPickupRequest.confirmedVolunteer == nil {
-            getPendingVolunteerNameAndDisplayPrompt()
-        }
-        else if myPickupRequest.donation != nil {
-            if let modalViewController = storyboard.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
-                embedViewController(modalViewController, intoView: view)
-                
-                if let thankYouPrompt = storyboard.instantiateViewControllerWithIdentifier("donationPickedUp") as? ThankYouPromptViewController {
-                    thankYouPrompt.pickupRequest = myPickupRequest
-                    modalViewController.embedViewController(thankYouPrompt, intoView: modalViewController.promptView)
-                }
-            }
-        }
-    }
+//    func displayPromptIfNeeded() {
+//        guard let storyboard = storyboard else {
+//            return
+//        }
+//        if myPickupRequest.pendingVolunteer != nil && myPickupRequest.confirmedVolunteer == nil {
+//            getPendingVolunteerNameAndDisplayPrompt()
+//        }
+//        else if myPickupRequest.donation != nil {
+//            if let modalViewController = storyboard.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
+//                embedViewController(modalViewController, intoView: view)
+//                
+//                if let thankYouPrompt = storyboard.instantiateViewControllerWithIdentifier("donationPickedUp") as? ThankYouPromptViewController {
+//                    thankYouPrompt.pickupRequest = myPickupRequest
+//                    modalViewController.embedViewController(thankYouPrompt, intoView: modalViewController.promptView)
+//                }
+//            }
+//        }
+//    }
     
-    func getPendingVolunteerNameAndDisplayPrompt() {
-        if let user = myPickupRequest.pendingVolunteer {
-            user.fetchIfNeededInBackgroundWithBlock({(result, error) -> Void in
-                if let volunteer = result as? User {
-                    if let name = volunteer.name {
-                        self.displayReadyForPickupPrompt(name)
-                    }
-                    else {
-                        let name = String.localizedString("a_volunteer")
-                        self.displayReadyForPickupPrompt(name)
-                    }
-                }
-                else {
-                    let name = String.localizedString("a_volunteer")
-                    self.displayReadyForPickupPrompt(name)
-                }
-            })
-        }
-    }
+//    func getPendingVolunteerNameAndDisplayPrompt() {
+//        if let user = myPickupRequest.pendingVolunteer {
+//            user.fetchIfNeededInBackgroundWithBlock({(result, error) -> Void in
+//                if let volunteer = result as? User {
+//                    if let name = volunteer.name {
+//                        self.displayReadyForPickupPrompt(name)
+//                    }
+//                    else {
+//                        let name = String.localizedString("a_volunteer")
+//                        self.displayReadyForPickupPrompt(name)
+//                    }
+//                }
+//                else {
+//                    let name = String.localizedString("a_volunteer")
+//                    self.displayReadyForPickupPrompt(name)
+//                }
+//            })
+//        }
+//    }
+//    
+//    func displayReadyForPickupPrompt(name: String) {
+//        guard let storyboard = storyboard else {
+//            return
+//        }
+//        if let modalViewController = storyboard.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
+//            embedViewController(modalViewController, intoView: view)
+//            
+//            if let readyForPickupPrompt = storyboard.instantiateViewControllerWithIdentifier("readyForPickup") as? ReadyForPickupViewController {
+//                
+//                readyForPickupPrompt.pickupRequest = myPickupRequest
+//                readyForPickupPrompt.name = name
+//                modalViewController.embedViewController(readyForPickupPrompt, intoView: modalViewController.promptView)
+//            }
+//        }
+//    }
     
-    func displayReadyForPickupPrompt(name: String) {
-        guard let storyboard = storyboard else {
-            return
-        }
-        if let modalViewController = storyboard.instantiateViewControllerWithIdentifier("modalPrompt") as? ModalPromptViewController {
-            embedViewController(modalViewController, intoView: view)
-            
-            if let readyForPickupPrompt = storyboard.instantiateViewControllerWithIdentifier("readyForPickup") as? ReadyForPickupViewController {
-                
-                readyForPickupPrompt.pickupRequest = myPickupRequest
-                readyForPickupPrompt.name = name
-                modalViewController.embedViewController(readyForPickupPrompt, intoView: modalViewController.promptView)
-            }
-        }
-    }
-    
-    func updatePendingDonationChildView() {
-        myPickupRequest.fetchIfNeededInBackgroundWithBlock({(result, error) -> Void in
-            if let error = error {
-                print(error)
-            }
-            else {
-                self.pendingDonationViewController.pickupRequest = self.myPickupRequest
-                self.pendingDonationViewController.setHeaderBasedOnRequestStatus()
-            }
-        })
-    }
+//    func updatePendingDonationChildView() {
+//        myPickupRequest.fetchIfNeededInBackgroundWithBlock({(result, error) -> Void in
+//            if let error = error {
+//                print(error)
+//            }
+//            else {
+//                self.pendingDonationViewController.pickupRequest = self.myPickupRequest
+//                self.pendingDonationViewController.setHeaderBasedOnRequestStatus()
+//            }
+//        })
+//    }
     
     @IBAction func setPickupLocationButtonTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("selectCategories", sender: nil)
