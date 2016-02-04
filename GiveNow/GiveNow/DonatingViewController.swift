@@ -115,15 +115,19 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     @IBAction func myLocationTapped(sender: AnyObject) {
+        myLocationButton.toggleShadowOff()
         centerMapOnUserLocation()
     }
     
     func centerMapOnUserLocation() {
+        guard let mapView = mapView else {
+            return
+        }
         if let location = locationManager?.location {
             let coord = location.coordinate
-            let currentRegion = mapView!.region
+            let currentRegion = mapView.region
             let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
-            mapView!.setRegion(newRegion, animated: true)
+            mapView.setRegion(newRegion, animated: true)
         }
     }
     
@@ -484,6 +488,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         if shouldUpdateSearchBarWithMapCenter == true {
             setAddressFromCoordinates()
         }
+        myLocationButton.toggleShadowOn()
     }
     
     private func setAddressFromCoordinates() {

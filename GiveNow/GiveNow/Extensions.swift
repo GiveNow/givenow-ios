@@ -56,10 +56,28 @@ extension UIView {
     }
     
     func addShadow() {
+        print("This also happened")
         layer.shadowColor = UIColor.blackColor().CGColor
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSizeMake(3.0, 3.0)
         layer.shadowRadius = 2.0
+    }
+    
+    func removeShadow() {
+        print("This happened")
+        layer.shadowOpacity = 0.0
+    }
+    
+    func toggleShadowOff() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.removeShadow()
+            }, completion: nil)
+    }
+    
+    func toggleShadowOn() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.addShadow()
+            }, completion: nil)
     }
     
 }
