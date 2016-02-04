@@ -28,6 +28,7 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var removeNoteButton: UIButton!
     @IBOutlet weak var helpButton: UIButton!
+    @IBOutlet weak var headerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +40,30 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     }
     
     func layoutView() {
+        headerView.addShadow()
+        setImages()
+        formatNote()
+        formatButtons()
+    }
+    
+    func setImages() {
         if let image = UIImage(named: "info") {
             self.infoImage.image = image.imageWithRenderingMode(.AlwaysTemplate)
             self.infoImage.tintColor = UIColor.whiteColor()
         }
+    }
+    
+    func formatNote() {
+        noteTextField.alpha = 0.0
+        removeNoteButton.alpha = 0.0
+        removeNoteButton.enabled = false
+    }
+    
+    func formatButtons() {
+        guard let button = giveNowButton else {
+            return
+        }
+        
         if let image = UIImage(named: "add_note") {
             self.addNoteButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
             self.addNoteButton.tintColor = UIColor.whiteColor()
@@ -56,17 +77,9 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
             self.helpButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
             self.helpButton.tintColor = UIColor.whiteColor()
         }
-        noteTextField.alpha = 0.0
-        removeNoteButton.alpha = 0.0
-        removeNoteButton.enabled = false
-        formatButton()
-    }
-    
-    func formatButton() {
-        guard let button = giveNowButton else {
-            return
-        }
+        
         button.layer.cornerRadius = 5.0
+        button.addShadow()
     }
     
     func localizeText() {
@@ -126,7 +139,6 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         let donationCategory = donationCategories[indexPath.row]
         configureDonationCategoryCell(cell, donationCategory: donationCategory)
         cell.layer.cornerRadius = 5.0
-        
         return cell
     }
     
@@ -142,6 +154,9 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         
         addImageToCell(cell, donationCategory: donationCategory)
         cell.categoryLabel.text = donationCategory.getName()
+        
+        cell.layer.masksToBounds = false
+        cell.addShadow()
         
         if donationCategory.selected == true {
             highlightCell(cell)
@@ -189,11 +204,13 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     func highlightCell(cell: DonationCategoryCollectionViewCell) {
         cell.categoryLabel.backgroundColor = UIColor.colorAccent()
         cell.categoryLabel.textColor = UIColor.whiteColor()
+        cell.removeShadow()
     }
     
     func unHighlightCell(cell: DonationCategoryCollectionViewCell) {
         cell.categoryLabel.backgroundColor = UIColor.lightGrayColor()
         cell.categoryLabel.textColor = UIColor.whiteColor()
+        cell.addShadow()
     }
     
     //MARK: Completing selection
@@ -203,14 +220,17 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
             let selectedDonationCategories = donationCategories.filter() {$0.selected == true}
             if selectedDonationCategories.count > 0 {
                 giveNowButton.enabled = true
+                giveNowButton.toggleShadowOn()
                 giveNowButton.backgroundColor = UIColor.colorAccent()
             }
             else {
+                giveNowButton.toggleShadowOff()
                 giveNowButton.enabled = false
                 giveNowButton.backgroundColor = UIColor.colorAccentDisabled()
             }
         }
         else {
+            giveNowButton.toggleShadowOff()
             giveNowButton.enabled = false
             giveNowButton.backgroundColor = UIColor.colorAccentDisabled()
         }
