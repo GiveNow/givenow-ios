@@ -23,6 +23,7 @@ class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControll
     
     func layoutView() {
         volunteerButton.layer.cornerRadius = 5.0
+        volunteerButton.addShadow()
     }
     
     // MARK: - User Actions
@@ -91,6 +92,7 @@ class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControll
         volunteerButton?.setTitle(NSLocalizedString("volunteer_button_user_has_applied", comment: ""), forState: .Normal)
         volunteerButton?.backgroundColor = UIColor.lightGrayColor()
         volunteerButton.hidden = false
+        volunteerButton.removeShadow()
     }
     
     private func checkPendingVolunteer() {
