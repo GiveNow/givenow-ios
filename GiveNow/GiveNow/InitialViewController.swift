@@ -94,10 +94,10 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
                 let message = NotificationHelper.localizeNotificationMessage(json)
                 
                 let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                alertController.addAction(UIAlertAction(title: "Yes", style: .Default, handler: {(action) in
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .Default, handler: {(action) in
                     self.donationIsReady()
                 }))
-                alertController.addAction(UIAlertAction(title: "No", style: .Default, handler: {(action) in
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("no", comment: ""), style: .Default, handler: {(action) in
                     self.donationIsNotReady()
                 }))
                 self.presentViewController(alertController, animated: true, completion: {})

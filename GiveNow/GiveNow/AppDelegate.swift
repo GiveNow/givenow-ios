@@ -104,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Received a remote notification")
 
         if application.applicationState == .Active {
-            handleNotificationWhenActive(userInfo)
+            postLocalNotification(userInfo)
         }
         else {
             handleNotification(userInfo, isRemote: true)
@@ -130,9 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Notification is remote")
             // use the given keys to get the localized strings and
             // schedule an immediate local user notification with that text
-            let json = JSON(dictionary)
-            let notification = NotificationHelper.localizeNotificationMessage(json)
-            scheduleLocalUserNotification(notification)
+            scheduleLocalUserNotification(dictionary)
         }
         else {
             print("Notification is local")
@@ -140,19 +138,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func handleNotificationWhenActive(dictionary: [ NSObject : AnyObject ]) {
+    func postLocalNotification(dictionary: [ NSObject : AnyObject ]) {
         let localNotification = NSNotification(name: "pushNotificationReceived", object: nil, userInfo: dictionary)
         NSNotificationCenter.defaultCenter().postNotification(localNotification)
     }
     
-    func scheduleLocalUserNotification(text: String) {
+    func scheduleLocalUserNotification(dictionary: [ NSObject : AnyObject]) {
         print("Scheduling a notification")
+        let json = JSON(dictionary)
+        let message = NotificationHelper.localizeNotificationMessage(json)
         let localNotification = UILocalNotification()
-        localNotification.alertBody = text
+        localNotification.alertBody = message
         localNotification.fireDate = NSDate()
         localNotification.category = "Alerts"
         localNotification.userInfo = ["data" : "TBD"]
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        
+        //Also posting a local notification so that the alert will appear when the app opens...
+        postLocalNotification(dictionary)
     }
 
 }
