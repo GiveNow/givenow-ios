@@ -61,6 +61,8 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
                 switch notificationType {
                 case "claimPickupRequest":
                     handleClaimPickupRequestNotificationReceived(json)
+                case "pickupDonation":
+                    handleDonationCompleteNotification(json)
                 default:
                     handleNotification(json)
                 }
@@ -86,7 +88,11 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
         })
     }
     
+    // Mark: Claiming pickup request
+    
     func handleClaimPickupRequestNotificationReceived(json: JSON) {
+        
+        //Note: this is dangerous; better to get it from the notification?
         queryMyPickupRequest({(error, result) -> Void in
             if let pickupRequest = result {
                 self.pickupRequest = pickupRequest
@@ -115,6 +121,47 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
     
     func donationIsReady() {
         backend.confirmVolunteerForPickupRequest(pickupRequest, completionHandler: {(result, error) -> Void in
+            if let error = error {
+                print(error)
+            }
+        })
+    }
+    
+    // MARK: Completing donation
+    
+    func handleDonationCompleteNotification(json: JSON) {
+        
+        //Note: This is dangerous - better to get it from the notification?
+        queryMyPickupRequest({(error, result) -> Void in
+            if let pickupRequest = result {
+                self.pickupRequest = pickupRequest
+                let title = NotificationHelper.localizeNotificationTitle(json)
+                let message = NotificationHelper.localizeNotificationMessage(json)
+                
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("done", comment: ""), style: .Default, handler: {(action) in
+                    self.donePressed()
+                }))
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("rate_app", comment: ""), style: .Default, handler: {(action) in
+                    self.rateApp()
+                }))
+                self.presentViewController(alertController, animated: true, completion: {})
+            }
+        })
+    }
+    
+    
+    func rateApp() {
+        closeDonation()
+        //To Do: Open app store to rate app
+    }
+    
+    func donePressed() {
+        closeDonation()
+    }
+    
+    func closeDonation() {
+        backend.markComplete(pickupRequest, completionHandler: {(resut, error) -> Void in
             if let error = error {
                 print(error)
             }
