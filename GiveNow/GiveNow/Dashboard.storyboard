@@ -20,6 +20,13 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MH5-YL-f4n">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="he9-xN-IQh" userLabel="shadowView">
+                                <rect key="frame" x="0.0" y="-10" width="600" height="10"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="l1D-gQ-5FN"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GtN-bE-Lsx" customClass="MyLocationButton" customModule="GiveNow" customModuleProvider="target">
                                 <rect key="frame" x="531" y="423" width="44" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -35,12 +42,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="he9-xN-IQh" firstAttribute="top" secondItem="mZp-af-V41" secondAttribute="bottom" constant="-10" id="1Ln-Mn-fmo"/>
+                            <constraint firstAttribute="trailing" secondItem="he9-xN-IQh" secondAttribute="trailing" id="SR2-zG-JiG"/>
                             <constraint firstItem="RX2-Av-Ilo" firstAttribute="top" secondItem="GtN-bE-Lsx" secondAttribute="bottom" constant="20" id="Z0B-MH-wSm"/>
                             <constraint firstItem="RX2-Av-Ilo" firstAttribute="top" secondItem="MH5-YL-f4n" secondAttribute="bottom" id="gvz-qe-GU2"/>
                             <constraint firstItem="MH5-YL-f4n" firstAttribute="top" secondItem="mZp-af-V41" secondAttribute="bottom" id="pq5-f0-L9P"/>
                             <constraint firstItem="MH5-YL-f4n" firstAttribute="leading" secondItem="aHS-eo-poZ" secondAttribute="leading" id="q0P-fj-NXi"/>
                             <constraint firstAttribute="trailing" secondItem="MH5-YL-f4n" secondAttribute="trailing" id="vSE-th-UfK"/>
                             <constraint firstAttribute="trailing" secondItem="GtN-bE-Lsx" secondAttribute="trailing" constant="25" id="vWX-0Y-oBQ"/>
+                            <constraint firstItem="he9-xN-IQh" firstAttribute="leading" secondItem="aHS-eo-poZ" secondAttribute="leading" id="xV2-Am-YXW"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="pickupRequests" image="person_pin" id="6hm-Oc-e1h" userLabel="Open Pickup Requests"/>
@@ -48,6 +58,7 @@
                         <outlet property="mapView" destination="MH5-YL-f4n" id="ltC-Jh-9A1"/>
                         <outlet property="myLocationButton" destination="GtN-bE-Lsx" id="rPt-4n-4KA"/>
                         <outlet property="pickupRequests" destination="6hm-Oc-e1h" id="hZi-P7-DgJ"/>
+                        <outlet property="shadowView" destination="he9-xN-IQh" id="ceu-6G-Ewd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zn1-3z-2OX" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -56,29 +56,40 @@ extension UIView {
     }
     
     func addShadow() {
-        print("This also happened")
-        layer.shadowColor = UIColor.blackColor().CGColor
+        layer.shadowColor = UIColor.darkGrayColor().CGColor
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSizeMake(3.0, 3.0)
         layer.shadowRadius = 2.0
     }
     
     func removeShadow() {
-        print("This happened")
         layer.shadowOpacity = 0.0
     }
     
     func toggleShadowOff() {
         UIView.animateWithDuration(0.5, animations: {
             self.removeShadow()
-            }, completion: nil)
+            })
     }
     
     func toggleShadowOn() {
         UIView.animateWithDuration(0.5, animations: {
             self.addShadow()
-            }, completion: nil)
+            })
     }
+    
+//// Can't get this to work - the second animation happens right away, so it looks like nothing happens.s
+//    func toggleShadow() {
+//        UIView.animateWithDuration(0.5, animations: {
+//            self.layer.shadowOpacity = 0.0
+//            print("Doing this")
+//            }, completion: nil)
+//        
+//        UIView.animateWithDuration(0.5, delay: 1.0, options: [], animations: {
+//            self.layer.shadowOpacity = 0.8
+//            print("Doing that")
+//            }, completion: nil)
+//    }
     
 }
 
