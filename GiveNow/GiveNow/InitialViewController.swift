@@ -106,11 +106,11 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
                 let message = NotificationHelper.localizeNotificationMessage(json)
                 
                 let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                alertController.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .Default, handler: {(action) in
-                    self.donationIsReady()
-                }))
                 alertController.addAction(UIAlertAction(title: NSLocalizedString("no", comment: ""), style: .Default, handler: {(action) in
                     self.donationIsNotReady()
+                }))
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .Default, handler: {(action) in
+                    self.donationIsReady()
                 }))
                 self.presentViewController(alertController, animated: true, completion: {})
             }
@@ -151,11 +151,11 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
                 let message = NotificationHelper.localizeNotificationMessage(json)
                 
                 let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                alertController.addAction(UIAlertAction(title: NSLocalizedString("done", comment: ""), style: .Default, handler: {(action) in
-                    self.donePressed()
-                }))
                 alertController.addAction(UIAlertAction(title: NSLocalizedString("rate_app", comment: ""), style: .Default, handler: {(action) in
                     self.rateApp()
+                }))
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("done", comment: ""), style: .Default, handler: {(action) in
+                    self.donePressed()
                 }))
                 self.presentViewController(alertController, animated: true, completion: {})
             }
@@ -262,11 +262,11 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
         let title = String.localizedStringWithParameters("push_notif_volunteer_is_ready_to_pickup", phoneNumber: nil, name: name, code: nil)
         let message = NSLocalizedString("dialog_accept_pending_volunteer", comment: "")
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .Default, handler: {(action) in
-            self.donationIsReady()
-        }))
         alertController.addAction(UIAlertAction(title: NSLocalizedString("no", comment: ""), style: .Default, handler: {(action) in
             self.donationIsNotReady()
+        }))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .Default, handler: {(action) in
+            self.donationIsReady()
         }))
         self.presentViewController(alertController, animated: true, completion: {})
     }
@@ -298,11 +298,11 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
     func showDonationPickedUpAlert(message: String) {
         let title = NSLocalizedString("donation_complete_title", comment: "")
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("done", comment: ""), style: .Default, handler: {(action) in
-            self.donePressed()
-        }))
         alertController.addAction(UIAlertAction(title: NSLocalizedString("rate_app", comment: ""), style: .Default, handler: {(action) in
             self.rateApp()
+        }))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("done", comment: ""), style: .Default, handler: {(action) in
+            self.donePressed()
         }))
         self.presentViewController(alertController, animated: true, completion: {})
     }
