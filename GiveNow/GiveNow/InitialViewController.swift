@@ -15,6 +15,8 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
     
     var manager:CLLocationManager!
     var pickupRequest:PickupRequest!
+    
+    var shouldCheckForPendingAlerts = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,9 +57,8 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
     // MARK: Handling push notifications
     
     func pushNotificationReceived(notification: NSNotification){
+        shouldCheckForPendingAlerts = false
         if let dictionary = notification.userInfo {
-            print(dictionary)
-            
             let json = JSON(dictionary)
             if let notificationType = json["data"]["type"].string {
                 switch notificationType {
@@ -69,6 +70,9 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
                     handleNotification(json)
                 }
             }
+        }
+        else {
+            shouldCheckForPendingAlerts = true
         }
         
     }
@@ -194,7 +198,7 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
     // MARK: Informing app that alert has been dismissed - views may need to be reloaded
     
     func alertActionCompleted() {
-        print("Doing this")
+        shouldCheckForPendingAlerts = true
         let localNotification = NSNotification(name: "alertActionCompleted", object: nil, userInfo: nil)
         NSNotificationCenter.defaultCenter().postNotification(localNotification)
     }
@@ -205,12 +209,19 @@ class InitialViewController: BaseViewController, CLLocationManagerDelegate {
     func showPendingAlertsIfPushDisabled() {
         let permissionStatus = Permissions.systemStatusForNotifications()
         if permissionStatus != .Allowed {
+            shouldCheckForPendingAlerts = true
             self.showPendingAlerts()
         }
     }
     
     func showPendingAlertsIfNeeded(notification: NSNotification){
-        showPendingAlerts()
+        // Commentary: In general, we should only do this for situations where push is disabled.
+        // However, it's possible that push is enabled but the notification was not delivered. In that case, we want
+        // the app to act as though push is disabled and display pending results if necessary. BUT we don't want this to collide
+        // with the app actually handling push notifications. So we're using this boolean to try and handle that...
+        if shouldCheckForPendingAlerts == true {
+            showPendingAlerts()
+        }
     }
     
     func showPendingAlerts() {
