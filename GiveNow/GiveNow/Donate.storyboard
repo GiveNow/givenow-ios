@@ -198,7 +198,7 @@
                         <subviews>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JU6-xw-LN8" userLabel="tintedView">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L0J-0F-WTG" userLabel="Header View">
                                 <rect key="frame" x="0.0" y="20" width="600" height="60"/>
@@ -610,13 +610,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofB-37-sWl" userLabel="headerView">
                                 <rect key="frame" x="0.0" y="64" width="600" height="100"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b3x-AK-RwX" userLabel="noteTextField">
-                                        <rect key="frame" x="65" y="54" width="475" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="b3x-AK-RwX" userLabel="noteTextField">
+                                        <rect key="frame" x="20" y="54" width="520" height="30"/>
                                         <color key="backgroundColor" red="0.039215687659999998" green="0.53725492949999998" blue="0.6549019814" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="noteEditingEnded:" destination="xqe-tM-5xe" eventType="editingDidEnd" id="peS-Lx-Wxf"/>
+                                        </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Qb-6p-O5Q" userLabel="infoImage">
                                         <rect key="frame" x="20" y="15" width="24" height="24"/>
@@ -643,20 +646,8 @@
                                             <action selector="helpButtonTapped:" destination="xqe-tM-5xe" eventType="touchUpInside" id="mGb-SH-UVG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9i-cr-prf" userLabel="removeNoteButton">
-                                        <rect key="frame" x="550" y="54" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="jOM-5T-U8F"/>
-                                            <constraint firstAttribute="height" constant="30" id="qVG-gB-0Uq"/>
-                                        </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="cancel"/>
-                                        <connections>
-                                            <action selector="removeNoteTapped:" destination="xqe-tM-5xe" eventType="touchUpInside" id="Tbe-zO-BWo"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MzU-Cy-LaY" userLabel="addNoteButton">
-                                        <rect key="frame" x="20" y="54" width="520" height="30"/>
+                                        <rect key="frame" x="20" y="54" width="560" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="n9q-jk-Zvu"/>
                                             <constraint firstAttribute="width" constant="200" id="tzr-mh-488"/>
@@ -671,40 +662,43 @@
                                             <action selector="addNoteButtonTapped:" destination="xqe-tM-5xe" eventType="touchUpInside" id="VCF-3J-Sv4"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tuH-6o-Uik" userLabel="doneNoteButton">
+                                        <rect key="frame" x="550" y="54" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="Ggh-oO-xCe"/>
+                                            <constraint firstAttribute="height" constant="30" id="sRc-3k-9Hi"/>
+                                        </constraints>
+                                        <state key="normal" image="done-check"/>
+                                        <connections>
+                                            <action selector="doneNoteTapped:" destination="xqe-tM-5xe" eventType="touchUpInside" id="Caj-PJ-JCK"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.72549021244049072" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="fwq-2m-f5K" firstAttribute="leading" secondItem="OQa-EI-4bk" secondAttribute="trailing" constant="10" id="5LN-J1-8df"/>
+                                    <constraint firstItem="tuH-6o-Uik" firstAttribute="centerY" secondItem="MzU-Cy-LaY" secondAttribute="centerY" id="647-EK-pXC"/>
                                     <constraint firstItem="9Qb-6p-O5Q" firstAttribute="top" secondItem="ofB-37-sWl" secondAttribute="top" constant="15" id="9ed-Rs-D5l"/>
-                                    <constraint firstItem="b3x-AK-RwX" firstAttribute="leading" secondItem="ofB-37-sWl" secondAttribute="leading" constant="65" id="AUl-4r-zYk"/>
-                                    <constraint firstAttribute="trailing" secondItem="OQa-EI-4bk" secondAttribute="trailing" constant="80" id="FCV-AO-hd7"/>
+                                    <constraint firstItem="b3x-AK-RwX" firstAttribute="leading" secondItem="ofB-37-sWl" secondAttribute="leading" constant="20" id="AUl-4r-zYk"/>
                                     <constraint firstItem="MzU-Cy-LaY" firstAttribute="centerY" secondItem="b3x-AK-RwX" secondAttribute="centerY" id="G3s-Tr-vLo"/>
                                     <constraint firstItem="OQa-EI-4bk" firstAttribute="centerY" secondItem="9Qb-6p-O5Q" secondAttribute="centerY" id="HQR-ds-as0"/>
-                                    <constraint firstAttribute="trailing" secondItem="b3x-AK-RwX" secondAttribute="trailing" constant="60" id="P9g-Bv-zbt"/>
-                                    <constraint firstItem="f9i-cr-prf" firstAttribute="centerY" secondItem="b3x-AK-RwX" secondAttribute="centerY" id="QdL-0F-5y1"/>
-                                    <constraint firstItem="f9i-cr-prf" firstAttribute="leading" secondItem="MzU-Cy-LaY" secondAttribute="trailing" constant="10" id="XoU-PD-oPz"/>
+                                    <constraint firstItem="tuH-6o-Uik" firstAttribute="leading" secondItem="ofB-37-sWl" secondAttribute="leading" constant="20" id="JqR-3h-k8U"/>
+                                    <constraint firstAttribute="trailing" secondItem="tuH-6o-Uik" secondAttribute="trailing" constant="20" id="Lld-0y-kbY"/>
                                     <constraint firstItem="MzU-Cy-LaY" firstAttribute="top" secondItem="9Qb-6p-O5Q" secondAttribute="bottom" constant="15" id="euW-vV-mdO"/>
-                                    <constraint firstItem="f9i-cr-prf" firstAttribute="leading" secondItem="b3x-AK-RwX" secondAttribute="trailing" constant="10" id="f5c-WR-BQb"/>
                                     <constraint firstItem="OQa-EI-4bk" firstAttribute="leading" secondItem="9Qb-6p-O5Q" secondAttribute="trailing" constant="10" id="ffD-65-mGd"/>
                                     <constraint firstItem="fwq-2m-f5K" firstAttribute="top" secondItem="ofB-37-sWl" secondAttribute="top" constant="15" id="fuk-59-K47"/>
                                     <constraint firstAttribute="trailing" secondItem="fwq-2m-f5K" secondAttribute="trailing" constant="20" id="gDm-2Q-MdC"/>
                                     <constraint firstAttribute="height" constant="100" id="i6S-31-3Iz"/>
-                                    <constraint firstItem="b3x-AK-RwX" firstAttribute="centerY" secondItem="ofB-37-sWl" secondAttribute="centerY" id="jU0-rE-FB1"/>
-                                    <constraint firstAttribute="bottom" secondItem="b3x-AK-RwX" secondAttribute="bottom" constant="20" id="moc-pA-zG6"/>
+                                    <constraint firstItem="tuH-6o-Uik" firstAttribute="top" secondItem="9Qb-6p-O5Q" secondAttribute="bottom" constant="15" id="jy8-AS-bRn"/>
                                     <constraint firstItem="MzU-Cy-LaY" firstAttribute="leading" secondItem="ofB-37-sWl" secondAttribute="leading" constant="20" id="ntL-ID-QXG"/>
+                                    <constraint firstAttribute="trailing" secondItem="MzU-Cy-LaY" secondAttribute="trailing" constant="20" id="pdS-Je-ocI"/>
                                     <constraint firstItem="9Qb-6p-O5Q" firstAttribute="leading" secondItem="ofB-37-sWl" secondAttribute="leading" constant="20" id="qH3-Fi-Vu3"/>
-                                    <constraint firstAttribute="height" constant="200" id="up0-vK-8LD"/>
-                                    <constraint firstAttribute="trailing" secondItem="b3x-AK-RwX" secondAttribute="trailing" constant="20" id="vEE-as-KTs"/>
-                                    <constraint firstAttribute="trailing" secondItem="f9i-cr-prf" secondAttribute="trailing" constant="20" id="zPi-h4-Paa"/>
+                                    <constraint firstAttribute="trailing" secondItem="b3x-AK-RwX" secondAttribute="trailing" constant="60" id="qSw-sm-JyD"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="up0-vK-8LD"/>
-                                        <exclude reference="FCV-AO-hd7"/>
-                                        <exclude reference="P9g-Bv-zbt"/>
-                                        <exclude reference="jU0-rE-FB1"/>
-                                        <exclude reference="moc-pA-zG6"/>
-                                        <exclude reference="vEE-as-KTs"/>
+                                        <exclude reference="JqR-3h-k8U"/>
+                                        <exclude reference="jy8-AS-bRn"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -750,6 +744,7 @@
                     <connections>
                         <outlet property="addNoteButton" destination="MzU-Cy-LaY" id="QdF-EW-95N"/>
                         <outlet property="collectionView" destination="ohA-ph-S3Q" id="wM4-J1-pC1"/>
+                        <outlet property="doneNoteButton" destination="tuH-6o-Uik" id="8os-v8-mnJ"/>
                         <outlet property="giveNowButton" destination="YF9-JT-GUc" id="9hF-9z-hOp"/>
                         <outlet property="headerView" destination="ofB-37-sWl" id="BB9-CK-PYK"/>
                         <outlet property="headerViewHeight" destination="i6S-31-3Iz" id="tEx-w2-7m6"/>
@@ -757,7 +752,6 @@
                         <outlet property="infoImage" destination="9Qb-6p-O5Q" id="uTQ-7C-HSm"/>
                         <outlet property="infoLabel" destination="OQa-EI-4bk" id="2lz-LE-x5o"/>
                         <outlet property="noteTextField" destination="b3x-AK-RwX" id="ktJ-GC-JXq"/>
-                        <outlet property="removeNoteButton" destination="f9i-cr-prf" id="MeR-O5-Ygz"/>
                         <segue destination="Kip-pf-66s" kind="unwind" identifier="newPickupRequestCreated" unwindAction="newPickupRequestCreated:" id="HDw-Rl-ZQ2"/>
                     </connections>
                 </viewController>
@@ -848,7 +842,7 @@
     </scenes>
     <resources>
         <image name="add_note" width="24" height="24"/>
-        <image name="cancel" width="24" height="24"/>
+        <image name="done-check" width="24" height="24"/>
         <image name="help" width="24" height="24"/>
         <image name="location_pin" width="30" height="55"/>
         <image name="menu" width="24" height="24"/>

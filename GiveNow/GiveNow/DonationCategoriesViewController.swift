@@ -26,9 +26,9 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     @IBOutlet weak var infoImage: UIImageView!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var removeNoteButton: UIButton!
     @IBOutlet weak var helpButton: UIButton!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var doneNoteButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,9 +54,8 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
     }
     
     func formatNote() {
+        doneNoteButton.alpha = 0.0
         noteTextField.alpha = 0.0
-        removeNoteButton.alpha = 0.0
-        removeNoteButton.enabled = false
     }
     
     func formatButtons() {
@@ -68,11 +67,12 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
             self.addNoteButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
             self.addNoteButton.tintColor = UIColor.whiteColor()
         }
-        addNoteButton.setTitle(NSLocalizedString("note_add_label", comment: ""), forState: .Normal)
-        if let image = UIImage(named: "cancel") {
-            self.removeNoteButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-            self.removeNoteButton.tintColor = UIColor.whiteColor()
+        
+        if let image = UIImage(named: "done-check") {
+            self.doneNoteButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            self.doneNoteButton.tintColor = UIColor.whiteColor()
         }
+        addNoteButton.setTitle(NSLocalizedString("note_add_label", comment: ""), forState: .Normal)
         if let image = UIImage(named: "help") {
             self.helpButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
             self.helpButton.tintColor = UIColor.whiteColor()
@@ -271,36 +271,44 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         UIView.animateWithDuration(0.5, animations: {() -> Void in
             
             self.addNoteButton.setTitle("", forState: .Normal)
-            if let image = UIImage(named: "note_added") {
-                self.addNoteButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-            }
-            
-            self.addNoteButton.enabled = false
+            self.doneNoteButton.alpha = 1.0
+            self.addNoteButton.alpha = 0.0
             self.noteTextField.alpha = 1.0
-            self.removeNoteButton.alpha = 1.0
-            self.removeNoteButton.enabled = true
             }, completion: { finished in
             self.noteTextField.becomeFirstResponder()
         })
     }
     
-    
-    @IBAction func removeNoteTapped(sender: AnyObject) {
+
+    @IBAction func doneNoteTapped(sender: AnyObject) {
         noteTextField.resignFirstResponder()
+    }
+    
+    @IBAction func noteEditingEnded(sender: AnyObject) {
+        doneEditingNote()
+    }
+    
+    func doneEditingNote() {
         UIView.animateWithDuration(0.5, animations: {() -> Void in
             
-            self.addNoteButton.setTitle(NSLocalizedString("note_add_label", comment: ""), forState: .Normal)
-            if let image = UIImage(named: "add_note") {
-                self.addNoteButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            var title:String!
+            if self.noteTextField.text != nil && self.noteTextField.text != "" {
+                title = "  " + self.noteTextField.text!
+                if let image = UIImage(named: "note_added") {
+                    self.addNoteButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+                }
             }
-            
-            
-            self.noteTextField.text = nil
-            self.addNoteButton.enabled = true
+            else {
+                title = NSLocalizedString("note_add_label", comment: "")
+                if let image = UIImage(named: "add_note") {
+                    self.addNoteButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+                }
+            }
+            self.addNoteButton.setTitle(title, forState: .Normal)
+            self.doneNoteButton.alpha = 0.0
+            self.addNoteButton.alpha = 1.0
             self.noteTextField.alpha = 0.0
-            self.removeNoteButton.alpha = 0.0
-            self.removeNoteButton.enabled = false
-            })
+        })
     }
 
     @IBAction func helpButtonTapped(sender: AnyObject) {
