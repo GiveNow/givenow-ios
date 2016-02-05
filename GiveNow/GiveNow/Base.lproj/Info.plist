@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We use this to find your pickup request</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -24,8 +26,6 @@
 	<true/>
 	<key>MGLMapboxMetricsEnabledSettingShownInApp</key>
 	<true/>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We like to know where you are!</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

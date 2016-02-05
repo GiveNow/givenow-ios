@@ -65,7 +65,6 @@
 		D2186FCF1C431A78001551EF /* NavMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FCE1C431A78001551EF /* NavMenuTableViewController.swift */; };
 		D2186FD11C431EA9001551EF /* DashboardTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FD01C431EA9001551EF /* DashboardTabViewController.swift */; };
 		D224452F1C52F51400E04A73 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D224452E1C52F51400E04A73 /* NotificationHelper.swift */; };
-		D22445311C530F8400E04A73 /* LocalizationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22445301C530F8400E04A73 /* LocalizationHelper.swift */; };
 		D23BBF511C457F1B00E68AF9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF4F1C457F1B00E68AF9 /* LoginViewController.swift */; };
 		D23BBF521C457F1B00E68AF9 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF501C457F1B00E68AF9 /* LoginViewController.xib */; };
 		D23BBF591C45C4B900E68AF9 /* DropOff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */; };
@@ -74,9 +73,7 @@
 		D23CF8161C47243F0070AEAA /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23CF8151C47243F0070AEAA /* Initial.storyboard */; };
 		D23CF8181C4724650070AEAA /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CF8171C4724650070AEAA /* InitialViewController.swift */; };
 		D23CF81A1C472F760070AEAA /* MyLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CF8191C472F760070AEAA /* MyLocationButton.swift */; };
-		D269DA191C4F388F00249214 /* ThankYouPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D269DA181C4F388F00249214 /* ThankYouPromptViewController.swift */; };
 		D29F72B31C4AED9900A7D07A /* ApplyToVolunteerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F72B21C4AED9900A7D07A /* ApplyToVolunteerViewController.swift */; };
-		D29F72B91C4B031300A7D07A /* ReadyForPickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F72B71C4B031300A7D07A /* ReadyForPickupViewController.swift */; };
 		D29F72BF1C4B0CF600A7D07A /* ModalPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F72BD1C4B0CF600A7D07A /* ModalPromptViewController.swift */; };
 		D2CEB8D31C48703D003F4CC0 /* BaseMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CEB8D21C48703D003F4CC0 /* BaseMapViewController.swift */; };
 /* End PBXBuildFile section */
@@ -197,7 +194,6 @@
 		2645C66E1C21E7FF00D6C70D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2645C6701C21E7FF00D6C70D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2645C6731C21E7FF00D6C70D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		2645C6751C21E7FF00D6C70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2645C67A1C21E7FF00D6C70D /* GiveNowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiveNowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2645C67E1C21E7FF00D6C70D /* GiveNowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveNowTests.swift; sourceTree = "<group>"; };
 		2645C6801C21E7FF00D6C70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -247,7 +243,6 @@
 		D2186FCE1C431A78001551EF /* NavMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavMenuTableViewController.swift; sourceTree = "<group>"; };
 		D2186FD01C431EA9001551EF /* DashboardTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTabViewController.swift; sourceTree = "<group>"; };
 		D224452E1C52F51400E04A73 /* NotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
-		D22445301C530F8400E04A73 /* LocalizationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizationHelper.swift; sourceTree = "<group>"; };
 		D23BBF4F1C457F1B00E68AF9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D23BBF501C457F1B00E68AF9 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DropOff.storyboard; sourceTree = "<group>"; };
@@ -256,9 +251,9 @@
 		D23CF8151C47243F0070AEAA /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
 		D23CF8171C4724650070AEAA /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D23CF8191C472F760070AEAA /* MyLocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLocationButton.swift; sourceTree = "<group>"; };
-		D269DA181C4F388F00249214 /* ThankYouPromptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThankYouPromptViewController.swift; sourceTree = "<group>"; };
+		D2572DC01C584E8800D4BBB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
+		D2572DC51C584E9100D4BBB6 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/Info.plist; sourceTree = "<group>"; };
 		D29F72B21C4AED9900A7D07A /* ApplyToVolunteerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyToVolunteerViewController.swift; sourceTree = "<group>"; };
-		D29F72B71C4B031300A7D07A /* ReadyForPickupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadyForPickupViewController.swift; sourceTree = "<group>"; };
 		D29F72BD1C4B0CF600A7D07A /* ModalPromptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalPromptViewController.swift; sourceTree = "<group>"; };
 		D2CEB8D21C48703D003F4CC0 /* BaseMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -376,12 +371,11 @@
 				260746201C23C8920022E0ED /* GiveNow-Bridging-Header.h */,
 				2645C6721C21E7FF00D6C70D /* LaunchScreen.storyboard */,
 				2645C6691C21E7FF00D6C70D /* AppDelegate.swift */,
-				2645C6751C21E7FF00D6C70D /* Info.plist */,
+				D2572DC11C584E8800D4BBB6 /* Info.plist */,
 				26FE37121C229B9C00BED9A0 /* Keys.plist */,
 				2607466B1C2622B30022E0ED /* Keys.swift */,
 				26F304931C4B0C6700A7971C /* Permissions.swift */,
 				D224452E1C52F51400E04A73 /* NotificationHelper.swift */,
-				D22445301C530F8400E04A73 /* LocalizationHelper.swift */,
 			);
 			path = GiveNow;
 			sourceTree = "<group>";
@@ -488,8 +482,6 @@
 				D2186FC01C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift */,
 				D23BBF621C45D3CF00E68AF9 /* MyPendingDonationViewController.swift */,
 				D29F72BD1C4B0CF600A7D07A /* ModalPromptViewController.swift */,
-				D29F72B71C4B031300A7D07A /* ReadyForPickupViewController.swift */,
-				D269DA181C4F388F00249214 /* ThankYouPromptViewController.swift */,
 			);
 			name = Donate;
 			sourceTree = "<group>";
@@ -780,7 +772,6 @@
 				D2186FB51C3CC632001551EF /* PickupRequestTableViewCell.swift in Sources */,
 				D29F72B31C4AED9900A7D07A /* ApplyToVolunteerViewController.swift in Sources */,
 				D2186FD11C431EA9001551EF /* DashboardTabViewController.swift in Sources */,
-				D269DA191C4F388F00249214 /* ThankYouPromptViewController.swift in Sources */,
 				D23BBF5D1C45C65700E68AF9 /* DropOffViewController.swift in Sources */,
 				D29F72BF1C4B0CF600A7D07A /* ModalPromptViewController.swift in Sources */,
 				D2186FCD1C41F4C8001551EF /* SWRevealViewController.m in Sources */,
@@ -797,11 +788,9 @@
 				D2CEB8D31C48703D003F4CC0 /* BaseMapViewController.swift in Sources */,
 				D23CF81A1C472F760070AEAA /* MyLocationButton.swift in Sources */,
 				D23CF8181C4724650070AEAA /* InitialViewController.swift in Sources */,
-				D29F72B91C4B031300A7D07A /* ReadyForPickupViewController.swift in Sources */,
 				D2186FB71C3CE917001551EF /* PickupDonationViewController.swift in Sources */,
 				2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */,
 				26FE37231C23B80500BED9A0 /* Donation.swift in Sources */,
-				D22445311C530F8400E04A73 /* LocalizationHelper.swift in Sources */,
 				26FE372B1C23B97400BED9A0 /* Volunteer.swift in Sources */,
 				D2186FC11C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift in Sources */,
 				D2186FCF1C431A78001551EF /* NavMenuTableViewController.swift in Sources */,
@@ -893,6 +882,15 @@
 				26FE371A1C22A59500BED9A0 /* de */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		D2572DC11C584E8800D4BBB6 /* Info.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2572DC01C584E8800D4BBB6 /* Base */,
+				D2572DC51C584E9100D4BBB6 /* de */,
+			);
+			name = Info.plist;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -987,7 +985,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Pods/Mapbox-iOS-SDK";
-				INFOPLIST_FILE = GiveNow/Info.plist;
+				INFOPLIST_FILE = GiveNow/Base.lproj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
@@ -1003,7 +1001,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Pods/Mapbox-iOS-SDK";
-				INFOPLIST_FILE = GiveNow/Info.plist;
+				INFOPLIST_FILE = GiveNow/Base.lproj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";

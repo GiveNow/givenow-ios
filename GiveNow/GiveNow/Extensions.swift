@@ -55,6 +55,29 @@ extension UIView {
         return label
     }
     
+    func addShadow() {
+        layer.shadowColor = UIColor.darkGrayColor().CGColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSizeMake(3.0, 3.0)
+        layer.shadowRadius = 2.0
+    }
+    
+    func removeShadow() {
+        layer.shadowOpacity = 0.0
+    }
+    
+    func toggleShadowOff() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.removeShadow()
+            })
+    }
+    
+    func toggleShadowOn() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.addShadow()
+            })
+    }
+    
 }
 
 extension UIImage {
