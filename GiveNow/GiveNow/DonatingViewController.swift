@@ -167,6 +167,10 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     
     func dismissPendingDonationViewController() {
         if let vc = pendingDonationViewController {
+            initializeSearchController()
+            centerMapOnUserLocation()
+            myPickupRequest = nil
+            navigationItem.title = ""
             vc.willMoveToParentViewController(nil)
             vc.view.removeFromSuperview()
             vc.removeFromParentViewController()
