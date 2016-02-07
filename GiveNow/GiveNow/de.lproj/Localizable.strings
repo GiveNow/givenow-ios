@@ -6,36 +6,113 @@
   Copyright © 2015 GiveNow. All rights reserved.
 */
 
-/* SMS Body */
-"SMS Body"  = "{code} is your code for GiveNow.";
+/* ONBOARDING */
+"onboarding_1_title" = "Willkommen bei GiveNow.";
+"onboarding_1_description" =  "GiveNow lässt dich von überall aus spenden.";
 
-/* Cancel */
-"Cancel" = "Cancel";
+"onboarding_2_title" = "Wir zeigen dir, was in deiner Nähe am dringendsten benötigt wird.";
+"onboarding_2_description" =  "Du musst nur noch auswählen, was du spenden möchtest.";
 
-/* Submit */
-"Submit" = "Submit";
+"onboarding_3_title" = "Markiere den Abholort.";
+"onboarding_3_description" =  "Wähle einfach einen Ort auf der Karte aus. Zusätzlich können weitere Informationen wie Wohnungsnummer oder Tür-Code angegeben werden.";
 
-/* Volunteering - Title */
-"Volunteering - Title Label" = "Want to volunteer to pick up donations? The only thing you need is a car and some spare time!";
-"Volunteering - Title Button" = "I want to volunteer!";
+"onboarding_4_title" = "Den Rest erledigen freiwillige Helfer.";
+"onboarding_4_description" =  "Ein Helfer wird nun deine Spende abholen.\nEr wird sich bei dir melden, um einen Termin mit dir zu vereinbaren.";
 
-/* Volunteering - Phone Number Modal Title */
-"Volunteering - Phone Number Modal Title" = "Add a phone number";
+"onboarding_or" = "oder";
+"onboarding_add_phone_number_later_button" = "Telefonnummer später hinzufügen";
 
-/* Volunteering - Phone Number Modal Details */
-"Volunteering - Phone Number Modal Details" = "We'll contact you at this number with details about volunteering. Don't worry, we won't share it with anyone!";
+/* LOGIN */
+"SMS Body"  = "{code} ist dein Code für GiveNow.";
+"Cancel" = "Abbrechen";
+"Submit" = "Absenden";
 
-/* Volunteering - Confirmation Number Modal Title */
-"Volunteering - Confirmation Number Modal Title" = "Enter confirmation code";
+"phone_number_verification_title" = "Telefonnummer hinzufügen";
+"phone_number_disclaimer" = "Diese wird nur von Helfern verwendet, um dich zur Terminvereinbarung erreichen zu können.\nDeine Telefonnummer wird nicht mit weiteren Personen oder Organisationen geteilt.";
+"phone_number_verification_error_number_invalid" = "Bitte eine gültige Telefonnummer angeben.\nBeispiel: +49 123 456 7890";
 
-/* Volunteering - Confirmation Number Modal Details */
-"Volunteering - Confirmation Number Modal Details" = "You should have gotten a 4-digit confirmation code. Enter it here to complete the signup!";
+"confirmation_code_title" = "Geben Sie den Bestätigungscode ein";
+"validate_sms_code" = "Du wirst einen 4-stelligen Code per SMS bekommen.\nBitte gib ihn unten ein.";
+"confirmation_code_error" = "Bestätigungscode ist ungültig";
 
-/* Volunteering - Thanks Label */
-"Volunteering - Thanks Label" = "Thanks for applying to volunteer! We'll contact you soon at {PhoneNumber}";
+/* MAIN MENU */
+"unknown_user" = "Unbekannter Nutzer";
+"not_logged_in" = "Nicht eingeloggt";
+"title_sign_out" = "Abmelden";
+"add_phone_number" = "Telefonnummer hinzufügen";
+"navigation_item_1" = "Sachen spenden";
+"navigation_item_2" = "Helfer";
+"navigation_item_3" = "Hilfsorganisationen";
 
-/* Volunteering - Your Phone Number */
-"Volunteering - Your Phone Number" = "your phone number";
+/* DONATING */
+"button_set_pickup_location_label" = "Abholort festlegen";
+"title_pickup_address" = "Adresse Auswählen";
+"address_helper_label" = "Adresse:";
+"note_helper_label" = "Notiz:";
+"button_confirm_donation_label" = "Jetzt spenden";
+"request_status_waiting" = "Es hat sich noch kein Helfer zur Abholung gefunden!";
+"your_donation_label" = "Deine Spende";
+"cancel_donation_button" = "Zurückziehen";
 
-/* Volunteering - Thanks Button */
-"Volunteering - Thanks Button" = "You applied to volunteer";
+"push_notif_volunteer_is_ready_to_pickup"= "{Name} ist bereit deine Spende abzuholen";
+"dialog_accept_pending_volunteer" = "Kann deine Spende heute abgeholt werden?";
+"yes"="Ja";
+"no"="Nein";
+"a_volunteer"="Ein Helfer";
+
+"request_status_volunteer_confirmed" = "Der Helfer wird sich bald unter {PhoneNumber} bei dir melden";
+
+"donation_complete_title" = "Vielen Dank für Ihre Spende";
+"donation_complete_message_head" = "Deine großzügige Spende von";
+"and" = "und";
+"donation_complete_message_tail" = "ist abgeschlossen.";
+"done" = "Fertig";
+"rate_app" = "App bewerten";
+
+"request_pickup_choose_location" = "Wo kann die Spende abgeholt werden?";
+"request_pickup_info_select_categories" = "Was möchtest du spenden?";
+"note_add_label" = "Notiz hinzufügen ...";
+
+"dialog_cancelDonation_title" = "Bestätigen";
+"dialog_cancelDonation_message" = "Diese Spende zurückziehen?";
+"dialog_cancelDonation_positiveButton" = "Spende zurückziehen";
+"dialog_cancelDonation_negativeButton" = "Doch nicht";
+"search_hint" = "Spende adresse";
+"address_field_note_hint" = ">Wohnungsnummer, Tür-Code, Name ...";
+
+/* VOLUNTEERING */
+"title_volunteer" = "Helfer";
+"volunteer_label_user_has_not_applied" = "Möchtest du Spenden transportieren?\n Du brauchst nur Zeit und ein Auto!";
+"volunteer_button_user_has_not_applied" = "Ich möchte Spenden transportieren!";
+"volunteer_label_user_has_applied" = "Danke das du Spenden abholen willst!\n Wir werden dich bald unter {PhoneNumber} kontaktieren.";
+"volunteer_your_phone_number" = "deine Telefonnummer";
+"volunteer_button_user_has_applied" = "Du hast dich beworben, ein Helfer zu werden.";
+
+/* DASHBOARD */
+"dashboard_pickup_requests_tabbaritem" = "Abholungen anfragen";
+"dashboard_pickup_request_unknown_address" = "Unbekannte Adresse";
+"accept" = "Annehmen";
+"dashboard_dashboard_tabbaritem" = "Dashboard";
+"volunteer_dashboard_status_waiting" = "Auf Spender warten";
+"volunteer_dashboard_status_ready" = "Abholbereit";
+"finish_pickup" = "Ich habe diese Spende abgeholt";
+"navigation_instructions_donation_location" = "Ort der Spende";
+
+/* DROPOFF */
+"dropoff_title" = "Hilfsorganisationen";
+"dropoff_center" = "Hilfsorganisationen";
+
+
+/* NOTIFICATIONS */
+"notif_volunteer_confirmed_msg" = "Die Spende von {Name} ist abholbereit.";
+"notif_pickup_request_claimed_msg" = "{Name} ist bereit, deine Spende abzuholen!";
+"notif_pickup_complete_msg" = "{Name} hat gerade deine Spende abgeholt. Vielen Dank!";
+
+"notif_pickup_request_claimed_title" = "Spende zugeordnet";
+"notif_volunteer_confirmed_title" = "Spende abholbereit";
+"notif_pickup_complete_title" = "Spende abgeholt";
+"dismiss" = "Schließen";
+
+"phone_number_replacement_text" = "deine Telefonnummer";
+"notification_received" = "Benachrichtigung erhalten";
+

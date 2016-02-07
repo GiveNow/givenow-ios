@@ -21,6 +21,18 @@ class PickupRequest : PFObject, PFSubclassing {
 	class func parseClassName() -> String {
 		return "PickupRequest"
 	}
+    
+    func pickupLocationCoordinates() -> CLLocationCoordinate2D? {
+        guard let pickupLocation = location else {
+            return nil
+        }
+        
+        let latitude = pickupLocation.latitude
+        let longitude = pickupLocation.longitude
+        let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        return coordinates
+        
+    }
 
 	// MARK: Parse Keys
 

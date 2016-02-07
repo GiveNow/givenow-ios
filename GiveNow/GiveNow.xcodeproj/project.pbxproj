@@ -18,29 +18,26 @@
 		2645C6741C21E7FF00D6C70D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2645C6721C21E7FF00D6C70D /* LaunchScreen.storyboard */; };
 		2645C67F1C21E7FF00D6C70D /* GiveNowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C67E1C21E7FF00D6C70D /* GiveNowTests.swift */; };
 		2645C68A1C21E7FF00D6C70D /* GiveNowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6891C21E7FF00D6C70D /* GiveNowUITests.swift */; };
-		2645C6981C21F32300D6C70D /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2645C6971C21F32300D6C70D /* Onboarding.storyboard */; };
-		2645C69A1C21F33900D6C70D /* Donating.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2645C6991C21F33900D6C70D /* Donating.storyboard */; };
-		2645C69C1C21F34400D6C70D /* Volunteering.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2645C69B1C21F34400D6C70D /* Volunteering.storyboard */; };
+		2645C6981C21F32300D6C70D /* Onboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2645C6971C21F32300D6C70D /* Onboard.storyboard */; };
+		2645C69A1C21F33900D6C70D /* Donate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2645C6991C21F33900D6C70D /* Donate.storyboard */; };
 		2645C6A01C21F37A00D6C70D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C69F1C21F37A00D6C70D /* BaseViewController.swift */; };
 		2645C6A21C21F38E00D6C70D /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A11C21F38E00D6C70D /* BaseNavigationController.swift */; };
-		2645C6A41C21F3A900D6C70D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A31C21F3A900D6C70D /* HomeViewController.swift */; };
 		2645C6A61C21F3BD00D6C70D /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A51C21F3BD00D6C70D /* OnboardingViewController.swift */; };
 		2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */; };
-		2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */; };
 		2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6AC1C21F40600D6C70D /* Backend.swift */; };
 		2645C6AF1C21F80000D6C70D /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C6AE1C21F80000D6C70D /* AppState.swift */; };
 		267BF1E31C27F68800A76425 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267BF1E21C27F68800A76425 /* IntegrationTests.swift */; };
-		267BF1F21C28019900A76425 /* Pickup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 267BF1F11C28019900A76425 /* Pickup.storyboard */; };
+		267BF1F21C28019900A76425 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 267BF1F11C28019900A76425 /* Dashboard.storyboard */; };
 		267BF1F61C2801CA00A76425 /* PickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267BF1F51C2801CA00A76425 /* PickupViewController.swift */; };
 		26A62ACE1C27E2D900D49311 /* libPhoneNumber_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A62AC21C27CF2800D49311 /* libPhoneNumber_iOS.framework */; };
 		26A62ACF1C27E2D900D49311 /* libPhoneNumber_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26A62AC21C27CF2800D49311 /* libPhoneNumber_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26F304941C4B0C6700A7971C /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F304931C4B0C6700A7971C /* Permissions.swift */; };
 		26F35DE01C228A080012C83C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DD71C228A080012C83C /* Bolts.framework */; };
 		26F35DE11C228A080012C83C /* Bolts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DD71C228A080012C83C /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26F35DE41C228A080012C83C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DDB1C228A080012C83C /* Parse.framework */; };
 		26F35DE51C228A080012C83C /* Parse.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DDB1C228A080012C83C /* Parse.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26F35DE81C228A080012C83C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DDF1C228A080012C83C /* SwiftyJSON.framework */; };
 		26F35DE91C228A080012C83C /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26F35DDF1C228A080012C83C /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		26FE370F1C2297B600BED9A0 /* TestLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */; };
 		26FE37131C229B9C00BED9A0 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26FE37121C229B9C00BED9A0 /* Keys.plist */; };
 		26FE37171C22A58900BED9A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26FE37191C22A58900BED9A0 /* Localizable.strings */; };
 		26FE37231C23B80500BED9A0 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FE37221C23B80500BED9A0 /* Donation.swift */; };
@@ -57,11 +54,28 @@
 		C72296401C228F6D0097A662 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C722963F1C228F6D0097A662 /* libc++.tbd */; };
 		C72296421C228F740097A662 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296411C228F740097A662 /* libsqlite3.tbd */; };
 		C72296441C228F7C0097A662 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C72296431C228F7C0097A662 /* libz.tbd */; };
+		D2005BDB1C482A6B00B59A9A /* ModalLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2005BDA1C482A6B00B59A9A /* ModalLoginViewController.swift */; };
 		D207A3471C23B82400E93BEB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207A3461C23B82400E93BEB /* Extensions.swift */; };
 		D2186FB11C3CC3FC001551EF /* MyDashboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */; };
 		D2186FB51C3CC632001551EF /* PickupRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */; };
 		D2186FB71C3CE917001551EF /* PickupDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FB61C3CE917001551EF /* PickupDonationViewController.swift */; };
-		D28A88CF1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */; };
+		D2186FBF1C3F2965001551EF /* DonationCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FBE1C3F2965001551EF /* DonationCategoriesViewController.swift */; };
+		D2186FC11C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FC01C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift */; };
+		D2186FCD1C41F4C8001551EF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2186FCC1C41F4C8001551EF /* SWRevealViewController.m */; };
+		D2186FCF1C431A78001551EF /* NavMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FCE1C431A78001551EF /* NavMenuTableViewController.swift */; };
+		D2186FD11C431EA9001551EF /* DashboardTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186FD01C431EA9001551EF /* DashboardTabViewController.swift */; };
+		D224452F1C52F51400E04A73 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D224452E1C52F51400E04A73 /* NotificationHelper.swift */; };
+		D23BBF511C457F1B00E68AF9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF4F1C457F1B00E68AF9 /* LoginViewController.swift */; };
+		D23BBF521C457F1B00E68AF9 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF501C457F1B00E68AF9 /* LoginViewController.xib */; };
+		D23BBF591C45C4B900E68AF9 /* DropOff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */; };
+		D23BBF5D1C45C65700E68AF9 /* DropOffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */; };
+		D23BBF631C45D3CF00E68AF9 /* MyPendingDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BBF621C45D3CF00E68AF9 /* MyPendingDonationViewController.swift */; };
+		D23CF8161C47243F0070AEAA /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23CF8151C47243F0070AEAA /* Initial.storyboard */; };
+		D23CF8181C4724650070AEAA /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CF8171C4724650070AEAA /* InitialViewController.swift */; };
+		D23CF81A1C472F760070AEAA /* MyLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CF8191C472F760070AEAA /* MyLocationButton.swift */; };
+		D29F72B31C4AED9900A7D07A /* ApplyToVolunteerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F72B21C4AED9900A7D07A /* ApplyToVolunteerViewController.swift */; };
+		D29F72BF1C4B0CF600A7D07A /* ModalPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F72BD1C4B0CF600A7D07A /* ModalPromptViewController.swift */; };
+		D2CEB8D31C48703D003F4CC0 /* BaseMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CEB8D21C48703D003F4CC0 /* BaseMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,30 +194,26 @@
 		2645C66E1C21E7FF00D6C70D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2645C6701C21E7FF00D6C70D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2645C6731C21E7FF00D6C70D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		2645C6751C21E7FF00D6C70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2645C67A1C21E7FF00D6C70D /* GiveNowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiveNowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2645C67E1C21E7FF00D6C70D /* GiveNowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveNowTests.swift; sourceTree = "<group>"; };
 		2645C6801C21E7FF00D6C70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2645C6851C21E7FF00D6C70D /* GiveNowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiveNowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2645C6891C21E7FF00D6C70D /* GiveNowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveNowUITests.swift; sourceTree = "<group>"; };
 		2645C68B1C21E7FF00D6C70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2645C6971C21F32300D6C70D /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
-		2645C6991C21F33900D6C70D /* Donating.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Donating.storyboard; sourceTree = "<group>"; };
-		2645C69B1C21F34400D6C70D /* Volunteering.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Volunteering.storyboard; sourceTree = "<group>"; };
+		2645C6971C21F32300D6C70D /* Onboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboard.storyboard; sourceTree = "<group>"; };
+		2645C6991C21F33900D6C70D /* Donate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Donate.storyboard; sourceTree = "<group>"; };
 		2645C69F1C21F37A00D6C70D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2645C6A11C21F38E00D6C70D /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
-		2645C6A31C21F3A900D6C70D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		2645C6A51C21F3BD00D6C70D /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonatingViewController.swift; sourceTree = "<group>"; };
-		2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringViewController.swift; sourceTree = "<group>"; };
 		2645C6AC1C21F40600D6C70D /* Backend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		2645C6AE1C21F80000D6C70D /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		267BF1E21C27F68800A76425 /* IntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
-		267BF1F11C28019900A76425 /* Pickup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pickup.storyboard; sourceTree = "<group>"; };
+		267BF1F11C28019900A76425 /* Dashboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
 		267BF1F51C2801CA00A76425 /* PickupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupViewController.swift; sourceTree = "<group>"; };
 		26A2F4E61C2285E40081165D /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = ../Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		26A62AB71C26BA9000D49311 /* Germany.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Germany.gpx; sourceTree = "<group>"; };
-		26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogInViewController.swift; sourceTree = "<group>"; };
+		26F304931C4B0C6700A7971C /* Permissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		26FE37121C229B9C00BED9A0 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		26FE37181C22A58900BED9A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		26FE371A1C22A59500BED9A0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -221,11 +231,31 @@
 		C722963F1C228F6D0097A662 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		C72296411C228F740097A662 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		C72296431C228F7C0097A662 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		D2005BDA1C482A6B00B59A9A /* ModalLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalLoginViewController.swift; sourceTree = "<group>"; };
 		D207A3461C23B82400E93BEB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDashboardTableViewController.swift; sourceTree = "<group>"; };
 		D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupRequestTableViewCell.swift; sourceTree = "<group>"; };
 		D2186FB61C3CE917001551EF /* PickupDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupDonationViewController.swift; sourceTree = "<group>"; };
-		D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteeringModalLoginViewController.swift; sourceTree = "<group>"; };
+		D2186FBE1C3F2965001551EF /* DonationCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationCategoriesViewController.swift; sourceTree = "<group>"; };
+		D2186FC01C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		D2186FCB1C41F4BF001551EF /* SWRevealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		D2186FCC1C41F4C8001551EF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		D2186FCE1C431A78001551EF /* NavMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavMenuTableViewController.swift; sourceTree = "<group>"; };
+		D2186FD01C431EA9001551EF /* DashboardTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTabViewController.swift; sourceTree = "<group>"; };
+		D224452E1C52F51400E04A73 /* NotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
+		D23BBF4F1C457F1B00E68AF9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D23BBF501C457F1B00E68AF9 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DropOff.storyboard; sourceTree = "<group>"; };
+		D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropOffViewController.swift; sourceTree = "<group>"; };
+		D23BBF621C45D3CF00E68AF9 /* MyPendingDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPendingDonationViewController.swift; sourceTree = "<group>"; };
+		D23CF8151C47243F0070AEAA /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
+		D23CF8171C4724650070AEAA /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		D23CF8191C472F760070AEAA /* MyLocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLocationButton.swift; sourceTree = "<group>"; };
+		D2572DC01C584E8800D4BBB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
+		D2572DC51C584E9100D4BBB6 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/Info.plist; sourceTree = "<group>"; };
+		D29F72B21C4AED9900A7D07A /* ApplyToVolunteerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyToVolunteerViewController.swift; sourceTree = "<group>"; };
+		D29F72BD1C4B0CF600A7D07A /* ModalPromptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalPromptViewController.swift; sourceTree = "<group>"; };
+		D2CEB8D21C48703D003F4CC0 /* BaseMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,19 +360,22 @@
 		2645C6681C21E7FF00D6C70D /* GiveNow */ = {
 			isa = PBXGroup;
 			children = (
+				D2CEB8CF1C483FEE003F4CC0 /* Features */,
 				26FE37141C22A54700BED9A0 /* Localization */,
-				2645C69E1C21F36500D6C70D /* View Controllers */,
-				2645C69D1C21F34900D6C70D /* Storyboards */,
+				2645C69E1C21F36500D6C70D /* Shared View Controllers */,
 				2645C6AB1C21F3E100D6C70D /* Integrations */,
 				2607467A1C265B130022E0ED /* Mapbox */,
+				C72296451C228F8F0097A662 /* Support */,
+				2645C6701C21E7FF00D6C70D /* Assets.xcassets */,
 				D207A3461C23B82400E93BEB /* Extensions.swift */,
 				260746201C23C8920022E0ED /* GiveNow-Bridging-Header.h */,
+				2645C6721C21E7FF00D6C70D /* LaunchScreen.storyboard */,
 				2645C6691C21E7FF00D6C70D /* AppDelegate.swift */,
-				2645C6701C21E7FF00D6C70D /* Assets.xcassets */,
-				C72296451C228F8F0097A662 /* Support */,
-				2645C6751C21E7FF00D6C70D /* Info.plist */,
+				D2572DC11C584E8800D4BBB6 /* Info.plist */,
 				26FE37121C229B9C00BED9A0 /* Keys.plist */,
 				2607466B1C2622B30022E0ED /* Keys.swift */,
+				26F304931C4B0C6700A7971C /* Permissions.swift */,
+				D224452E1C52F51400E04A73 /* NotificationHelper.swift */,
 			);
 			path = GiveNow;
 			sourceTree = "<group>";
@@ -366,41 +399,24 @@
 			path = GiveNowUITests;
 			sourceTree = "<group>";
 		};
-		2645C69D1C21F34900D6C70D /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				267BF1F11C28019900A76425 /* Pickup.storyboard */,
-				2645C6721C21E7FF00D6C70D /* LaunchScreen.storyboard */,
-				2645C66D1C21E7FF00D6C70D /* Main.storyboard */,
-				2645C6971C21F32300D6C70D /* Onboarding.storyboard */,
-				2645C6991C21F33900D6C70D /* Donating.storyboard */,
-				2645C69B1C21F34400D6C70D /* Volunteering.storyboard */,
-			);
-			name = Storyboards;
-			sourceTree = "<group>";
-		};
-		2645C69E1C21F36500D6C70D /* View Controllers */ = {
+		2645C69E1C21F36500D6C70D /* Shared View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				2645C6A11C21F38E00D6C70D /* BaseNavigationController.swift */,
 				2645C69F1C21F37A00D6C70D /* BaseViewController.swift */,
-				2645C6A31C21F3A900D6C70D /* HomeViewController.swift */,
-				2645C6A51C21F3BD00D6C70D /* OnboardingViewController.swift */,
-				2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */,
-				2645C6A91C21F3D500D6C70D /* VolunteeringViewController.swift */,
-				D28A88CE1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift */,
-				26FE370E1C2297B600BED9A0 /* TestLogInViewController.swift */,
-				267BF1F51C2801CA00A76425 /* PickupViewController.swift */,
-				D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */,
-				D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */,
-				D2186FB61C3CE917001551EF /* PickupDonationViewController.swift */,
+				D23CF8191C472F760070AEAA /* MyLocationButton.swift */,
+				D23BBF4F1C457F1B00E68AF9 /* LoginViewController.swift */,
+				D23BBF501C457F1B00E68AF9 /* LoginViewController.xib */,
+				D2005BDA1C482A6B00B59A9A /* ModalLoginViewController.swift */,
+				D2CEB8D21C48703D003F4CC0 /* BaseMapViewController.swift */,
 			);
-			name = "View Controllers";
+			name = "Shared View Controllers";
 			sourceTree = "<group>";
 		};
 		2645C6AB1C21F3E100D6C70D /* Integrations */ = {
 			isa = PBXGroup;
 			children = (
+				D2186FCA1C41F4A4001551EF /* SWRevealViewController */,
 				C72296311C228E550097A662 /* ColorPalette.swift */,
 				260746231C23D5E10022E0ED /* Parse */,
 				2645C6AC1C21F40600D6C70D /* Backend.swift */,
@@ -437,6 +453,91 @@
 			);
 			name = Support;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		D2186FCA1C41F4A4001551EF /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D2186FCB1C41F4BF001551EF /* SWRevealViewController.h */,
+				D2186FCC1C41F4C8001551EF /* SWRevealViewController.m */,
+			);
+			name = SWRevealViewController;
+			sourceTree = "<group>";
+		};
+		D23BBF481C457B0E00E68AF9 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2645C66D1C21E7FF00D6C70D /* Main.storyboard */,
+				D2186FCE1C431A78001551EF /* NavMenuTableViewController.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		D23BBF4B1C457B5C00E68AF9 /* Donate */ = {
+			isa = PBXGroup;
+			children = (
+				2645C6991C21F33900D6C70D /* Donate.storyboard */,
+				2645C6A71C21F3C900D6C70D /* DonatingViewController.swift */,
+				D2186FBE1C3F2965001551EF /* DonationCategoriesViewController.swift */,
+				D2186FC01C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift */,
+				D23BBF621C45D3CF00E68AF9 /* MyPendingDonationViewController.swift */,
+				D29F72BD1C4B0CF600A7D07A /* ModalPromptViewController.swift */,
+			);
+			name = Donate;
+			sourceTree = "<group>";
+		};
+		D23BBF4C1C457BCF00E68AF9 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				267BF1F11C28019900A76425 /* Dashboard.storyboard */,
+				D2186FD01C431EA9001551EF /* DashboardTabViewController.swift */,
+				267BF1F51C2801CA00A76425 /* PickupViewController.swift */,
+				D2186FB61C3CE917001551EF /* PickupDonationViewController.swift */,
+				D2186FB41C3CC632001551EF /* PickupRequestTableViewCell.swift */,
+				D2186FB01C3CC3FC001551EF /* MyDashboardTableViewController.swift */,
+				D29F72B21C4AED9900A7D07A /* ApplyToVolunteerViewController.swift */,
+			);
+			name = Dashboard;
+			sourceTree = "<group>";
+		};
+		D23BBF4E1C457C5500E68AF9 /* Onboard */ = {
+			isa = PBXGroup;
+			children = (
+				2645C6971C21F32300D6C70D /* Onboard.storyboard */,
+				2645C6A51C21F3BD00D6C70D /* OnboardingViewController.swift */,
+			);
+			name = Onboard;
+			sourceTree = "<group>";
+		};
+		D23BBF551C45C49600E68AF9 /* DropOff */ = {
+			isa = PBXGroup;
+			children = (
+				D23BBF581C45C4B900E68AF9 /* DropOff.storyboard */,
+				D23BBF5C1C45C65700E68AF9 /* DropOffViewController.swift */,
+			);
+			name = DropOff;
+			sourceTree = "<group>";
+		};
+		D23CF8121C4724210070AEAA /* Initial */ = {
+			isa = PBXGroup;
+			children = (
+				D23CF8151C47243F0070AEAA /* Initial.storyboard */,
+				D23CF8171C4724650070AEAA /* InitialViewController.swift */,
+			);
+			name = Initial;
+			sourceTree = "<group>";
+		};
+		D2CEB8CF1C483FEE003F4CC0 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				D23CF8121C4724210070AEAA /* Initial */,
+				D23BBF4E1C457C5500E68AF9 /* Onboard */,
+				D23BBF481C457B0E00E68AF9 /* Main */,
+				D23BBF4B1C457B5C00E68AF9 /* Donate */,
+				D23BBF4C1C457BCF00E68AF9 /* Dashboard */,
+				D23BBF551C45C49600E68AF9 /* DropOff */,
+			);
+			name = Features;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -513,11 +614,15 @@
 				TargetAttributes = {
 					2645C6651C21E7FF00D6C70D = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = M3FCT79SM9;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -611,14 +716,16 @@
 			files = (
 				2645C6741C21E7FF00D6C70D /* LaunchScreen.storyboard in Resources */,
 				2645C6711C21E7FF00D6C70D /* Assets.xcassets in Resources */,
-				2645C69C1C21F34400D6C70D /* Volunteering.storyboard in Resources */,
+				D23CF8161C47243F0070AEAA /* Initial.storyboard in Resources */,
 				260746761C265A710022E0ED /* Mapbox.bundle in Resources */,
 				2645C66F1C21E7FF00D6C70D /* Main.storyboard in Resources */,
 				26FE37131C229B9C00BED9A0 /* Keys.plist in Resources */,
 				26FE37171C22A58900BED9A0 /* Localizable.strings in Resources */,
-				2645C69A1C21F33900D6C70D /* Donating.storyboard in Resources */,
-				267BF1F21C28019900A76425 /* Pickup.storyboard in Resources */,
-				2645C6981C21F32300D6C70D /* Onboarding.storyboard in Resources */,
+				2645C69A1C21F33900D6C70D /* Donate.storyboard in Resources */,
+				267BF1F21C28019900A76425 /* Dashboard.storyboard in Resources */,
+				D23BBF591C45C4B900E68AF9 /* DropOff.storyboard in Resources */,
+				D23BBF521C457F1B00E68AF9 /* LoginViewController.xib in Resources */,
+				2645C6981C21F32300D6C70D /* Onboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,26 +767,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2186FBF1C3F2965001551EF /* DonationCategoriesViewController.swift in Sources */,
 				D2186FB11C3CC3FC001551EF /* MyDashboardTableViewController.swift in Sources */,
-				D28A88CF1C24C09D005122F3 /* VolunteeringModalLoginViewController.swift in Sources */,
 				D2186FB51C3CC632001551EF /* PickupRequestTableViewCell.swift in Sources */,
-				2645C6AA1C21F3D500D6C70D /* VolunteeringViewController.swift in Sources */,
-				2645C6A41C21F3A900D6C70D /* HomeViewController.swift in Sources */,
+				D29F72B31C4AED9900A7D07A /* ApplyToVolunteerViewController.swift in Sources */,
+				D2186FD11C431EA9001551EF /* DashboardTabViewController.swift in Sources */,
+				D23BBF5D1C45C65700E68AF9 /* DropOffViewController.swift in Sources */,
+				D29F72BF1C4B0CF600A7D07A /* ModalPromptViewController.swift in Sources */,
+				D2186FCD1C41F4C8001551EF /* SWRevealViewController.m in Sources */,
 				2645C6AD1C21F40600D6C70D /* Backend.swift in Sources */,
 				2607466C1C2622B30022E0ED /* Keys.swift in Sources */,
 				2645C6AF1C21F80000D6C70D /* AppState.swift in Sources */,
 				260746271C23D87D0022E0ED /* User.swift in Sources */,
+				D23BBF511C457F1B00E68AF9 /* LoginViewController.swift in Sources */,
 				2645C6A61C21F3BD00D6C70D /* OnboardingViewController.swift in Sources */,
 				C72296321C228E550097A662 /* ColorPalette.swift in Sources */,
+				D224452F1C52F51400E04A73 /* NotificationHelper.swift in Sources */,
+				26F304941C4B0C6700A7971C /* Permissions.swift in Sources */,
 				260746261C23D87D0022E0ED /* DropOffAgency.swift in Sources */,
+				D2CEB8D31C48703D003F4CC0 /* BaseMapViewController.swift in Sources */,
+				D23CF81A1C472F760070AEAA /* MyLocationButton.swift in Sources */,
+				D23CF8181C4724650070AEAA /* InitialViewController.swift in Sources */,
 				D2186FB71C3CE917001551EF /* PickupDonationViewController.swift in Sources */,
 				2645C6A81C21F3C900D6C70D /* DonatingViewController.swift in Sources */,
 				26FE37231C23B80500BED9A0 /* Donation.swift in Sources */,
-				26FE370F1C2297B600BED9A0 /* TestLogInViewController.swift in Sources */,
 				26FE372B1C23B97400BED9A0 /* Volunteer.swift in Sources */,
+				D2186FC11C3F2ECB001551EF /* DonationCategoryCollectionViewCell.swift in Sources */,
+				D2186FCF1C431A78001551EF /* NavMenuTableViewController.swift in Sources */,
 				2645C6A21C21F38E00D6C70D /* BaseNavigationController.swift in Sources */,
 				267BF1F61C2801CA00A76425 /* PickupViewController.swift in Sources */,
 				2645C66A1C21E7FF00D6C70D /* AppDelegate.swift in Sources */,
+				D2005BDB1C482A6B00B59A9A /* ModalLoginViewController.swift in Sources */,
+				D23BBF631C45D3CF00E68AF9 /* MyPendingDonationViewController.swift in Sources */,
 				D207A3471C23B82400E93BEB /* Extensions.swift in Sources */,
 				2645C6A01C21F37A00D6C70D /* BaseViewController.swift in Sources */,
 				26FE37271C23B81400BED9A0 /* DonationCategory.swift in Sources */,
@@ -763,6 +882,15 @@
 				26FE371A1C22A59500BED9A0 /* de */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		D2572DC11C584E8800D4BBB6 /* Info.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2572DC01C584E8800D4BBB6 /* Base */,
+				D2572DC51C584E9100D4BBB6 /* de */,
+			);
+			name = Info.plist;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -857,7 +985,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Pods/Mapbox-iOS-SDK";
-				INFOPLIST_FILE = GiveNow/Info.plist;
+				INFOPLIST_FILE = GiveNow/Base.lproj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
@@ -873,7 +1001,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Pods/Mapbox-iOS-SDK";
-				INFOPLIST_FILE = GiveNow/Info.plist;
+				INFOPLIST_FILE = GiveNow/Base.lproj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";

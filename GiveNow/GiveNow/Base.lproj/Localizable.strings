@@ -6,36 +6,113 @@
   Copyright © 2015 GiveNow. All rights reserved.
 */
 
-/* SMS Body */
+
+/* ONBOARDING */
+"onboarding_1_title" = "Welcome to GiveNow.";
+"onboarding_1_description" =  "GiveNow lets you donate from anywhere.";
+
+"onboarding_2_title" = "We show you what's needed most in your area.";
+"onboarding_2_description" =  "You select what you want to donate.";
+
+"onboarding_3_title" = "Tell us where to pick it up.";
+"onboarding_3_description" =  "Simply pinpoint a spot on the map. You can even add special instructions like apartment numbers or gate codes.";
+
+"onboarding_4_title" = "We take care of the rest.";
+"onboarding_4_description" =  "A trusted volunteer driver will pick up your donation. We'll contact you to coordinate the pickup.";
+
+"onboarding_or" = "or";
+"onboarding_add_phone_number_later_button" = "Add a phone number later";
+
+/* LOGIN */
 "SMS Body"  = "{code} is your code for GiveNow.";
-
-/* Cancel */
 "Cancel" = "Cancel";
-
-/* Submit */
 "Submit" = "Submit";
 
-/* Volunteering - Title */
-"Volunteering - Title Label" = "Want to volunteer to pick up donations? The only thing you need is a car and some spare time!";
-"Volunteering - Title Button" = "I want to volunteer!";
+"phone_number_verification_title" = "Add a phone number";
+"phone_number_disclaimer" = "This only lets your driver reach you to arrange pickup. We never share your number with third parties.";
+"phone_number_verification_error_number_invalid" = "Please enter a valid phone number.\nExample: +49 123 456 7890";
 
-/* Volunteering - Phone Number Modal Title */
-"Volunteering - Phone Number Modal Title" = "Add a phone number";
+"confirmation_code_title" = "Enter confirmation code";
+"validate_sms_code" = "We sent a 4-digit SMS code to your phone number. Enter it in below.";
+"confirmation_code_error" = "Confirmation code is invalid";
 
-/* Volunteering - Phone Number Modal Details */
-"Volunteering - Phone Number Modal Details" = "We'll contact you at this number with details about volunteering. Don't worry, we won't share it with anyone!";
+/* MAIN MENU */
+"unknown_user" = "Unknown User";
+"not_logged_in" = "Not logged in";
+"title_sign_out" = "Sign Out";
+"add_phone_number" = "Add phone number";
+"navigation_item_1" = "Give Now";
+"navigation_item_2" = "Volunteer";
+"navigation_item_3" = "Dropoff Centers";
 
-/* Volunteering - Confirmation Number Modal Title */
-"Volunteering - Confirmation Number Modal Title" = "Enter confirmation code";
+/* DONATING */
+"button_set_pickup_location_label" = "Set Pickup Location";
+"title_pickup_address" = "Select Address";
+"address_helper_label" = "Address:";
+"note_helper_label" = "Note";
+"button_confirm_donation_label" = "Give Now";
+"request_status_waiting" = "Waiting for a volunteer to accept your request!";
+"your_donation_label" = "Your Donation";
+"cancel_donation_button" = "Cancel";
 
-/* Volunteering - Confirmation Number Modal Details */
-"Volunteering - Confirmation Number Modal Details" = "You should have gotten a 4-digit confirmation code. Enter it here to complete the signup!";
+"push_notif_volunteer_is_ready_to_pickup"= "{Name} is ready to pick up your donation!";
+"dialog_accept_pending_volunteer" = "Is your donation available for pickup today?";
+"yes"="Yes";
+"no"="No";
+"a_volunteer"="A volunteer";
 
-/* Volunteering - Thanks Label */
-"Volunteering - Thanks Label" = "Thanks for applying to volunteer! We'll contact you soon at {PhoneNumber}";
+"request_status_volunteer_confirmed" = "Your volunteer will contact you soon at {PhoneNumber}";
 
-/* Volunteering - Your Phone Number */
-"Volunteering - Your Phone Number" = "your phone number";
+"donation_complete_title" = "Thank you for your donation";
+"donation_complete_message_head" = "Your generous donation of";
+"and" = "and";
+"donation_complete_message_tail" = "is complete.";
+"done" = "Done";
+"rate_app" = "Rate app";
 
-/* Volunteering - Thanks Button */
-"Volunteering - Thanks Button" = "You applied to volunteer";
+"request_pickup_choose_location" = "Where is your donation located?";
+"request_pickup_info_select_categories" = "What are you donating?";
+"note_add_label" = "Add a note...";
+
+"dialog_cancelDonation_title" = "Confirm";
+"dialog_cancelDonation_message" = "Are you sure you want to cancel your donation?";
+"dialog_cancelDonation_positiveButton" = "Cancel donation";
+"dialog_cancelDonation_negativeButton" = "Keep donation";
+"search_hint" = "Donation address";
+"address_field_note_hint" = "Apartment, gate code, name…";
+
+/* VOLUNTEERING */
+"title_volunteer" = "Volunteer";
+"volunteer_label_user_has_not_applied" = "Want to volunteer to pickup donations?\nThe only thing you need is a car and some spare time!";
+"volunteer_button_user_has_not_applied" = "I want to volunteer!";
+"volunteer_label_user_has_applied" = "Thanks for applying to volunteer! We'll contact you soon at {PhoneNumber}";
+"volunteer_your_phone_number" = "your phone number";
+"volunteer_button_user_has_applied" = "You applied to volunteer";
+
+/* DASHBOARD */
+"dashboard_pickup_requests_tabbaritem" = "Pickup Requests";
+"unknown_address" = "Unknown address";
+"accept" = "Accept";
+"dashboard_dashboard_tabbaritem" = "Dashboard";
+"volunteer_dashboard_status_waiting" = "Waiting for Donor";
+"volunteer_dashboard_status_ready" = "Ready for Pickup";
+"finish_pickup" = "I picked up this donation";
+"navigation_instructions_donation_location" = "Donation Location";
+
+/* DROPOFF */
+"dropoff_title" = "Drop Off";
+"dropoff_center" = "Dropoff Center";
+
+/* NOTIFICATIONS */
+"notif_volunteer_confirmed_msg" = "{Name}'s donation is ready to be picked up.";
+"notif_pickup_request_claimed_msg" = "{Name} is ready to pick up your donation!";
+"notif_pickup_complete_msg" = "{Name} just picked up your donation. Thanks!";
+
+"notif_pickup_request_claimed_title" = "Pickup accepted";
+"notif_volunteer_confirmed_title" = "Ready for Pickup";
+"notif_pickup_complete_title" = "Donation Picked Up";
+"dismiss" = "Dismiss";
+
+"phone_number_replacement_text" = "your phone number";
+"notification_received" = "Notification Received";
+

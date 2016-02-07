@@ -26,6 +26,19 @@ class User : PFUser {
 		case name = "name"
 	}
     
+    func phoneNumber() -> String? {
+        if let username = username {
+            var phoneNumber = username
+            if phoneNumber.hasPrefix("+") == false {
+                phoneNumber = "+" + phoneNumber
+            }
+            if Backend.sharedInstance().isValidPhoneNumber(phoneNumber) {
+                return phoneNumber
+            }
+        }
+        return nil
+    }
+    
 	// MARK: Properties
 
 	@NSManaged var AuthData: String?

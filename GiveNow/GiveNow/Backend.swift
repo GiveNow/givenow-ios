@@ -18,6 +18,7 @@ import libPhoneNumber_iOS
 
 public typealias BackendFunctionCompletionHandler = (Bool, NSError?) -> Void
 public typealias BackendQueryCompletionHandler = ([PFObject]?, NSError?) -> Void
+public typealias BackendImageDownloadCompletionHandler = (UIImage?, NSError?) -> Void
 
 let LoginStatusDidChangeNotification = "LoginStatusDidChangeNotification"
 
@@ -52,7 +53,6 @@ class Backend: NSObject {
         
         let smsBody = NSLocalizedString("SMS Body", comment: "SMS Body")
         let params = ["phoneNumber" : completePhoneNumber(phoneNumber), "body" : smsBody]
-        print(params)
         PFCloud.callFunctionInBackground("sendCode", withParameters: params) { (result, error) -> Void in
             if let error = error {
                 completionHandler(false, error)
@@ -69,7 +69,6 @@ class Backend: NSObject {
         }
         
         let params = ["phoneNumber" : completePhoneNumber(phoneNumber), "codeEntry" : codeEntry]
-        print(params)
         PFCloud.callFunctionInBackground("logIn", withParameters: params) { (result, error) -> Void in
             if let error = error {
                 completionHandler(false, error)
@@ -95,24 +94,90 @@ class Backend: NSObject {
         }
     }
     
-    func fetchDonationCentersNearCoordinate(coordinate : CLLocationCoordinate2D, completionHandler: BackendQueryCompletionHandler?) {
+    // MARK: Donation Categories
+
+    
+    func queryTopNineDonationCategories() -> PFQuery {
+        let query = PFQuery(className: "DonationCategory")
+        query.orderByAscending("priority")
+        query.limit = 9
+        return query
+    }
+    
+    func fetchDonationCategoriesWithQuery(query: PFQuery, completionHandler: BackendQueryCompletionHandler?) {
         guard let completionHandler = completionHandler else {
             return
         }
-        
-        let geoPoint = PFGeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        let query = PFQuery(className: "DropOffAgency")
-        query.whereKey("agencyGeoLocation", nearGeoPoint: geoPoint)
-        query.limit = 20
         query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
             if let error = error {
                 completionHandler(nil, error)
             }
+            else if let results = results {
+                if let donationCategories = results as? [DonationCategory] {
+                    completionHandler(donationCategories, nil)
+                }
+                else {
+                    print("Could not cast as donation category")
+                }
+            }
             else {
-                completionHandler(results, nil)
+                print("Did not get any results")
             }
         })
     }
+    
+    func getImageForDonationCategory(donationCategory: DonationCategory, completionHandler: BackendImageDownloadCompletionHandler?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        if let image = donationCategory.image {
+            image.getDataInBackgroundWithBlock({(data, error) -> Void in
+                if let error = error {
+                    completionHandler(nil, error)
+                }
+                else if let data = data {
+                    let image = UIImage(data: data)
+                    completionHandler(image, nil)
+                }
+                else {
+                    completionHandler(nil, nil)
+                }
+            })
+        }
+    }
+    
+    
+    // MARK: Donation Centers
+    
+    func queryDropOffAgencies() -> PFQuery {
+        let query = PFQuery(className: "DropOffAgency")
+        return query
+    }
+    
+    func fetchDropOffAgencies(completionHandler: BackendQueryCompletionHandler?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        let query = self.queryDropOffAgencies()
+        query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else if let results = results {
+                if let dropOffAgencies = results as? [DropOffAgency] {
+                    completionHandler(dropOffAgencies, nil)
+                }
+                else {
+                    print("Could not cast as dropoff agency")
+                }
+            }
+            else {
+                print("Did not get any results")
+            }
+        })
+    }
+    
+    // MARK: Donation
     
     func fetchDonationsFromUser(user : PFUser, completionHandler: BackendQueryCompletionHandler?) {
         guard let completionHandler = completionHandler else {
@@ -130,34 +195,6 @@ class Backend: NSObject {
                 completionHandler(results, nil)
             }
         })
-    }
-    
-    func fetchCategoriesForDonationCenter(donationCenter : PFObject, completionHandler: BackendQueryCompletionHandler?) {
-        guard let completionHandler = completionHandler else {
-            return
-        }
-        
-        if !"DropOffAgency".isEqualToString(donationCenter.parseClassName) {
-            let userInfo = [NSLocalizedDescriptionKey : "Invalid Parse Class: \(donationCenter.parseClassName)"]
-            let error = NSError(domain: "Backend", code: 1, userInfo: userInfo)
-            completionHandler(nil, error)
-        }
-        else {
-            // Are categories related to donation centers?
-            let query = PFQuery(className: "DonationCategory")
-            query.orderByAscending("priority")
-            //query.limit = 9
-            query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
-                if let error = error {
-                    completionHandler(nil, error)
-                }
-                else {
-                    completionHandler(results, nil)
-                }
-            })
-        }
-        
-        completionHandler(nil, nil)
     }
     
     func saveDonation(donor: User, categories: [DonationCategory], completionHandler: ((Donation?, NSError?) -> Void)?) {
@@ -207,7 +244,9 @@ class Backend: NSObject {
         }
     }
     
-    func savePickupRequest(donationCategories: [DonationCategory], address: String, location: PFGeoPoint, note: String, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+    //MARK: Pickup Request
+    
+    func savePickupRequest(donationCategories: [DonationCategory], address: String, location: PFGeoPoint, note: String?, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
         guard let completionHandler = completionHandler else {
             return
         }
@@ -216,7 +255,12 @@ class Backend: NSObject {
         pickupRequest.donationCategories = donationCategories
         pickupRequest.address = address
         pickupRequest.location = location
-        pickupRequest.note = note
+        pickupRequest.isActive = true
+        pickupRequest.donor = User.currentUser()
+        
+        if let note = note {
+            pickupRequest.note = note
+        }
         
         pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
             if let error = error {
@@ -229,44 +273,27 @@ class Backend: NSObject {
 
     }
     
-//    func updatePickupRequest(pickupRequest: PickupRequest, pendingVolunteer: User?, confirmedVolunteer: User?, donation: Donation?, donationCategories: [DonationCategory]?, address: String?, location: PFGeoPoint?, note: String?, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
-//        guard let completionHandler = completionHandler else {
-//            return
-//        }
-//        
-//        let query = PFObject.query()!
-//        query.getObjectInBackgroundWithId(pickupRequest.objectId!) { (object, error) -> Void in
-//            if error != nil {
-//                completionHandler(nil, error)
-//            }
-//            else {
-//                if pendingVolunteer != nil { pickupRequest.pendingVolunteer = pendingVolunteer }
-//                if confirmedVolunteer != nil { pickupRequest.confirmedVolunteer = confirmedVolunteer }
-//                if donation != nil { pickupRequest.donation = donation }
-//                if donationCategories != nil { pickupRequest.donationCategories = donationCategories }
-//                if address != nil { pickupRequest.address = address }
-//                if location != nil { pickupRequest.location = location }
-//                if note != nil { pickupRequest.note = note }
-//                
-//                pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
-//                    if let error = error {
-//                        completionHandler(nil, error)
-//                    }
-//                    else {
-//                        completionHandler(pickupRequest, nil)
-//                    }
-//                })
-//                
-//                
-//            }
-//        }
-//    }
-    
     func claimOpenPickupRequest(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
         guard let completionHandler = completionHandler else {
             return
         }
-        pickupRequest.pendingVolunteer = User.currentUser()
+        
+        let params = ["pickupRequestId": pickupRequest.objectId!]
+        PFCloud.callFunctionInBackground("claimPickupRequest", withParameters: params) { (results, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                completionHandler(pickupRequest, nil)
+            }
+        }
+    }
+    
+    func cancelClaimedPickupRequest(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        pickupRequest.pendingVolunteer = nil
         pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
             if let error = error {
                 completionHandler(nil, error)
@@ -277,12 +304,28 @@ class Backend: NSObject {
         })
     }
     
-    func cancelClaimedPickupRequest(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+    func confirmVolunteerForPickupRequest(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
+        
+        let params = ["pickupRequestId": pickupRequest.objectId!]
+        PFCloud.callFunctionInBackground("confirmVolunteer", withParameters: params) { (results, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                completionHandler(pickupRequest, nil)
+            }
+        }
+    }
+    
+    func indicatePickupRequestIsNotReady(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
         guard let completionHandler = completionHandler else {
             return
         }
         pickupRequest.pendingVolunteer = nil
-        pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
+        pickupRequest.saveInBackgroundWithBlock({(success, error) -> Void in
             if let error = error {
                 completionHandler(nil, error)
             }
@@ -302,14 +345,8 @@ class Backend: NSObject {
             if let error = error {
                 completionHandler(nil, error)
             }
-            else if results != nil {
-                if let pickupRequests = results as? [PickupRequest] {
-                    completionHandler(pickupRequests, nil)
-                }
-                else {
-                    print("Could not cast as pickup request")
-                    print(results)
-                }
+            else if let pickupRequests = results as? [PickupRequest] {
+                completionHandler(pickupRequests, nil)
             }
             else {
                 print("Did not get any results")
@@ -344,6 +381,7 @@ class Backend: NSObject {
     func queryMyDashboardPendingPickups() -> PFQuery {
         let query = queryActivePickupRequests()
         query.whereKey("pendingVolunteer", equalTo: User.currentUser()!)
+        query.whereKeyDoesNotExist("confirmedVolunteer")
         query.whereKeyDoesNotExist("donation")
         return query
     }
@@ -372,6 +410,14 @@ class Backend: NSObject {
         return query
     }
     
+    // query pickup requests I have made that do not have a pending volunteer or confirmed volunteer
+    func queryMyNewRequests() -> PFQuery {
+        let query = queryMyPickupRequests()
+        query.whereKeyDoesNotExist("pendingVolunteer")
+        query.whereKeyDoesNotExist("confirmedVolunteer")
+        return query
+    }
+    
     // query pickup requests I have made, which currently have a pending volunteer, but no confirmed volunteer
     func queryMyPendingRequests() -> PFQuery {
         let query = queryMyPickupRequests()
@@ -390,38 +436,44 @@ class Backend: NSObject {
     
     // MARK: Donated pickup requests
     
-    func saveDonationForPickupRequest(pickupRequest: PickupRequest, completionHandler: ((Donation?, NSError?) -> Void)?) {
+    func pickUpDonation(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
         guard let completionHandler = completionHandler else {
             return
         }
         
-        let donation = Donation()
-        donation.donor = pickupRequest.donor
-        donation.donationCategories = pickupRequest.donationCategories
-        
-        donation.saveInBackgroundWithBlock({ (success, error) -> Void in
+        let params = ["pickupRequestId": pickupRequest.objectId!]
+        PFCloud.callFunctionInBackground("pickupDonation", withParameters: params) { (results, error) -> Void in
             if let error = error {
                 completionHandler(nil, error)
             }
             else {
-                self.addDonationToPickupRequest(donation, pickupRequest: pickupRequest, completionHandler: {(pickupRequest, error) -> Void in
-                    if let error = error {
-                        completionHandler(nil, error)
-                    }
-                    else {
-                        completionHandler(donation, nil)
-                    }
-                })
+                completionHandler(pickupRequest, nil)
             }
-        })
-        
+        }
     }
     
-    func addDonationToPickupRequest(donation: Donation, pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+    func markComplete(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
         guard let completionHandler = completionHandler else {
             return
         }
-        pickupRequest.donation = donation
+        
+        let params = ["pickupRequestId": pickupRequest.objectId!]
+        PFCloud.callFunctionInBackground("markComplete", withParameters: params) { (results, error) -> Void in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            else {
+                completionHandler(pickupRequest, nil)
+            }
+        }
+    }
+    
+    
+    
+    func markPickupRequestAsInactive(pickupRequest: PickupRequest, completionHandler: ((PickupRequest?, NSError?) -> Void)?) {
+        guard let completionHandler = completionHandler else {
+            return
+        }
         pickupRequest.isActive = false
         pickupRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
             if let error = error {
@@ -505,6 +557,8 @@ class Backend: NSObject {
         }
     }
     
+    // MARK: Phone number validation
+    
     func phoneCountryCodeForPhoneNumberCurrentLocale() -> Int? {
         let locale = NSLocale.currentLocale()
         return phoneCountryCodeForLocale(locale)
@@ -514,9 +568,6 @@ class Backend: NSObject {
         if let countryCode = locale.objectForKey(NSLocaleCountryCode) as? String {
             let phoneUtil = NBPhoneNumberUtil()
             let value = Int(phoneUtil.getCountryCodeForRegion(countryCode))
-            
-            print(value)
-            
             return value
         }
         
@@ -555,6 +606,20 @@ class Backend: NSObject {
         }
         
         return phoneNumber
+    }
+    
+    func formatPhoneNumber(phoneNumberString: String) -> String {
+        let phoneUtil = NBPhoneNumberUtil()
+        do {
+            let phoneNumber = try phoneUtil.parse(phoneNumberString, defaultRegion: "US")
+            let formattedString = try phoneUtil.format(phoneNumber, numberFormat: .E164)
+            return formattedString
+        }
+        catch let error as NSError {
+            print(error.localizedDescription)
+            return phoneNumberString
+        }
+        
     }
 
 }

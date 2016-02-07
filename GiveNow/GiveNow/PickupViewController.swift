@@ -11,40 +11,18 @@ import Parse
 import MapKit
 import CoreLocation
 
-//// https://github.com/GiveNow/givenow-ios/issues/8
-//// ToDo:
-//Fetch pending donations
-//Display donations on a map
-//Select a donation and send notification to confirm donation is ready for pick up
-//Set donation as picked up and dropped off
-
-class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class PickupViewController: BaseMapViewController {
     
     @IBOutlet weak var mapView: MKMapView!
-    
-    var locationManager: CLLocationManager? {
-        didSet {
-            if let locationManager = locationManager {
-                locationManager.delegate = self
-                locationManager.requestWhenInUseAuthorization()
-                locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-                locationManager.activityType = .OtherNavigation
-                locationManager.startUpdatingLocation()
-            }
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        locationManager = CLLocationManager()
-        super.init(coder: aDecoder)
-    }
+    @IBOutlet weak var myLocationButton: MyLocationButton!
+    @IBOutlet weak var pickupRequests: UITabBarItem!
+    @IBOutlet weak var shadowView: UIView!
     
     var openPickupRequests:[PickupRequest]!
-    
-    let backend = Backend.sharedInstance()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        layoutView()
         mapView.delegate = self
         fetchOpenPickupRequests()
     }
@@ -57,61 +35,40 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMap
             promptForLocationAuthorization()
         }
         else if status == .Allowed {
-            zoomIntoLocation(true)
+            zoomIntoLocation(false, mapView: mapView, completionHandler: {_ in})
         }
+    }
+    
+    func layoutView() {
+        shadowView.addShadow()
+        myLocationButton.addShadow()
+    }
+    
+    @IBAction func myLocationTapped(sender: AnyObject) {
+        myLocationButton.toggleShadowOff()
+        if let location = locationManager?.location {
+            let coord = location.coordinate
+            let currentRegion = mapView!.region
+            let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
+            mapView!.setRegion(newRegion, animated: true)
+        }
+    }
+    
+    //Turning shadow back on after map moves
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        myLocationButton.toggleShadowOn()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func locationStatus() -> SystemPermissionStatus {
-        let status = CLLocationManager.authorizationStatus()
-        
-        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
-            return .Allowed
-        }
-        if status == .Restricted || status == .Denied {
-            return .Denied
-        }
-        
-        return .NotDetermined
-    }
+    // MARK: Fetching pickup requests
     
-    func promptForLocationAuthorization() {
-        if let locationManager = self.locationManager {
-            locationManager.requestAlwaysAuthorization()
-        }
-    }
-    
-    func zoomIntoLocation(animated : Bool) {
-        if let locationManager = self.locationManager,
-            let location = locationManager.location {
-                if CLLocationCoordinate2DIsValid(location.coordinate) {
-                    let latitudeInMeters : CLLocationDistance = 30000
-                    let longitudeInMeters : CLLocationDistance = 30000
-                    let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
-                    
-                    self.mapView?.setRegion(coordinateRegion, animated: animated)
-                }
-                else {
-                    print("Location is not valid")
-                }
-        }
-        else {
-            if self.locationManager == nil {
-                print("Location manager is nil")
-            }
-            if self.locationManager?.location == nil {
-                print("Location is nil")
-            }
-        }
-    }
-    
-    func fetchOpenPickupRequests() {
+    private func fetchOpenPickupRequests() {
         let query = backend.queryOpenPickupRequests()
         backend.fetchPickupRequestsWithQuery(query, completionHandler: { (result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else if let pickupRequests = result as? [PickupRequest] {
@@ -122,29 +79,28 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMap
     
     }
     
-    func addOpenPickupRequestToMap() {
-        print(openPickupRequests)
+    private func addOpenPickupRequestToMap() {
         for pickupRequest in openPickupRequests {
             let latitude = pickupRequest.location!.latitude
             let longitude = pickupRequest.location!.longitude
-            var title:String!
-            if pickupRequest.address != nil {
-                title = pickupRequest.address!
-            }
-            else {
-                title = "Unknown address"
+            var title = NSLocalizedString("unknown_address", comment: "")
+            if let address = pickupRequest.address {
+                if address != "" {
+                    title = address
+                }
             }
             let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
             mapView.addAnnotation(donationPoint)
-            print(donationPoint)
         }
     }
+    
+    // MARK: Map view setup
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let pickupRequestMapPoint = view.annotation as? PickupRequestMapPoint {
             let pickupRequest = pickupRequestMapPoint.pickupRequest
             backend.claimOpenPickupRequest(pickupRequest, completionHandler: { (result, error) -> Void in
-                if error != nil {
+                if let error = error {
                     print(error)
                 }
                 else {
@@ -157,14 +113,16 @@ class PickupViewController: BaseViewController, CLLocationManagerDelegate, MKMap
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is PickupRequestMapPoint {
             let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pickupRequest")
-            pinAnnotationView.pinColor = .Purple
+            pinAnnotationView.pinColor = .Green
             pinAnnotationView.canShowCallout = true
+            pinAnnotationView.addShadow()
             
             let selectButton = UIButton()
             selectButton.frame.size.width = 80
             selectButton.frame.size.height = 44
-            selectButton.setTitle("Accept", forState: .Normal)
-            selectButton.backgroundColor = UIColor.purpleColor()
+            selectButton.layer.cornerRadius = 5
+            selectButton.setTitle(NSLocalizedString("accept", comment: ""), forState: .Normal)
+            selectButton.backgroundColor = UIColor.colorAccent()
 
             pinAnnotationView.leftCalloutAccessoryView = selectButton
             

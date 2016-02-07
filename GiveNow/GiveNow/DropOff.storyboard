@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TDF-vo-PIt">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="atJ-ot-TNS">
+            <objects>
+                <navigationController id="TDF-vo-PIt" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="J4R-b3-BZe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.0" green="0.72549021244049072" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="TS0-yR-z4y" kind="relationship" relationship="rootViewController" id="khO-pv-355"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MjL-X0-dhF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1" y="393"/>
+        </scene>
+        <!--navItem-->
+        <scene sceneID="6ir-sj-FGv">
+            <objects>
+                <viewController id="TS0-yR-z4y" customClass="DropOffViewController" customModule="GiveNow" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mqp-av-CpG"/>
+                        <viewControllerLayoutGuide type="bottom" id="cyR-ar-Is9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zwx-TM-9Cv">
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fK1-PW-xYv">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                            </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYG-OL-4ZJ" userLabel="shadowView">
+                                <rect key="frame" x="0.0" y="-10" width="600" height="10"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="qu7-vy-iA0"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ux4-aK-jQe" customClass="MyLocationButton" customModule="GiveNow" customModuleProvider="target">
+                                <rect key="frame" x="536" y="472" width="44" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="1es-B7-Ken"/>
+                                    <constraint firstAttribute="width" constant="44" id="96R-x6-edG"/>
+                                </constraints>
+                                <state key="normal" image="my-location"/>
+                                <connections>
+                                    <action selector="myLocationTapped:" destination="TS0-yR-z4y" eventType="touchUpInside" id="DOX-uT-rkD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hYG-OL-4ZJ" firstAttribute="top" secondItem="Mqp-av-CpG" secondAttribute="bottom" constant="-10" id="3Gd-Dz-Qoy"/>
+                            <constraint firstItem="fK1-PW-xYv" firstAttribute="top" secondItem="Mqp-av-CpG" secondAttribute="bottom" id="4dl-9A-yZ0"/>
+                            <constraint firstAttribute="trailing" secondItem="ux4-aK-jQe" secondAttribute="trailing" constant="20" id="LTM-vM-Bdx"/>
+                            <constraint firstItem="cyR-ar-Is9" firstAttribute="top" secondItem="fK1-PW-xYv" secondAttribute="bottom" id="cWz-1H-jLO"/>
+                            <constraint firstAttribute="trailing" secondItem="hYG-OL-4ZJ" secondAttribute="trailing" id="eDo-oQ-R88"/>
+                            <constraint firstItem="cyR-ar-Is9" firstAttribute="top" secondItem="ux4-aK-jQe" secondAttribute="bottom" constant="20" id="fcP-Zf-GEo"/>
+                            <constraint firstItem="hYG-OL-4ZJ" firstAttribute="leading" secondItem="zwx-TM-9Cv" secondAttribute="leading" id="glr-4k-IH4"/>
+                            <constraint firstItem="fK1-PW-xYv" firstAttribute="leading" secondItem="zwx-TM-9Cv" secondAttribute="leading" id="kAb-Pq-rSH"/>
+                            <constraint firstAttribute="trailing" secondItem="fK1-PW-xYv" secondAttribute="trailing" id="uVd-YG-vDY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="navItem" id="2ml-ub-2M9">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="F10-s1-UjP" userLabel="menuButton">
+                            <color key="tintColor" red="0.043137254899999998" green="0.043137254899999998" blue="0.043137254899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="fK1-PW-xYv" id="o0s-O9-OJ3"/>
+                        <outlet property="menuButton" destination="F10-s1-UjP" id="zqd-WP-dFx"/>
+                        <outlet property="myLocationButton" destination="ux4-aK-jQe" id="PTQ-at-pUS"/>
+                        <outlet property="navItem" destination="2ml-ub-2M9" id="oDp-H3-g70"/>
+                        <outlet property="shadowView" destination="hYG-OL-4ZJ" id="6Hj-Ez-ZeL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yAC-as-3Ue" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="702" y="393"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="menu" width="24" height="24"/>
+        <image name="my-location" width="24" height="24"/>
+    </resources>
+</document>

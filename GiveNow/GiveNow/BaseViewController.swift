@@ -7,8 +7,18 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class BaseViewController: UIViewController {
+    
+    // Quick reference to the backend
+    let backend = Backend.sharedInstance()
+    
+    // MARK: Loading view
+    
+    override func viewDidLoad(){
+        super.viewDidLoad()
+    }
 
     // MARK: Base Overrides
 
@@ -78,6 +88,26 @@ class BaseViewController: UIViewController {
         vc.willMoveToParentViewController(self)
         vc.view.removeFromSuperview()
         vc.removeFromParentViewController()
+    }
+    
+    func fetchViewControllerFromStoryboard(storyboardName: String, storyboardIdentifier: String) -> UIViewController {
+        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier(storyboardIdentifier)
+        return vc
+    }
+    
+    // MARK: Navigation for side menu
+    
+    func initializeMenuButton(menuButton: UIBarButtonItem) {
+        if self.revealViewController() != nil {
+            if let menuImage = UIImage(named: "menu") {
+                menuButton.image = menuImage.imageWithRenderingMode(.AlwaysTemplate)
+                menuButton.tintColor = UIColor.whiteColor()
+            }
+            menuButton.target = self.revealViewController()
+            menuButton.action = "revealToggle:"
+            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
     }
 
 }

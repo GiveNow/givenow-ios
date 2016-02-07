@@ -11,7 +11,7 @@ import Parse
 import MapKit
 import CoreLocation
 
-class PickupDonationViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class PickupDonationViewController: BaseMapViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var donationPickedUpButton: UIButton!
@@ -19,31 +19,66 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
     @IBOutlet weak var callButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var navigationButton: UIButton!
+    @IBOutlet weak var myLocationButton: MyLocationButton!
+    @IBOutlet weak var shadowView: UIView!
+    
+    var donorPhoneNumber:String!
     
     var pickupRequest:PickupRequest!
-    let backend = Backend.sharedInstance()
-    
-    var locationManager: CLLocationManager? {
-        didSet {
-            if let locationManager = locationManager {
-                locationManager.delegate = self
-                locationManager.requestWhenInUseAuthorization()
-                locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-                locationManager.activityType = .OtherNavigation
-                locationManager.startUpdatingLocation()
-            }
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        locationManager = CLLocationManager()
-        super.init(coder: aDecoder)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         addPickupRequestToMap()
+        layoutView()
+    }
+    
+    private func localizeStrings() {
+        donationPickedUpButton.setTitle(NSLocalizedString("finish_pickup", comment: ""), forState: .Normal)
+    }
+    
+    private func layoutView() {
+        shadowView.addShadow()
+        formatButtons()
+        setDonorPhoneNumber()
+        validateButtons()
+        localizeStrings()
+    }
+    
+    private func formatButtons() {
+        guard let donationPickedUpButton = donationPickedUpButton else {
+            return
+        }
+        callButton.setImage(UIImage.templatedImageFromName("phone"), forState: .Normal)
+        messageButton.setImage(UIImage.templatedImageFromName("textsms"), forState: .Normal)
+        navigationButton.setImage(UIImage.templatedImageFromName("navigation"), forState: .Normal)
+        
+        donationPickedUpButton.layer.cornerRadius = 5.0
+        donationPickedUpButton.addShadow()
+        
+        myLocationButton.addShadow()
+    }
+    
+    private func validateButtons() {
+        if donorPhoneNumber == nil {
+            callButton.enabled = false
+            messageButton.enabled = false
+        }
+    }
+    
+    @IBAction func myLocationTapped(sender: AnyObject) {
+        if let location = locationManager?.location {
+            let coord = location.coordinate
+            let currentRegion = mapView!.region
+            let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
+            mapView!.setRegion(newRegion, animated: true)
+        }
+        myLocationButton.toggleShadowOff()
+    }
+    
+    //Turning shadow back on after map moves
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        myLocationButton.toggleShadowOn()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -54,70 +89,34 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
             promptForLocationAuthorization()
         }
         else if status == .Allowed {
-            zoomIntoLocation(true)
+            zoomIntoLocation(false, mapView: mapView, completionHandler: {_ in })
         }
     }
     
-    func locationStatus() -> SystemPermissionStatus {
-        let status = CLLocationManager.authorizationStatus()
-        
-        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
-            return .Allowed
+    private func addPickupRequestToMap() {
+        guard let location = pickupRequest.location else {
+            return
         }
-        if status == .Restricted || status == .Denied {
-            return .Denied
-        }
-        
-        return .NotDetermined
-    }
-    
-    func promptForLocationAuthorization() {
-        if let locationManager = self.locationManager {
-            locationManager.requestAlwaysAuthorization()
-        }
-    }
-    
-    func zoomIntoLocation(animated : Bool) {
-        if let locationManager = self.locationManager,
-            let location = locationManager.location {
-                if CLLocationCoordinate2DIsValid(location.coordinate) {
-                    let latitudeInMeters : CLLocationDistance = 30000
-                    let longitudeInMeters : CLLocationDistance = 30000
-                    let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, latitudeInMeters, longitudeInMeters)
-                    
-                    self.mapView?.setRegion(coordinateRegion, animated: animated)
-                }
-                else {
-                    print("Location is not valid")
-                }
-        }
-        else {
-            if self.locationManager == nil {
-                print("Location manager is nil")
-            }
-            if self.locationManager?.location == nil {
-                print("Location is nil")
-            }
-        }
-    }
-    
-    func addPickupRequestToMap() {
-        let latitude = pickupRequest.location!.latitude
-        let longitude = pickupRequest.location!.longitude
+        let latitude = location.latitude
+        let longitude = location.longitude
         var title:String!
-        if pickupRequest.address != nil {
-            title = pickupRequest.address!
+        if let address = pickupRequest.address {
+            if address != "" {
+                title = address
+            }
+            else {
+                title = NSLocalizedString("unknown_address", comment: "")
+            }
         }
         else {
-            title = "Unknown address"
+            title = NSLocalizedString("unknown_address", comment: "")
         }
         let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
         mapView.addAnnotation(donationPoint)
-        print(donationPoint)
     }
     
     @IBAction func donationPickedUp(sender: AnyObject) {
-        backend.saveDonationForPickupRequest(pickupRequest, completionHandler: {(donation, error) -> Void in
+        backend.pickUpDonation(pickupRequest, completionHandler: {(donation, error) -> Void in
             if let error = error {
                 print(error)
             }
@@ -127,15 +126,30 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
         })
     }
     
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is PickupRequestMapPoint {
+            let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pickupRequest")
+            pinAnnotationView.pinColor = .Green
+            pinAnnotationView.canShowCallout = true
+            pinAnnotationView.addShadow()
+            return pinAnnotationView
+        }
+        return nil
+    }
+    
+    private func setDonorPhoneNumber() {
+        guard let donor = pickupRequest.donor else {
+            return
+        }
+        if let phoneNumber = donor.phoneNumber() {
+            self.donorPhoneNumber = phoneNumber
+        }
+    }
+    
     //MARK: Toolbar buttons
 
     @IBAction func callButtonTapped(sender: AnyObject) {
-        let phoneNumber = pickupRequest.donor!.username!
-        callNumber(phoneNumber)
-    }
-    
-    private func callNumber(phoneNumber:String) {
-        if let phoneCallURL:NSURL = NSURL(string:"tel://\(phoneNumber)") {
+        if let phoneCallURL:NSURL = NSURL(string:"tel://\(donorPhoneNumber)") {
             let application:UIApplication = UIApplication.sharedApplication()
             if (application.canOpenURL(phoneCallURL)) {
                 application.openURL(phoneCallURL);
@@ -144,12 +158,7 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
     }
     
     @IBAction func messageButtonTapped(sender: AnyObject) {
-        let phoneNumber = pickupRequest.donor!.username!
-        sendMessage(phoneNumber)
-    }
-    
-    private func sendMessage(phoneNumber:String) {
-        if let messageURL:NSURL = NSURL(string:"sms://\(phoneNumber)") {
+        if let messageURL:NSURL = NSURL(string:"sms://\(donorPhoneNumber)") {
             let application:UIApplication = UIApplication.sharedApplication()
             if (application.canOpenURL(messageURL)) {
                 application.openURL(messageURL);
@@ -158,21 +167,18 @@ class PickupDonationViewController: BaseViewController, CLLocationManagerDelegat
     }
     
     @IBAction func navigationButtonTapped(sender: AnyObject) {
-        print("Navigate!")
         let latitude = pickupRequest.location!.latitude
         let longitude = pickupRequest.location!.longitude
         let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let placeMark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placeMark)
-        mapItem.name = "Donation Location"
+        
+        mapItem.name = NSLocalizedString("navigation_instructions_donation_location", comment: "")
         let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
         
         mapItem.openInMapsWithLaunchOptions(launchOptions)
         
-        
     }
-    
-    
     
 
 }
