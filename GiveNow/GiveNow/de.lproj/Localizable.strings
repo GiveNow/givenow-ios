@@ -62,6 +62,13 @@
 
 "request_status_volunteer_confirmed" = "Der Helfer wird sich bald unter {PhoneNumber} bei dir melden";
 
+"donation_complete_title" = "Vielen Dank für Ihre Spende";
+"donation_complete_message_head" = "Deine großzügige Spende von";
+"and" = "und";
+"donation_complete_message_tail" = "ist abgeschlossen.";
+"done" = "Fertig";
+"rate_app" = "App bewerten";
+
 "request_pickup_choose_location" = "Wo kann die Spende abgeholt werden?";
 "request_pickup_info_select_categories" = "Was möchtest du spenden?";
 "note_add_label" = "Notiz hinzufügen ...";
