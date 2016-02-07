@@ -138,14 +138,16 @@ class DonationCategoriesViewController: BaseViewController, UICollectionViewDele
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DonationCategoryCollectionViewCell
         let donationCategory = donationCategories[indexPath.row]
         configureDonationCategoryCell(cell, donationCategory: donationCategory)
+        cell.layoutIfNeeded()
         cell.layer.cornerRadius = 5.0
+        cell.cellContainer.layer.cornerRadius = 5.0
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
         //Assuming a margin of 10.0, and three columns
-        let dimension = (view.frame.width - 40) / 3
+        let dimension = (view.frame.width - 44) / 3
         let size = CGSize(width: dimension, height: dimension)
         return size
     }

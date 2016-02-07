@@ -8,13 +8,27 @@ if [ -f "${SECRET_KEYS}" ] && [ -f "${KEYS_PLIST}" ]; then
 
     echo "### Found Keys.plist ###"
 
-    # ParseApplicationId
-    /usr/libexec/PlistBuddy -c "Set :ParseApplicationId '${ParseApplicationId}'" "${KEYS_PLIST}"
-    /usr/libexec/PlistBuddy -c "Print :ParseApplicationId" "${KEYS_PLIST}"
+    # Production
 
-    # ParseClientKey
-    /usr/libexec/PlistBuddy -c "Set :ParseClientKey '${ParseClientKey}'" "${KEYS_PLIST}"
-    /usr/libexec/PlistBuddy -c "Print :ParseClientKey" "${KEYS_PLIST}"
+    # ProdParseApplicationId
+    /usr/libexec/PlistBuddy -c "Set :ProdParseApplicationId '${ProdParseApplicationId}'" "${KEYS_PLIST}"
+    /usr/libexec/PlistBuddy -c "Print :ProdParseApplicationId" "${KEYS_PLIST}"
+
+    # ProdParseClientKey
+    /usr/libexec/PlistBuddy -c "Set :ProdParseClientKey '${ProdParseClientKey}'" "${KEYS_PLIST}"
+    /usr/libexec/PlistBuddy -c "Print :ProdParseClientKey" "${KEYS_PLIST}"
+
+    # Development
+
+    # DevParseApplicationId
+    /usr/libexec/PlistBuddy -c "Set :DevParseApplicationId '${DevParseApplicationId}'" "${KEYS_PLIST}"
+    /usr/libexec/PlistBuddy -c "Print :DevParseApplicationId" "${KEYS_PLIST}"
+
+    # DevParseClientKey
+    /usr/libexec/PlistBuddy -c "Set :DevParseClientKey '${DevParseClientKey}'" "${KEYS_PLIST}"
+    /usr/libexec/PlistBuddy -c "Print :DevParseClientKey" "${KEYS_PLIST}"
+
+    # Universal
 
     # MapboxToken
     /usr/libexec/PlistBuddy -c "Set :MapboxToken '${MapboxToken}'" "${KEYS_PLIST}"

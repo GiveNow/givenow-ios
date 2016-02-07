@@ -33,7 +33,9 @@ updates `Keys.plist` in the build output folder.
 ```sh
 #!/bin/sh
 
-export ParseApplicationId="INSERT_VALUE_HERE"
-export ParseClientKey="INSERT_VALUE_HERE"
+export ProdParseApplicationId="INSERT_VALUE_HERE"
+export ProdParseClientKey="INSERT_VALUE_HERE"
+export DevParseApplicationId="INSERT_VALUE_HERE"
+export DevParseClientKey="INSERT_VALUE_HERE"
 export MapboxToken="INSERT_VALUE_HERE"
 ```
