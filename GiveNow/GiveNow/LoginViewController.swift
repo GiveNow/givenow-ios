@@ -127,6 +127,7 @@ class LoginViewController: BaseViewController, UIGestureRecognizerDelegate {
             let backButton = backButton
             else {
                 assert(false, "Outlets are required")
+                return
         }
         
         switch entryMode {

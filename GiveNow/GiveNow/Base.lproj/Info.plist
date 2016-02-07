@@ -6,6 +6,8 @@
 	<string>We use this to find your pickup request</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>Configuration</key>
+	<string>${CONFIGURATION}</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
