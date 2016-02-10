@@ -76,6 +76,20 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
     let phoneFormatter = NBAsYouTypeFormatter(regionCode: Backend.sharedInstance().regionCodeForCurrentLocale())
     @IBAction func phoneTextFieldEditingChanged(sender: AnyObject) {
         
+        /*
+        We have the adjusted text after user performed an editing action, eg (Backspace, Add a character, Select and delete, Select and add)
+        Need to get the raw numbers and plus sign out of this text and format it
+        
+        Complication: set the text to the formatted text forgets the cursor position we must save it and restore it adjusting for differences between
+        formatted text and the previous formatted text
+        
+        Edge case when the user performs a backspace event on a non-numeric character the output of the formatter is going to be the same as before 
+        making it appear as if backspace failed, instead we want to find the number before the current cursor and delete it, perform our formatting 
+        and restore the cursor
+        
+        Since we require the plus sign prefix we should not allow users to delete it
+        */
+        
         if entryMode == .PhoneNumber {
             if let inputField = sender as? UITextField,
                 inputText = inputField.text
@@ -289,9 +303,31 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
         doneButton.titleLabel?.textColor = UIColor.whiteColor()
     }
     
+    //want stripped offset
+    
+    //formatted text is +1-845-709|-1552
+    //stripped length is +18457091552
+    
+    ///+1-845-709|-1552
+    ///stripped length is +1845709|1552
+    ///return 8
+    
+    ///+1-84|5-709-1552
+    ///stripped length is +184|57091552
+    ///return 4
+    
+    ///unformatted characters in range
+    
+    private func unformattedCharactersBeforeIndex(input: String, index: Int) -> Int {
+        let stringIndex = input.startIndex.advancedBy(index, limit: input.endIndex)
+        let filteredCharacters = input.substringToIndex(stringIndex).characters.filter { "+0123456789".containsString("\($0)") }
+        return filteredCharacters.count
+    }
+    
     private func strippedPhoneNumber(phoneNumberString: String) -> String {
         let digitsPlusCharacterSet = NSCharacterSet(charactersInString: "+0123456789").invertedSet
         let strippedPhoneNumberString = phoneNumberString.componentsSeparatedByCharactersInSet(digitsPlusCharacterSet).joinWithSeparator("")
         return strippedPhoneNumberString
     }
 }
+
