@@ -23,6 +23,10 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
     
     var delegate:LoginViewControllerDelegate!
     var isModal:Bool!
+    
+    //Number validation
+    let phoneFormatter = NBAsYouTypeFormatter(regionCode: Backend.sharedInstance().regionCodeForCurrentLocale())
+    var previousFormattedText = "+"
 
     @IBOutlet weak var instructionsLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
@@ -72,56 +76,41 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
     func viewTapped(sender: UIGestureRecognizer? = nil) {
         view.endEditing(true)
     }
-    
-    let phoneFormatter = NBAsYouTypeFormatter(regionCode: Backend.sharedInstance().regionCodeForCurrentLocale())
+
     @IBAction func phoneTextFieldEditingChanged(sender: AnyObject) {
-        
-        /*
-        We have the adjusted text after user performed an editing action, eg (Backspace, Add a character, Select and delete, Select and add)
-        Need to get the raw numbers and plus sign out of this text and format it
-        
-        Complication: set the text to the formatted text forgets the cursor position we must save it and restore it adjusting for differences between
-        formatted text and the previous formatted text
-        
-        Edge case when the user performs a backspace event on a non-numeric character the output of the formatter is going to be the same as before 
-        making it appear as if backspace failed, instead we want to find the number before the current cursor and delete it, perform our formatting 
-        and restore the cursor
-        
-        Since we require the plus sign prefix we should not allow users to delete it
-        */
         
         if entryMode == .PhoneNumber {
             if let inputField = sender as? UITextField,
                 inputText = inputField.text
             {
-                //Strip the phone number of previous formatting and invalid chars
                 let strippedInputText = strippedPhoneNumber(inputText)
                 
-                //Save the cursor state to restore after
-                let previousSelectedRange = inputField.selectedTextRange
+                let currentSelectedRange = inputField.selectedTextRange
                 
-                //Format the phone number
                 let formattedText = phoneFormatter.inputString(strippedInputText)
-                inputField.text = formattedText
                 
-                if let selectedRange = previousSelectedRange {
-
-                    // get previous cursor position
-                    let start = inputField.beginningOfDocument
-                    let cursorOffset = inputField.offsetFromPosition(start, toPosition:selectedRange.start)
-                    let currentLength = inputText.characters.count
+                if let selectedRange = currentSelectedRange where previousFormattedText == formattedText { //Failed delete on nonumeric char
+                    let (adjustedRange, adjustedInputString) = self.deleteNumberBeforeSelectedRange(inputField, startText: inputText, selectedRange: selectedRange)
+                    let strippedAdjustedString = strippedPhoneNumber(adjustedInputString)
+                    let adjustedFormattedText = phoneFormatter.inputString(strippedAdjustedString)
+                    inputField.text = adjustedFormattedText
                     
-                    // if cursor was not at the end of the text restore its position
-                    if cursorOffset != currentLength {
-                        let lengthDelta = formattedText.characters.count - currentLength
-                        let newCursorOffset = max(0, min(formattedText.characters.count, cursorOffset + lengthDelta))
-                        if let newPosition = inputField.positionFromPosition(textField.beginningOfDocument, offset:newCursorOffset) {
-                            let newRange = inputField.textRangeFromPosition(newPosition, toPosition:newPosition)
-                            inputField.selectedTextRange = newRange
-                        }
+                    if let updatedRange = adjustedRange {
+                        self.restoreSelectedRange(inputField, startText: adjustedFormattedText, endText: adjustedFormattedText, selectedRange: updatedRange)
                     }
+                    
+                    previousFormattedText = adjustedFormattedText
+                } else {
+                    inputField.text = formattedText
+                    
+                    if let selectedRange = currentSelectedRange {
+                        self.restoreSelectedRange(inputField, startText: inputText, endText: formattedText, selectedRange: selectedRange)
+                    }
+                    
+                    previousFormattedText = formattedText
                 }
             }
+         
         }
         
         validateSubmitButton()
@@ -303,25 +292,50 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
         doneButton.titleLabel?.textColor = UIColor.whiteColor()
     }
     
-    //want stripped offset
+    // MARK: Phone Number Validation
     
-    //formatted text is +1-845-709|-1552
-    //stripped length is +18457091552
+    private func deleteNumberBeforeSelectedRange(textField: UITextField, startText: String, selectedRange : UITextRange) -> (adjustedRange: UITextRange?, adjustedText: String) {
+        //get previous cursor position
+        let start = textField.beginningOfDocument
+        let cursorOffset = textField.offsetFromPosition(start, toPosition:selectedRange.start)
+        
+        //Loop until we find a digit
+        var currentOffset = cursorOffset
+        var index = startText.startIndex.advancedBy(currentOffset - 1, limit: startText.endIndex)
+        var updatedText = startText
+        while index >= startText.startIndex {
+            if startText.characters[index] > "0" || startText.characters[index] < "9" { //digit
+                updatedText.removeAtIndex(index)
+                break
+            }
+            
+            currentOffset = currentOffset - 1
+            index = startText.startIndex.advancedBy(currentOffset, limit: startText.endIndex)
+        }
+        
+        var updatedRange : UITextRange?
+        if let newPosition = textField.positionFromPosition(textField.beginningOfDocument, offset:currentOffset - 1) {
+            updatedRange = textField.textRangeFromPosition(newPosition, toPosition:newPosition)
+        }
+        
+        return (updatedRange, updatedText)
+    }
     
-    ///+1-845-709|-1552
-    ///stripped length is +1845709|1552
-    ///return 8
-    
-    ///+1-84|5-709-1552
-    ///stripped length is +184|57091552
-    ///return 4
-    
-    ///unformatted characters in range
-    
-    private func unformattedCharactersBeforeIndex(input: String, index: Int) -> Int {
-        let stringIndex = input.startIndex.advancedBy(index, limit: input.endIndex)
-        let filteredCharacters = input.substringToIndex(stringIndex).characters.filter { "+0123456789".containsString("\($0)") }
-        return filteredCharacters.count
+    private func restoreSelectedRange(textField: UITextField, startText: String, endText: String, selectedRange : UITextRange) {
+        // get previous cursor position
+        let start = textField.beginningOfDocument
+        let cursorOffset = textField.offsetFromPosition(start, toPosition:selectedRange.start)
+        let currentLength = startText.characters.count
+        
+        // if cursor was not at the end of the text restore its position
+        if cursorOffset != currentLength {
+            let lengthDelta = endText.characters.count - currentLength
+            let newCursorOffset = max(0, min(endText.characters.count, cursorOffset + lengthDelta))
+            if let newPosition = textField.positionFromPosition(textField.beginningOfDocument, offset:newCursorOffset) {
+                let newRange = textField.textRangeFromPosition(newPosition, toPosition:newPosition)
+                textField.selectedTextRange = newRange
+            }
+        }
     }
     
     private func strippedPhoneNumber(phoneNumberString: String) -> String {
