@@ -16,11 +16,13 @@ class PickupViewController: BaseMapViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var myLocationButton: MyLocationButton!
     @IBOutlet weak var pickupRequests: UITabBarItem!
+    @IBOutlet weak var shadowView: UIView!
     
     var openPickupRequests:[PickupRequest]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        layoutView()
         mapView.delegate = self
         fetchOpenPickupRequests()
     }
@@ -37,13 +39,24 @@ class PickupViewController: BaseMapViewController {
         }
     }
     
+    func layoutView() {
+        shadowView.addShadow()
+        myLocationButton.addShadow()
+    }
+    
     @IBAction func myLocationTapped(sender: AnyObject) {
+        myLocationButton.toggleShadowOff()
         if let location = locationManager?.location {
             let coord = location.coordinate
             let currentRegion = mapView!.region
             let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
             mapView!.setRegion(newRegion, animated: true)
         }
+    }
+    
+    //Turning shadow back on after map moves
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        myLocationButton.toggleShadowOn()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +68,7 @@ class PickupViewController: BaseMapViewController {
     private func fetchOpenPickupRequests() {
         let query = backend.queryOpenPickupRequests()
         backend.fetchPickupRequestsWithQuery(query, completionHandler: { (result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else if let pickupRequests = result as? [PickupRequest] {
@@ -70,16 +83,14 @@ class PickupViewController: BaseMapViewController {
         for pickupRequest in openPickupRequests {
             let latitude = pickupRequest.location!.latitude
             let longitude = pickupRequest.location!.longitude
-            var title:String!
-            if pickupRequest.address != nil {
-                title = pickupRequest.address!
-            }
-            else {
-                title = NSLocalizedString("unknown_address", comment: "")
+            var title = NSLocalizedString("unknown_address", comment: "")
+            if let address = pickupRequest.address {
+                if address != "" {
+                    title = address
+                }
             }
             let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
             mapView.addAnnotation(donationPoint)
-            print(donationPoint)
         }
     }
     
@@ -89,7 +100,7 @@ class PickupViewController: BaseMapViewController {
         if let pickupRequestMapPoint = view.annotation as? PickupRequestMapPoint {
             let pickupRequest = pickupRequestMapPoint.pickupRequest
             backend.claimOpenPickupRequest(pickupRequest, completionHandler: { (result, error) -> Void in
-                if error != nil {
+                if let error = error {
                     print(error)
                 }
                 else {
@@ -104,10 +115,12 @@ class PickupViewController: BaseMapViewController {
             let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pickupRequest")
             pinAnnotationView.pinColor = .Green
             pinAnnotationView.canShowCallout = true
+            pinAnnotationView.addShadow()
             
             let selectButton = UIButton()
             selectButton.frame.size.width = 80
             selectButton.frame.size.height = 44
+            selectButton.layer.cornerRadius = 5
             selectButton.setTitle(NSLocalizedString("accept", comment: ""), forState: .Normal)
             selectButton.backgroundColor = UIColor.colorAccent()
 

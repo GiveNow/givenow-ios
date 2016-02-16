@@ -16,14 +16,22 @@ class DropOffViewController: BaseMapViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var myLocationButton: MyLocationButton!
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var shadowView: UIView!
     
     var dropOffAgencies:[DropOffAgency]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        layoutView()
         initializeMenuButton(menuButton)
         mapView.delegate = self
         fetchDropOffAgencies()
+        
+    }
+    
+    func layoutView() {
+        myLocationButton.addShadow()
+        shadowView.addShadow()
         localizeStrings()
     }
     
@@ -38,6 +46,11 @@ class DropOffViewController: BaseMapViewController {
             let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
             mapView!.setRegion(newRegion, animated: true)
         }
+        myLocationButton.toggleShadowOff()
+    }
+    
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        myLocationButton.toggleShadowOn()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -59,7 +72,7 @@ class DropOffViewController: BaseMapViewController {
     
     func fetchDropOffAgencies() {
         backend.fetchDropOffAgencies({ (result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else if let dropOffAgencies = result as? [DropOffAgency] {
@@ -75,8 +88,10 @@ class DropOffViewController: BaseMapViewController {
             let latitude = dropOffAgency.agencyGeoLocation!.latitude
             let longitude = dropOffAgency.agencyGeoLocation!.longitude
             var title:String!
-            if dropOffAgency.agencyAddress != nil {
-                title = dropOffAgency.agencyAddress!
+            if let agencyAddress = dropOffAgency.agencyAddress {
+                if agencyAddress != "" {
+                    title = agencyAddress
+                }
             }
             else {
                 title = NSLocalizedString("unknown_address", comment: "")
@@ -91,10 +106,12 @@ class DropOffViewController: BaseMapViewController {
             let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "dropOffAgency")
             pinAnnotationView.pinColor = .Green
             pinAnnotationView.canShowCallout = true
+            pinAnnotationView.addShadow()
             
             let directionsButton = UIButton()
             directionsButton.frame.size.width = 44
             directionsButton.frame.size.height = 44
+            directionsButton.layer.cornerRadius = 5
             directionsButton.tintColor = UIColor.whiteColor()
             directionsButton.setImage(UIImage(named: "navigation")!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
             directionsButton.backgroundColor = UIColor.colorAccent()

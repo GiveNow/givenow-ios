@@ -14,12 +14,6 @@ import CoreLocation
 // TODO: implement
 // See https://github.com/GiveNow/givenow-ios/issues/6
 
-public enum SystemPermissionStatus : Int {
-    case NotDetermined = 0
-    case Allowed
-    case Denied
-}
-
 class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISearchControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet var pickupLocationButton: UIButton?
@@ -27,74 +21,172 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     @IBOutlet weak var myLocationButton: MyLocationButton!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var infoImage: UIImageView!
+    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var helpButton: UIButton!
+    @IBOutlet weak var infoView: UIView!
     
     var shouldUpdateSearchBarWithMapCenter = false
-    var newPickupRequest:PickupRequest!
+    var myPickupRequest:PickupRequest!
+    var selectedAddress:String?
     
-    var searchController:UISearchController!
+    var pendingDonationViewController:MyPendingDonationViewController!
+    
+    var searchController:UISearchController?
     
     var searchResults = [MKMapItem]()
     var searchResultsTableView: UITableView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        pickupLocationButton?.backgroundColor = UIColor.colorAccent()
-        pickupLocationButton?.setTitleColor(.whiteColor(), forState: .Normal)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeSearchController()
         initializeSearchResultsTable()
         initializeMenuButton(menuButton)
-        localizeText()
-        awakeFromNib()
-    }
-    
-    func localizeText() {
-        pickupLocationButton?.setTitle(NSLocalizedString("button_set_pickup_location_label", comment: ""), forState: .Normal)
-        navItem.title = NSLocalizedString("title_pickup_address", comment: "")
-        
+        layoutView()
+        zoomToUserLocation()
+        navigationItem.title = ""
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "alertActionCompleted:", name: "alertActionCompleted", object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        displayPendingDonationViewIfNeeded()
+        showPendingAlertsIfNeeded()
+    }
+    
+    func showPendingAlertsIfNeeded() {
+        let localNotification = NSNotification(name: "showPendingAlertsIfNeeded", object: nil, userInfo: nil)
+        NSNotificationCenter.defaultCenter().postNotification(localNotification)
+    }
+    
+
+    func layoutView() {
+        infoView.addShadow()
+        localizeText()
+        templateImages()
+        formatButtons()
+    }
+    
+    func localizeText() {
+        pickupLocationButton?.setTitle(NSLocalizedString("button_set_pickup_location_label", comment: ""), forState: .Normal)
+        infoLabel.text = NSLocalizedString("request_pickup_choose_location", comment: "")
         
+    }
+    
+    func templateImages() {
+        if let image = UIImage(named: "info") {
+            self.infoImage.image = image.imageWithRenderingMode(.AlwaysTemplate)
+            self.infoImage.tintColor = UIColor.whiteColor()
+        }
+        if let image = UIImage(named: "help") {
+            helpButton.setImage(image.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            helpButton.tintColor = UIColor.whiteColor()
+        }
+    }
+    
+    func formatButtons() {
+        guard let pickupButton = pickupLocationButton else {
+            return
+        }
+        pickupButton.addShadow()
+        pickupButton.layer.cornerRadius = 5.0
+        
+        myLocationButton.addShadow()
+    }
+    
+    @IBAction func helpButtonTapped(sender: AnyObject) {
+    }
+    
+    func zoomToUserLocation() {
         let status = locationStatus()
         if status == .NotDetermined {
             promptForLocationAuthorization()
         }
-        else if status == .Allowed && mapView != nil {
-            zoomIntoLocation(false, mapView: self.mapView!, completionHandler: {(zoomed) -> Void in
-                if zoomed == true {
-                    self.shouldUpdateSearchBarWithMapCenter = true
-                    self.setAddressFromCoordinates()
-                }
-            })
+        else if status == .Allowed {
+            if let mapView = self.mapView {
+                zoomIntoLocation(false, mapView: mapView, completionHandler: {(zoomed) -> Void in
+                    if zoomed == true {
+                        self.shouldUpdateSearchBarWithMapCenter = true
+                        self.setAddressFromCoordinates()
+                    }
+                })
+            }
         }
-        
-        displayPendingDonationViewIfNeeded()
+        else if status == .Denied {
+            self.shouldUpdateSearchBarWithMapCenter = true
+        }
+        else {
+            print("I'm not gonna zoom")
+        }
     }
     
     @IBAction func myLocationTapped(sender: AnyObject) {
+        myLocationButton.toggleShadowOff()
+        centerMapOnUserLocation()
+    }
+    
+    func centerMapOnUserLocation() {
+        guard let mapView = mapView else {
+            return
+        }
         if let location = locationManager?.location {
             let coord = location.coordinate
-            let currentRegion = mapView!.region
+            let currentRegion = mapView.region
             let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
-            mapView!.setRegion(newRegion, animated: true)
+            mapView.setRegion(newRegion, animated: true)
+        }
+    }
+    
+    func alertActionCompleted(notification: NSNotification) {
+        print("Time to reload the views!")
+        let query = backend.queryMyPickupRequests()
+        backend.fetchPickupRequestsWithQuery(query, completionHandler: {(result, error) -> Void in
+            if let error = error {
+                print(error)
+            }
+            else if let result = result {
+                if result.count > 0 {
+                    if let pickupRequest = result[0] as? PickupRequest {
+                        self.myPickupRequest = pickupRequest
+                        self.updatePendingDonationViewController()
+                    }
+                }
+                else {
+                    self.dismissPendingDonationViewController()
+                }
+            }
+        })
+    }
+    
+    func updatePendingDonationViewController() {
+        if let vc = pendingDonationViewController {
+            vc.pickupRequest = self.myPickupRequest
+            vc.setHeaderBasedOnRequestStatus()
+        }
+    }
+    
+    func dismissPendingDonationViewController() {
+        if let vc = pendingDonationViewController {
+            initializeSearchController()
+            centerMapOnUserLocation()
+            myPickupRequest = nil
+            navigationItem.title = ""
+            vc.willMoveToParentViewController(nil)
+            vc.view.removeFromSuperview()
+            vc.removeFromParentViewController()
         }
     }
     
     func displayPendingDonationViewIfNeeded() {
-        let query = backend.queryMyNewRequests()
+        let query = backend.queryMyPickupRequests()
         backend.fetchPickupRequestsWithQuery(query, completionHandler: {(result, error) -> Void in
-            if error != nil {
+            if let error = error {
                 print(error)
             }
-            else if result != nil {
-                if result!.count > 0 {
-                    if let pickupRequest = result![0] as? PickupRequest {
-                        self.newPickupRequest = pickupRequest
+            else if let result = result {
+                if result.count > 0 {
+                    if let pickupRequest = result[0] as? PickupRequest {
+                        self.myPickupRequest = pickupRequest
                         self.addPendingDonationChildView()
                     }
                 }
@@ -103,10 +195,11 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func addPendingDonationChildView() {
-        if storyboard != nil {
-            searchController.searchBar.hidden = true
-            let pendingDonationViewController = storyboard!.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
-            pendingDonationViewController.pickupRequest = newPickupRequest
+        centerMapOnDonation()
+        setNavTitle()
+        if let storyboard = storyboard {
+            pendingDonationViewController = storyboard.instantiateViewControllerWithIdentifier("pendingDonationView") as! MyPendingDonationViewController
+            pendingDonationViewController.pickupRequest = myPickupRequest
             addChildViewController(pendingDonationViewController)
             pendingDonationViewController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
             view.addSubview(pendingDonationViewController.view)
@@ -114,44 +207,120 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         }
     }
     
+    func centerMapOnDonation() {
+        guard let coordinates = myPickupRequest.pickupLocationCoordinates(), mapView = mapView else {
+            return
+        }
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapView.centerMapOnMapItem(mapItem)
+    }
+    
+    func setNavTitle() {
+        guard let pickupLocationName = myPickupRequest.address else {
+            return
+        }
+        navigationItem.titleView = nil
+        searchController = nil
+        navigationItem.title = pickupLocationName
+    }
+    
     @IBAction func setPickupLocationButtonTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("selectCategories", sender: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard let searchController = searchController else {
+            return
+        }
         if segue.identifier == "selectCategories" {
+            let destinationController = segue.destinationViewController as! DonationCategoriesViewController
             let location = mapView?.centerCoordinate
             var address:String!
-            if searchController.searchBar.text != nil {
-                address = searchController.searchBar.text!
+            if let searchText = searchController.searchBar.text {
+                address = searchText
+                destinationController.navigationItem.title = searchText
             }
             else {
                 address = ""
             }
-            let destinationController = segue.destinationViewController as! DonationCategoriesViewController
             destinationController.location = location
             destinationController.address = address
         }
         else if segue.identifier == "viewNewDonation" {
             let destinationController = segue.destinationViewController as! MyPendingDonationViewController
-            destinationController.pickupRequest = newPickupRequest
+            destinationController.pickupRequest = myPickupRequest
         }
+    }
+    
+    private func validateSetPickupLocationButton() {
+        guard let searchController = searchController else {
+            return
+        }
+        if searchController.searchBar.text == nil || searchController.searchBar.text == "" {
+            self.disablePickupLocationButton()
+        }
+        else {
+            self.enablePickupLocationButton()
+        }
+    }
+    
+    private func disablePickupLocationButton() {
+        self.pickupLocationButton!.enabled = false
+        self.pickupLocationButton!.backgroundColor = UIColor.colorAccentDisabled()
+    }
+    
+    private func enablePickupLocationButton() {
+        self.pickupLocationButton!.enabled = true
+        self.pickupLocationButton!.backgroundColor = UIColor.colorAccent()
     }
     
     // MARK: - Search
     
     func initializeSearchController() {
+        print("Creating the search controller")
         searchController = UISearchController(searchResultsController: nil)
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.delegate = self
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.delegate = self
-        navigationItem.titleView = searchController.searchBar
-        searchController.searchBar.tintColor = UIColor.colorPrimaryDark()
+        if let searchController = searchController {
+            searchController.hidesNavigationBarDuringPresentation = false
+            searchController.searchBar.delegate = self
+            searchController.dimsBackgroundDuringPresentation = false
+            formatSearchField()
+            searchController.delegate = self
+            navigationItem.titleView = searchController.searchBar
+            validateSetPickupLocationButton()
+        }
+    }
+    
+    func formatSearchField() {
+        guard let searchController = searchController else {
+            return
+        }
+        for subView in searchController.searchBar.subviews {
+            for subView in subView.subviews {
+                if let textField = subView as? UITextField {
+                    textField.backgroundColor = UIColor.colorPrimaryDark()
+                    textField.textColor = UIColor.whiteColor()
+                    if textField.respondsToSelector("attributedPlaceholder") {
+                        let attributedDict = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+                        textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("search_hint", comment: ""), attributes: attributedDict)
+                    }
+                }
+            }
+        }
+        if let searchImage = UIImage(named: "search") {
+            searchController.searchBar.setImage(searchImage.imageWithRenderingMode(.AlwaysTemplate), forSearchBarIcon: .Search, state: .Normal)
+        }
+        if let cancelImage = UIImage(named: "clear-search") {
+            searchController.searchBar.setImage(cancelImage.imageWithRenderingMode(.AlwaysTemplate), forSearchBarIcon: .Clear, state: .Normal)
+        }
+        searchController.searchBar.tintColor = UIColor.whiteColor()
     }
     
     func backgroundTapped(sender: UIGestureRecognizer? = nil) {
         hideSearchResultsTable()
+        guard let searchController = searchController else {
+            return
+        }
         searchController.dismissViewControllerAnimated(true, completion: {})
     }
     
@@ -162,10 +331,14 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        searchResultsTableView.hidden = false
-        if searchController.searchBar.text != nil {
-            searchMapView(searchController.searchBar.text!)
+        guard let searchController = searchController else {
+            return false
         }
+        guard let searchText = searchController.searchBar.text else {
+            return false
+        }
+        searchResultsTableView.hidden = false
+        searchMapView(searchText)
         return true
     }
     
@@ -187,7 +360,7 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         let localSearch = MKLocalSearch(request: localSearchRequest)
         localSearch.startWithCompletionHandler{(localSearchResponse, error) -> Void in
             
-            if error != nil {
+            if let error = error {
                 print(error)
             }
             else if localSearchResponse == nil {
@@ -209,9 +382,12 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        guard let mapView = self.mapView else {
+            return
+        }
         if searchResults.count > 0 {
             let mapItem = searchResults[0]
-            self.mapView!.centerMapOnMapItem(mapItem)
+            mapView.centerMapOnMapItem(mapItem)
         }
         hideSearchResultsTable()
     }
@@ -248,30 +424,39 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let mapItem = searchResults[indexPath.row]
-        
-        let nameFrame = CGRect(x: 10.0, y: 5.0, width: view.frame.width - 20.0, height: 22.0)
-        let mapItemNameLabel = cell.addCustomUILabel(nameFrame, font: UIFont.boldSystemFontOfSize(15.0), textColor: UIColor.blackColor())
-        mapItemNameLabel.text = mapItem.getName()
-        
-        let addressFrame = CGRect(x: 10.0, y: 27.0, width: view.frame.width - 20.0, height: 22.0)
-        let mapItemAddressLabel = cell.addCustomUILabel(addressFrame, font: UIFont.italicSystemFontOfSize(13.0), textColor: UIColor.lightGrayColor())
-        mapItemAddressLabel.text = mapItem.getAddress()
-        
+        // Asking for searchResults[indexPath.row] directly is occassionally crashing the app
+        if indexPath.row < searchResults.count {
+            let mapItem = searchResults[indexPath.row]
+            
+            let nameFrame = CGRect(x: 10.0, y: 5.0, width: view.frame.width - 20.0, height: 22.0)
+            let mapItemNameLabel = cell.addCustomUILabel(nameFrame, font: UIFont.boldSystemFontOfSize(15.0), textColor: UIColor.blackColor())
+            mapItemNameLabel.text = mapItem.getName()
+            
+            let addressFrame = CGRect(x: 10.0, y: 27.0, width: view.frame.width - 20.0, height: 22.0)
+            let mapItemAddressLabel = cell.addCustomUILabel(addressFrame, font: UIFont.italicSystemFontOfSize(13.0), textColor: UIColor.lightGrayColor())
+            mapItemAddressLabel.text = mapItem.getAddress()
+        }
         return cell
     }
 
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let searchController = searchController else {
+            return
+        }
         let mapItem = searchResults[indexPath.row]
-        searchController.searchBar.text = mapItem.getName()
+        selectedAddress = mapItem.getName()
         hideSearchResultsTable()
         searchController.dismissViewControllerAnimated(true, completion: {() -> Void in
             self.mapView!.centerMapOnMapItem(mapItem)
+            self.validateSetPickupLocationButton()
         })
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        guard let searchController = searchController else {
+            return
+        }
         searchController.searchBar.resignFirstResponder()
     }
     
@@ -281,27 +466,39 @@ class DonatingViewController: BaseMapViewController, UISearchBarDelegate, UISear
         if shouldUpdateSearchBarWithMapCenter == true {
             setAddressFromCoordinates()
         }
+        myLocationButton.toggleShadowOn()
     }
     
     private func setAddressFromCoordinates() {
-        let geocoder = CLGeocoder()
-        let coordinates = mapView?.centerCoordinate
-        let latitude = coordinates!.latitude
-        let longitude = coordinates!.longitude
-        let location = CLLocation(latitude: latitude, longitude: longitude)
-        geocoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
-            if error != nil {
-                print(error)
-            }
-            else {
-                if placemarks != nil {
-                    let placemark = placemarks![0]
-                    if placemark.name != nil {
-                        self.searchController.searchBar.text = placemark.name!
+        guard let searchController = searchController, mapView = mapView else {
+            return
+        }
+        if let selectedAddress = selectedAddress {
+            searchController.searchBar.text = selectedAddress
+            self.selectedAddress = nil
+        }
+        else {
+            let geocoder = CLGeocoder()
+            let coordinates = mapView.centerCoordinate
+            let latitude = coordinates.latitude
+            let longitude = coordinates.longitude
+            let location = CLLocation(latitude: latitude, longitude: longitude)
+            geocoder.reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
+                if let error = error {
+                    print("Got an error doing reverse geocoding")
+                    print(error)
+                }
+                else {
+                    if let placemarks = placemarks {
+                        let placemark = placemarks[0]
+                        if let name = placemark.name {
+                            searchController.searchBar.text = name
+                            self.validateSetPickupLocationButton()
+                        }
                     }
                 }
-            }
-        })
+            })
+        }
     }
     
     // MARK: Segues

@@ -1,36 +1,29 @@
 //
-//  VolunteeringViewController.swift
+//  ApplyToVolunteerViewController.swift
 //  GiveNow
 //
-//  Created by Brennan Stehling on 12/16/15.
-//  Copyright © 2015 GiveNow. All rights reserved.
+//  Created by Evan Waters on 1/16/16.
+//  Copyright © 2016 GiveNow. All rights reserved.
 //
 
 import UIKit
-import Parse
 
-// TODO: implement
-// See https://github.com/GiveNow/givenow-ios/issues/7
-// See https://github.com/GiveNow/givenow-ios/issues/8
-
-class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDelegate {
+class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControllerDelegate {
     
-    @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var volunteeringTitleLabel: UILabel!
     @IBOutlet weak var volunteerButton: UIButton!
-    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     // MARK: - View Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeMenuButton(menuButton)
+        layoutView()
         checkPendingVolunteer()
-        localizeStrings()
     }
     
-    func localizeStrings() {
-        navItem.title = NSLocalizedString("title_volunteer", comment: "")
+    func layoutView() {
+        volunteerButton.layer.cornerRadius = 5.0
+        volunteerButton.addShadow()
     }
     
     // MARK: - User Actions
@@ -51,8 +44,8 @@ class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDe
     func modalViewDismissedWithResult(controller: ModalLoginViewController) {
         createVolunteer()
     }
-
-    // MARK: - Private
+    
+    // MARK: - Private  
     
     private func createVolunteer() {
         if let user = User.currentUser() {
@@ -63,13 +56,28 @@ class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDe
                 else {
                     // after successful submission
                     self.backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, user) -> Void in
-                        if volunteer != nil && volunteer!.isApproved == true {
-                            //To Do: Figure out how to seamlessly show the dashboard here.
+                        if let volunteer = volunteer {
+                            if volunteer.isApproved == true {
+                                self.removeFromTabBar()
+                                self.removeEmbeddedViewController(self)
+                            }
                         }
                     })
+                    Permissions.registerForNotificationsIfNeeded()
                     self.updateViewForPendingVolunteer()
                 }
             })
+        }
+    }
+    
+    private func removeFromTabBar() {
+        if let tabBarController = self.tabBarController {
+            let indexToRemove = 2
+            if indexToRemove < tabBarController.viewControllers?.count {
+                var viewControllers = tabBarController.viewControllers
+                viewControllers?.removeAtIndex(indexToRemove)
+                tabBarController.viewControllers = viewControllers
+            }
         }
     }
     
@@ -78,23 +86,13 @@ class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDe
     }
     
     private func updateViewForPendingVolunteer() {
-        // replace {PhoneNumber} with actual number
-        var titleText = NSLocalizedString("volunteer_label_user_has_applied", comment: "")
-        
-        let phoneNumber = AppState.sharedInstance().userPhoneNumber
-        assert(phoneNumber != nil, "Phone number should be defined")
-        if let phoneNumber = phoneNumber {
-            titleText = titleText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: phoneNumber)
-        }
-        else {
-            let defaultText = NSLocalizedString("volunteer_your_phone_number", comment: "")
-            titleText = titleText.stringByReplacingOccurrencesOfString("{PhoneNumber}", withString: defaultText)
-        }
-        
+        let phoneNumberText = AppState.sharedInstance().userPhoneNumberOrReplacementText
+        let titleText = String.localizedStringWithParameters("phone_number_replacement_text", phoneNumber: phoneNumberText, name: nil, code: nil)
         volunteeringTitleLabel.text = titleText
         volunteerButton?.setTitle(NSLocalizedString("volunteer_button_user_has_applied", comment: ""), forState: .Normal)
         volunteerButton?.backgroundColor = UIColor.lightGrayColor()
         volunteerButton.hidden = false
+        volunteerButton.removeShadow()
     }
     
     private func checkPendingVolunteer() {
@@ -104,8 +102,10 @@ class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDe
         if AppState.sharedInstance().isUserRegistered {
             let user = User.currentUser()!
             backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, user) -> Void in
-                if volunteer != nil && volunteer!.isApproved == false {
-                    self.updateViewForPendingVolunteer()
+                if let volunteer = volunteer {
+                    if volunteer.isApproved == false {
+                        self.updateViewForPendingVolunteer()
+                    }
                 }
                 else {
                     self.updateViewForApplicant()
@@ -118,10 +118,9 @@ class VolunteeringViewController: BaseViewController, ModalLoginViewControllerDe
     }
     
     private func updateViewForApplicant() {
-        
         volunteeringTitleLabel.text = NSLocalizedString("volunteer_label_user_has_not_applied", comment: "")
         volunteerButton.setTitle(NSLocalizedString("volunteer_button_user_has_not_applied", comment: ""), forState: .Normal)
         volunteerButton.hidden = false
     }
-
+        
 }

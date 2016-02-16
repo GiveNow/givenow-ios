@@ -18,14 +18,47 @@ class Keys: NSObject {
         return Keys._sharedInstance
     }
     
+    // MARK: Current configuration
+    
+    var currentConfiguration : String? {
+        var currentConfiguration:String?
+        
+        if let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist") {
+            let myDict = NSDictionary(contentsOfFile: path)
+            if let dict = myDict {
+                currentConfiguration = dict["Configuration"] as? String
+            }
+        }
+        
+        return currentConfiguration
+    }
+    
     // MARK: Keys
 
     var parseApplicationId : String? {
-        return stringForKey("ParseApplicationId")
+        guard let currentConfiguration = currentConfiguration else {
+            return nil
+        }
+
+        if currentConfiguration == "Release" {
+            return stringForKey("ProdParseApplicationId")
+        }
+        else {
+            return stringForKey("DevParseApplicationId")
+        }
     }
     
     var parseClientKey : String? {
-        return stringForKey("ParseClientKey")
+        guard let currentConfiguration = currentConfiguration else {
+            return nil
+        }
+        
+        if currentConfiguration == "Release" {
+            return stringForKey("ProdParseClientKey")
+        }
+        else {
+            return stringForKey("DevParseClientKey")
+        }
     }
     
     var mapboxToken : String? {
@@ -36,7 +69,7 @@ class Keys: NSObject {
     
     private var keys : [String : AnyObject]? {
         get {
-            if _keys != nil {
+            if let _keys = _keys {
                 return _keys
             }
             if let path = NSBundle.mainBundle().pathForResource("Keys", ofType: "plist"),

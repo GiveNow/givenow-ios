@@ -85,7 +85,7 @@ class BaseMapViewController: BaseViewController, MKMapViewDelegate, CLLocationMa
     
     func promptForLocationAuthorization() {
         if let locationManager = self.locationManager {
-            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
         }
     }
 

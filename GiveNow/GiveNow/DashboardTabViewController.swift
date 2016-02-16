@@ -13,19 +13,22 @@ class DashboardTabViewController: UITabBarController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var navItem: UINavigationItem!
     
+    let backend = Backend.sharedInstance()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeMenuButton()
         localizeStrings()
+        showVolunteerApplicationIfNecessary()
     }
     
     private func localizeStrings() {
         navItem.title = NSLocalizedString("title_volunteer", comment: "")
         
         // Need to localize all tab bar items on load; if this is done within the individual view controllers they are not loaded until those tabs are opened
-        if tabBar.items != nil {
+        if let tabBarItems = tabBar.items {
             let tabTitles = [NSLocalizedString("dashboard_pickup_requests_tabbaritem", comment: ""),NSLocalizedString("dashboard_dashboard_tabbaritem", comment: "")]
-            for i in 0...tabBar.items!.count - 1 {
+            for i in 0...tabBarItems.count - 1 {
                 let tabBarItem = tabBar.items![i]
                 tabBarItem.title = tabTitles[i]
             }
@@ -47,6 +50,33 @@ class DashboardTabViewController: UITabBarController {
             self.menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+    }
+    
+    // MARK: Displaying tab bar if necessary
+    
+    private func showVolunteerApplicationIfNecessary() {
+        if AppState.sharedInstance().isUserRegistered {
+            let user = User.currentUser()!
+            backend.fetchVolunteerForUser(user, completionHandler: {(volunteer, error) -> Void in
+                if volunteer == nil || volunteer?.isApproved != true {
+                    self.showVolunteerApplication()
+                }
+            })
+        }
+        else {
+            self.showVolunteerApplication()
+        }
+    }
+    
+    private func showVolunteerApplication() {
+        guard let volunteerApplicationController = storyboard?.instantiateViewControllerWithIdentifier("volunteerApplication") as? ApplyToVolunteerViewController else {
+            print("Could not find storyboard")
+            return
+        }
+        addChildViewController(volunteerApplicationController)
+        volunteerApplicationController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        view.addSubview(volunteerApplicationController.view)
+        volunteerApplicationController.didMoveToParentViewController(self)
     }
 
 }

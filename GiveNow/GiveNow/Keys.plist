@@ -2,9 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ParseApplicationId</key>
+	<key>ProdParseApplicationId</key>
 	<string>SET_ACTUAL_VALUE</string>
-	<key>ParseClientKey</key>
+	<key>ProdParseClientKey</key>
+	<string>SET_ACTUAL_VALUE</string>
+	<key>DevParseApplicationId</key>
+	<string>SET_ACTUAL_VALUE</string>
+	<key>DevParseClientKey</key>
 	<string>SET_ACTUAL_VALUE</string>
 	<key>MapboxToken</key>
 	<string>SET_ACTUAL_VALUE</string>

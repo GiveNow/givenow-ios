@@ -27,8 +27,8 @@ class User : PFUser {
 	}
     
     func phoneNumber() -> String? {
-        if username != nil {
-            var phoneNumber = username!
+        if let username = username {
+            var phoneNumber = username
             if phoneNumber.hasPrefix("+") == false {
                 phoneNumber = "+" + phoneNumber
             }

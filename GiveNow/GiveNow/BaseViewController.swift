@@ -7,11 +7,18 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class BaseViewController: UIViewController {
     
     // Quick reference to the backend
     let backend = Backend.sharedInstance()
+    
+    // MARK: Loading view
+    
+    override func viewDidLoad(){
+        super.viewDidLoad()
+    }
 
     // MARK: Base Overrides
 

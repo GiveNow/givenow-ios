@@ -20,6 +20,7 @@ class PickupDonationViewController: BaseMapViewController {
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var navigationButton: UIButton!
     @IBOutlet weak var myLocationButton: MyLocationButton!
+    @IBOutlet weak var shadowView: UIView!
     
     var donorPhoneNumber:String!
     
@@ -29,20 +30,33 @@ class PickupDonationViewController: BaseMapViewController {
         super.viewDidLoad()
         mapView.delegate = self
         addPickupRequestToMap()
-        formatButtons()
-        setDonorPhoneNumber()
-        validateButtons()
-        localizeStrings()
+        layoutView()
     }
     
     private func localizeStrings() {
         donationPickedUpButton.setTitle(NSLocalizedString("finish_pickup", comment: ""), forState: .Normal)
     }
     
+    private func layoutView() {
+        shadowView.addShadow()
+        formatButtons()
+        setDonorPhoneNumber()
+        validateButtons()
+        localizeStrings()
+    }
+    
     private func formatButtons() {
+        guard let donationPickedUpButton = donationPickedUpButton else {
+            return
+        }
         callButton.setImage(UIImage.templatedImageFromName("phone"), forState: .Normal)
         messageButton.setImage(UIImage.templatedImageFromName("textsms"), forState: .Normal)
         navigationButton.setImage(UIImage.templatedImageFromName("navigation"), forState: .Normal)
+        
+        donationPickedUpButton.layer.cornerRadius = 5.0
+        donationPickedUpButton.addShadow()
+        
+        myLocationButton.addShadow()
     }
     
     private func validateButtons() {
@@ -59,6 +73,12 @@ class PickupDonationViewController: BaseMapViewController {
             let newRegion = MKCoordinateRegion(center: coord, span: currentRegion.span)
             mapView!.setRegion(newRegion, animated: true)
         }
+        myLocationButton.toggleShadowOff()
+    }
+    
+    //Turning shadow back on after map moves
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        myLocationButton.toggleShadowOn()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -74,22 +94,29 @@ class PickupDonationViewController: BaseMapViewController {
     }
     
     private func addPickupRequestToMap() {
-        let latitude = pickupRequest.location!.latitude
-        let longitude = pickupRequest.location!.longitude
+        guard let location = pickupRequest.location else {
+            return
+        }
+        let latitude = location.latitude
+        let longitude = location.longitude
         var title:String!
-        if pickupRequest.address != nil {
-            title = pickupRequest.address!
+        if let address = pickupRequest.address {
+            if address != "" {
+                title = address
+            }
+            else {
+                title = NSLocalizedString("unknown_address", comment: "")
+            }
         }
         else {
             title = NSLocalizedString("unknown_address", comment: "")
         }
         let donationPoint = PickupRequestMapPoint(latitude: latitude, longitude: longitude, title: title, pickupRequest: pickupRequest)
         mapView.addAnnotation(donationPoint)
-        print(donationPoint)
     }
     
     @IBAction func donationPickedUp(sender: AnyObject) {
-        backend.saveDonationForPickupRequest(pickupRequest, completionHandler: {(donation, error) -> Void in
+        backend.pickUpDonation(pickupRequest, completionHandler: {(donation, error) -> Void in
             if let error = error {
                 print(error)
             }
@@ -104,17 +131,18 @@ class PickupDonationViewController: BaseMapViewController {
             let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pickupRequest")
             pinAnnotationView.pinColor = .Green
             pinAnnotationView.canShowCallout = true
+            pinAnnotationView.addShadow()
             return pinAnnotationView
         }
         return nil
     }
     
     private func setDonorPhoneNumber() {
-        if pickupRequest.donor != nil {
-            let phoneNumber = pickupRequest.donor!.phoneNumber()
-            if phoneNumber != nil {
-                self.donorPhoneNumber = phoneNumber!
-            }
+        guard let donor = pickupRequest.donor else {
+            return
+        }
+        if let phoneNumber = donor.phoneNumber() {
+            self.donorPhoneNumber = phoneNumber
         }
     }
     
@@ -139,7 +167,6 @@ class PickupDonationViewController: BaseMapViewController {
     }
     
     @IBAction func navigationButtonTapped(sender: AnyObject) {
-        print("Navigate!")
         let latitude = pickupRequest.location!.latitude
         let longitude = pickupRequest.location!.longitude
         let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

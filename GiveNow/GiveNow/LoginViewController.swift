@@ -167,6 +167,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
             let backButton = backButton
             else {
                 assert(false, "Outlets are required")
+                return
         }
         
         switch entryMode {
