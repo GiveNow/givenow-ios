@@ -270,10 +270,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
         // A phone number should include the country code which is 1 for the United States.
         // Typically the country code is assumed so perhaps it can be added automatically.
         
-        if entryMode == .PhoneNumber &&
-            (phoneNumberDigitsText.characters.count >= 10 &&
-                phoneNumberDigitsText.characters.count <= 12) {
-                    enableDoneButton()
+        if entryMode == .PhoneNumber && phoneNumberDigitsText.characters.count > 0 {
+            enableDoneButton()
         }
         else if entryMode == .ConfirmationCode && phoneNumberText.characters.count == 4 {
             enableDoneButton()
