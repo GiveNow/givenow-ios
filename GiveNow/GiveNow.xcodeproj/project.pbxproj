@@ -146,21 +146,21 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 708E01B006A9F88B3C13711562282B5E;
+			remoteGlobalIDString = 2C8B975E86C5716F2005E085FF6B3AB3;
 			remoteInfo = Bolts;
 		};
 		26F35DE61C228A080012C83C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 511B536F0DE06D9C3BD65397A91990C0;
+			remoteGlobalIDString = 77175C680674DB2264DD9A148DB8E867;
 			remoteInfo = Parse;
 		};
 		26F35DEA1C228A080012C83C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 26A2F4E61C2285E40081165D /* Pods.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 571775EC1F866F58FF108F69B9A2FF12;
+			remoteGlobalIDString = B9A04D3C9B208813656510FDA8ADAE02;
 			remoteInfo = SwiftyJSON;
 		};
 /* End PBXContainerItemProxy section */
@@ -429,11 +429,11 @@
 			isa = PBXGroup;
 			children = (
 				26F35DD71C228A080012C83C /* Bolts.framework */,
-				26A62AC21C27CF2800D49311 /* libPhoneNumber_iOS.framework */,
 				26F35DD91C228A080012C83C /* Mapbox.bundle */,
 				26F35DDB1C228A080012C83C /* Parse.framework */,
 				26F35DDD1C228A080012C83C /* Pods_GiveNow.framework */,
 				26F35DDF1C228A080012C83C /* SwiftyJSON.framework */,
+				26A62AC21C27CF2800D49311 /* libPhoneNumber_iOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -983,6 +983,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Pods/Mapbox-iOS-SDK";
 				INFOPLIST_FILE = GiveNow/Base.lproj/Info.plist;
@@ -991,6 +993,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.givenow.GiveNow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GiveNow/GiveNow-Bridging-Header.h";
 			};
 			name = Debug;
@@ -999,6 +1002,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Pods/Mapbox-iOS-SDK";
 				INFOPLIST_FILE = GiveNow/Base.lproj/Info.plist;
@@ -1007,6 +1012,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.givenow.GiveNow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GiveNow/GiveNow-Bridging-Header.h";
 			};
 			name = Release;

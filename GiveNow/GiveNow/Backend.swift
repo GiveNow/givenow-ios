@@ -559,6 +559,15 @@ class Backend: NSObject {
     
     // MARK: Phone number validation
     
+    func regionCodeForCurrentLocale() -> String? {
+        let locale = NSLocale.currentLocale()
+        return regionCodeForLocale(locale)
+    }
+    
+    func regionCodeForLocale(locale: NSLocale) -> String? {
+        return locale.objectForKey(NSLocaleCountryCode) as? String
+    }
+    
     func phoneCountryCodeForPhoneNumberCurrentLocale() -> Int? {
         let locale = NSLocale.currentLocale()
         return phoneCountryCodeForLocale(locale)
@@ -573,6 +582,7 @@ class Backend: NSObject {
         
         return nil
     }
+    
     
     func isValidPhoneNumber(phoneNumber : String) -> Bool {
         var isValid = false

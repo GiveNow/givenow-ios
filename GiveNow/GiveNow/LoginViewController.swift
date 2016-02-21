@@ -1,5 +1,5 @@
 //
-//  LoginModalViewController.swift
+//  LoginViewController.swift
 //  GiveNow
 //
 //  Created by Evan Waters on 1/12/16.
@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import libPhoneNumber_iOS
 
 public enum EntryMode : Int {
     case None = 0
@@ -18,10 +19,14 @@ protocol LoginViewControllerDelegate{
     func successfulLogin(controller:LoginViewController)
 }
 
-class LoginViewController: BaseViewController, UIGestureRecognizerDelegate {
+class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
     
     var delegate:LoginViewControllerDelegate!
     var isModal:Bool!
+    
+    //Number validation
+    let phoneFormatter = NBAsYouTypeFormatter(regionCode: Backend.sharedInstance().regionCodeForCurrentLocale())
+    var previousFormattedText = "+"
 
     @IBOutlet weak var instructionsLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
@@ -71,8 +76,43 @@ class LoginViewController: BaseViewController, UIGestureRecognizerDelegate {
     func viewTapped(sender: UIGestureRecognizer? = nil) {
         view.endEditing(true)
     }
-    
+
     @IBAction func phoneTextFieldEditingChanged(sender: AnyObject) {
+        
+        if entryMode == .PhoneNumber {
+            if let inputField = sender as? UITextField,
+                inputText = inputField.text
+            {
+                let strippedInputText = strippedPhoneNumber(inputText)
+                
+                let currentSelectedRange = inputField.selectedTextRange
+                
+                let formattedText = phoneFormatter.inputString(strippedInputText)
+                
+                if let selectedRange = currentSelectedRange where previousFormattedText == formattedText { //Failed delete on nonumeric char
+                    let (adjustedRange, adjustedInputString) = self.deleteNumberBeforeSelectedRange(inputField, startText: inputText, selectedRange: selectedRange)
+                    let strippedAdjustedString = strippedPhoneNumber(adjustedInputString)
+                    let adjustedFormattedText = phoneFormatter.inputString(strippedAdjustedString)
+                    inputField.text = adjustedFormattedText
+                    
+                    if let updatedRange = adjustedRange {
+                        self.restoreSelectedRange(inputField, startText: adjustedFormattedText, endText: adjustedFormattedText, selectedRange: updatedRange)
+                    }
+                    
+                    previousFormattedText = adjustedFormattedText
+                } else {
+                    inputField.text = formattedText
+                    
+                    if let selectedRange = currentSelectedRange {
+                        self.restoreSelectedRange(inputField, startText: inputText, endText: formattedText, selectedRange: selectedRange)
+                    }
+                    
+                    previousFormattedText = formattedText
+                }
+            }
+         
+        }
+        
         validateSubmitButton()
     }
     
@@ -83,7 +123,6 @@ class LoginViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     // MARK: User Actions
     
-    
     @IBAction func doneButtonTapped(sender: AnyObject) {
         guard let entryText = textField?.text else {
             assert(false, "Entry text is required")
@@ -91,7 +130,8 @@ class LoginViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
         
         if entryMode == .PhoneNumber {
-            validatePhoneNumber(entryText)
+            let phoneNumberDigits = self.strippedPhoneNumber(entryText)
+            validatePhoneNumber(phoneNumberDigits)
         }
         else if entryMode == .ConfirmationCode {
             if let phoneNumber = self.phoneNumber {
@@ -216,12 +256,15 @@ class LoginViewController: BaseViewController, UIGestureRecognizerDelegate {
             return
         }
         
+        
+        let phoneNumberDigitsText = self.strippedPhoneNumber(phoneNumberText)
+        
         // A phone number should include the country code which is 1 for the United States.
         // Typically the country code is assumed so perhaps it can be added automatically.
         
         if entryMode == .PhoneNumber &&
-            (phoneNumberText.characters.count >= 10 &&
-                phoneNumberText.characters.count <= 12) {
+            (phoneNumberDigitsText.characters.count >= 10 &&
+                phoneNumberDigitsText.characters.count <= 12) {
                     enableDoneButton()
         }
         else if entryMode == .ConfirmationCode && phoneNumberText.characters.count == 4 {
@@ -250,5 +293,56 @@ class LoginViewController: BaseViewController, UIGestureRecognizerDelegate {
         doneButton.titleLabel?.textColor = UIColor.whiteColor()
     }
     
-
+    // MARK: Phone Number Validation
+    
+    private func deleteNumberBeforeSelectedRange(textField: UITextField, startText: String, selectedRange : UITextRange) -> (adjustedRange: UITextRange?, adjustedText: String) {
+        //get previous cursor position
+        let start = textField.beginningOfDocument
+        let cursorOffset = textField.offsetFromPosition(start, toPosition:selectedRange.start)
+        
+        //Loop until we find a digit
+        var currentOffset = cursorOffset
+        var index = startText.startIndex.advancedBy(currentOffset - 1, limit: startText.endIndex)
+        var updatedText = startText
+        while index >= startText.startIndex {
+            if startText.characters[index] > "0" || startText.characters[index] < "9" { //digit
+                updatedText.removeAtIndex(index)
+                break
+            }
+            
+            currentOffset = currentOffset - 1
+            index = startText.startIndex.advancedBy(currentOffset, limit: startText.endIndex)
+        }
+        
+        var updatedRange : UITextRange?
+        if let newPosition = textField.positionFromPosition(textField.beginningOfDocument, offset:currentOffset - 1) {
+            updatedRange = textField.textRangeFromPosition(newPosition, toPosition:newPosition)
+        }
+        
+        return (updatedRange, updatedText)
+    }
+    
+    private func restoreSelectedRange(textField: UITextField, startText: String, endText: String, selectedRange : UITextRange) {
+        // get previous cursor position
+        let start = textField.beginningOfDocument
+        let cursorOffset = textField.offsetFromPosition(start, toPosition:selectedRange.start)
+        let currentLength = startText.characters.count
+        
+        // if cursor was not at the end of the text restore its position
+        if cursorOffset != currentLength {
+            let lengthDelta = endText.characters.count - currentLength
+            let newCursorOffset = max(0, min(endText.characters.count, cursorOffset + lengthDelta))
+            if let newPosition = textField.positionFromPosition(textField.beginningOfDocument, offset:newCursorOffset) {
+                let newRange = textField.textRangeFromPosition(newPosition, toPosition:newPosition)
+                textField.selectedTextRange = newRange
+            }
+        }
+    }
+    
+    private func strippedPhoneNumber(phoneNumberString: String) -> String {
+        let digitsPlusCharacterSet = NSCharacterSet(charactersInString: "+0123456789").invertedSet
+        let strippedPhoneNumberString = phoneNumberString.componentsSeparatedByCharactersInSet(digitsPlusCharacterSet).joinWithSeparator("")
+        return strippedPhoneNumberString
+    }
 }
+
