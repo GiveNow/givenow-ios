@@ -145,7 +145,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
     
     @IBAction func backButtonTapped(sender: AnyObject) {
         entryMode = .PhoneNumber
-        textField.text = phoneNumber
+        textField.text = phoneFormatter.inputString(phoneNumber)
     }
     
     
