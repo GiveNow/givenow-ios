@@ -30,6 +30,7 @@
 "phone_number_verification_title" = "Telefonnummer hinzufügen";
 "phone_number_disclaimer" = "Diese wird nur von Helfern verwendet, um dich zur Terminvereinbarung erreichen zu können.\nDeine Telefonnummer wird nicht mit weiteren Personen oder Organisationen geteilt.";
 "phone_number_verification_error_number_invalid" = "Bitte eine gültige Telefonnummer angeben.\nBeispiel: +49 123 456 7890";
+"phone_number_verification_error_no_country_code"="Du musst die Ländervorwahl mit angeben.\nBeispiel: +49 123 456 7890";
 
 "confirmation_code_title" = "Geben Sie den Bestätigungscode ein";
 "validate_sms_code" = "Du wirst einen 4-stelligen Code per SMS bekommen.\nBitte gib ihn unten ein.";

@@ -192,7 +192,15 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, UIGestureRec
     }
     
     private func updateViewForInvalidPhoneNumber() {
-        detailLabel.text = NSLocalizedString("phone_number_verification_error_number_invalid", comment: "")
+        guard let phoneEntry = textField.text else {
+            return
+        }
+        if phoneEntry.characters.first != "+" {
+            detailLabel.text = NSLocalizedString("phone_number_verification_error_no_country_code", comment: "")
+        }
+        else {
+           detailLabel.text = NSLocalizedString("phone_number_verification_error_number_invalid", comment: "")
+        }
         backButton.hidden = true
     }
     

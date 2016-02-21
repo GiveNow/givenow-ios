@@ -31,6 +31,7 @@
 "phone_number_verification_title" = "Add a phone number";
 "phone_number_disclaimer" = "This only lets your driver reach you to arrange pickup. We never share your number with third parties.";
 "phone_number_verification_error_number_invalid" = "Please enter a valid phone number.\nExample: +49 123 456 7890";
+"phone_number_verification_error_no_country_code"="Please include the country code.\nExample: +49 123 456 7890";
 
 "confirmation_code_title" = "Enter confirmation code";
 "validate_sms_code" = "We sent a 4-digit SMS code to your phone number. Enter it in below.";
