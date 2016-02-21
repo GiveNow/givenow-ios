@@ -619,17 +619,15 @@ class Backend: NSObject {
     }
     
     func formatPhoneNumber(phoneNumberString: String) -> String {
-        let phoneUtil = NBPhoneNumberUtil()
-        do {
-            let phoneNumber = try phoneUtil.parse(phoneNumberString, defaultRegion: "US")
-            let formattedString = try phoneUtil.format(phoneNumber, numberFormat: .E164)
-            return formattedString
+        let phoneFormatter = NBAsYouTypeFormatter(regionCode: Backend.sharedInstance().regionCodeForCurrentLocale())
+        var phoneNumber:String!
+        if phoneNumberString.characters.first != "+" {
+            phoneNumber = "+" + phoneNumberString
         }
-        catch let error as NSError {
-            print(error.localizedDescription)
-            return phoneNumberString
+        else {
+            phoneNumber = phoneNumberString
         }
-        
+        return phoneFormatter.inputString(phoneNumber)
     }
 
 }

@@ -87,7 +87,7 @@ class ApplyToVolunteerViewController: BaseViewController, ModalLoginViewControll
     
     private func updateViewForPendingVolunteer() {
         let phoneNumberText = AppState.sharedInstance().userPhoneNumberOrReplacementText
-        let titleText = String.localizedStringWithParameters("phone_number_replacement_text", phoneNumber: phoneNumberText, name: nil, code: nil)
+        let titleText = String.localizedStringWithParameters("volunteer_label_user_has_applied", phoneNumber: phoneNumberText, name: nil, code: nil)
         volunteeringTitleLabel.text = titleText
         volunteerButton?.setTitle(NSLocalizedString("volunteer_button_user_has_applied", comment: ""), forState: .Normal)
         volunteerButton?.backgroundColor = UIColor.lightGrayColor()
