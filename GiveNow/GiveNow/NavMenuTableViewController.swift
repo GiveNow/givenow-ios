@@ -132,7 +132,7 @@ class NavMenuTableViewController: UITableViewController, ModalLoginViewControlle
                     nameLabel.text = name
                 }
                 else {
-                    nameLabel.text = NSLocalizedString("unknown_user", comment: "")
+                    nameLabel.text = "" // Should be 'your profile' when we have implmented profile
                 }
                 if let username = user.username {
                     usernameLabel.text = phoneFormatter.inputString("+" + username)
