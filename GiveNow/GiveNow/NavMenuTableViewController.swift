@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import libPhoneNumber_iOS
 
 class NavMenuTableViewController: UITableViewController, ModalLoginViewControllerDelegate {
 
@@ -20,6 +21,7 @@ class NavMenuTableViewController: UITableViewController, ModalLoginViewControlle
     var selectedIndex = NSIndexPath(forItem: 0, inSection: 0)
     
     let backend = Backend.sharedInstance()
+    let phoneFormatter = NBAsYouTypeFormatter(regionCode: Backend.sharedInstance().regionCodeForCurrentLocale())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,7 +135,7 @@ class NavMenuTableViewController: UITableViewController, ModalLoginViewControlle
                     nameLabel.text = NSLocalizedString("unknown_user", comment: "")
                 }
                 if let username = user.username {
-                    usernameLabel.text = username
+                    usernameLabel.text = phoneFormatter.inputString("+" + username)
                 }
                 else {
                     usernameLabel.text = ""
