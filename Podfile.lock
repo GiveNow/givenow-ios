@@ -1,6 +1,6 @@
 PODS:
   - Bolts/Tasks (1.6.0)
-  - libPhoneNumber-iOS (0.8.10)
+  - libPhoneNumber-iOS (0.8.11)
   - Mapbox-iOS-SDK (3.0.1)
   - Parse (1.12.0):
     - Bolts/Tasks (~> 1.5)
@@ -8,13 +8,13 @@ PODS:
 
 DEPENDENCIES:
   - libPhoneNumber-iOS (~> 0.8)
-  - Mapbox-iOS-SDK (~> 3.0)
+  - Mapbox-iOS-SDK (= 3.0.1)
   - Parse (~> 1.11)
   - SwiftyJSON (~> 2.3)
 
 SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
-  libPhoneNumber-iOS: 7bfd00f843fdcd82b5182b463e8eb3b27579f41d
+  libPhoneNumber-iOS: ded33fab2c51ee847979556aa504c9e70f32d703
   Mapbox-iOS-SDK: 61e79f3dd8432617bd1a66b2d7273ab5ce923ca9
   Parse: de2c52a9a1421b91ae7594ab8ce191afd184f19b
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
