@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>4</string>
 	<key>Configuration</key>
 	<string>${CONFIGURATION}</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -30,7 +30,6 @@
 	<string>We use this to find your pickup request</string>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
